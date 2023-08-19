@@ -3,259 +3,247 @@
 
 // Functions signature
 void main_menu(void);
+void show_menu(void);
+void cred_show(void);
+void read_show(void);
+void upd_show(void);
+void del_show(void);
 void about(void);
 void dev(void);
-void ticket_menu(void);
-void cred_ticket(void);
-void read_ticket(void);
-void upd_ticket(void);
-void del_ticket(void);
 
 // Functions
 void main_menu(void)
 {
-    char resp;
+    // char resp;
     system("clear || cls");
-    printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///             Universidade Federal do Rio Grande do Norte                 ///\n");
     printf("///                 Centro de Ensino Superior do Serido                     ///\n");
     printf("///               Departamento de Computacao e Tecnologia                   ///\n");
     printf("///                  Disciplina DCT1106 -- Programacao                      ///\n");
-    printf("///                  Projeto Sistema de Gestao Escolar                      ///\n");
-    printf("///             Developed by @flgorgonio -- since Mar, 2020                 ///\n");
+    printf("///         Projeto -- Sistema de Gestao para uma Casa de Shows             ///\n");
+    printf("///           Developed by LuizMiguel4444 -- since Aug, 2023                ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
-    printf("///            = = = = = Sistema de Gestao Escolar = = = = =                ///\n");
+    printf("///      ============================================================       ///\n");
+    printf("///      ========= Sistema de Gestao para uma Casa de Shows =========       ///\n");
+    printf("///      ============================================================       ///\n");
     printf("///                                                                         ///\n");
-    printf("///            1. Modulo Aluno                                              ///\n");
-    printf("///            2. Modulo Professor                                          ///\n");
-    printf("///            3. Modulo Turma                                              ///\n");
-    printf("///            4. Modulo Matricula                                          ///\n");
-    printf("///            5. Modulo Relatorios                                         ///\n");
-    printf("///            0. Sair                                                      ///\n");
+    printf("///                             1. Menu Shows                               ///\n");
+    printf("///                           2. Menu Ingressos                             ///\n");
+    printf("///                           3. Menu FeedBacks                             ///\n");
+    printf("///                           4. Menu Relatorios                            ///\n");
+    printf("///                                0. Sair                                  ///\n");
     printf("///                                                                         ///\n");
-    printf("///            Escolha a opcao que deseja: ");
-    scanf("%c", &resp);
-    getchar();
+    printf("///                       Escolha a opcao que deseja:                       ///\n");
+    printf("///                         Em desenvolvimento ...                          ///\n");
+    // scanf("%c", &resp);
+    // getchar();
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
-    printf("\t\t\t>>> Tecle ENTER para continuar ...\n");
+    printf("\n");
+    printf("\t\t>>> Tecle ENTER para ir a proxima tela <<<\n");
     getchar();
 }
 
 void about(void)
 {
     system("clear || cls");
-    printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///             Universidade Federal do Rio Grande do Norte                 ///\n");
     printf("///                 Centro de Ensino Superior do Serido                     ///\n");
     printf("///               Departamento de Computacao e Tecnologia                   ///\n");
     printf("///                  Disciplina DCT1106 -- Programacao                      ///\n");
-    printf("///                  Projeto Sistema de Gestao Escolar                      ///\n");
-    printf("///             Developed by @flgorgonio -- since Mar, 2020                 ///\n");
+    printf("///         Projeto -- Sistema de Gestao para uma Casa de Shows             ///\n");
+    printf("///           Developed by LuizMiguel4444 -- since Aug, 2023                ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
-    printf("///            = = = = = Sistema de Gestao Escolar = = = = =                ///\n");
+    printf("///      ============================================================       ///\n");
+    printf("///      ========= Sistema de Gestao para uma Casa de Shows =========       ///\n");
+    printf("///      ============================================================       ///\n");
     printf("///                                                                         ///\n");
-    printf("///  Programa exemplo utilizado na disciplina DCT1106 - Programacao, para   ///\n");
-    printf("///  fins didaticos de ilustracao. O programa contem os principais modulos  ///\n");
-    printf("///  e funcionalidades que serao exigidos na avaliacao dos projetos a serem ///\n");
-    printf("///  desenvolvidos pelos alunos ao longo da disciplina. Serve como um guia  ///\n");
-    printf("///  de consulta e referencia para o desenvolvidos dos demais projetos.     ///\n");
+    printf("///      Programa criado para disciplina DCT1106 -- Programacao, com        ///\n");
+    printf("///      fins de obtencao de conhecimento e nota. O programa contem         ///\n");
+    printf("///      os principais modulos e funcionalidades que serao exigido          ///\n");
+    printf("///      na avaliacao dos projetos repassados pelo professor Flavius        ///\n");
+    printf("///      ao longo da disciplina.                                            ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
-    printf("\t\t\t>>> Tecle ENTER para continuar ...\n");
+    printf("\n");
+    printf("\t\t>>> Tecle ENTER para ir a proxima tela <<<\n");
     getchar();
 }
 
 void dev(void)
 {
     system("clear || cls");
-    printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///             Universidade Federal do Rio Grande do Norte                 ///\n");
     printf("///                 Centro de Ensino Superior do Serido                     ///\n");
     printf("///               Departamento de Computacao e Tecnologia                   ///\n");
     printf("///                  Disciplina DCT1106 -- Programacao                      ///\n");
-    printf("///                  Projeto Sistema de Gestao Escolar                      ///\n");
-    printf("///             Developed by @flgorgonio -- since Mar, 2020                 ///\n");
+    printf("///         Projeto -- Sistema de Gestao para uma Casa de Shows             ///\n");
+    printf("///           Developed by LuizMiguel4444 -- since Aug, 2023                ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
-    printf("///            = = = = = Sistema de Gestao Escolar = = = = =                ///\n");
+    printf("///      ============================================================       ///\n");
+    printf("///      ========= Sistema de Gestao para uma Casa de Shows =========       ///\n");
+    printf("///      ============================================================       ///\n");
     printf("///                                                                         ///\n");
-    printf("///            Este projeto exemplo foi desenvolvido por:                   ///\n");
+    printf("///      Este projeto foi desenvolvido por:                                 ///\n");
     printf("///                                                                         ///\n");
-    printf("///            Prof. Flavius Gorgonio                                       ///\n");
-    printf("///            E-mail: flavius.gorgonio@ufrn.br                             ///\n");
-    printf("///            Redes sociais: @flgorgonio                                   ///\n");
-    printf("///            Git: https://github.com/FlaviusGorgonio/LinguaSolta.git      ///\n");
+    printf("///      Luiz Miguel Santos Silva                                           ///\n");
+    printf("///      E-mail: luiz.santos.090@ufrn.edu.br                                ///\n");
+    printf("///      Instagram: luiz__miguel10                                          ///\n");
+    printf("///      GitHub: https://github.com/LuizMiguel4444/GestaoCasaShow.git       ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
-    printf("\t\t\t>>> Tecle ENTER para continuar ...\n");
+    printf("\n");
+    printf("\t\t>>> Tecle ENTER para ir a proxima tela <<<\n");
     getchar();
 }
 
-void ticket_menu(void)
+void show_menu(void)
 {
-    char resp;
+    // char resp;
     system("clear || cls");
-    printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///            ===================================================          ///\n");
-    printf("///            = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
-    printf("///            = = = =   Escola de Idiomas Lingua Solta    = = = =          ///\n");
-    printf("///            = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
+    printf("///            =============   Gestao Casa Shows   ===============          ///\n");
     printf("///            ===================================================          ///\n");
-    printf("///               Developed by @flgorgonio -- since Mar, 2020               ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
-    printf("///            = = = = = = = = =  Menu Aluno = = = = = = = = =              ///\n");
+    printf("///            = = = = = = = = = Menu  Shows = = = = = = = = =              ///\n");
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
     printf("///                                                                         ///\n");
-    printf("///            1. Cadastrar um novo aluno                                   ///\n");
-    printf("///            2. Pesquisar os dados de um aluno                            ///\n");
-    printf("///            3. Atualizar o cadastro de um aluno                          ///\n");
-    printf("///            4. Excluir um aluno do sistema                               ///\n");
+    printf("///            1. Cadastrar um novo show                                    ///\n");
+    printf("///            2. Pesquisar os dados de um show                             ///\n");
+    printf("///            3. Editar o cadastro de um show                              ///\n");
+    printf("///            4. Excluir um show do sistema                                ///\n");
     printf("///            0. Voltar ao menu anterior                                   ///\n");
     printf("///                                                                         ///\n");
-    printf("///            Escolha a opcao que deseja: ");
-    scanf("%c", &resp);
-    getchar();
+    printf("///            Escolha a opcao que deseja:                                  ///\n");
+    printf("///            Em desenvolvimento ...                                       ///\n");
+    // scanf("%c", &resp);
+    // getchar();
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
-    printf("\t\t\t>>> Tecle ENTER para continuar ...\n");
-    getchar();
-}
-
-void cred_ticket(void)
-{
-    system("clear || cls");
     printf("\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n");
-    printf("///            ===================================================          ///\n");
-    printf("///            = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
-    printf("///            = = = =   Escola de Idiomas Lingua Solta    = = = =          ///\n");
-    printf("///            = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
-    printf("///            ===================================================          ///\n");
-    printf("///               Developed by @flgorgonio -- since Mar, 2020               ///\n");
-    printf("///                                                                         ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n");
-    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
-    printf("///            = = = = = = = = Cadastrar Aluno = = = = = = = =              ///\n");
-    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
-    printf("///                                                                         ///\n");
-    printf("///            Matricula (apenas numeros):                                  ///\n");
-    printf("///            Nome completo:                                               ///\n");
-    printf("///            E-mail:                                                      ///\n");
-    printf("///            Data de Nascimento (dd/mm/aaaa):                             ///\n");
-    printf("///            Celular  (apenas numeros):                                   ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                                                                         ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("\n");
-    printf("\t\t\t>>> Tecle ENTER para continuar ...\n");
+    printf("\t\t>>> Tecle ENTER para ir a proxima tela <<<\n");
     getchar();
 }
 
-void read_ticket(void)
+void cred_show(void)
 {
     system("clear || cls");
-    printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///            ===================================================          ///\n");
-    printf("///            = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
-    printf("///            = = = =   Escola de Idiomas Lingua Solta    = = = =          ///\n");
-    printf("///            = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
+    printf("///            =============   Gestao Casa Shows   ===============          ///\n");
     printf("///            ===================================================          ///\n");
-    printf("///               Developed by @flgorgonio -- since Mar, 2020               ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
-    printf("///            = = = = = = = = Pesquisar Aluno = = = = = = = =              ///\n");
+    printf("///            = = = = = = = = Cadastrar  Show = = = = = = = =              ///\n");
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
     printf("///                                                                         ///\n");
-    printf("///            Informe a matricula (apenas numeros):                        ///\n");
-    printf("///                                                                         ///\n");
+    printf("///            Atracao:                                                     ///\n");
+    printf("///            Data (dd/mm/aaaa):                                           ///\n");
+    printf("///            Local:                                                       ///\n");
+    printf("///            Quant. de ingressos (apenas numeros):                        ///\n");
+    printf("///            Id destinado aos ingressos (apenas numeros):                 ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
-    printf("\t\t\t>>> Tecle ENTER para continuar ...\n");
+    printf("\n");
+    printf("\t\t>>> Tecle ENTER para ir a proxima tela <<<\n");
     getchar();
 }
 
-void upd_ticket(void)
+void read_show(void)
 {
     system("clear || cls");
-    printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///            ===================================================          ///\n");
-    printf("///            = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
-    printf("///            = = = =   Escola de Idiomas Lingua Solta    = = = =          ///\n");
-    printf("///            = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
+    printf("///            =============   Gestao Casa Shows   ===============          ///\n");
     printf("///            ===================================================          ///\n");
-    printf("///               Developed by @flgorgonio -- since Mar, 2020               ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
-    printf("///            = = = = = = = = Alterar Aluno = = = = = = = = =              ///\n");
+    printf("///            = = = = = = = = Pesquisar  Show = = = = = = = =              ///\n");
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
     printf("///                                                                         ///\n");
-    printf("///            Informe a matricula (apenas numeros):                        ///\n");
-    printf("///                                                                         ///\n");
+    printf("///            Informe a atracao:                                           ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
-    printf("\t\t\t>>> Tecle ENTER para continuar ...\n");
+    printf("\n");
+    printf("\t\t>>> Tecle ENTER para ir a proxima tela <<<\n");
     getchar();
 }
 
-void del_ticket(void)
+void upd_show(void)
 {
     system("clear || cls");
-    printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///            ===================================================          ///\n");
-    printf("///            = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
-    printf("///            = = = =   Escola de Idiomas Lingua Solta    = = = =          ///\n");
-    printf("///            = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
+    printf("///            =============   Gestao Casa Shows   ===============          ///\n");
     printf("///            ===================================================          ///\n");
-    printf("///               Developed by @flgorgonio -- since Mar, 2020               ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
-    printf("///            = = = = = = = = Excluir Aluno = = = = = = = = =              ///\n");
+    printf("///            = = = = = = = =  Editar Show  = = = = = = = = =              ///\n");
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
     printf("///                                                                         ///\n");
-    printf("///            Informe a matricula (apenas numeros):                        ///\n");
-    printf("///                                                                         ///\n");
+    printf("///            Informe a atracao:                                           ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
-    printf("\t\t\t>>> Tecle ENTER para continuar ...\n");
+    printf("\n");
+    printf("\t\t>>> Tecle ENTER para ir a proxima tela <<<\n");
+    getchar();
+}
+
+void del_show(void)
+{
+    system("clear || cls");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///            ===================================================          ///\n");
+    printf("///            =============   Gestao Casa Shows   ===============          ///\n");
+    printf("///            ===================================================          ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("///            = = = = = = = = Excluir  Show = = = = = = = = =              ///\n");
+    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
+    printf("///                                                                         ///\n");
+    printf("///            Informe a atracao:                                           ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
+    printf("\n");
+    printf("\t\t>>> Tecle ENTER para ir a proxima tela <<<\n");
     getchar();
 }
 
@@ -263,12 +251,12 @@ void del_ticket(void)
 int main(void)
 {
     main_menu();
+    show_menu();
+    cred_show();
+    read_show();
+    upd_show();
+    del_show();
     about();
     dev();
-    ticket_menu();
-    cred_ticket();
-    read_ticket();
-    upd_ticket();
-    del_ticket();
     return 0;
 }
