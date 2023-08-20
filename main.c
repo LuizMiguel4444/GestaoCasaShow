@@ -3,19 +3,19 @@
 #include <locale.h>
 
 // Functions signature
-void main_menu(void);
-void show_menu(void);
-void cred_show(void);
-void read_show(void);
-void upd_show(void);
-void del_show(void);
+int main_menu();
+int show_menu();
+char cred_show();
+char read_show();
+char upd_show();
+char del_show();
 void about(void);
 void dev(void);
 
 // Functions
-void main_menu(void)
+int main_menu()
 {
-    // char resp;
+    int resp;
     system("clear || cls");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
@@ -33,25 +33,23 @@ void main_menu(void)
     printf("///      ============================================================       ///\n");
     printf("///                                                                         ///\n");
     printf("///                             1. Menu Shows                               ///\n");
-    printf("///                           2. Menu Ingressos                             ///\n");
-    printf("///                           3. Menu FeedBacks                             ///\n");
-    printf("///                           4. Menu Relatórios                            ///\n");
+    printf("///                           2. Menu Ingressos --> Em desenvilvimento      ///\n");
+    printf("///                           3. Menu FeedBacks --> Em desenvilvimento      ///\n");
+    printf("///                           4. Menu Relatórios --> Em desenvilvimento     ///\n");
+    printf("///                                5. Sobre                                 ///\n");
+    printf("///                              6. Créditos                                ///\n");
     printf("///                                0. Sair                                  ///\n");
     printf("///                                                                         ///\n");
-    printf("///                       Escolha a opção que deseja:                       ///\n");
-    printf("///                         Em desenvolvimento ...                          ///\n");
-    // scanf("%c", &resp);
-    // getchar();
+    printf("///                       Escolha a opção que deseja: ");
+    scanf("%d", &resp);
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("\n");
-    printf("\n");
-    printf("\t\t>>> Tecle ENTER para ir a próxima tela <<<\n");
-    getchar();
+    return resp;
 }
 
 void about(void)
 {
+    char go;
     system("clear || cls");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
@@ -76,13 +74,14 @@ void about(void)
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
-    printf("\n");
-    printf("\t\t>>> Tecle ENTER para ir a próxima tela <<<\n");
+    printf("\t\t>>> Tecle ENTER para voltar ao Menu Principal... <<<");
+    scanf("%c", &go);
     getchar();
 }
 
 void dev(void)
 {
+    char go;
     system("clear || cls");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
@@ -108,14 +107,14 @@ void dev(void)
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
-    printf("\n");
-    printf("\t\t>>> Tecle ENTER para ir a próxima tela <<<\n");
+    printf("\t\t>>> Tecle ENTER para voltar ao Menu Principal... <<<");
+    scanf("%c", &go);
     getchar();
 }
 
-void show_menu(void)
+int show_menu()
 {
-    // char resp;
+    int resp;
     system("clear || cls");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
@@ -133,23 +132,18 @@ void show_menu(void)
     printf("///            2. Pesquisar os dados de um show                             ///\n");
     printf("///            3. Editar o cadastro de um show                              ///\n");
     printf("///            4. Excluir um show do sistema                                ///\n");
-    printf("///            0. Voltar ao menu anterior                                   ///\n");
+    printf("///            0. Voltar ao Menu Principal                                  ///\n");
     printf("///                                                                         ///\n");
-    printf("///            Escolha a opção que deseja:                                  ///\n");
-    printf("///            Em desenvolvimento ...                                       ///\n");
-    // scanf("%c", &resp);
-    // getchar();
-    printf("///                                                                         ///\n");
+    printf("///            Escolha a opção que deseja: ");
+    scanf("%d", &resp);
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("\n");
-    printf("\n");
-    printf("\t\t>>> Tecle ENTER para ir a próxima tela <<<\n");
-    getchar();
+    return resp;
 }
 
-void cred_show(void)
+char cred_show()
 {
+    char go;
     system("clear || cls");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
@@ -171,13 +165,15 @@ void cred_show(void)
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
-    printf("\n");
-    printf("\t\t>>> Tecle ENTER para ir a próxima tela <<<\n");
+    printf("\t\t>>> Tecle ENTER para voltar ao Menu Principal... <<<");
+    scanf("%c", &go);
     getchar();
+    return go;
 }
 
-void read_show(void)
+char read_show()
 {
+    char go;
     system("clear || cls");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
@@ -195,13 +191,15 @@ void read_show(void)
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
-    printf("\n");
-    printf("\t\t>>> Tecle ENTER para ir a próxima tela <<<\n");
+    printf("\t\t>>> Tecle ENTER para voltar ao Menu Principal... <<<");
+    scanf("%c", &go);
     getchar();
+    return go;
 }
 
-void upd_show(void)
+char upd_show()
 {
+    char go;
     system("clear || cls");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
@@ -219,13 +217,15 @@ void upd_show(void)
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
-    printf("\n");
-    printf("\t\t>>> Tecle ENTER para ir a próxima tela <<<\n");
+    printf("\t\t>>> Tecle ENTER para voltar ao Menu Principal... <<<");
+    scanf("%c", &go);
     getchar();
+    return go;
 }
 
-void del_show(void)
+char del_show()
 {
+    char go;
     system("clear || cls");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
@@ -243,22 +243,66 @@ void del_show(void)
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
-    printf("\n");
-    printf("\t\t>>> Tecle ENTER para ir a próxima tela <<<\n");
+    printf("\t\t>>> Tecle ENTER para voltar ao Menu Principal... <<<");
+    scanf("%c", &go);
     getchar();
+    return go;
 }
 
 // Main program
-int main(void)
+int main()
 {
+    int i;
+    i = 0;
     setlocale(LC_ALL, "Portuguese_Brazil");
-    main_menu();
-    show_menu();
-    cred_show();
-    read_show();
-    upd_show();
-    del_show();
-    about();
-    dev();
-    return 0;
+    while (i < 1)
+    {
+        int resp1 = main_menu();
+        if (resp1 == 1)
+        {
+            int resp2 = show_menu();
+            if (resp2 == 1)
+            {
+                cred_show();
+            }
+            else if (resp2 == 2)
+            {
+                read_show();
+            }
+            else if (resp2 == 3)
+            {
+                upd_show();
+            }
+            else if (resp2 == 4)
+            {
+                del_show();
+            }
+            else
+            {
+                system("cls || clear");
+            }
+        }
+        else if (resp1 == 2 || resp1 == 3 || resp1 == 4)
+        {
+            char go;
+            system("cls || clear");
+            printf("Em desenvolvimento!\n");
+            printf("\n");
+            printf(">>> Tecle Enter para voltar ao Menu Principal... <<<");
+            scanf("%c", &go);
+            getchar();
+        }
+        else if (resp1 == 5)
+        {
+            about();
+        }
+        else if (resp1 == 6)
+        {
+            dev();
+        }
+        else
+        {
+            break;
+        }
+    }
 }
