@@ -332,11 +332,9 @@ char del_show()
 // Main program
 int main()
 {
-    int i;
-    i = 0;
     setlocale(LC_ALL, "Portuguese_Brazil");
     welcome();
-    while (i < 1)
+    while (1)
     {
         int resp1 = main_menu();
         if (resp1 == 1)
