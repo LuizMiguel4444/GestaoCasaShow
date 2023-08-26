@@ -95,7 +95,7 @@ int main_menu(void)
     printf("///                                                                         ///\n");
     printf("///                             1. Menu Shows                               ///\n");
     printf("///                           2. Menu Ingressos --> Em desenvilvimento      ///\n");
-    printf("///                           3. Menu FeedBacks --> Em desenvilvimento      ///\n");
+    printf("///                           3. Menu Contratos --> Em desenvilvimento      ///\n");
     printf("///                           4. Menu Relatórios --> Em desenvilvimento     ///\n");
     printf("///                                5. Sobre                                 ///\n");
     printf("///                              6. Créditos                                ///\n");
