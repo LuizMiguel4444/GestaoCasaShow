@@ -14,6 +14,65 @@ void dev(void);
 void welcome(void);
 void end(void);
 
+// Main program
+int main()
+{
+    setlocale(LC_ALL, "Portuguese_Brazil");
+    welcome();
+    while (1)
+    {
+        int resp1 = main_menu();
+        if (resp1 == 1)
+        {
+            int resp2 = show_menu();
+            if (resp2 == 1)
+            {
+                cred_show();
+            }
+            else if (resp2 == 2)
+            {
+                read_show();
+            }
+            else if (resp2 == 3)
+            {
+                upd_show();
+            }
+            else if (resp2 == 4)
+            {
+                del_show();
+            }
+            else
+            {
+                system("cls || clear");
+            }
+        }
+        else if (resp1 == 2 || resp1 == 3 || resp1 == 4)
+        {
+            char go;
+            system("cls || clear");
+            printf("Em desenvolvimento!\n");
+            printf("\n");
+            printf(">>> Tecle Enter para voltar ao Menu Principal... <<<");
+            scanf("%c", &go);
+            getchar();
+        }
+        else if (resp1 == 5)
+        {
+            about();
+        }
+        else if (resp1 == 6)
+        {
+            dev();
+        }
+        else
+        {
+            end();
+            break;
+        }
+    }
+    return 0;
+}
+
 // Functions
 int main_menu()
 {
@@ -327,63 +386,4 @@ char del_show()
     scanf("%c", &go);
     getchar();
     return go;
-}
-
-// Main program
-int main()
-{
-    setlocale(LC_ALL, "Portuguese_Brazil");
-    welcome();
-    while (1)
-    {
-        int resp1 = main_menu();
-        if (resp1 == 1)
-        {
-            int resp2 = show_menu();
-            if (resp2 == 1)
-            {
-                cred_show();
-            }
-            else if (resp2 == 2)
-            {
-                read_show();
-            }
-            else if (resp2 == 3)
-            {
-                upd_show();
-            }
-            else if (resp2 == 4)
-            {
-                del_show();
-            }
-            else
-            {
-                system("cls || clear");
-            }
-        }
-        else if (resp1 == 2 || resp1 == 3 || resp1 == 4)
-        {
-            char go;
-            system("cls || clear");
-            printf("Em desenvolvimento!\n");
-            printf("\n");
-            printf(">>> Tecle Enter para voltar ao Menu Principal... <<<");
-            scanf("%c", &go);
-            getchar();
-        }
-        else if (resp1 == 5)
-        {
-            about();
-        }
-        else if (resp1 == 6)
-        {
-            dev();
-        }
-        else
-        {
-            end();
-            break;
-        }
-    }
-    return 0;
 }
