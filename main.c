@@ -5,14 +5,15 @@
 // Functions signature
 int main_menu(void);
 int show_menu(void);
-char cred_show(void);
-char read_show(void);
-char upd_show(void);
-char del_show(void);
+void cred_show(void);
+void read_show(void);
+void upd_show(void);
+void del_show(void);
 void about(void);
 void dev(void);
 void welcome(void);
 void end(void);
+void print_dados(void);
 
 // Main program
 int main(void)
@@ -280,7 +281,7 @@ int show_menu(void)
     return resp;
 }
 
-char cred_show(void)
+void cred_show(void)
 {
     char go;
     system("clear || cls");
@@ -307,12 +308,12 @@ char cred_show(void)
     printf("\t\t>>> Tecle ENTER para voltar ao Menu Principal... <<<");
     scanf("%c", &go);
     getchar();
-    return go;
 }
 
-char read_show(void)
+void read_show(void)
 {
-    char go;
+    int go;
+    char go1;
     system("clear || cls");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
@@ -326,19 +327,29 @@ char read_show(void)
     printf("///            = = = = = = = = Pesquisar  Show = = = = = = = =              ///\n");
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
     printf("///                                                                         ///\n");
-    printf("///            Informe a atração:                                           ///\n");
-    printf("///                                                                         ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("\n");
-    printf("\t\t>>> Tecle ENTER para voltar ao Menu Principal... <<<");
-    scanf("%c", &go);
+    printf("///            Informe o Id dos ingressos do show: ");
+    scanf("%d", &go);
     getchar();
-    return go;
+    if (go != 1000)
+    {
+        print_dados();
+    }
+    else
+    {
+        printf("///                                                                         ///\n");
+        printf("///            Id do show não encontrado!                                   ///\n");
+        printf("///                                                                         ///\n");
+        printf("///////////////////////////////////////////////////////////////////////////////\n");
+        printf("\n");
+        printf("\t\t>>> Tecle ENTER para voltar ao Menu Principal... <<<");
+        scanf("%c", &go1);
+    }
 }
 
-char upd_show(void)
+void upd_show(void)
 {
-    char go;
+    int go;
+    char go1;
     system("clear || cls");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
@@ -352,19 +363,29 @@ char upd_show(void)
     printf("///            = = = = = = = =  Editar Show  = = = = = = = = =              ///\n");
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
     printf("///                                                                         ///\n");
-    printf("///            Informe a atração:                                           ///\n");
-    printf("///                                                                         ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("\n");
-    printf("\t\t>>> Tecle ENTER para voltar ao Menu Principal... <<<");
-    scanf("%c", &go);
+    printf("///            Informe o Id dos ingressos do show: ");
+    scanf("%d", &go);
     getchar();
-    return go;
+    if (go != 1000)
+    {
+        print_dados();
+    }
+    else
+    {
+        printf("///                                                                         ///\n");
+        printf("///            Id do show não encontrado!                                   ///\n");
+        printf("///                                                                         ///\n");
+        printf("///////////////////////////////////////////////////////////////////////////////\n");
+        printf("\n");
+        printf("\t\t>>> Tecle ENTER para voltar ao Menu Principal... <<<");
+        scanf("%c", &go1);
+    }
 }
 
-char del_show(void)
+void del_show(void)
 {
-    char go;
+    int go;
+    char go1;
     system("clear || cls");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
@@ -378,12 +399,34 @@ char del_show(void)
     printf("///            = = = = = = = = Excluir  Show = = = = = = = = =              ///\n");
     printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
     printf("///                                                                         ///\n");
-    printf("///            Informe a atração:                                           ///\n");
-    printf("///                                                                         ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///            Informe o Id dos ingressos do show: ");
+    scanf("%d", &go);
+    getchar();
+    if (go != 1000)
+    {
+        print_dados();
+    }
+    else
+    {
+        printf("///                                                                         ///\n");
+        printf("///            Id do show não encontrado!                                   ///\n");
+        printf("///                                                                         ///\n");
+        printf("///////////////////////////////////////////////////////////////////////////////\n");
+        printf("\n");
+        printf("\t\t>>> Tecle ENTER para voltar ao Menu Principal... <<<");
+        scanf("%c", &go1);
+    }
+}
+
+void print_dados(void)
+{
+    char go;
+    system("cls || clear");
+    printf("\n");
+    printf("Mostra os dados do show...\n");
+    printf("\n");
+    printf("Em desenvolvimento...\n");
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao Menu Principal... <<<");
     scanf("%c", &go);
-    getchar();
-    return go;
 }
