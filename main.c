@@ -3,19 +3,19 @@
 #include <locale.h>
 
 // Functions signature
-int main_menu();
-int show_menu();
-char cred_show();
-char read_show();
-char upd_show();
-char del_show();
+int main_menu(void);
+int show_menu(void);
+char cred_show(void);
+char read_show(void);
+char upd_show(void);
+char del_show(void);
 void about(void);
 void dev(void);
 void welcome(void);
 void end(void);
 
 // Main program
-int main()
+int main(void)
 {
     setlocale(LC_ALL, "Portuguese_Brazil");
     welcome();
@@ -74,7 +74,7 @@ int main()
 }
 
 // Functions
-int main_menu()
+int main_menu(void)
 {
     int resp;
     system("clear || cls");
@@ -229,21 +229,21 @@ void end(void)
     printf("        ##############                                      ##############\n");
     printf("          ########                                              #########\n");
     printf("            ####                                                   ####\n");
-    printf("              ##    ######                              ######     ##\n");
-    printf("                    ########                          ########\n");
-    printf("                    ##########                      ##########\n");
-    printf("                    ############                  ############\n");
-    printf("                    ##############              ##############\n");
-    printf("                    ################          ################\n");
-    printf("                    ##################      ##################\n");
-    printf("                    ####################  ####################\n");
-    printf("                    ##########################################\n");
-    printf("                    ##########################################\n");
-    printf("                      ######################################\n");
-    printf("                       ####################################\n");
-    printf("                          ##############################\n");
+    printf("              ##                                                   ##\n");
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("\n");
     printf("\n");
     printf("                                 FIM DO ESPETÁCULO\n");
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("\n");
     printf("\n");
     printf("                ##################################################\n");
     printf("                  ##############################################\n");
@@ -251,7 +251,7 @@ void end(void)
     printf("                            ##########################\n");
 }
 
-int show_menu()
+int show_menu(void)
 {
     int resp;
     system("clear || cls");
@@ -280,7 +280,7 @@ int show_menu()
     return resp;
 }
 
-char cred_show()
+char cred_show(void)
 {
     char go;
     system("clear || cls");
@@ -310,7 +310,7 @@ char cred_show()
     return go;
 }
 
-char read_show()
+char read_show(void)
 {
     char go;
     system("clear || cls");
@@ -336,7 +336,7 @@ char read_show()
     return go;
 }
 
-char upd_show()
+char upd_show(void)
 {
     char go;
     system("clear || cls");
@@ -362,7 +362,7 @@ char upd_show()
     return go;
 }
 
-char del_show()
+char del_show(void)
 {
     char go;
     system("clear || cls");
