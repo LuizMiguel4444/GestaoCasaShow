@@ -140,27 +140,27 @@ int main_menu(void)
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///             Universidade Federal do Rio Grande do Norte                 ///\n");
-    printf("///                 Centro de Ensino Superior do Serid?                     ///\n");
-    printf("///               Departamento de Computa??o e Tecnologia                   ///\n");
-    printf("///                  Disciplina DCT1106 -- Programa??o                      ///\n");
-    printf("///         Projeto -- Sistema de Gest?o para uma Casa de Shows             ///\n");
+    printf("///                 Centro de Ensino Superior do Seridó                     ///\n");
+    printf("///               Departamento de Computação e Tecnologia                   ///\n");
+    printf("///                  Disciplina DCT1106 -- Programação                      ///\n");
+    printf("///         Projeto -- Sistema de Gestão para uma Casa de Shows             ///\n");
     printf("///           Developed by LuizMiguel4444 -- since Aug, 2023                ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///      ============================================================       ///\n");
-    printf("///      ========= Sistema de Gest?o para uma Casa de Shows =========       ///\n");
+    printf("///      ========= Sistema de Gestão para uma Casa de Shows =========       ///\n");
     printf("///      ============================================================       ///\n");
     printf("///                                                                         ///\n");
     printf("///                             1. Menu Shows                               ///\n");
     printf("///                           2. Menu Ingressos                             ///\n");
     printf("///                           3. Menu Contratos                             ///\n");
-    printf("///                           4. Menu Relat?rios                            ///\n");
+    printf("///                           4. Menu Relatórios                            ///\n");
     printf("///                                5. Sobre                                 ///\n");
-    printf("///                              6. Cr?ditos                                ///\n");
+    printf("///                              6. Créditos                                ///\n");
     printf("///                                0. Sair                                  ///\n");
     printf("///                                                                         ///\n");
-    printf("///                       Escolha a op??o que deseja:");
+    printf("///                       Escolha a opção que deseja:");
     scanf("%d", &resp);
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -174,22 +174,22 @@ void about(void)
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///             Universidade Federal do Rio Grande do Norte                 ///\n");
-    printf("///                 Centro de Ensino Superior do Serid?                     ///\n");
-    printf("///               Departamento de Computa??o e Tecnologia                   ///\n");
-    printf("///                  Disciplina DCT1106 -- Programa??o                      ///\n");
-    printf("///         Projeto -- Sistema de Gest?o para uma Casa de Shows             ///\n");
+    printf("///                 Centro de Ensino Superior do Seridó                     ///\n");
+    printf("///               Departamento de Computação e Tecnologia                   ///\n");
+    printf("///                  Disciplina DCT1106 -- Programação                      ///\n");
+    printf("///         Projeto -- Sistema de Gestão para uma Casa de Shows             ///\n");
     printf("///           Developed by LuizMiguel4444 -- since Aug, 2023                ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///      ============================================================       ///\n");
-    printf("///      ========= Sistema de Gest?o para uma Casa de Shows =========       ///\n");
+    printf("///      ========= Sistema de Gestão para uma Casa de Shows =========       ///\n");
     printf("///      ============================================================       ///\n");
     printf("///                                                                         ///\n");
-    printf("///      Programa criado para disciplina DCT1106 -- Programa??o, com        ///\n");
-    printf("///      fins de obten??o de conhecimento e nota. O programa cont?m         ///\n");
-    printf("///      os principais m?dulos e funcionalidades que ser?o exigidos         ///\n");
-    printf("///      na avali??o dos projetos repassados pelo professor Flavius         ///\n");
+    printf("///      Programa criado para disciplina DCT1106 -- Programação, com        ///\n");
+    printf("///      fins de obtenção de conhecimento e nota. O programa contém         ///\n");
+    printf("///      os principais módulos e funcionalidades que serão exigidos         ///\n");
+    printf("///      na avaliação dos projetos repassados pelo professor Flavius        ///\n");
     printf("///      ao longo da disciplina.                                            ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -206,16 +206,16 @@ void dev(void)
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///             Universidade Federal do Rio Grande do Norte                 ///\n");
-    printf("///                 Centro de Ensino Superior do Serid?                     ///\n");
-    printf("///               Departamento de Computa??o e Tecnologia                   ///\n");
-    printf("///                  Disciplina DCT1106 -- Programa??o                      ///\n");
-    printf("///         Projeto -- Sistema de Gest?o para uma Casa de Shows             ///\n");
+    printf("///                 Centro de Ensino Superior do Seridó                     ///\n");
+    printf("///               Departamento de Computação e Tecnologia                   ///\n");
+    printf("///                  Disciplina DCT1106 -- Programação                      ///\n");
+    printf("///         Projeto -- Sistema de Gestão para uma Casa de Shows             ///\n");
     printf("///           Developed by LuizMiguel4444 -- since Aug, 2023                ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///      ============================================================       ///\n");
-    printf("///      ========= Sistema de Gest?o para uma Casa de Shows =========       ///\n");
+    printf("///      ========= Sistema de Gestão para uma Casa de Shows =========       ///\n");
     printf("///      ============================================================       ///\n");
     printf("///                                                                         ///\n");
     printf("///      Este projeto foi desenvolvido por:                                 ///\n");
@@ -263,7 +263,7 @@ void welcome(void)
     ciano("                    ####################################\n");
     ciano("                       ##############################\n");
     printf("\n");
-    amarelo("                      SEJA BEM-VINDO AO GEST?O CASA SHOW\n");
+    amarelo("                      SEJA BEM-VINDO AO GESTÃO CASA SHOW\n");
     printf("\n");
     printf("               ##################################################\n");
     printf("                ##############################################\n");
@@ -295,7 +295,7 @@ void end(void)
     printf("\n");
     printf("\n");
     printf("\n");
-    amarelo("                             FIM DO ESPET�CULO\n");
+    amarelo("                             FIM DO ESPETÁCULO\n");
     printf("\n");
     printf("\n");
     printf("\n");
@@ -314,7 +314,7 @@ int show_menu(void)
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///            ===================================================          ///\n");
-    printf("///            =============   Gest?o Casa Shows   ===============          ///\n");
+    printf("///            =============   Gestão Casa Shows   ===============          ///\n");
     printf("///            ===================================================          ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -329,7 +329,7 @@ int show_menu(void)
     printf("///              4. Excluir um show do sistema                              ///\n");
     printf("///              0. Voltar ao Menu Principal                                ///\n");
     printf("///                                                                         ///\n");
-    printf("///              Escolha a op??o que deseja:");
+    printf("///              Escolha a opção que deseja:");
     scanf("%d", &resp);
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -343,7 +343,7 @@ void cred_show(void)
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///            ===================================================          ///\n");
-    printf("///            =============   Gest?o Casa Shows   ===============          ///\n");
+    printf("///            =============   Gestão Casa Shows   ===============          ///\n");
     printf("///            ===================================================          ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -352,7 +352,7 @@ void cred_show(void)
     printf("///              = = = = = = = = Cadastrar  Show = = = = = = = =            ///\n");
     printf("///              = = = = = = = = = = = = = = = = = = = = = = = =            ///\n");
     printf("///                                                                         ///\n");
-    printf("///              Atra??o:                                                   ///\n");
+    printf("///              Atração:                                                   ///\n");
     printf("///              Data (dd/mm/aaaa):                                         ///\n");
     printf("///              Local:                                                     ///\n");
     printf("///              Quant. de ingressos (apenas numeros):                      ///\n");
@@ -373,7 +373,7 @@ void read_show(void)
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///            ===================================================          ///\n");
-    printf("///            =============   Gest?o Casa Shows   ===============          ///\n");
+    printf("///            =============   Gestão Casa Shows   ===============          ///\n");
     printf("///            ===================================================          ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -392,7 +392,7 @@ void read_show(void)
     else
     {
         printf("///                                                                         ///\n");
-        printf("///              Id do show n?o encontrado!                                 ///\n");
+        printf("///              Id do show não encontrado!                                 ///\n");
         printf("///                                                                         ///\n");
         printf("///////////////////////////////////////////////////////////////////////////////\n");
         printf("\n");
@@ -409,7 +409,7 @@ void upd_show(void)
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///            ===================================================          ///\n");
-    printf("///            =============   Gest?o Casa Shows   ===============          ///\n");
+    printf("///            =============   Gestão Casa Shows   ===============          ///\n");
     printf("///            ===================================================          ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -428,7 +428,7 @@ void upd_show(void)
     else
     {
         printf("///                                                                         ///\n");
-        printf("///              Id do show n?o encontrado!                                 ///\n");
+        printf("///              Id do show não encontrado!                                 ///\n");
         printf("///                                                                         ///\n");
         printf("///////////////////////////////////////////////////////////////////////////////\n");
         printf("\n");
@@ -445,7 +445,7 @@ void del_show(void)
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///            ===================================================          ///\n");
-    printf("///            =============   Gest?o Casa Shows   ===============          ///\n");
+    printf("///            =============   Gestão Casa Shows   ===============          ///\n");
     printf("///            ===================================================          ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -464,7 +464,7 @@ void del_show(void)
     else
     {
         printf("///                                                                         ///\n");
-        printf("///              Id do show n?o encontrado!                                 ///\n");
+        printf("///              Id do show não encontrado!                                 ///\n");
         printf("///                                                                         ///\n");
         printf("///////////////////////////////////////////////////////////////////////////////\n");
         printf("\n");
@@ -480,7 +480,7 @@ int ticket_menu(void)
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///            ===================================================          ///\n");
-    printf("///            =============   Gest?o Casa Shows   ===============          ///\n");
+    printf("///            =============   Gestão Casa Shows   ===============          ///\n");
     printf("///            ===================================================          ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -495,7 +495,7 @@ int ticket_menu(void)
     printf("///              4. Excluir um ingresso do sistema                          ///\n");
     printf("///              0. Voltar ao Menu Principal                                ///\n");
     printf("///                                                                         ///\n");
-    printf("///              Escolha a op??o que deseja:");
+    printf("///              Escolha a opção que deseja:");
     scanf("%d", &resp);
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -509,7 +509,7 @@ void cred_ticket(void)
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///            ===================================================          ///\n");
-    printf("///            =============   Gest?o Casa Shows   ===============          ///\n");
+    printf("///            =============   Gestão Casa Shows   ===============          ///\n");
     printf("///            ===================================================          ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -535,7 +535,7 @@ void read_ticket(void)
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///            ===================================================          ///\n");
-    printf("///            =============   Gest?o Casa Shows   ===============          ///\n");
+    printf("///            =============   Gestão Casa Shows   ===============          ///\n");
     printf("///            ===================================================          ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -554,7 +554,7 @@ void read_ticket(void)
     else
     {
         printf("///                                                                         ///\n");
-        printf("///              Id do ingresso n?o encontrado!                             ///\n");
+        printf("///              Id do ingresso não encontrado!                             ///\n");
         printf("///                                                                         ///\n");
         printf("///////////////////////////////////////////////////////////////////////////////\n");
         printf("\n");
@@ -571,7 +571,7 @@ void upd_ticket(void)
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///            ===================================================          ///\n");
-    printf("///            =============   Gest?o Casa Shows   ===============          ///\n");
+    printf("///            =============   Gestão Casa Shows   ===============          ///\n");
     printf("///            ===================================================          ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -590,7 +590,7 @@ void upd_ticket(void)
     else
     {
         printf("///                                                                         ///\n");
-        printf("///              Id do ingresso n?o encontrado!                             ///\n");
+        printf("///              Id do ingresso não encontrado!                             ///\n");
         printf("///                                                                         ///\n");
         printf("///////////////////////////////////////////////////////////////////////////////\n");
         printf("\n");
@@ -607,7 +607,7 @@ void del_ticket(void)
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///            ===================================================          ///\n");
-    printf("///            =============   Gest?o Casa Shows   ===============          ///\n");
+    printf("///            =============   Gestão Casa Shows   ===============          ///\n");
     printf("///            ===================================================          ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -626,7 +626,7 @@ void del_ticket(void)
     else
     {
         printf("///                                                                         ///\n");
-        printf("///              Id do ingresso n?o encontrado!                             ///\n");
+        printf("///              Id do ingresso não encontrado!                             ///\n");
         printf("///                                                                         ///\n");
         printf("///////////////////////////////////////////////////////////////////////////////\n");
         printf("\n");
@@ -642,7 +642,7 @@ int contract_menu(void)
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///            ===================================================          ///\n");
-    printf("///            =============   Gest?o Casa Shows   ===============          ///\n");
+    printf("///            =============   Gestão Casa Shows   ===============          ///\n");
     printf("///            ===================================================          ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -657,7 +657,7 @@ int contract_menu(void)
     printf("///              4. Excluir um contrato do sistema                          ///\n");
     printf("///              0. Voltar ao Menu Principal                                ///\n");
     printf("///                                                                         ///\n");
-    printf("///              Escolha a op??o que deseja:");
+    printf("///              Escolha a opção que deseja:");
     scanf("%d", &resp);
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -671,7 +671,7 @@ void cred_contract(void)
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///            ===================================================          ///\n");
-    printf("///            =============   Gest?o Casa Shows   ===============          ///\n");
+    printf("///            =============   Gestão Casa Shows   ===============          ///\n");
     printf("///            ===================================================          ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -697,7 +697,7 @@ void read_contract(void)
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///            ===================================================          ///\n");
-    printf("///            =============   Gest?o Casa Shows   ===============          ///\n");
+    printf("///            =============   Gestão Casa Shows   ===============          ///\n");
     printf("///            ===================================================          ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -716,7 +716,7 @@ void read_contract(void)
     else
     {
         printf("///                                                                         ///\n");
-        printf("///              Id do contrato n?o encontrado!                             ///\n");
+        printf("///              Id do contrato não encontrado!                             ///\n");
         printf("///                                                                         ///\n");
         printf("///////////////////////////////////////////////////////////////////////////////\n");
         printf("\n");
@@ -733,7 +733,7 @@ void upd_contract(void)
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///            ===================================================          ///\n");
-    printf("///            =============   Gest?o Casa Shows   ===============          ///\n");
+    printf("///            =============   Gestão Casa Shows   ===============          ///\n");
     printf("///            ===================================================          ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -752,7 +752,7 @@ void upd_contract(void)
     else
     {
         printf("///                                                                         ///\n");
-        printf("///              Id do contrato n?o encontrado!                             ///\n");
+        printf("///              Id do contrato não encontrado!                             ///\n");
         printf("///                                                                         ///\n");
         printf("///////////////////////////////////////////////////////////////////////////////\n");
         printf("\n");
@@ -769,7 +769,7 @@ void del_contract(void)
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///            ===================================================          ///\n");
-    printf("///            =============   Gest?o Casa Shows   ===============          ///\n");
+    printf("///            =============   Gestão Casa Shows   ===============          ///\n");
     printf("///            ===================================================          ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -788,7 +788,7 @@ void del_contract(void)
     else
     {
         printf("///                                                                         ///\n");
-        printf("///              Id do contrato n?o encontrado!                             ///\n");
+        printf("///              Id do contrato não encontrado!                             ///\n");
         printf("///                                                                         ///\n");
         printf("///////////////////////////////////////////////////////////////////////////////\n");
         printf("\n");
@@ -804,16 +804,16 @@ void report_menu(void)
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///            ===================================================          ///\n");
-    printf("///            =============   Gest?o Casa Shows   ===============          ///\n");
+    printf("///            =============   Gestão Casa Shows   ===============          ///\n");
     printf("///            ===================================================          ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///              = = = = = = = = = = = = = = = = = = = = = = = =            ///\n");
-    printf("///              = = = = = = = = Menu  Relat�rio = = = = = = = =            ///\n");
+    printf("///              = = = = = = = = Menu  Relatório = = = = = = = =            ///\n");
     printf("///              = = = = = = = = = = = = = = = = = = = = = = = =            ///\n");
     printf("///                                                                         ///\n");
-    printf("///              Apresenta os dados do relat�rio...                         ///\n");
+    printf("///              Apresenta os dados do relatório...                         ///\n");
     printf("///                                                                         ///\n");
     printf("///              Em desenvolvimento...                                      ///\n");
     printf("///                                                                         ///\n");
@@ -829,7 +829,7 @@ void print_dados(void)
     char go;
     system("cls || clear");
     printf("\n");
-    printf("Mostra os dados do show...\n");
+    printf("Mostra os dados na tela...\n");
     printf("\n");
     printf("Em desenvolvimento...\n");
     printf("\n");
