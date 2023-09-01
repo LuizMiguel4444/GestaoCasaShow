@@ -30,6 +30,7 @@ void read_contract(void);
 void upd_contract(void);
 void del_contract(void);
 void report_menu(void);
+void error(void);
 
 // Main program
 int main(void)
@@ -835,4 +836,14 @@ void print_dados(void)
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao Menu Principal... <<<");
     scanf("%c", &go);
+}
+
+void error(void)
+{
+    char go;
+    printf("\n");
+    printf("Opção inválida!\n");
+    printf("\n");
+    printf("\t\t>>> Tecle ENTER para voltar ao Menu Principal... <<<");
+    scanf("%c\n", &go);
 }
