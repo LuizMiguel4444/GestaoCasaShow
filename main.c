@@ -37,12 +37,14 @@ int main(void)
 {
     setlocale(LC_ALL, "Portuguese_Brazil");
     welcome();
-    while (1)
+    int resp1;
+    int resp2;
+    do
     {
-        int resp1 = main_menu();
+        resp1 = main_menu();
         if (resp1 == 1)
         {
-            int resp2 = show_menu();
+            resp2 = show_menu();
             if (resp2 == 1)
             {
                 cred_show();
@@ -66,7 +68,7 @@ int main(void)
         }
         else if (resp1 ==2)
         {
-            int resp2 = ticket_menu();
+            resp2 = ticket_menu();
             if (resp2 == 1)
             {
                 cred_ticket();
@@ -90,7 +92,7 @@ int main(void)
         }
         else if (resp1 == 3)
         {
-            int resp2 = contract_menu();
+            resp2 = contract_menu();
             if (resp2 == 1)
             {
                 cred_contract();
@@ -123,13 +125,9 @@ int main(void)
         else if (resp1 == 6)
         {
             dev();
-        }
-        else
-        {
-            end();
-            break;
-        }
-    }
+        }  
+    } while (resp1 != 0);
+    end();
     return 0;
 }
 
