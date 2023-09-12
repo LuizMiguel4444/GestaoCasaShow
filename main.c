@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
+#include <time.h>
 #ifndef cores
 #define cores
 #define ciano(texto) printf("\33[1;36m %s \33[0m", texto)
@@ -38,96 +39,34 @@ int main(void)
     setlocale(LC_ALL, "Portuguese_Brazil");
     welcome();
     int resp1;
-    int resp2;
     do
     {
         resp1 = main_menu();
-        if (resp1 == 1)
+        switch (resp1)
         {
-            resp2 = show_menu();
-            if (resp2 == 1)
-            {
-                cred_show();
-            }
-            else if (resp2 == 2)
-            {
-                read_show();
-            }
-            else if (resp2 == 3)
-            {
-                upd_show();
-            }
-            else if (resp2 == 4)
-            {
-                del_show();
-            }
-            else
-            {
-                system("cls || clear");
-            }
+            case 1:
+                show_menu();
+                break;
+            case 2:
+                ticket_menu();
+                break;
+            case 3:
+                contract_menu();
+                break;
+            case 4:
+                report_menu();
+                break;
+            case 5:
+                about();
+                break;
+            case 6:
+                dev();
+                break;
+            case 0:
+                end();
+                break;
         }
-        else if (resp1 ==2)
-        {
-            resp2 = ticket_menu();
-            if (resp2 == 1)
-            {
-                cred_ticket();
-            }
-            else if (resp2 == 2)
-            {
-                read_ticket();
-            }
-            else if (resp2 == 3)
-            {
-                upd_ticket();
-            }
-            else if (resp2 == 4)
-            {
-                del_ticket();
-            }
-            else
-            {
-                system("cls || clear");
-            }
-        }
-        else if (resp1 == 3)
-        {
-            resp2 = contract_menu();
-            if (resp2 == 1)
-            {
-                cred_contract();
-            }
-            else if (resp2 == 2)
-            {
-                read_contract();
-            }
-            else if (resp2 == 3)
-            {
-                upd_contract();
-            }
-            else if (resp2 == 4)
-            {
-                del_contract();
-            }
-            else
-            {
-                system("cls || clear");
-            }
-        }
-        else if (resp1 == 4)
-        {
-           report_menu();
-        }
-        else if (resp1 == 5)
-        {
-            about();
-        }
-        else if (resp1 == 6)
-        {
-            dev();
-        }  
     } while (resp1 != 0);
-    end();
     return 0;
 }
 
@@ -309,35 +248,58 @@ void end(void)
 int show_menu(void)
 {
     int resp;
-    system("clear || cls");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n");
-    printf("///            ===================================================          ///\n");
-    printf("///            =============   Gestão Casa Shows   ===============          ///\n");
-    printf("///            ===================================================          ///\n");
-    printf("///                                                                         ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n");
-    printf("///              = = = = = = = = = = = = = = = = = = = = = = = =            ///\n");
-    printf("///              = = = = = = = = = Menu  Shows = = = = = = = = =            ///\n");
-    printf("///              = = = = = = = = = = = = = = = = = = = = = = = =            ///\n");
-    printf("///                                                                         ///\n");
-    printf("///              1. Cadastrar um novo show                                  ///\n");
-    printf("///              2. Pesquisar os dados de um show                           ///\n");
-    printf("///              3. Editar o cadastro de um show                            ///\n");
-    printf("///              4. Excluir um show do sistema                              ///\n");
-    printf("///              0. Voltar ao Menu Principal                                ///\n");
-    printf("///                                                                         ///\n");
-    printf("///              Escolha a opção que deseja:");
-    scanf("%d", &resp);
-    printf("///                                                                         ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    return resp;
+    do
+    {
+        system("clear || cls");
+        printf("///////////////////////////////////////////////////////////////////////////////\n");
+        printf("///                                                                         ///\n");
+        printf("///            ===================================================          ///\n");
+        printf("///            =============   Gestão Casa Shows   ===============          ///\n");
+        printf("///            ===================================================          ///\n");
+        printf("///                                                                         ///\n");
+        printf("///////////////////////////////////////////////////////////////////////////////\n");
+        printf("///                                                                         ///\n");
+        printf("///              = = = = = = = = = = = = = = = = = = = = = = = =            ///\n");
+        printf("///              = = = = = = = = = Menu  Shows = = = = = = = = =            ///\n");
+        printf("///              = = = = = = = = = = = = = = = = = = = = = = = =            ///\n");
+        printf("///                                                                         ///\n");
+        printf("///              1. Cadastrar um novo show                                  ///\n");
+        printf("///              2. Pesquisar os dados de um show                           ///\n");
+        printf("///              3. Editar o cadastro de um show                            ///\n");
+        printf("///              4. Excluir um show do sistema                              ///\n");
+        printf("///              0. Voltar ao Menu Principal                                ///\n");
+        printf("///                                                                         ///\n");
+        printf("///              Escolha a opção que deseja:");
+        scanf("%d", &resp);
+        printf("///                                                                         ///\n");
+        printf("///////////////////////////////////////////////////////////////////////////////\n");
+        switch (resp)
+        {
+            case 1:
+                cred_show();
+                break;
+            case 2:
+                read_show();
+                break;
+            case 3:
+                upd_show();
+                break;
+            case 4:
+                del_show();
+                break;
+            case 0:
+                system("cls || clear");
+                break;
+        }
+    } while (resp != 0);
+    return 0;
 }
 
 void cred_show(void)
 {
     char go;
+    char* skip;
+    skip = (char*) malloc(30*sizeof(char));
     system("clear || cls");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
@@ -351,17 +313,26 @@ void cred_show(void)
     printf("///              = = = = = = = = Cadastrar  Show = = = = = = = =            ///\n");
     printf("///              = = = = = = = = = = = = = = = = = = = = = = = =            ///\n");
     printf("///                                                                         ///\n");
-    printf("///              Atração:                                                   ///\n");
-    printf("///              Data (dd/mm/aaaa):                                         ///\n");
-    printf("///              Local:                                                     ///\n");
-    printf("///              Quant. de ingressos (apenas numeros):                      ///\n");
-    printf("///              Id destinado aos ingressos (apenas numeros):               ///\n");
+    printf("///              Atração: ");
+    scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]", skip);
+    getchar();
+    printf("\n///              Data (dd/mm/aaaa): ");
+    scanf("%[0-9/]", skip);
+    getchar();
+    printf("///              Local:");
+    scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]", skip);
+    getchar();
+    printf("///              Quant. de ingressos (apenas numeros): ");
+    scanf("%[0-9]", skip);
+    getchar();
+    printf("///              Id destinado aos ingressos (apenas numeros): ");
+    scanf("%[0-9]", skip);
+    getchar();
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
-    printf("\t\t>>> Tecle ENTER para voltar ao Menu Principal... <<<");
+    printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
     scanf("%c", &go);
-    getchar();
 }
 
 void read_show(void)
@@ -475,35 +446,58 @@ void del_show(void)
 int ticket_menu(void)
 {
     int resp;
-    system("clear || cls");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n");
-    printf("///            ===================================================          ///\n");
-    printf("///            =============   Gestão Casa Shows   ===============          ///\n");
-    printf("///            ===================================================          ///\n");
-    printf("///                                                                         ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n");
-    printf("///              = = = = = = = = = = = = = = = = = = = = = = = =            ///\n");
-    printf("///              = = = = = = = = Menu  Ingressos = = = = = = = =            ///\n");
-    printf("///              = = = = = = = = = = = = = = = = = = = = = = = =            ///\n");
-    printf("///                                                                         ///\n");
-    printf("///              1. Cadastrar um novo ingresso                              ///\n");
-    printf("///              2. Pesquisar os dados de um ingresso                       ///\n");
-    printf("///              3. Editar o cadastro de um ingresso                        ///\n");
-    printf("///              4. Excluir um ingresso do sistema                          ///\n");
-    printf("///              0. Voltar ao Menu Principal                                ///\n");
-    printf("///                                                                         ///\n");
-    printf("///              Escolha a opção que deseja:");
-    scanf("%d", &resp);
-    printf("///                                                                         ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    return resp;
+    do 
+    {
+        system("clear || cls");
+        printf("///////////////////////////////////////////////////////////////////////////////\n");
+        printf("///                                                                         ///\n");
+        printf("///            ===================================================          ///\n");
+        printf("///            =============   Gestão Casa Shows   ===============          ///\n");
+        printf("///            ===================================================          ///\n");
+        printf("///                                                                         ///\n");
+        printf("///////////////////////////////////////////////////////////////////////////////\n");
+        printf("///                                                                         ///\n");
+        printf("///              = = = = = = = = = = = = = = = = = = = = = = = =            ///\n");
+        printf("///              = = = = = = = = Menu  Ingressos = = = = = = = =            ///\n");
+        printf("///              = = = = = = = = = = = = = = = = = = = = = = = =            ///\n");
+        printf("///                                                                         ///\n");
+        printf("///              1. Cadastrar um novo ingresso                              ///\n");
+        printf("///              2. Pesquisar os dados de um ingresso                       ///\n");
+        printf("///              3. Editar o cadastro de um ingresso                        ///\n");
+        printf("///              4. Excluir um ingresso do sistema                          ///\n");
+        printf("///              0. Voltar ao Menu Principal                                ///\n");
+        printf("///                                                                         ///\n");
+        printf("///              Escolha a opção que deseja:");
+        scanf("%d", &resp);
+        printf("///                                                                         ///\n");
+        printf("///////////////////////////////////////////////////////////////////////////////\n");
+        switch (resp)
+            {
+                case 1:
+                    cred_ticket();
+                    break;
+                case 2:
+                    read_ticket();
+                    break;
+                case 3:
+                    upd_ticket();
+                    break;
+                case 4:
+                    del_ticket();
+                    break;
+                case 0:
+                    system("cls || clear");
+                    break;
+        }
+    } while (resp != 0);
+    return 0;
 }
 
 void cred_ticket(void)
 {
     char go;
+    char* skip;
+    skip = (char*) malloc(8*sizeof(char));
     system("clear || cls");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
@@ -518,6 +512,7 @@ void cred_ticket(void)
     printf("///              = = = = = = = = = = = = = = = = = = = = = = = =            ///\n");
     printf("///                                                                         ///\n");
     printf("///              Informe o Id do ingresso:                                  ///\n");
+    scanf("%[0-9]", skip);
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
@@ -637,35 +632,58 @@ void del_ticket(void)
 int contract_menu(void)
 {
     int resp;
-    system("clear || cls");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n");
-    printf("///            ===================================================          ///\n");
-    printf("///            =============   Gestão Casa Shows   ===============          ///\n");
-    printf("///            ===================================================          ///\n");
-    printf("///                                                                         ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n");
-    printf("///              = = = = = = = = = = = = = = = = = = = = = = = =            ///\n");
-    printf("///              = = = = = = = = Menu  Contratos = = = = = = = =            ///\n");
-    printf("///              = = = = = = = = = = = = = = = = = = = = = = = =            ///\n");
-    printf("///                                                                         ///\n");
-    printf("///              1. Cadastrar um novo contrato                              ///\n");
-    printf("///              2. Pesquisar os dados de um contrato                       ///\n");
-    printf("///              3. Editar o cadastro de um contrato                        ///\n");
-    printf("///              4. Excluir um contrato do sistema                          ///\n");
-    printf("///              0. Voltar ao Menu Principal                                ///\n");
-    printf("///                                                                         ///\n");
-    printf("///              Escolha a opção que deseja:");
-    scanf("%d", &resp);
-    printf("///                                                                         ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    return resp;
+    do
+    {
+        system("clear || cls");
+        printf("///////////////////////////////////////////////////////////////////////////////\n");
+        printf("///                                                                         ///\n");
+        printf("///            ===================================================          ///\n");
+        printf("///            =============   Gestão Casa Shows   ===============          ///\n");
+        printf("///            ===================================================          ///\n");
+        printf("///                                                                         ///\n");
+        printf("///////////////////////////////////////////////////////////////////////////////\n");
+        printf("///                                                                         ///\n");
+        printf("///              = = = = = = = = = = = = = = = = = = = = = = = =            ///\n");
+        printf("///              = = = = = = = = Menu  Contratos = = = = = = = =            ///\n");
+        printf("///              = = = = = = = = = = = = = = = = = = = = = = = =            ///\n");
+        printf("///                                                                         ///\n");
+        printf("///              1. Cadastrar um novo contrato                              ///\n");
+        printf("///              2. Pesquisar os dados de um contrato                       ///\n");
+        printf("///              3. Editar o cadastro de um contrato                        ///\n");
+        printf("///              4. Excluir um contrato do sistema                          ///\n");
+        printf("///              0. Voltar ao Menu Principal                                ///\n");
+        printf("///                                                                         ///\n");
+        printf("///              Escolha a opção que deseja:");
+        scanf("%d", &resp);
+        printf("///                                                                         ///\n");
+        printf("///////////////////////////////////////////////////////////////////////////////\n");
+        switch (resp)
+        {
+            case 1:
+                cred_contract();
+                break;
+            case 2:
+                read_contract();
+                break;
+            case 3:
+                upd_contract();
+                break;
+            case 4:
+                del_contract();
+                break;
+            case 0:
+                system("cls || clear");
+                break;
+        }
+    } while (resp != 0);
+    return 0;
 }
 
 void cred_contract(void)
 {
     char go;
+    char* skip;
+    skip = (char*) malloc(8*sizeof(char));
     system("clear || cls");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
@@ -680,6 +698,7 @@ void cred_contract(void)
     printf("///              = = = = = = = = = = = = = = = = = = = = = = = =            ///\n");
     printf("///                                                                         ///\n");
     printf("///              Informe o Id do contrato:                                  ///\n");
+    scanf("%[0-9]", skip);
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
