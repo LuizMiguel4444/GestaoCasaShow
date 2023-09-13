@@ -1,29 +1,29 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
-#include "show.h"
+#include "contract.h"
 #include "util.h"
 
-void modulo_show(void)
+void modulo_contract(void)
 {
     setlocale(LC_ALL, "Portuguese_Brazil");
     int resp;
     do
     {
-        resp = show_menu();
+        resp = contract_menu();
         switch (resp)
         {
             case 1:
-                cred_show();
+                cred_contract();
                 break;
             case 2:
-                read_show();
+                read_contract();
                 break;
             case 3:
-                upd_show();
+                upd_contract();
                 break;
             case 4:
-                del_show();
+                del_contract();
                 break;
             case 0:
                 system("cls || clear");
@@ -32,7 +32,7 @@ void modulo_show(void)
     } while (resp != 0);
 }
 
-int show_menu(void)
+int contract_menu(void)
 {
     int resp;
         system("clear || cls");
@@ -45,16 +45,16 @@ int show_menu(void)
         printf("///////////////////////////////////////////////////////////////////////////////\n");
         printf("///                                                                         ///\n");
         printf("///              = = = = = = = = = = = = = = = = = = = = = = = =            ///\n");
-        printf("///              = = = = = = = = = Menu  Shows = = = = = = = = =            ///\n");
+        printf("///              = = = = = = = = Menu  Contratos = = = = = = = =            ///\n");
         printf("///              = = = = = = = = = = = = = = = = = = = = = = = =            ///\n");
         printf("///                                                                         ///\n");
-        printf("///              1. Cadastrar um novo show                                  ///\n");
-        printf("///              2. Pesquisar os dados de um show                           ///\n");
-        printf("///              3. Editar o cadastro de um show                            ///\n");
-        printf("///              4. Excluir um show do sistema                              ///\n");
+        printf("///              1. Cadastrar um novo contrato                              ///\n");
+        printf("///              2. Pesquisar os dados de um contrato                       ///\n");
+        printf("///              3. Editar o cadastro de um contrato                        ///\n");
+        printf("///              4. Excluir um contrato do sistema                          ///\n");
         printf("///              0. Voltar ao Menu Principal                                ///\n");
         printf("///                                                                         ///\n");
-        printf("///              Escolha a opção que deseja:");
+        printf("///              Escolha a opção que deseja: ");
         scanf("%d", &resp);
         getchar();
         printf("///                                                                         ///\n");
@@ -62,11 +62,11 @@ int show_menu(void)
         return resp;
 }
 
-void cred_show(void)
+void cred_contract(void)
 {
     char go;
     char* skip;
-    skip = (char*) malloc(30*sizeof(char));
+    skip = (char*) malloc(8*sizeof(char));
     system("clear || cls");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
@@ -77,32 +77,20 @@ void cred_show(void)
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///              = = = = = = = = = = = = = = = = = = = = = = = =            ///\n");
-    printf("///              = = = = = = = = Cadastrar  Show = = = = = = = =            ///\n");
+    printf("///              = = = = = = = Cadastrar  Contrato = = = = = = =            ///\n");
     printf("///              = = = = = = = = = = = = = = = = = = = = = = = =            ///\n");
     printf("///                                                                         ///\n");
-    printf("///              Atração: ");
-    scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]", skip);
-    getchar();
-    printf("///              Data (dd/mm/aaaa): ");
-    scanf("%[0-9/]", skip);
-    getchar();
-    printf("///              Local:");
-    scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]", skip);
-    getchar();
-    printf("///              Quant. de ingressos (apenas numeros): ");
+    printf("///              Informe o Id do contrato: ");
     scanf("%[0-9]", skip);
-    getchar();
-    printf("///              Id destinado aos ingressos (apenas numeros): ");
-    scanf("%[0-9]", skip);
-    getchar();
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
-    printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
+    printf("\t\t>>> Tecle ENTER para voltar ao Menu Principal... <<<");
     scanf("%c", &go);
+    getchar();
 }
 
-void read_show(void)
+void read_contract(void)
 {
     int go;
     char go1;
@@ -116,10 +104,10 @@ void read_show(void)
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///              = = = = = = = = = = = = = = = = = = = = = = = =            ///\n");
-    printf("///              = = = = = = = = Pesquisar  Show = = = = = = = =            ///\n");
+    printf("///              = = = = = = = Pesquisar  Contrato = = = = = = =            ///\n");
     printf("///              = = = = = = = = = = = = = = = = = = = = = = = =            ///\n");
     printf("///                                                                         ///\n");
-    printf("///              Informe o Id dos ingressos do show:");
+    printf("///              Informe o Id do contrato:");
     scanf("%d", &go);
     getchar();
     if (go != 1000)
@@ -129,7 +117,7 @@ void read_show(void)
     else
     {
         printf("///                                                                         ///\n");
-        printf("///              Id do show não encontrado!                                 ///\n");
+        printf("///              Id do contrato não encontrado!                             ///\n");
         printf("///                                                                         ///\n");
         printf("///////////////////////////////////////////////////////////////////////////////\n");
         printf("\n");
@@ -138,7 +126,7 @@ void read_show(void)
     }
 }
 
-void upd_show(void)
+void upd_contract(void)
 {
     int go;
     char go1;
@@ -152,10 +140,10 @@ void upd_show(void)
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///              = = = = = = = = = = = = = = = = = = = = = = = =            ///\n");
-    printf("///              = = = = = = = =  Editar Show  = = = = = = = = =            ///\n");
+    printf("///              = = = = = = = = Editar Contrato = = = = = = = =            ///\n");
     printf("///              = = = = = = = = = = = = = = = = = = = = = = = =            ///\n");
     printf("///                                                                         ///\n");
-    printf("///              Informe o Id dos ingressos do show:");
+    printf("///              Informe o Id do contrato:");
     scanf("%d", &go);
     getchar();
     if (go != 1000)
@@ -165,7 +153,7 @@ void upd_show(void)
     else
     {
         printf("///                                                                         ///\n");
-        printf("///              Id do show não encontrado!                                 ///\n");
+        printf("///              Id do contrato não encontrado!                             ///\n");
         printf("///                                                                         ///\n");
         printf("///////////////////////////////////////////////////////////////////////////////\n");
         printf("\n");
@@ -174,7 +162,7 @@ void upd_show(void)
     }
 }
 
-void del_show(void)
+void del_contract(void)
 {
     int go;
     char go1;
@@ -188,10 +176,10 @@ void del_show(void)
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///              = = = = = = = = = = = = = = = = = = = = = = = =            ///\n");
-    printf("///              = = = = = = = = Excluir  Show = = = = = = = = =            ///\n");
+    printf("///              = = = = = = = Excluir  Contrsto = = = = = = = =            ///\n");
     printf("///              = = = = = = = = = = = = = = = = = = = = = = = =            ///\n");
     printf("///                                                                         ///\n");
-    printf("///              Informe o Id dos ingressos do show:");
+    printf("///              Informe o Id do contrato:");
     scanf("%d", &go);
     getchar();
     if (go != 1000)
@@ -201,7 +189,7 @@ void del_show(void)
     else
     {
         printf("///                                                                         ///\n");
-        printf("///              Id do show não encontrado!                                 ///\n");
+        printf("///              Id do contrato não encontrado!                             ///\n");
         printf("///                                                                         ///\n");
         printf("///////////////////////////////////////////////////////////////////////////////\n");
         printf("\n");
