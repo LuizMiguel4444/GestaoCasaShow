@@ -140,7 +140,7 @@ int valData(char* data)
 ////// FUNÇÃO DE ID/CODIGO
 int val_id(char* id, int tam)
 {
-    
+  
     int i;
 
     // quantidade de digitos
@@ -155,11 +155,11 @@ int val_id(char* id, int tam)
     
     // apenas digitos numericos
     for (i = 0; i < tam; i++) {
-        if (!numero(id[i])) {
+        if (!ehDigito(id[i])) {
             return 0;
         }
     }
 
     // ID valido
     return 1;
-}  // AUTOR: MATHEUS QUIRINO FERNANDES FIGUEIREDO /// GIT: https://github.com/quirinof
+}  // MODIFICADO DE: MATHEUS QUIRINO FERNANDES FIGUEIREDO /// GIT: https://github.com/quirinof
