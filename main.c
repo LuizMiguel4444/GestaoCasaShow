@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
-#include "show.c"
-#include "ticket.c"
-#include "contract.c"
-#include "report.c"
-#include "util.c"
+#include "show.h"
+#include "ticket.h"
+#include "contract.h"
+#include "report.h"
+#include "util.h"
 #ifndef cores
 #define cores
 #define ciano(texto) printf("\33[1;36m %s \33[0m", texto)

@@ -110,7 +110,7 @@ void read_contract(void)
     printf("///              Informe o Id do contrato:");
     scanf("%d", &go);
     getchar();
-    if (go != 1000)
+    if (go == 1000)
     {
         print_dados();
     }
@@ -146,7 +146,7 @@ void upd_contract(void)
     printf("///              Informe o Id do contrato:");
     scanf("%d", &go);
     getchar();
-    if (go != 1000)
+    if (go == 1000)
     {
         print_dados();
     }
@@ -182,7 +182,7 @@ void del_contract(void)
     printf("///              Informe o Id do contrato:");
     scanf("%d", &go);
     getchar();
-    if (go != 1000)
+    if (go == 1000)
     {
         print_dados();
     }

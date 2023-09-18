@@ -122,7 +122,7 @@ void read_show(void)
     printf("///              Informe o Id dos ingressos do show:");
     scanf("%d", &go);
     getchar();
-    if (go != 1000)
+    if (go == 1000)
     {
         print_dados();
     }
@@ -158,7 +158,7 @@ void upd_show(void)
     printf("///              Informe o Id dos ingressos do show:");
     scanf("%d", &go);
     getchar();
-    if (go != 1000)
+    if (go == 1000)
     {
         print_dados();
     }
@@ -194,7 +194,7 @@ void del_show(void)
     printf("///              Informe o Id dos ingressos do show:");
     scanf("%d", &go);
     getchar();
-    if (go != 1000)
+    if (go == 1000)
     {
         print_dados();
     }
