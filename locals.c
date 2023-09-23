@@ -1,29 +1,29 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
-#include "show.h"
+#include "locals.h"
 #include "util.h"
 
-void modulo_show(void)
+void modulo_locals(void)
 {
     setlocale(LC_ALL, "Portuguese_Brazil");
     int resp;
     do
     {
-        resp = show_menu();
+        resp = locals_menu();
         switch (resp)
         {
             case 1:
-                cred_show();
+                cred_locals();
                 break;
             case 2:
-                read_show();
+                read_locals();
                 break;
             case 3:
-                upd_show();
+                upd_locals();
                 break;
             case 4:
-                del_show();
+                del_locals();
                 break;
             case 0:
                 system("cls || clear");
@@ -32,7 +32,7 @@ void modulo_show(void)
     } while (resp != 0);
 }
 
-int show_menu(void)
+int locals_menu(void)
 {
     int resp;
         system("clear || cls");
@@ -45,16 +45,16 @@ int show_menu(void)
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
         printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-        printf("###              = = = = = = = = = Menu  Shows = = = = = = = = =            ###\n");
+        printf("###              = = = = = = = = = menu aocais = = = = = = = = =            ###\n");
         printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
         printf("###                                                                         ###\n");
-        printf("###              1. Cadastrar um novo show                                  ###\n");
-        printf("###              2. Pesquisar os dados de um show                           ###\n");
-        printf("###              3. Editar o cadastro de um show                            ###\n");
-        printf("###              4. Excluir um show do sistema                              ###\n");
-        printf("###              0. Voltar ao Menu Principal                                ###\n");
+        printf("###              1. Cadastrar um novo local                                 ###\n");
+        printf("###              2. Pesquisar os dados de um local                          ###\n");
+        printf("###              3. Editar o cadastro de um local                           ###\n");
+        printf("###              4. Excluir um local do sistema                             ###\n");
+        printf("###              0. Voltar ao menu arincipal                                ###\n");
         printf("###                                                                         ###\n");
-        printf("###              Escolha a opção que deseja:");
+        printf("###              Escolha a opção que deseja: ");
         scanf("%d", &resp);
         getchar();
         printf("###                                                                         ###\n");
@@ -62,7 +62,7 @@ int show_menu(void)
         return resp;
 }
 
-void cred_show(void)
+void cred_locals(void)
 {
     char go;
     char* skip;
@@ -77,28 +77,22 @@ void cred_show(void)
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-    printf("###              = = = = = = = = Cadastrar  Show = = = = = = = =            ###\n");
+    printf("###              = = = = = = = Cadastrar  local    = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    printf("###              Atração: ");
+    printf("###              Nome do local: ");
     scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]", skip);
     getchar();
-    printf("###              Data (dd/mm/aaaa): ");
-    scanf("%[0-9/]", skip);
+    printf("###              Email da gestão do local: ");
+    scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ@.]", skip);
     getchar();
-    printf("###              Hora (hr:min): ");
-    scanf("%[0-9/:]", skip);
+    printf("###              Número de contato da gestão do local: ");
+    scanf("%[0-9/ -()]", skip);
     getchar();
-    printf("###              Local:");
-    scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]", skip);
-    getchar();
-    printf("###              Quant. de ingressos (apenas numeros): ");
-    scanf("%[0-9]", skip);
-    getchar();
-    printf("###              Valor do ingresso: ");
+    printf("###              Valor da locação do local: ");
     scanf("%[0-9/.,]", skip);
     getchar();
-    printf("###              Id do show (apenas numeros): ");
+    printf("###              Id do local: ");
     scanf("%[0-9]", skip);
     getchar();
     printf("###                                                                         ###\n");
@@ -108,7 +102,7 @@ void cred_show(void)
     scanf("%c", &go);
 }
 
-void read_show(void)
+void read_locals(void)
 {
     int go;
     char go1;
@@ -122,10 +116,10 @@ void read_show(void)
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-    printf("###              = = = = = = = = Pesquisar  Show = = = = = = = =            ###\n");
+    printf("###              = = = = = = = = Pesquisar local = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    printf("###              Informe o Id do show:");
+    printf("###              Informe o Id do local: ");
     scanf("%d", &go);
     getchar();
     if (go == 1000)
@@ -135,7 +129,7 @@ void read_show(void)
     else
     {
         printf("###                                                                         ###\n");
-        printf("###              Id do show não encontrado!                                 ###\n");
+        printf("###              Id do local não encontrado!                                ###\n");
         printf("###                                                                         ###\n");
         printf("###############################################################################\n");
         printf("\n");
@@ -144,7 +138,7 @@ void read_show(void)
     }
 }
 
-void upd_show(void)
+void upd_locals(void)
 {
     int go;
     char go1;
@@ -158,10 +152,10 @@ void upd_show(void)
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-    printf("###              = = = = = = = =  Editar Show  = = = = = = = = =            ###\n");
+    printf("###              = = = = = = = =  Editar  local  = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    printf("###              Informe o Id do show:");
+    printf("###              Informe o Id do local: ");
     scanf("%d", &go);
     getchar();
     if (go == 1000)
@@ -171,7 +165,7 @@ void upd_show(void)
     else
     {
         printf("###                                                                         ###\n");
-        printf("###              Id do show não encontrado!                                 ###\n");
+        printf("###              Id do local não encontrado!                                ###\n");
         printf("###                                                                         ###\n");
         printf("###############################################################################\n");
         printf("\n");
@@ -180,7 +174,7 @@ void upd_show(void)
     }
 }
 
-void del_show(void)
+void del_locals(void)
 {
     int go;
     char go1;
@@ -194,10 +188,10 @@ void del_show(void)
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-    printf("###              = = = = = = = = Excluir  Show = = = = = = = = =            ###\n");
+    printf("###              = = = = = = = = Excluir Local = = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    printf("###              Informe o Id do show:");
+    printf("###              Informe o Id do local: ");
     scanf("%d", &go);
     getchar();
     if (go == 1000)
@@ -207,7 +201,7 @@ void del_show(void)
     else
     {
         printf("###                                                                         ###\n");
-        printf("###              Id do show não encontrado!                                 ###\n");
+        printf("###              Id do local não encontrado!                                ###\n");
         printf("###                                                                         ###\n");
         printf("###############################################################################\n");
         printf("\n");

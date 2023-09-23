@@ -26,7 +26,7 @@ void report_menu(void)
     printf("###              = = = = = = = = Menu  Relatório = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    printf("###              Apresenta os dados do relatório...                         ###\n");
+    printf("###              Apresenta os dados do relatório de vendas...               ###\n");
     printf("###                                                                         ###\n");
     printf("###              Em desenvolvimento...                                      ###\n");
     printf("###                                                                         ###\n");

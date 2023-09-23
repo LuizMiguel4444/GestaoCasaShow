@@ -15,7 +15,7 @@ void print_dados(void)
     printf("\n");
     printf("Em desenvolvimento...\n");
     printf("\n");
-    printf("\t\t>>> Tecle ENTER para voltar ao Menu Principal... <<<");
+    printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
     scanf("%c", &go);
 }
 
@@ -28,7 +28,7 @@ void error(void)
     printf("\n");
     printf("Opção inválida!\n");
     printf("\n");
-    printf("\t\t>>> Tecle ENTER para voltar ao Menu Principal... <<<");
+    printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
     scanf("%c\n", &go);
 }
 

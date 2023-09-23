@@ -2,8 +2,9 @@
 #include <stdlib.h>
 #include <locale.h>
 #include "show.h"
-#include "ticket.h"
-#include "contract.h"
+#include "atraction.h"
+#include "locals.h"
+#include "buy.h"
 #include "report.h"
 #include "util.h"
 #ifndef cores
@@ -34,18 +35,21 @@ int main(void)
                 modulo_show();
                 break;
             case 2:
-                modulo_ticket();
+                modulo_atraction();
                 break;
             case 3:
-                modulo_contract();
+                modulo_locals();
                 break;
             case 4:
-                modulo_report();
+                modulo_buy();
                 break;
             case 5:
-                about();
+                modulo_report();
                 break;
             case 6:
+                about();
+                break;
+            case 7:
                 dev();
                 break;
             case 0:
@@ -68,11 +72,12 @@ int main_menu(void)
     printf("###      ============================================================       ###\n");
     printf("###                                                                         ###\n");
     printf("###                             1. Menu Shows                               ###\n");
-    printf("###                           2. Menu Ingressos                             ###\n");
-    printf("###                           3. Menu Contratos                             ###\n");
-    printf("###                           4. Menu Relatórios                            ###\n");
-    printf("###                                5. Sobre                                 ###\n");
-    printf("###                              6. Créditos                                ###\n");
+    printf("###                            2. Menu Atrações                             ###\n");
+    printf("###                             3. Menu Locais                              ###\n");
+    printf("###                             4. Menu Vendas                              ###\n");
+    printf("###                           5. Menu Relatórios                            ###\n");
+    printf("###                                6. Sobre                                 ###\n");
+    printf("###                              7. Créditos                                ###\n");
     printf("###                                0. Sair                                  ###\n");
     printf("###                                                                         ###\n");
     printf("###                       Escolha a opção que deseja:");

@@ -1,29 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
-#include "contract.h"
+#include "buy.h"
 #include "util.h"
 
-void modulo_contract(void)
+void modulo_buy(void)
 {
     setlocale(LC_ALL, "Portuguese_Brazil");
     int resp;
     do
     {
-        resp = contract_menu();
+        resp = buy_menu();
         switch (resp)
         {
             case 1:
-                cred_contract();
+                cred_buy();
                 break;
             case 2:
-                read_contract();
+                read_buy();
                 break;
             case 3:
-                upd_contract();
-                break;
-            case 4:
-                del_contract();
+                upd_buy();
                 break;
             case 0:
                 system("cls || clear");
@@ -32,7 +29,7 @@ void modulo_contract(void)
     } while (resp != 0);
 }
 
-int contract_menu(void)
+int buy_menu(void)
 {
     int resp;
         system("clear || cls");
@@ -45,13 +42,12 @@ int contract_menu(void)
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
         printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-        printf("###              = = = = = = = = Menu  Contratos = = = = = = = =            ###\n");
+        printf("###              = = = = = = = = = Menu Vendas = = = = = = = = =            ###\n");
         printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
         printf("###                                                                         ###\n");
-        printf("###              1. Cadastrar um novo contrato                              ###\n");
-        printf("###              2. Pesquisar os dados de um contrato                       ###\n");
-        printf("###              3. Editar o cadastro de um contrato                        ###\n");
-        printf("###              4. Excluir um contrato do sistema                          ###\n");
+        printf("###              1. Cadastrar uma nova venda                                ###\n");
+        printf("###              2. Pesquisar os dados de uma venda                         ###\n");
+        printf("###              3. Editar o cadastro de uma venda                          ###\n");
         printf("###              0. Voltar ao Menu Principal                                ###\n");
         printf("###                                                                         ###\n");
         printf("###              Escolha a opção que deseja: ");
@@ -62,11 +58,11 @@ int contract_menu(void)
         return resp;
 }
 
-void cred_contract(void)
+void cred_buy(void)
 {
     char go;
     char* skip;
-    skip = (char*) malloc(8*sizeof(char));
+    skip = (char*) malloc(30*sizeof(char));
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -77,20 +73,37 @@ void cred_contract(void)
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-    printf("###              = = = = = = = Cadastrar  Contrato = = = = = = =            ###\n");
+    printf("###              = = = = = = = = Cadastrar Venda = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    printf("###              Informe o Id do contrato: ");
-    scanf("%[0-9]", skip);
+    printf("###              Nome do cliente: ");
+    scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]", skip);
+    getchar();
+    printf("###              CPF do cliente: ");
+    scanf("%[0-9 /-.]", skip);
+    getchar();
+    printf("###              Email do contato do cliente: ");
+    scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ@.]", skip);
+    getchar();
+    printf("###              Número de contato do cliente: ");
+    scanf("%[0-9/ -()]", skip);
+    getchar();
+    printf("###              Valor pago pelo cliente: ");
+    scanf("%[0-9/.,]", skip);
+    getchar();
+    printf("###                                                                         ###\n");
+    printf("###############################################################################\n");
+    printf("###                                                                         ###\n");
+    printf("###              Quant. de ingressos vendidos: x+1                          ###\n");
+    printf("###              Quant. de ingressos que restam: x-1                        ###\n");
     printf("###                                                                         ###\n");
     printf("###############################################################################\n");
     printf("\n");
-    printf("\t\t>>> Tecle ENTER para voltar ao Menu Principal... <<<");
+    printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
     scanf("%c", &go);
-    getchar();
 }
 
-void read_contract(void)
+void read_buy(void)
 {
     int go;
     char go1;
@@ -104,10 +117,10 @@ void read_contract(void)
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-    printf("###              = = = = = = = Pesquisar  Contrato = = = = = = =            ###\n");
+    printf("###              = = = = = = = = Pesquisar Venda = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    printf("###              Informe o Id do contrato:");
+    printf("###              Informe o Id da venda:");
     scanf("%d", &go);
     getchar();
     if (go == 1000)
@@ -117,16 +130,16 @@ void read_contract(void)
     else
     {
         printf("###                                                                         ###\n");
-        printf("###              Id do contrato não encontrado!                             ###\n");
+        printf("###              Id da venda não encontrado!                                ###\n");
         printf("###                                                                         ###\n");
         printf("###############################################################################\n");
         printf("\n");
-        printf("\t\t>>> Tecle ENTER para voltar ao Menu Principal... <<<");
+        printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
         scanf("%c", &go1);
     }
 }
 
-void upd_contract(void)
+void upd_buy(void)
 {
     int go;
     char go1;
@@ -140,10 +153,10 @@ void upd_contract(void)
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-    printf("###              = = = = = = = = Editar Contrato = = = = = = = =            ###\n");
+    printf("###              = = = = = = = =  Editar  Venda  = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    printf("###              Informe o Id do contrato:");
+    printf("###              Informe o Id da venda:");
     scanf("%d", &go);
     getchar();
     if (go == 1000)
@@ -153,47 +166,11 @@ void upd_contract(void)
     else
     {
         printf("###                                                                         ###\n");
-        printf("###              Id do contrato não encontrado!                             ###\n");
+        printf("###              Id da venda não encontrado!                                ###\n");
         printf("###                                                                         ###\n");
         printf("###############################################################################\n");
         printf("\n");
-        printf("\t\t>>> Tecle ENTER para voltar ao Menu Principal... <<<");
-        scanf("%c", &go1);
-    }
-}
-
-void del_contract(void)
-{
-    int go;
-    char go1;
-    system("clear || cls");
-    printf("###############################################################################\n");
-    printf("###                                                                         ###\n");
-    printf("###            ===================================================          ###\n");
-    printf("###            =============   Gestão Casa Shows   ===============          ###\n");
-    printf("###            ===================================================          ###\n");
-    printf("###                                                                         ###\n");
-    printf("###############################################################################\n");
-    printf("###                                                                         ###\n");
-    printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-    printf("###              = = = = = = = Excluir  Contrsto = = = = = = = =            ###\n");
-    printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-    printf("###                                                                         ###\n");
-    printf("###              Informe o Id do contrato:");
-    scanf("%d", &go);
-    getchar();
-    if (go == 1000)
-    {
-        print_dados();
-    }
-    else
-    {
-        printf("###                                                                         ###\n");
-        printf("###              Id do contrato não encontrado!                             ###\n");
-        printf("###                                                                         ###\n");
-        printf("###############################################################################\n");
-        printf("\n");
-        printf("\t\t>>> Tecle ENTER para voltar ao Menu Principal... <<<");
+        printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
         scanf("%c", &go1);
     }
 }
