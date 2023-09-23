@@ -3,7 +3,7 @@
 #include <locale.h>
 #include "show.h"
 #include "atraction.h"
-#include "locals.h"
+#include "client.h"
 #include "buy.h"
 #include "report.h"
 #include "util.h"
@@ -38,7 +38,7 @@ int main(void)
                 modulo_atraction();
                 break;
             case 3:
-                modulo_locals();
+                modulo_client();
                 break;
             case 4:
                 modulo_buy();
@@ -73,7 +73,7 @@ int main_menu(void)
     printf("###                                                                         ###\n");
     printf("###                             1. Menu Shows                               ###\n");
     printf("###                            2. Menu Atrações                             ###\n");
-    printf("###                             3. Menu Locais                              ###\n");
+    printf("###                            3. Menu Clientes                             ###\n");
     printf("###                             4. Menu Vendas                              ###\n");
     printf("###                           5. Menu Relatórios                            ###\n");
     printf("###                                6. Sobre                                 ###\n");

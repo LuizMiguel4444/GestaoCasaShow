@@ -1,29 +1,29 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
-#include "locals.h"
+#include "client.h"
 #include "util.h"
 
-void modulo_locals(void)
+void modulo_client(void)
 {
     setlocale(LC_ALL, "Portuguese_Brazil");
     int resp;
     do
     {
-        resp = locals_menu();
+        resp = client_menu();
         switch (resp)
         {
             case 1:
-                cred_locals();
+                cred_client();
                 break;
             case 2:
-                read_locals();
+                read_client();
                 break;
             case 3:
-                upd_locals();
+                upd_client();
                 break;
             case 4:
-                del_locals();
+                del_client();
                 break;
             case 0:
                 system("cls || clear");
@@ -32,7 +32,7 @@ void modulo_locals(void)
     } while (resp != 0);
 }
 
-int locals_menu(void)
+int client_menu(void)
 {
     int resp;
         system("clear || cls");
@@ -45,13 +45,13 @@ int locals_menu(void)
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
         printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-        printf("###              = = = = = = = = = menu aocais = = = = = = = = =            ###\n");
+        printf("###              = = = = = = = =  Menu Clientes  = = = = = = = =            ###\n");
         printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
         printf("###                                                                         ###\n");
-        printf("###              1. Cadastrar um novo local                                 ###\n");
-        printf("###              2. Pesquisar os dados de um local                          ###\n");
-        printf("###              3. Editar o cadastro de um local                           ###\n");
-        printf("###              4. Excluir um local do sistema                             ###\n");
+        printf("###              1. Cadastrar um novo cliente                               ###\n");
+        printf("###              2. Pesquisar os dados de um cliente                        ###\n");
+        printf("###              3. Editar o cadastro de um cliente                         ###\n");
+        printf("###              4. Excluir um cliente do sistema                           ###\n");
         printf("###              0. Voltar ao menu arincipal                                ###\n");
         printf("###                                                                         ###\n");
         printf("###              Escolha a opção que deseja: ");
@@ -62,7 +62,7 @@ int locals_menu(void)
         return resp;
 }
 
-void cred_locals(void)
+void cred_client(void)
 {
     char go;
     char* skip;
@@ -77,22 +77,22 @@ void cred_locals(void)
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-    printf("###              = = = = = = = Cadastrar  local    = = = = = = =            ###\n");
+    printf("###              = = = = = = =  Cadastrar Cliente  = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    printf("###              Nome do local: ");
+    printf("###              Nome do cliente: ");
     scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]", skip);
     getchar();
-    printf("###              Email da gestão do local: ");
+    printf("###              CPF do cliente: ");
+    scanf("%[0-9 /-.]", skip);
+    getchar();
+    printf("###              Email do cliente: ");
     scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ@.]", skip);
     getchar();
-    printf("###              Número de contato da gestão do local: ");
+    printf("###              Número do cliente: ");
     scanf("%[0-9/ -()]", skip);
     getchar();
-    printf("###              Valor da locação do local: ");
-    scanf("%[0-9/.,]", skip);
-    getchar();
-    printf("###              Id do local: ");
+    printf("###              Id do cliente: ");
     scanf("%[0-9]", skip);
     getchar();
     printf("###                                                                         ###\n");
@@ -102,7 +102,7 @@ void cred_locals(void)
     scanf("%c", &go);
 }
 
-void read_locals(void)
+void read_client(void)
 {
     int go;
     char go1;
@@ -116,10 +116,10 @@ void read_locals(void)
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-    printf("###              = = = = = = = = Pesquisar local = = = = = = = =            ###\n");
+    printf("###              = = = = = = =  Pesquisar Cliente  = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    printf("###              Informe o Id do local: ");
+    printf("###              Informe o Id do cliente: ");
     scanf("%d", &go);
     getchar();
     if (go == 1000)
@@ -129,7 +129,7 @@ void read_locals(void)
     else
     {
         printf("###                                                                         ###\n");
-        printf("###              Id do local não encontrado!                                ###\n");
+        printf("###              Id do cliente não encontrado!                              ###\n");
         printf("###                                                                         ###\n");
         printf("###############################################################################\n");
         printf("\n");
@@ -138,7 +138,7 @@ void read_locals(void)
     }
 }
 
-void upd_locals(void)
+void upd_client(void)
 {
     int go;
     char go1;
@@ -152,10 +152,10 @@ void upd_locals(void)
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-    printf("###              = = = = = = = =  Editar  local  = = = = = = = =            ###\n");
+    printf("###              = = = = = = = = Editar  Cliente = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    printf("###              Informe o Id do local: ");
+    printf("###              Informe o Id do cliente: ");
     scanf("%d", &go);
     getchar();
     if (go == 1000)
@@ -165,7 +165,7 @@ void upd_locals(void)
     else
     {
         printf("###                                                                         ###\n");
-        printf("###              Id do local não encontrado!                                ###\n");
+        printf("###              Id do cliente não encontrado!                              ###\n");
         printf("###                                                                         ###\n");
         printf("###############################################################################\n");
         printf("\n");
@@ -174,7 +174,7 @@ void upd_locals(void)
     }
 }
 
-void del_locals(void)
+void del_client(void)
 {
     int go;
     char go1;
@@ -188,10 +188,10 @@ void del_locals(void)
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-    printf("###              = = = = = = = = Excluir Local = = = = = = = = =            ###\n");
+    printf("###              = = = = = = =  Excluir Cliente  = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    printf("###              Informe o Id do local: ");
+    printf("###              Informe o Id do cliente: ");
     scanf("%d", &go);
     getchar();
     if (go == 1000)
@@ -201,7 +201,7 @@ void del_locals(void)
     else
     {
         printf("###                                                                         ###\n");
-        printf("###              Id do local não encontrado!                                ###\n");
+        printf("###              Id do cliente não encontrado!                              ###\n");
         printf("###                                                                         ###\n");
         printf("###############################################################################\n");
         printf("\n");
