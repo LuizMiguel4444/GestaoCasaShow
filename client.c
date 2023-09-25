@@ -122,7 +122,7 @@ void read_client(void)
     printf("###              Informe o Id do cliente: ");
     scanf("%d", &go);
     getchar();
-    if (go == 1000)
+    if (go == 0)
     {
         print_dados();
     }
@@ -158,7 +158,7 @@ void upd_client(void)
     printf("###              Informe o Id do cliente: ");
     scanf("%d", &go);
     getchar();
-    if (go == 1000)
+    if (go == 0)
     {
         print_dados();
     }
@@ -194,7 +194,7 @@ void del_client(void)
     printf("###              Informe o Id do cliente: ");
     scanf("%d", &go);
     getchar();
-    if (go == 1000)
+    if (go == 0)
     {
         print_dados();
     }

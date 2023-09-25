@@ -82,9 +82,6 @@ void cred_buy(void)
     printf("###              Id do cliente: ");
     scanf("%[0-9]", skip);
     getchar();
-    printf("###              Id da venda: ");
-    scanf("%[0-9]", skip);
-    getchar();
     printf("###              Quant. de ingressos: ");
     scanf("%[0-9]", skip);
     getchar();
