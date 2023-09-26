@@ -36,9 +36,9 @@ void error(void)
 /// Retorna 1 se o caractere recebido for um dígito (entre 0 e 9)
 /// retorna 0 caso contrário
 ///
-int ehDigito(char c)
+int ehDigito(int d)
 {
-  if (c >= '0' && c <= '9') {
+  if (d >= 0 && d <= 9) {
     return 1;
   } else {
     return 0;

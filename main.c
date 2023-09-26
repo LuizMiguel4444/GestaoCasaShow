@@ -28,7 +28,7 @@ int main(void)
     int resp1;
     do
     {
-        resp1 = main_menu();
+        resp1 = main_menu(); printf("<%d>\n", resp1); getchar();
         switch (resp1)
         {
             case 1:
@@ -56,7 +56,7 @@ int main(void)
                 end();
                 break;
         }
-    } while (resp1 != 0);
+    } while (resp1 != 0); printf("ok"); 
     return 0;
 }
 
@@ -80,10 +80,19 @@ int main_menu(void)
     printf("###                              7. Créditos                                ###\n");
     printf("###                                0. Sair                                  ###\n");
     printf("###                                                                         ###\n");
-    printf("###                       Escolha a opção que deseja:");
-    scanf("%d", &resp);
-    printf("###                                                                         ###\n");
-    printf("###############################################################################\n");
+    do {
+        printf("###                       Escolha a opção que deseja: ");
+        scanf("%d", &resp); printf("<%d>\n", resp);
+        getchar();
+        if (ehDigito(resp)){
+            printf("###                                                                         ###\n");
+            printf("###############################################################################\n");
+        } else {
+            printf("###                       Escolha a opção que deseja: ");
+            scanf("%d", &resp); printf("<%d>\n", resp);
+            getchar();
+        }
+    } while (!ehDigito(resp));
     return resp;
 }
 
