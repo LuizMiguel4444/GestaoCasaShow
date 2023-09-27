@@ -36,14 +36,27 @@ void error(void)
 /// Retorna 1 se o caractere recebido for um dígito (entre 0 e 9)
 /// retorna 0 caso contrário
 ///
-int ehDigito(int d)
+int ehDigito(char c)
 {
-  if (d >= 0 && d <= 9) {
+  if (c >= '0' && c <= '9') {
     return 1;
   } else {
     return 0;
   }
 } // AUTOR: FLAVIUS GORGÔNIO /// GIT: https://github.com/flaviusgorgonio
+
+///////////////////////////////////////////////////////////////////////////////
+/// Retorna 1 se o caractere recebido for um dígito entre os números passados
+/// como parâmetro e retorna 0 caso contrário
+///
+int ehDigitoMax(char c, char max)
+{
+  if (c >= '0' && c <= max) {
+    return 1;
+  } else {
+    return 0;
+  }
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Retorna 1 se o caractere recebido for uma alfabético 

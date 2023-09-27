@@ -13,28 +13,28 @@ void modulo_report(void)
         resp = report_menu();
         switch (resp)
         {
-            case 1:
+            case '1':
                 report_show();
                 break;
-            case 2:
+            case '2':
                 report_atraction();
                 break;
-            case 3:
+            case '3':
                 report_client();
                 break;
-            case 4:
+            case '4':
                 report_buy();
                 break;
-            case 0:
+            case '0':
                 system("cls || clear");
                 break;
         }
-    } while (resp != 0);
+    } while (resp != '0');
 }
 
-int report_menu(void)
+char report_menu(void)
 {
-    int resp;
+    char resp;
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -55,7 +55,7 @@ int report_menu(void)
     printf("###                         0. Voltar ao menu anterior                      ###\n");
     printf("###                                                                         ###\n");
     printf("###                       Escolha a opção que deseja: ");
-    scanf("%d", &resp);
+    scanf("%c", &resp);
     printf("###                                                                         ###\n");
     printf("###############################################################################\n");
     return resp;

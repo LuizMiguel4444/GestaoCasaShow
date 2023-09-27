@@ -13,25 +13,25 @@ void modulo_buy(void)
         resp = buy_menu();
         switch (resp)
         {
-            case 1:
+            case '1':
                 cred_buy();
                 break;
-            case 2:
+            case '2':
                 read_buy();
                 break;
-            case 3:
+            case '3':
                 upd_buy();
                 break;
-            case 0:
+            case '0':
                 system("cls || clear");
                 break;
         }
-    } while (resp != 0);
+    } while (resp != '0');
 }
 
-int buy_menu(void)
+char buy_menu(void)
 {
-    int resp;
+    char resp;
         system("clear || cls");
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
@@ -51,7 +51,7 @@ int buy_menu(void)
         printf("###              0. Voltar ao Menu Principal                                ###\n");
         printf("###                                                                         ###\n");
         printf("###              Escolha a opção que deseja: ");
-        scanf("%d", &resp);
+        scanf("%c", &resp);
         getchar();
         printf("###                                                                         ###\n");
         printf("###############################################################################\n");

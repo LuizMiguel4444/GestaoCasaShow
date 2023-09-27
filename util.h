@@ -1,6 +1,7 @@
 void print_dados(void);
 void error(void);
-int ehDigito(int d);
+int ehDigito(char c);
+int ehDigitoMax(char c, char max);
 int ehLetra(char c);
 int ehBissexto(int aa);
 int ehData(int dd, int mm, int aa);

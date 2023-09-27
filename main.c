@@ -14,7 +14,7 @@
 #endif
 
 // Functions signature
-int main_menu(void);
+char main_menu(void);
 void about(void);
 void dev(void);
 void welcome(void);
@@ -25,45 +25,45 @@ int main(void)
 {
     setlocale(LC_ALL, "Portuguese_Brazil");
     welcome();
-    int resp1;
+    char resp;
     do
     {
-        resp1 = main_menu(); printf("<%d>\n", resp1); getchar();
-        switch (resp1)
+        resp = main_menu();
+        switch (resp)
         {
-            case 1:
+            case '1':
                 modulo_show();
                 break;
-            case 2:
+            case '2':
                 modulo_atraction();
                 break;
-            case 3:
+            case '3':
                 modulo_client();
                 break;
-            case 4:
+            case '4':
                 modulo_buy();
                 break;
-            case 5:
+            case '5':
                 modulo_report();
                 break;
-            case 6:
+            case '6':
                 about();
                 break;
-            case 7:
+            case '7':
                 dev();
                 break;
-            case 0:
+            case '0':
                 end();
                 break;
         }
-    } while (resp1 != 0); printf("ok"); 
+    } while (resp != '0'); 
     return 0;
 }
 
 // Functions
-int main_menu(void)
+char main_menu(void)
 {
-    int resp;
+    char resp;
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -82,14 +82,14 @@ int main_menu(void)
     printf("###                                                                         ###\n");
     do {
         printf("###                       Escolha a opção que deseja: ");
-        scanf("%d", &resp); printf("<%d>\n", resp);
+        scanf("%c", &resp);
         getchar();
         if (ehDigito(resp)){
             printf("###                                                                         ###\n");
             printf("###############################################################################\n");
         } else {
             printf("###                       Escolha a opção que deseja: ");
-            scanf("%d", &resp); printf("<%d>\n", resp);
+            scanf("%c", &resp);
             getchar();
         }
     } while (!ehDigito(resp));
@@ -116,7 +116,7 @@ void about(void)
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao Menu Principal... <<<");
     scanf("%c", &go);
-    getchar();
+    //getchar();
 }
 
 void dev(void)
@@ -141,7 +141,7 @@ void dev(void)
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao Menu Principal... <<<");
     scanf("%c", &go);
-    getchar();
+    //getchar();
 }
 
 void welcome(void)

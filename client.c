@@ -13,28 +13,28 @@ void modulo_client(void)
         resp = client_menu();
         switch (resp)
         {
-            case 1:
+            case '1':
                 cred_client();
                 break;
-            case 2:
+            case '2':
                 read_client();
                 break;
-            case 3:
+            case '3':
                 upd_client();
                 break;
-            case 4:
+            case '4':
                 del_client();
                 break;
-            case 0:
+            case '0':
                 system("cls || clear");
                 break;
         }
-    } while (resp != 0);
+    } while (resp != '0');
 }
 
-int client_menu(void)
+char client_menu(void)
 {
-    int resp;
+    char resp;
         system("clear || cls");
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
@@ -55,7 +55,7 @@ int client_menu(void)
         printf("###              0. Voltar ao menu arincipal                                ###\n");
         printf("###                                                                         ###\n");
         printf("###              Escolha a opção que deseja: ");
-        scanf("%d", &resp);
+        scanf("%c", &resp);
         getchar();
         printf("###                                                                         ###\n");
         printf("###############################################################################\n");

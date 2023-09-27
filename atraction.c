@@ -13,28 +13,28 @@ void modulo_atraction(void)
         resp = atraction_menu();
         switch (resp)
         {
-            case 1:
+            case '1':
                 cred_atraction();
                 break;
-            case 2:
+            case '2':
                 read_atraction();
                 break;
-            case 3:
+            case '3':
                 upd_atraction();
                 break;
-            case 4:
+            case '4':
                 del_atraction();
                 break;
-            case 0:
+            case '0':
                 system("cls || clear");
                 break;
         }
-    } while (resp != 0);
+    } while (resp != '0');
 }
 
-int atraction_menu(void)
+char atraction_menu(void)
 {
-    int resp;
+    char resp;
         system("clear || cls");
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
@@ -55,7 +55,7 @@ int atraction_menu(void)
         printf("###              0. Voltar ao Menu Principal                                ###\n");
         printf("###                                                                         ###\n");
         printf("###              Escolha a opção que deseja: ");
-        scanf("%d", &resp);
+        scanf("%c", &resp);
         getchar();
         printf("###                                                                         ###\n");
         printf("###############################################################################\n");
