@@ -1,3 +1,4 @@
+void limpa_buffer(void);
 void print_dados(void);
 void error(void);
 int ehDigito(char c);

@@ -4,6 +4,16 @@
 #include "util.h"
 
 ///////////////////////////////////////////////////////////////////////////////
+/// Função que limpa o buffer
+///
+void limpa_buffer(void) {
+    int entrada;
+    do {
+        entrada = fgetc(stdin);
+    } while (entrada != EOF && entrada != '\n');
+}
+
+///////////////////////////////////////////////////////////////////////////////
 /// Printa dados fictícios na tela e induz volta a tela anterior
 ///
 void print_dados(void)

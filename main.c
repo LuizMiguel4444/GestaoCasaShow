@@ -83,16 +83,16 @@ char main_menu(void)
     do {
         printf("###                       Escolha a opção que deseja: ");
         scanf("%c", &resp);
-        getchar();
-        if (ehDigito(resp)){
+        limpa_buffer();
+        if (ehDigitoMax(resp, '7')){
             printf("###                                                                         ###\n");
             printf("###############################################################################\n");
         } else {
             printf("###                       Escolha a opção que deseja: ");
             scanf("%c", &resp);
-            getchar();
+            limpa_buffer();
         }
-    } while (!ehDigito(resp));
+    } while (!ehDigitoMax(resp, '7'));
     return resp;
 }
 
