@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
+#include <string.h>
 #include "show.h"
 #include "atraction.h"
 #include "client.h"
@@ -15,6 +16,7 @@
 
 // Functions signature
 char main_menu(void);
+void main_menu_screen(void);
 void about(void);
 void dev(void);
 void welcome(void);
@@ -63,7 +65,53 @@ int main(void)
 // Functions
 char main_menu(void)
 {
-    char resp;
+    char resp[100];
+    //char op;
+
+    // se tamanho está correto
+
+    // se entrada está dentro dos limites
+
+
+
+    do {
+        main_menu_screen();
+        scanf("%s", resp);
+        limpa_buffer(); 
+        printf("<%s>-<%ld>", resp, strlen(resp));
+        getchar();
+        //fgets(resp, 1, stdin);
+        if (strlen(resp) > 1)
+        {
+            main_menu_screen();
+            scanf("%s", resp);
+            limpa_buffer();
+            //fgets(resp, 1, stdin);
+        }
+        // limpa_buffer();
+        // op = resp[0];
+        // if (ehDigitoMax(op, '7')){
+        //     printf("###                                                                         ###\n");
+        //     printf("###############################################################################\n");
+        // } else {
+        //     main_menu_screen();
+        //     //scanf("%c", &resp);
+        //     fgets(resp, 1, stdin);
+        //     if (strlen(resp) > 1)
+        //     {
+        //         limpa_buffer();
+        //         main_menu_screen();
+        //         //scanf("%c", &resp);
+        //         fgets(resp, 1, stdin);
+        //     }  
+        //     limpa_buffer();
+        // }
+    } while (!ehDigitoMax(resp[0], '7'));
+    return resp[0];
+}
+
+void main_menu_screen(void)
+{
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -80,20 +128,7 @@ char main_menu(void)
     printf("###                              7. Créditos                                ###\n");
     printf("###                                0. Sair                                  ###\n");
     printf("###                                                                         ###\n");
-    do {
-        printf("###                       Escolha a opção que deseja: ");
-        scanf("%c", &resp);
-        limpa_buffer();
-        if (ehDigitoMax(resp, '7')){
-            printf("###                                                                         ###\n");
-            printf("###############################################################################\n");
-        } else {
-            printf("###                       Escolha a opção que deseja: ");
-            scanf("%c", &resp);
-            limpa_buffer();
-        }
-    } while (!ehDigitoMax(resp, '7'));
-    return resp;
+    printf("###                       Escolha a opção que deseja: ");
 }
 
 void about(void)

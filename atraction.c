@@ -35,7 +35,26 @@ void modulo_atraction(void)
 char atraction_menu(void)
 {
     char resp;
-        system("clear || cls");
+    do 
+    {
+        atraction_menu_screen();
+        scanf("%c", &resp);
+        limpa_buffer();
+        if (ehDigitoMax(resp, '4')){
+            printf("###                                                                         ###\n");
+            printf("###############################################################################\n");
+        } else {
+            atraction_menu_screen();
+            scanf("%c", &resp);
+            limpa_buffer();
+        }
+    } while (!ehDigitoMax(resp, '4'));
+    return resp;
+}
+
+void atraction_menu_screen(void)
+{
+    system("clear || cls");
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
         printf("###            ===================================================          ###\n");
@@ -55,11 +74,6 @@ char atraction_menu(void)
         printf("###              0. Voltar ao Menu Principal                                ###\n");
         printf("###                                                                         ###\n");
         printf("###              Escolha a opção que deseja: ");
-        scanf("%c", &resp);
-        getchar();
-        printf("###                                                                         ###\n");
-        printf("###############################################################################\n");
-        return resp;
 }
 
 void cred_atraction(void)

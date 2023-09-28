@@ -1,5 +1,6 @@
 void modulo_client(void);
 char client_menu(void);
+char client_menu_screen(void);
 void cred_client(void);
 void read_client(void);
 void upd_client(void);

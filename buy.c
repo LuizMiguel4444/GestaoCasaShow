@@ -32,7 +32,26 @@ void modulo_buy(void)
 char buy_menu(void)
 {
     char resp;
-        system("clear || cls");
+    do
+    {
+        buy_menu_screen();
+        scanf("%c", &resp);
+        limpa_buffer();
+        if (ehDigitoMax(resp, '3')){
+            printf("###                                                                         ###\n");
+            printf("###############################################################################\n");
+        } else {
+            buy_menu_screen();
+            scanf("%c", &resp);
+            limpa_buffer();
+        }
+    } while (!ehDigitoMax(resp, '3'));
+    return resp;
+}
+
+void buy_menu_screen(void)
+{
+    system("clear || cls");
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
         printf("###            ===================================================          ###\n");
@@ -51,11 +70,6 @@ char buy_menu(void)
         printf("###              0. Voltar ao Menu Principal                                ###\n");
         printf("###                                                                         ###\n");
         printf("###              Escolha a opção que deseja: ");
-        scanf("%c", &resp);
-        getchar();
-        printf("###                                                                         ###\n");
-        printf("###############################################################################\n");
-        return resp;
 }
 
 void cred_buy(void)

@@ -35,31 +35,45 @@ void modulo_client(void)
 char client_menu(void)
 {
     char resp;
-        system("clear || cls");
-        printf("###############################################################################\n");
-        printf("###                                                                         ###\n");
-        printf("###            ===================================================          ###\n");
-        printf("###            =============   Gestão Casa Shows   ===============          ###\n");
-        printf("###            ===================================================          ###\n");
-        printf("###                                                                         ###\n");
-        printf("###############################################################################\n");
-        printf("###                                                                         ###\n");
-        printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-        printf("###              = = = = = = = =  Menu Clientes  = = = = = = = =            ###\n");
-        printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-        printf("###                                                                         ###\n");
-        printf("###              1. Cadastrar um novo cliente                               ###\n");
-        printf("###              2. Pesquisar os dados de um cliente                        ###\n");
-        printf("###              3. Editar o cadastro de um cliente                         ###\n");
-        printf("###              4. Excluir um cliente do sistema                           ###\n");
-        printf("###              0. Voltar ao menu arincipal                                ###\n");
-        printf("###                                                                         ###\n");
-        printf("###              Escolha a opção que deseja: ");
+    do
+    {
+        client_menu_screen();
         scanf("%c", &resp);
-        getchar();
-        printf("###                                                                         ###\n");
-        printf("###############################################################################\n");
-        return resp;
+        limpa_buffer();
+        if (ehDigitoMax(resp, '4')){
+            printf("###                                                                         ###\n");
+            printf("###############################################################################\n");
+        } else {
+            client_menu_screen();
+            scanf("%c", &resp);
+            limpa_buffer();
+        }
+    } while (!ehDigitoMax(resp, '4'));
+    return resp;
+}
+
+char client_menu_screen(void)
+{
+    system("clear || cls");
+    printf("###############################################################################\n");
+    printf("###                                                                         ###\n");
+    printf("###            ===================================================          ###\n");
+    printf("###            =============   Gestão Casa Shows   ===============          ###\n");
+    printf("###            ===================================================          ###\n");
+    printf("###                                                                         ###\n");
+    printf("###############################################################################\n");
+    printf("###                                                                         ###\n");
+    printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
+    printf("###              = = = = = = = =  Menu Clientes  = = = = = = = =            ###\n");
+    printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
+    printf("###                                                                         ###\n");
+    printf("###              1. Cadastrar um novo cliente                               ###\n");
+    printf("###              2. Pesquisar os dados de um cliente                        ###\n");
+    printf("###              3. Editar o cadastro de um cliente                         ###\n");
+    printf("###              4. Excluir um cliente do sistema                           ###\n");
+    printf("###              0. Voltar ao menu arincipal                                ###\n");
+    printf("###                                                                         ###\n");
+    printf("###              Escolha a opção que deseja: ");
 }
 
 void cred_client(void)
