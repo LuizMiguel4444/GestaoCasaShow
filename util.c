@@ -16,13 +16,24 @@ void limpa_buffer(void) {
 ///////////////////////////////////////////////////////////////////////////////
 /// Função que barra entrada dependendo do tamanho
 ///
-int conta_entrada(char *entrada) {
-  //do {
+int conta_entrada1(char *entrada)
+{
+  do {
       if (strlen(entrada) > 1){
         return 0;
       }
-  //} while (strlen(entrada) != 1);
+  } while (strlen(entrada) != 1);
   return 1;
+}
+
+int conta_entrada2(char *entrada)
+{
+  for (int i = 0; entrada[i] != '\0'; i++) {
+    if (i != 1) {
+      return 0;
+    }
+  }
+	return 1;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -137,9 +148,9 @@ int ehData(int dd, int mm, int aa)
 /// Retorna 1 se string recebido for exclusivamente alfabético ou
 /// retorna 0 caso contrário
 ///
-int valNome(char* nome)
+int valNome(char *nome)
 {
-  for (int i=0; nome[i]!='\0'; i++) {
+  for (int i = 0; nome[i] != '\0'; i++) {
     if (!ehLetra(nome[i])) {
       return 0;
     }
@@ -151,7 +162,7 @@ int valNome(char* nome)
 /// Retorna 1 se string recebido corresponder a uma data válida (apenas dígitos
 /// e no formato: ddmmaaaa) ou retorna 0 caso contrário
 ///
-int valData(char* data)
+int valData(char *data)
 {
   int tam, dia, mes, ano;
   tam = strlen(data);
@@ -174,7 +185,7 @@ int valData(char* data)
 }  // AUTOR: FLAVIUS GORGÔNIO /// GIT: https://github.com/flaviusgorgonio
 
 ////// FUNÇÃO DE ID/CODIGO
-int val_id(char* id, int tam)
+int val_id(char *id, int tam)
 {
   
     int i;
@@ -200,19 +211,39 @@ int val_id(char* id, int tam)
     return 1;
 }  // MODIFICADO DE: MATHEUS QUIRINO FERNANDES FIGUEIREDO /// GIT: https://github.com/quirinof
 
-int val_email(char * email )
+int val_email(char *email )
 {
     char usuario[256], site[256], dominio[256];
     if( sscanf( email, "%[^@ \t\n]@%[^. \t\n].%3[^ \t\n]", usuario, site, dominio ) != 3 )
         return 0;
     return 1;
+}  // AUTOR: LACOBUS /// STACKOVERFLOW: https://pt.stackoverflow.com/questions/310096/como-validar-um-e-mail-em-c
+
+float ehdinheiro(char *c)
+{
+  for (int i = 0; c[i] != '\0'; i++) {
+    if ((!ehDigito(c[i])) && (c[i] =! '.')) {
+      return 0;
+    }
+  }
+	return 1;
 }
 
-float ehdinheiro(char * c)
+///////////////////////////////////////////////////////////////////////////////
+/// Retorna 1 se string recebido corresponder a um número de celular válido 
+/// (apenas dígitos) ou retorna 0 caso contrário
+///
+int validarFone(char *fone)
 {
-  if (*c >= '0' && *c <= '9') {
-    return 1;
-  } else {
+  int tam;
+  tam = strlen(fone);
+  if (tam != 11) {
     return 0;
   }
-}
+  for (int i = 0; i < tam; i++) {
+    if (!ehDigito(fone[i])) {
+        return 0;
+    }
+  }
+  return 1;
+}  // AUTOR: FLAVIUS GORGÔNIO /// GIT: https://github.com/flaviusgorgonio
