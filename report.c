@@ -91,7 +91,6 @@ void report_show(void)
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
     scanf("%c", &go);
-    getchar();
 }
 
 void report_atraction(void)
@@ -118,7 +117,6 @@ void report_atraction(void)
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
     scanf("%c", &go);
-    getchar();
 }
 
 void report_client(void)
@@ -145,7 +143,6 @@ void report_client(void)
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
     scanf("%c", &go);
-    getchar();
 }
 
 void report_buy(void)
@@ -172,5 +169,4 @@ void report_buy(void)
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
     scanf("%c", &go);
-    getchar();
 }

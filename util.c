@@ -199,3 +199,20 @@ int val_id(char* id, int tam)
     // ID valido
     return 1;
 }  // MODIFICADO DE: MATHEUS QUIRINO FERNANDES FIGUEIREDO /// GIT: https://github.com/quirinof
+
+int val_email(char * email )
+{
+    char usuario[256], site[256], dominio[256];
+    if( sscanf( email, "%[^@ \t\n]@%[^. \t\n].%3[^ \t\n]", usuario, site, dominio ) != 3 )
+        return 0;
+    return 1;
+}
+
+float ehdinheiro(char * c)
+{
+  if (*c >= '0' && *c <= '9') {
+    return 1;
+  } else {
+    return 0;
+  }
+}

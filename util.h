@@ -10,3 +10,5 @@ int ehData(int dd, int mm, int aa);
 int valNome(char* nome);
 int valData(char* data);
 int val_id(char* id, int tam);
+int val_email(char * email);
+float ehdinheiro(char * c);

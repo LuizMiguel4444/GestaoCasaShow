@@ -70,8 +70,14 @@ void atraction_menu_screen(void)
 void cred_atraction(void)
 {
     char go;
-    char* skip;
-    skip = (char*) malloc(30*sizeof(char));
+    char* nome;
+    char* cache;
+    char* email;
+    char* num;
+    nome = (char*) malloc(30*sizeof(char));
+    cache = (char*) malloc(10*sizeof(char));
+    email = (char*) malloc(50*sizeof(char));
+    num = (char*) malloc(20*sizeof(char));
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -85,18 +91,25 @@ void cred_atraction(void)
     printf("###              = = = = = = =  Cadastrar Atração  = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    printf("###              Nome: ");
-    scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]", skip);
-    getchar();
-    printf("###              Valor do cachê: ");
-    scanf("%[0-9/.,]", skip);
-    getchar();
-    printf("###              Email de contato: ");
-    scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ@.]", skip);
-    getchar();
-    printf("###              Número de contato: ");
-    scanf("%[0-9/ -()]", skip);
-    getchar();
+    do {
+        printf("###              Nome: ");
+        scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]", nome);
+        getchar();
+        if (!valNome(nome)) {
+            printf("###              Nome: ");
+            scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]", nome);
+            getchar();
+        }
+        printf("###              Valor do cachê: ");
+        scanf("%[0-9/.,]", cache);
+        getchar();
+        printf("###              Email de contato: ");
+        scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ@.]", email);
+        getchar();
+        printf("###              Número de contato: ");
+        scanf("%[0-9/ -()]", num);
+        getchar();
+    } while ((!valNome(nome)) && (!ehdinheiro(cache)) && (!val_email(email)));
     printf("###                                                                         ###\n");
     printf("###############################################################################\n");
     printf("\n");
