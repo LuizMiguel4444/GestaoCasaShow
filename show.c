@@ -35,31 +35,36 @@ void modulo_show(void)
 char show_menu(void)
 {
     char resp;
-        system("clear || cls");
-        printf("###############################################################################\n");
-        printf("###                                                                         ###\n");
-        printf("###            ===================================================          ###\n");
-        printf("###            =============   Gestão Casa Shows   ===============          ###\n");
-        printf("###            ===================================================          ###\n");
-        printf("###                                                                         ###\n");
-        printf("###############################################################################\n");
-        printf("###                                                                         ###\n");
-        printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-        printf("###              = = = = = = = = = Menu  Shows = = = = = = = = =            ###\n");
-        printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-        printf("###                                                                         ###\n");
-        printf("###              1. Cadastrar um novo show                                  ###\n");
-        printf("###              2. Pesquisar os dados de um show                           ###\n");
-        printf("###              3. Editar o cadastro de um show                            ###\n");
-        printf("###              4. Excluir um show do sistema                              ###\n");
-        printf("###              0. Voltar ao Menu Principal                                ###\n");
-        printf("###                                                                         ###\n");
-        printf("###              Escolha a opção que deseja:");
+    do {
+        show_menu_screen();
         scanf("%c", &resp);
-        getchar();
-        printf("###                                                                         ###\n");
-        printf("###############################################################################\n");
-        return resp;
+        limpa_buffer();
+    } while (!ehDigitoMax(resp, '4'));
+    return resp;
+}
+
+void show_menu_screen(void)
+{
+    system("clear || cls");
+    printf("###############################################################################\n");
+    printf("###                                                                         ###\n");
+    printf("###            ===================================================          ###\n");
+    printf("###            =============   Gestão Casa Shows   ===============          ###\n");
+    printf("###            ===================================================          ###\n");
+    printf("###                                                                         ###\n");
+    printf("###############################################################################\n");
+    printf("###                                                                         ###\n");
+    printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
+    printf("###              = = = = = = = = = Menu  Shows = = = = = = = = =            ###\n");
+    printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
+    printf("###                                                                         ###\n");
+    printf("###              1. Cadastrar um novo show                                  ###\n");
+    printf("###              2. Pesquisar os dados de um show                           ###\n");
+    printf("###              3. Editar o cadastro de um show                            ###\n");
+    printf("###              4. Excluir um show do sistema                              ###\n");
+    printf("###              0. Voltar ao Menu Principal                                ###\n");
+    printf("###                                                                         ###\n");
+    printf("###              Escolha a opção que deseja:");
 }
 
 void cred_show(void)

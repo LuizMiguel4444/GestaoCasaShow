@@ -35,24 +35,15 @@ void modulo_client(void)
 char client_menu(void)
 {
     char resp;
-    do
-    {
+    do {
         client_menu_screen();
         scanf("%c", &resp);
         limpa_buffer();
-        if (ehDigitoMax(resp, '4')){
-            printf("###                                                                         ###\n");
-            printf("###############################################################################\n");
-        } else {
-            client_menu_screen();
-            scanf("%c", &resp);
-            limpa_buffer();
-        }
     } while (!ehDigitoMax(resp, '4'));
     return resp;
 }
 
-char client_menu_screen(void)
+void client_menu_screen(void)
 {
     system("clear || cls");
     printf("###############################################################################\n");

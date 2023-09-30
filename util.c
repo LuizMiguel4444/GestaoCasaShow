@@ -16,15 +16,13 @@ void limpa_buffer(void) {
 ///////////////////////////////////////////////////////////////////////////////
 /// Função que barra entrada dependendo do tamanho
 ///
-int conta_entrada(char c) {
-    char entrada;
-    do {
-        if (strlen(entrada) > 1){
-          return 0;
-        }
-        return 1;
-    } while (strlen(entrada) != 1);
-    return entrada;
+int conta_entrada(char *entrada) {
+  //do {
+      if (strlen(entrada) > 1){
+        return 0;
+      }
+  //} while (strlen(entrada) != 1);
+  return 1;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

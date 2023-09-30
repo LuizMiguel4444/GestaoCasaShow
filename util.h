@@ -1,5 +1,5 @@
 void limpa_buffer(void);
-int conta_entrada(char c);
+int conta_entrada(char *entrada);
 void print_dados(void);
 void error(void);
 int ehDigito(char c);

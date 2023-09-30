@@ -35,6 +35,16 @@ void modulo_report(void)
 char report_menu(void)
 {
     char resp;
+    do {
+        report_menu_screen();
+        scanf("%c", &resp);
+        limpa_buffer();
+    } while (!ehDigitoMax(resp, '4'));
+    return resp;
+}
+
+void report_menu_screen(void)
+{
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -55,10 +65,6 @@ char report_menu(void)
     printf("###                         0. Voltar ao menu anterior                      ###\n");
     printf("###                                                                         ###\n");
     printf("###                       Escolha a opção que deseja: ");
-    scanf("%c", &resp);
-    printf("###                                                                         ###\n");
-    printf("###############################################################################\n");
-    return resp;
 }
 
 void report_show(void)

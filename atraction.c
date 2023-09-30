@@ -35,19 +35,10 @@ void modulo_atraction(void)
 char atraction_menu(void)
 {
     char resp;
-    do 
-    {
+    do {
         atraction_menu_screen();
         scanf("%c", &resp);
         limpa_buffer();
-        if (ehDigitoMax(resp, '4')){
-            printf("###                                                                         ###\n");
-            printf("###############################################################################\n");
-        } else {
-            atraction_menu_screen();
-            scanf("%c", &resp);
-            limpa_buffer();
-        }
     } while (!ehDigitoMax(resp, '4'));
     return resp;
 }

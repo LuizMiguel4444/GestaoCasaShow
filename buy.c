@@ -32,19 +32,10 @@ void modulo_buy(void)
 char buy_menu(void)
 {
     char resp;
-    do
-    {
+    do {
         buy_menu_screen();
         scanf("%c", &resp);
         limpa_buffer();
-        if (ehDigitoMax(resp, '3')){
-            printf("###                                                                         ###\n");
-            printf("###############################################################################\n");
-        } else {
-            buy_menu_screen();
-            scanf("%c", &resp);
-            limpa_buffer();
-        }
     } while (!ehDigitoMax(resp, '3'));
     return resp;
 }

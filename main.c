@@ -65,49 +65,13 @@ int main(void)
 // Functions
 char main_menu(void)
 {
-    char resp[100];
-    //char op;
-
-    // se tamanho está correto
-
-    // se entrada está dentro dos limites
-
-
-
+    char resp;
     do {
         main_menu_screen();
-        scanf("%s", resp);
-        limpa_buffer(); 
-        printf("<%s>-<%ld>", resp, strlen(resp));
-        getchar();
-        //fgets(resp, 1, stdin);
-        if (strlen(resp) > 1)
-        {
-            main_menu_screen();
-            scanf("%s", resp);
-            limpa_buffer();
-            //fgets(resp, 1, stdin);
-        }
-        // limpa_buffer();
-        // op = resp[0];
-        // if (ehDigitoMax(op, '7')){
-        //     printf("###                                                                         ###\n");
-        //     printf("###############################################################################\n");
-        // } else {
-        //     main_menu_screen();
-        //     //scanf("%c", &resp);
-        //     fgets(resp, 1, stdin);
-        //     if (strlen(resp) > 1)
-        //     {
-        //         limpa_buffer();
-        //         main_menu_screen();
-        //         //scanf("%c", &resp);
-        //         fgets(resp, 1, stdin);
-        //     }  
-        //     limpa_buffer();
-        // }
-    } while (!ehDigitoMax(resp[0], '7'));
-    return resp[0];
+        scanf("%c", &resp);
+        limpa_buffer();
+    } while (!ehDigitoMax(resp, '7')); //&& (!conta_entrada(resp)));
+    return resp;
 }
 
 void main_menu_screen(void)
