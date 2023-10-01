@@ -4,14 +4,14 @@
 #include "util.h"
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Função que limpa o buffer
+/// Função que limpa o buffer do teclado
 ///
 void limpa_buffer(void) {
     int entrada;
     do {
         entrada = fgetc(stdin);
     } while (entrada != EOF && entrada != '\n');
-}
+} // AUTOR: GUILHERME BERNAL /// STACKOVERFLOW: https://pt.stackoverflow.com/questions/9427/limpeza-do-buffer-do-teclado-ap%C3%B3s-scanf
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Função que barra entrada dependendo do tamanho
@@ -24,8 +24,11 @@ int conta_entrada1(char *entrada)
       }
   } while (strlen(entrada) != 1);
   return 1;
-}
+} // AUTOR: LUIZ MIGUEL /// GIT: https://github.com/LuizMiguel4444
 
+///////////////////////////////////////////////////////////////////////////////
+/// Função que barra entrada dependendo do tamanho
+///
 int conta_entrada2(char *entrada)
 {
   for (int i = 0; entrada[i] != '\0'; i++) {
@@ -34,7 +37,7 @@ int conta_entrada2(char *entrada)
     }
   }
 	return 1;
-}
+} // AUTOR: LUIZ MIGUEL /// GIT: https://github.com/LuizMiguel4444
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Printa dados fictícios na tela e induz volta a tela anterior
@@ -50,20 +53,7 @@ void print_dados(void)
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
     scanf("%c", &go);
-}
-
-///////////////////////////////////////////////////////////////////////////////
-/// Printa uma mensagem de erro e induz volta a tela anterior
-///
-void error(void)
-{
-    char go;
-    printf("\n");
-    printf("Opção inválida!\n");
-    printf("\n");
-    printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-    scanf("%c\n", &go);
-}
+} // AUTOR: LUIZ MIGUEL /// GIT: https://github.com/LuizMiguel4444
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Retorna 1 se o caractere recebido for um dígito (entre 0 e 9)
@@ -89,7 +79,7 @@ int ehDigitoMax(char c, char max)
   } else {
     return 0;
   }
-}
+} // AUTOR: LUIZ MIGUEL /// GIT: https://github.com/LuizMiguel4444
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Retorna 1 se o caractere recebido for uma alfabético 
@@ -184,7 +174,10 @@ int valData(char *data)
   return 1;
 }  // AUTOR: FLAVIUS GORGÔNIO /// GIT: https://github.com/flaviusgorgonio
 
-////// FUNÇÃO DE ID/CODIGO
+///////////////////////////////////////////////////////////////////////////////
+/// Retorna 1 se string (com tamanhos específicos) recebido corresponder  
+/// a um id válido (apenas dígitos) ou retorna 0 caso contrário
+///
 int val_id(char *id, int tam)
 {
     int i;
@@ -207,6 +200,10 @@ int val_id(char *id, int tam)
     return 1;
 }  // MODIFICADO DE: MATHEUS QUIRINO FERNANDES FIGUEIREDO /// GIT: https://github.com/quirinof
 
+///////////////////////////////////////////////////////////////////////////////
+/// Retorna 1 se string recebido corresponder a um email válido 
+/// ou retorna 0 caso contrário
+///
 int val_email(char *email )
 {
     char usuario[256], site[256], dominio[256];
@@ -215,6 +212,10 @@ int val_email(char *email )
     return 1;
 }  // AUTOR: LACOBUS /// STACKOVERFLOW: https://pt.stackoverflow.com/questions/310096/como-validar-um-e-mail-em-c
 
+///////////////////////////////////////////////////////////////////////////////
+/// Retorna 1 se string recebido corresponder a apenas digitos e um ponto 
+/// ou retorna 0 caso contrário
+///
 float ehdinheiro(char *c)
 {
   for (int i = 0; c[i] != '\0'; i++) {
@@ -223,7 +224,7 @@ float ehdinheiro(char *c)
     }
   }
 	return 1;
-}
+} // AUTOR: LUIZ MIGUEL /// GIT: https://github.com/LuizMiguel4444
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Retorna 1 se string recebido corresponder a um número de celular válido 
@@ -244,6 +245,10 @@ int validarFone(char *fone)
   return 1;
 }  // AUTOR: FLAVIUS GORGÔNIO /// GIT: https://github.com/flaviusgorgonio
 
+///////////////////////////////////////////////////////////////////////////////
+/// Retorna 1 se string recebido corresponder a um cpf válido 
+/// ou retorna 0 caso contrário
+///
 int validarCPF(char *cpf)
 {
     int i, j, digito1 = 0, digito2 = 0;
@@ -282,3 +287,39 @@ int validarCPF(char *cpf)
     }
     return 1;
 }  // AUTOR: EDUARDO EDSON /// GIT: https://gist.github.com/eduardoedson
+
+///////////////////////////////////////////////////////////////////////////////
+/// Retorna 1 se string recebido corresponder a uma hora válida 
+/// (apenas digitos e um ':') ou retorna 0 caso contrário
+///
+int ehHora(char c)
+{
+  if ((c >= '0' && c <= '9') || (c == ':')) {
+    return 1;
+  } else {
+    return 0;
+  }
+} // AUTOR: LUIZ MIGUEL /// GIT: https://github.com/LuizMiguel4444
+
+///////////////////////////////////////////////////////////////////////////////
+/// Retorna 1 se string recebido corresponder a uma hora válida 
+/// (hh:mm) ou retorna 0 caso contrário
+///
+int val_hour(char *hour)
+{
+  int tam;
+  tam = strlen(hour);
+  if ((tam != 5)){
+    return 0;
+  }
+  for (int i = 0; i < tam; i++) {
+    if ((!ehHora(hour[i])) && (hour[2] != ':')) {
+      return 0;
+    }
+    // if (((hour[0] > 2)) || ((hour[1] > 3)) || (hour[3] > 5)) {
+    //   printf("<%d><%d><%d><%d><%d>", hour[0], hour[1], hour[2], hour[3], hour[4]); 
+    //   return 0;
+    // }
+  }
+  return 1; ///////////////////////////////// MOSTRAR A FLAVIUS /////////////////////////////////
+} // AUTOR: LUIZ MIGUEL /// GIT: https://github.com/LuizMiguel4444
