@@ -115,7 +115,6 @@ void about(void)
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao Menu Principal... <<<");
     scanf("%c", &go);
-    //getchar();
 }
 
 void dev(void)
@@ -140,7 +139,6 @@ void dev(void)
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao Menu Principal... <<<");
     scanf("%c", &go);
-    //getchar();
 }
 
 void welcome(void)

@@ -122,7 +122,7 @@ void read_atraction(void)
         limpa_buffer();
     } while (!val_id(id, tam));
     if (*id == 1000) {
-        print_dados();
+        print_dados_atraction();
     }
     else {
         printf("###                                                                         ###\n");
@@ -160,7 +160,7 @@ void upd_atraction(void)
         limpa_buffer();
     } while (!val_id(id, tam));
     if (*id == 1000) {
-        print_dados();
+        print_dados_atraction();
     }
     else {
         printf("###                                                                         ###\n");
@@ -198,7 +198,7 @@ void del_atraction(void)
         limpa_buffer();
     } while (!val_id(id, tam));
     if (*id == 1000) {
-        print_dados();
+        print_dados_atraction();
     }
     else {
         printf("###                                                                         ###\n");
@@ -233,4 +233,29 @@ void atraction_val(char *nome, char *cache, char *email, char *num)
         scanf("%s", num);
         limpa_buffer();
     } while (!validarFone(num));
+}
+
+void print_dados_atraction(void)
+{
+    char go;
+    system("clear || cls");
+    printf("###############################################################################\n");
+    printf("###                                                                         ###\n");
+    printf("###            ===================================================          ###\n");
+    printf("###            =============   Gestão Casa Shows   ===============          ###\n");
+    printf("###            ===================================================          ###\n");
+    printf("###                                                                         ###\n");
+    printf("###############################################################################\n");
+    printf("###                                                                         ###\n");
+    printf("###              Informações do Id digitado (Id):                           ###\n");
+    printf("###                                                                         ###\n");
+    printf("###              Nome da atração: Em desenvolvimento...                     ###\n");
+    printf("###              Valor do cachê da atração: Em desenvolvimento...           ###\n");
+    printf("###              Email de contato da atração: Em desenvolvimento...         ###\n");
+    printf("###              Número de contato da atração: Em desenvolvimento...        ###\n");
+    printf("###                                                                         ###\n");
+    printf("###############################################################################\n");
+    printf("\n");
+    printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
+    scanf("%c", &go);
 }

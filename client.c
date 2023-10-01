@@ -122,7 +122,7 @@ void read_client(void)
         limpa_buffer();
     } while (!val_id(id, tam));
     if (*id == 0) {
-        print_dados();
+        print_dados_client();
     }
     else {
         printf("###                                                                         ###\n");
@@ -160,7 +160,7 @@ void upd_client(void)
         limpa_buffer();
     } while (!val_id(id, tam));
     if (*id == 0) {
-        print_dados();
+        print_dados_client();
     }
     else {
         printf("###                                                                         ###\n");
@@ -198,7 +198,7 @@ void del_client(void)
         limpa_buffer();
     } while (!val_id(id, tam));
     if (*id == 0) {
-        print_dados();
+        print_dados_client();
     }
     else {
         printf("###                                                                         ###\n");
@@ -239,4 +239,30 @@ void client_val(char *nome, char *cpf, char *email, char *num, char *id)
         scanf("%s", id);
         limpa_buffer();
     } while (!val_id(id, tam));
+}
+
+void print_dados_client(void)
+{
+    char go;
+    system("clear || cls");
+    printf("###############################################################################\n");
+    printf("###                                                                         ###\n");
+    printf("###            ===================================================          ###\n");
+    printf("###            =============   Gestão Casa Shows   ===============          ###\n");
+    printf("###            ===================================================          ###\n");
+    printf("###                                                                         ###\n");
+    printf("###############################################################################\n");
+    printf("###                                                                         ###\n");
+    printf("###              Informações do Id digitado (Id):                           ###\n");
+    printf("###                                                                         ###\n");
+    printf("###              Nome do cliente: Em desenvolvimento...                     ###\n");
+    printf("###              CPF do cliente: Em desenvolvimento...                      ###\n");
+    printf("###              Email do cliente: Em desenvolvimento...                    ###\n");
+    printf("###              Número do cliente: Em desenvolvimento...                   ###\n");
+    printf("###              Id do cliente: Em desenvolvimento...                       ###\n");
+    printf("###                                                                         ###\n");
+    printf("###############################################################################\n");
+    printf("\n");
+    printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
+    scanf("%c", &go);
 }

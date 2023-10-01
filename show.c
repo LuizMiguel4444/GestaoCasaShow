@@ -123,7 +123,7 @@ void read_show(void)
         limpa_buffer();
     } while (!val_id(id, tam));
     if (*id == 1000) {
-        print_dados();
+        print_dados_show();
     }
     else {
         printf("###                                                                         ###\n");
@@ -161,7 +161,7 @@ void upd_show(void)
         limpa_buffer();
     } while (!val_id(id, tam));
     if (*id == 1000) {
-        print_dados();
+        print_dados_show();
     }
     else {
         printf("###                                                                         ###\n");
@@ -199,7 +199,7 @@ void del_show(void)
         limpa_buffer();
     } while (!val_id(id, tam));
     if (*id == 1000) {
-        print_dados();
+        print_dados_show();
     }
     else {
         printf("###                                                                         ###\n");
@@ -245,4 +245,31 @@ void show_val(char *atraction, char *data, char *hour, char *quant, char *valor,
         scanf("%s", id);
         limpa_buffer();
     } while (!val_id(id, tam));
+}
+
+void print_dados_show(void)
+{
+    char go;
+    system("clear || cls");
+    printf("###############################################################################\n");
+    printf("###                                                                         ###\n");
+    printf("###            ===================================================          ###\n");
+    printf("###            =============   Gestão Casa Shows   ===============          ###\n");
+    printf("###            ===================================================          ###\n");
+    printf("###                                                                         ###\n");
+    printf("###############################################################################\n");
+    printf("###                                                                         ###\n");
+    printf("###              Informações do Id digitado (Id):                           ###\n");
+    printf("###                                                                         ###\n");
+    printf("###              Atração: Em desenvolvimento...                             ###\n");
+    printf("###              Data: Em desenvolvimento...                                ###\n");
+    printf("###              Hora: Em desenvolvimento...                                ###\n");
+    printf("###              Quant. de ingressos: Em desenvolvimento...                 ###\n");
+    printf("###              Valor do ingresso: Em desenvolvimento...                   ###\n");
+    printf("###              Id do show: Em desenvolvimento...                          ###\n");
+    printf("###                                                                         ###\n");
+    printf("###############################################################################\n");
+    printf("\n");
+    printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
+    scanf("%c", &go);
 }

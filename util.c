@@ -40,22 +40,6 @@ int conta_entrada2(char *entrada)
 } // AUTOR: LUIZ MIGUEL /// GIT: https://github.com/LuizMiguel4444
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Printa dados fictícios na tela e induz volta a tela anterior
-///
-void print_dados(void)
-{
-    char go;
-    system("cls || clear");
-    printf("\n");
-    printf("Mostra os dados na tela...\n");
-    printf("\n");
-    printf("Em desenvolvimento...\n");
-    printf("\n");
-    printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-    scanf("%c", &go);
-} // AUTOR: LUIZ MIGUEL /// GIT: https://github.com/LuizMiguel4444
-
-///////////////////////////////////////////////////////////////////////////////
 /// Retorna 1 se o caractere recebido for um dígito (entre 0 e 9)
 /// retorna 0 caso contrário
 ///
