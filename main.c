@@ -216,3 +216,5 @@ void end(void)
     printf("                   ######################################\n");
     printf("                         ##########################\n");
 }
+
+/////////////// conta_entrada, read_atraction, ehdinheiro

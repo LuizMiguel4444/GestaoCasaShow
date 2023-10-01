@@ -14,4 +14,4 @@ int val_id(char *id, int tam);
 int val_email(char *email);
 float ehdinheiro(char *c);
 int validarFone(char *fone);
-    
+int validarCPF(char *cpf);

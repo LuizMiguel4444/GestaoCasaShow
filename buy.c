@@ -66,8 +66,11 @@ void buy_menu_screen(void)
 void cred_buy(void)
 {
     char go;
-    char* skip;
-    skip = (char*) malloc(30*sizeof(char));
+    char *id_show, *id_cli, *quant, *valor;
+    id_show = (char*) malloc(4*sizeof(char));
+    id_cli = (char*) malloc(4*sizeof(char));
+    quant = (char*) malloc(10*sizeof(char));
+    valor = (char*) malloc(16*sizeof(char));
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -81,23 +84,12 @@ void cred_buy(void)
     printf("###              = = = = = = = = Cadastrar Venda = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    printf("###              Id do show: ");
-    scanf("%[0-9]", skip);
-    getchar();
-    printf("###              Id do cliente: ");
-    scanf("%[0-9]", skip);
-    getchar();
-    printf("###              Quant. de ingressos: ");
-    scanf("%[0-9]", skip);
-    getchar();
-    printf("###              Valor pago pelo cliente: ");
-    scanf("%[0-9.,]", skip);
-    getchar();
+    buy_val(id_show, id_cli, quant, valor);
     printf("###                                                                         ###\n");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
-    printf("###              Quant. de ingressos vendidos: x + ingressos vendidos       ###\n");
-    printf("###              Quant. de ingressos que restam: x - ingressos vendidos     ###\n");
+    printf("###              Quant. de ingressos vendidos: x + %s\n", quant);
+    printf("###              Quant. de ingressos que restam: x - %s\n", quant);
     printf("###                                                                         ###\n");
     printf("###############################################################################\n");
     printf("\n");
@@ -107,8 +99,10 @@ void cred_buy(void)
 
 void read_buy(void)
 {
-    int go;
-    char go1;
+    char *id;
+    id = (char*) malloc(4*sizeof(char));
+    int tam = 4;
+    char go;
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -122,29 +116,31 @@ void read_buy(void)
     printf("###              = = = = = = = = Pesquisar Venda = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    printf("###              Informe o Id da venda:");
-    scanf("%d", &go);
-    getchar();
-    if (go == 1000)
-    {
+    do {
+        printf("###              Informe o Id da venda (4 dígitos): ");
+        scanf("%s", id);
+        limpa_buffer();
+    } while (!val_id(id, tam));
+    if (*id == 1000) {
         print_dados();
     }
-    else
-    {
+    else {
         printf("###                                                                         ###\n");
         printf("###              Id da venda não encontrado!                                ###\n");
         printf("###                                                                         ###\n");
         printf("###############################################################################\n");
         printf("\n");
         printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-        scanf("%c", &go1);
+        scanf("%c", &go);
     }
 }
 
 void upd_buy(void)
 {
-    int go;
-    char go1;
+    char *id;
+    id = (char*) malloc(10*sizeof(char));
+    int tam = 4;
+    char go;
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -158,21 +154,46 @@ void upd_buy(void)
     printf("###              = = = = = = = =  Editar  Venda  = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    printf("###              Informe o Id da venda:");
-    scanf("%d", &go);
-    getchar();
-    if (go == 1000)
-    {
+    do {
+        printf("###              Informe o Id da venda (4 dígitos): ");
+        scanf("%s", id);
+        limpa_buffer();
+    } while (!val_id(id, tam));
+    if (*id == 1000) {
         print_dados();
     }
-    else
-    {
+    else {
         printf("###                                                                         ###\n");
         printf("###              Id da venda não encontrado!                                ###\n");
         printf("###                                                                         ###\n");
         printf("###############################################################################\n");
         printf("\n");
         printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-        scanf("%c", &go1);
+        scanf("%c", &go);
     }
+}
+
+void buy_val(char *id_show, char *id_cli, char *quant, char *valor)
+{
+    int tam = 4;
+    do {
+        printf("###              Id do show (4 dígitos): ");
+        scanf("%s", id_show);
+        limpa_buffer();
+    } while (!val_id(id_show, tam));
+    do {
+        printf("###              Id do cliente (4 dígitos): ");
+        scanf("%s", id_cli);
+        limpa_buffer();
+    } while (!val_id(id_cli, tam));
+    do {
+        printf("###              Quant. de ingressos: ");
+        scanf("%s", quant);
+        limpa_buffer();
+    } while (!ehdinheiro(quant));
+    do {
+        printf("###              Valor pago pelo cliente: ");
+        scanf("%s", valor);
+        limpa_buffer();
+    } while (!ehdinheiro(valor));
 }
