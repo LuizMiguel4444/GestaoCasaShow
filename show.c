@@ -70,10 +70,10 @@ void show_menu_screen(void)
 void cred_show(void)
 {
     char go;
-    char *atraction, *data, *local, *quant, *valor, *id;
+    char *atraction, *data, *hour, *quant, *valor, *id;
     atraction = (char*) malloc(50*sizeof(char));
     data = (char*) malloc(8*sizeof(char));
-    local = (char*) malloc(50*sizeof(char));
+    hour = (char*) malloc(4*sizeof(char));
     quant = (char*) malloc(10*sizeof(char));
     valor = (char*) malloc(16*sizeof(char));
     id = (char*) malloc(4*sizeof(char));
@@ -90,7 +90,7 @@ void cred_show(void)
     printf("###              = = = = = = = = Cadastrar  Show = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    show_val(atraction, data, local, quant, valor, id);
+    show_val(atraction, data, hour, quant, valor, id);
     printf("###                                                                         ###\n");
     printf("###############################################################################\n");
     printf("\n");
@@ -212,7 +212,7 @@ void del_show(void)
     }
 }
 
-void show_val(char *atraction, char *data, char *local, char *quant, char *valor, char *id)
+void show_val(char *atraction, char *data, char *hour, char *quant, char *valor, char *id)
 {
     int tam = 4;
     do {
@@ -221,15 +221,15 @@ void show_val(char *atraction, char *data, char *local, char *quant, char *valor
         limpa_buffer();
     } while (!valNome(atraction));
     do {
-        printf("###              Data (dd/mm/aaaa): ");
+        printf("###              Data (dd/mm/aaaa)(apenas numeros): ");
         scanf("%s", data);
         limpa_buffer();
     } while (!valData(data));
     do {
-        printf("###              Local: ");
-        scanf("%s", local);
+        printf("###              Hora (hh:mm): ");
+        scanf("%s", hour);
         limpa_buffer();
-    } while (!valNome(local));
+    } while (!val_hour(hour));
     do {
         printf("###              Quant. de ingressos (apenas numeros): ");
         scanf("%s", quant);
