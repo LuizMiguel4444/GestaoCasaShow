@@ -140,23 +140,23 @@ int valData(char *data)
 {
   int tam, dia, mes, ano;
   tam = strlen(data);
-  if (tam != 8) {
+  if (tam != 10) {
     return 0;
   }
   for (int i = 0; i < tam; i++) {
-    if (!ehDigito(data[i])) {
+    if (!ehDigito(data[i]) && (data[2] != '/') && (data[5] != '/')) {
       return 0;
     }
   }
   dia = (data[0] - '0') * 10 + (data[1] - '0');
-  mes = (data[2] - '0') * 10 + (data[3] - '0');
-  ano = (data[4] - '0') * 1000 + (data[5] - '0') * 100 + 
-        (data[6] - '0') * 10 + (data[7] - '0');
+  mes = (data[3] - '0') * 10 + (data[4] - '0');
+  ano = (data[6] - '0') * 1000 + (data[7] - '0') * 100 + 
+        (data[8] - '0') * 10 + (data[9] - '0');
   if (!ehData(dia, mes, ano)) {
     return 0;
   }
   return 1;
-}  // AUTOR: FLAVIUS GORGÔNIO /// GIT: https://github.com/flaviusgorgonio
+}  // MODIFICADO DE: FLAVIUS GORGÔNIO /// GIT: https://github.com/flaviusgorgonio
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Retorna 1 se string (com tamanhos específicos) recebido corresponder  

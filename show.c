@@ -221,7 +221,7 @@ void show_val(char *atraction, char *data, char *hour, char *quant, char *valor,
         limpa_buffer();
     } while (!valNome(atraction));
     do {
-        printf("###              Data (dd/mm/aaaa)(apenas numeros): ");
+        printf("###              Data (dd/mm/aaaa): ");
         scanf("%s", data);
         limpa_buffer();
     } while (!valData(data));

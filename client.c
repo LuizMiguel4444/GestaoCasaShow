@@ -220,7 +220,7 @@ void client_val(char *nome, char *cpf, char *email, char *num, char *id)
         limpa_buffer();
     } while (!valNome(nome));
     do {
-        printf("###              CPF do cliente: ");
+        printf("###              CPF do cliente (apenas números): ");
         scanf("%[0-9-.]", cpf);
         limpa_buffer();
     } while (!validarCPF(cpf));

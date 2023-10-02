@@ -215,4 +215,4 @@ void end(void)
     printf("                         ##########################\n");
 }
 
-/////////////// conta_entrada, read_atraction, ehdinheiro
+/////////////// conta_entrada, read_atraction, ehdinheiro, val_hour
