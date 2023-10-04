@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
+#include <string.h>
 #include "atraction.h"
 #include "util.h"
 
@@ -99,7 +100,7 @@ void cred_atraction(void)
 void read_atraction(void)
 {
     char *id;
-    id = (char*) malloc(4*sizeof(char));
+    id = (char*) malloc(5*sizeof(char));
     int tam = 4;
     char go;
     system("clear || cls");
@@ -118,10 +119,10 @@ void read_atraction(void)
     do {
         printf("###              Informe o Id da atração (4 dígitos): ");
         scanf("%s", id);
-        printf("<%d>", *id);
+        printf("<%s>", id);
         limpa_buffer();
     } while (!val_id(id, tam));
-    if (*id == 1000) {
+    if (strcmp(id,"1000") == 0) {
         print_dados_atraction();
     }
     else {

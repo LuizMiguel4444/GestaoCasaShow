@@ -65,13 +65,15 @@ int main(void)
 // Functions
 char main_menu(void)
 {
-    char resp;
+    char resp[256];
     do {
         main_menu_screen();
-        scanf("%c", &resp);
+        scanf("%s", resp);
         limpa_buffer();
-    } while (!ehDigitoMax(resp, '7')); //&& (!conta_entrada(resp)));
-    return resp;
+        printf("Teste 1: %d\t Teste 2: %d\n", !ehDigitoMax(resp[0], '7'), !conta_entrada1(resp));
+        getchar();
+    } while (!ehDigitoMax(resp[0], '7')  || !conta_entrada1(resp));
+    return resp[0];
 }
 
 void main_menu_screen(void)

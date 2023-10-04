@@ -18,11 +18,9 @@ void limpa_buffer(void) {
 ///
 int conta_entrada1(char *entrada)
 {
-  do {
-      if (strlen(entrada) > 1){
-        return 0;
-      }
-  } while (strlen(entrada) != 1);
+  if (strlen(entrada) > 1){
+    return 0;
+  }
   return 1;
 } // AUTOR: LUIZ MIGUEL /// GIT: https://github.com/LuizMiguel4444
 
@@ -241,7 +239,7 @@ int validarCPF(char *cpf)
     else if((strcmp(cpf,"00000000000") == 0) || (strcmp(cpf,"11111111111") == 0) || (strcmp(cpf,"22222222222") == 0) ||
             (strcmp(cpf,"33333333333") == 0) || (strcmp(cpf,"44444444444") == 0) || (strcmp(cpf,"55555555555") == 0) ||
             (strcmp(cpf,"66666666666") == 0) || (strcmp(cpf,"77777777777") == 0) || (strcmp(cpf,"88888888888") == 0) ||
-            (strcmp(cpf,"99999999999") == 0))
+            (strcmp(cpf,"99999999999") == 0) || (strcmp(cpf,"12345678909") == 0))
         return 0; ///se o CPF tiver todos os números iguais ele é inválido.
     else
     {
@@ -270,7 +268,7 @@ int validarCPF(char *cpf)
         }
     }
     return 1;
-}  // AUTOR: EDUARDO EDSON /// GIT: https://gist.github.com/eduardoedson
+}  // AUTOR: EDUARDO EDSON /// GIT: https://github.com/eduardoedson
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Retorna 1 se string recebido corresponder a uma hora válida 
