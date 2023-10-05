@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
+#include <string.h>
 #include "buy.h"
 #include "util.h"
 
@@ -31,13 +32,13 @@ void modulo_buy(void)
 
 char buy_menu(void)
 {
-    char resp;
+    char resp[256];
     do {
         buy_menu_screen();
-        scanf("%c", &resp);
+        scanf("%s", resp);
         limpa_buffer();
-    } while (!ehDigitoMax(resp, '3'));
-    return resp;
+    } while (!ehDigitoMax(resp[0], '3') || !val_entrada(resp));
+    return resp[0];
 }
 
 void buy_menu_screen(void)
@@ -67,10 +68,10 @@ void cred_buy(void)
 {
     char go;
     char *id_show, *id_cli, *quant, *valor;
-    id_show = (char*) malloc(4*sizeof(char));
-    id_cli = (char*) malloc(4*sizeof(char));
-    quant = (char*) malloc(10*sizeof(char));
-    valor = (char*) malloc(16*sizeof(char));
+    id_show = (char*) malloc(5*sizeof(char));
+    id_cli = (char*) malloc(5*sizeof(char));
+    quant = (char*) malloc(5*sizeof(char));
+    valor = (char*) malloc(8*sizeof(char));
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -99,10 +100,6 @@ void cred_buy(void)
 
 void read_buy(void)
 {
-    char *id;
-    id = (char*) malloc(4*sizeof(char));
-    int tam = 4;
-    char go;
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -116,31 +113,11 @@ void read_buy(void)
     printf("###              = = = = = = = = Pesquisar Venda = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    do {
-        printf("###              Informe o Id da venda (4 dígitos): ");
-        scanf("%s", id);
-        limpa_buffer();
-    } while (!val_id(id, tam));
-    if (*id == 1000) {
-        print_dados_buy();
-    }
-    else {
-        printf("###                                                                         ###\n");
-        printf("###              Id da venda não encontrado!                                ###\n");
-        printf("###                                                                         ###\n");
-        printf("###############################################################################\n");
-        printf("\n");
-        printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-        scanf("%c", &go);
-    }
+    buy_id_check();
 }
 
 void upd_buy(void)
 {
-    char *id;
-    id = (char*) malloc(10*sizeof(char));
-    int tam = 4;
-    char go;
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -154,23 +131,7 @@ void upd_buy(void)
     printf("###              = = = = = = = =  Editar  Venda  = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    do {
-        printf("###              Informe o Id da venda (4 dígitos): ");
-        scanf("%s", id);
-        limpa_buffer();
-    } while (!val_id(id, tam));
-    if (*id == 1000) {
-        print_dados_buy();
-    }
-    else {
-        printf("###                                                                         ###\n");
-        printf("###              Id da venda não encontrado!                                ###\n");
-        printf("###                                                                         ###\n");
-        printf("###############################################################################\n");
-        printf("\n");
-        printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-        scanf("%c", &go);
-    }
+    buy_id_check();
 }
 
 void buy_val(char *id_show, char *id_cli, char *quant, char *valor)
@@ -196,6 +157,31 @@ void buy_val(char *id_show, char *id_cli, char *quant, char *valor)
         scanf("%s", valor);
         limpa_buffer();
     } while (!ehdinheiro(valor));
+}
+
+void buy_id_check(void)
+{
+    char *id;
+    id = (char*) malloc(5*sizeof(char));
+    int tam = 4;
+    char go;
+    do {
+        printf("###              Informe o Id da venda (4 dígitos): ");
+        scanf("%s", id);
+        limpa_buffer();
+    } while (!val_id(id, tam));
+    if (strcmp(id, "1000") == 0) {
+        print_dados_buy();
+    }
+    else {
+        printf("###                                                                         ###\n");
+        printf("###              Id da venda não encontrado!                                ###\n");
+        printf("###                                                                         ###\n");
+        printf("###############################################################################\n");
+        printf("\n");
+        printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
+        scanf("%c", &go);
+    }
 }
 
 void print_dados_buy(void)

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
+#include <string.h>
 #include "client.h"
 #include "util.h"
 
@@ -34,13 +35,13 @@ void modulo_client(void)
 
 char client_menu(void)
 {
-    char resp;
+    char resp[256];
     do {
         client_menu_screen();
-        scanf("%c", &resp);
+        scanf("%s", resp);
         limpa_buffer();
-    } while (!ehDigitoMax(resp, '4'));
-    return resp;
+    } while (!ehDigitoMax(resp[0], '4') || !val_entrada(resp));
+    return resp[0];
 }
 
 void client_menu_screen(void)
@@ -75,7 +76,7 @@ void cred_client(void)
     cpf = (char*) malloc(20*sizeof(char));
     email = (char*) malloc(50*sizeof(char));
     num = (char*) malloc(20*sizeof(char));
-    id = (char*) malloc(4*sizeof(char));
+    id = (char*) malloc(5*sizeof(char));
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -99,10 +100,6 @@ void cred_client(void)
 
 void read_client(void)
 {
-    char *id;
-    id = (char*) malloc(4*sizeof(char));
-    int tam = 4;
-    char go;
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -116,31 +113,11 @@ void read_client(void)
     printf("###              = = = = = = =  Pesquisar Cliente  = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    do {
-        printf("###              Informe o Id do cliente: ");
-        scanf("%s", id);
-        limpa_buffer();
-    } while (!val_id(id, tam));
-    if (*id == 0) {
-        print_dados_client();
-    }
-    else {
-        printf("###                                                                         ###\n");
-        printf("###              Id do cliente não encontrado!                              ###\n");
-        printf("###                                                                         ###\n");
-        printf("###############################################################################\n");
-        printf("\n");
-        printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-        scanf("%c", &go);
-    }
+    client_id_check();
 }
 
 void upd_client(void)
 {
-    char *id;
-    id = (char*) malloc(4*sizeof(char));
-    int tam = 4;
-    char go;
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -154,31 +131,11 @@ void upd_client(void)
     printf("###              = = = = = = = = Editar  Cliente = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    do {
-        printf("###              Informe o Id do cliente: ");
-        scanf("%s", id);
-        limpa_buffer();
-    } while (!val_id(id, tam));
-    if (*id == 0) {
-        print_dados_client();
-    }
-    else {
-        printf("###                                                                         ###\n");
-        printf("###              Id do cliente não encontrado!                              ###\n");
-        printf("###                                                                         ###\n");
-        printf("###############################################################################\n");
-        printf("\n");
-        printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-        scanf("%c", &go);
-    }
+    client_id_check();
 }
 
 void del_client(void)
 {
-    char *id;
-    id = (char*) malloc(4*sizeof(char));
-    int tam = 4;
-    char go;
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -192,23 +149,7 @@ void del_client(void)
     printf("###              = = = = = = =  Excluir Cliente  = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    do {
-        printf("###              Informe o Id do cliente: ");
-        scanf("%s", id);
-        limpa_buffer();
-    } while (!val_id(id, tam));
-    if (*id == 0) {
-        print_dados_client();
-    }
-    else {
-        printf("###                                                                         ###\n");
-        printf("###              Id do cliente não encontrado!                              ###\n");
-        printf("###                                                                         ###\n");
-        printf("###############################################################################\n");
-        printf("\n");
-        printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-        scanf("%c", &go);
-    }
+    client_id_check();
 }
 
 void client_val(char *nome, char *cpf, char *email, char *num, char *id)
@@ -239,6 +180,31 @@ void client_val(char *nome, char *cpf, char *email, char *num, char *id)
         scanf("%s", id);
         limpa_buffer();
     } while (!val_id(id, tam));
+}
+
+void client_id_check(void)
+{
+    char *id;
+    id = (char*) malloc(5*sizeof(char));
+    int tam = 4;
+    char go;
+    do {
+        printf("###              Informe o Id do cliente: ");
+        scanf("%s", id);
+        limpa_buffer();
+    } while (!val_id(id, tam));
+    if (strcmp(id, "0000") == 0) {
+        print_dados_client();
+    }
+    else {
+        printf("###                                                                         ###\n");
+        printf("###              Id do cliente não encontrado!                              ###\n");
+        printf("###                                                                         ###\n");
+        printf("###############################################################################\n");
+        printf("\n");
+        printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
+        scanf("%c", &go);
+    }
 }
 
 void print_dados_client(void)

@@ -35,13 +35,13 @@ void modulo_atraction(void)
 
 char atraction_menu(void)
 {
-    char resp;
+    char resp[256];
     do {
         atraction_menu_screen();
-        scanf("%c", &resp);
+        scanf("%s", resp);
         limpa_buffer();
-    } while (!ehDigitoMax(resp, '4'));
-    return resp;
+    } while (!ehDigitoMax(resp[0], '4') || !val_entrada(resp));
+    return resp[0];
 }
 
 void atraction_menu_screen(void)
@@ -75,7 +75,7 @@ void cred_atraction(void)
     nome = (char*) malloc(50*sizeof(char));
     cache = (char*) malloc(10*sizeof(char));
     email = (char*) malloc(50*sizeof(char));
-    num = (char*) malloc(20*sizeof(char));
+    num = (char*) malloc(12*sizeof(char));
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -96,13 +96,9 @@ void cred_atraction(void)
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
     scanf("%c", &go);
 }
-///////////////////////////////// MOSTRAR A FLAVIUS /////////////////////////////////
+
 void read_atraction(void)
 {
-    char *id;
-    id = (char*) malloc(5*sizeof(char));
-    int tam = 4;
-    char go;
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -116,32 +112,11 @@ void read_atraction(void)
     printf("###              = = = = = = =  Pesquisar Atração  = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    do {
-        printf("###              Informe o Id da atração (4 dígitos): ");
-        scanf("%s", id);
-        printf("<%s>", id);
-        limpa_buffer();
-    } while (!val_id(id, tam));
-    if (strcmp(id,"1000") == 0) {
-        print_dados_atraction();
-    }
-    else {
-        printf("###                                                                         ###\n");
-        printf("###              Id da atração não encontrado!                              ###\n");
-        printf("###                                                                         ###\n");
-        printf("###############################################################################\n");
-        printf("\n");
-        printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-        scanf("%c", &go);
-    }
+    atraction_id_check();
 }
 
 void upd_atraction(void)
 {
-    char *id;
-    id = (char*) malloc(10*sizeof(char));
-    int tam = 4;
-    char go;
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -155,31 +130,11 @@ void upd_atraction(void)
     printf("###              = = = = = = = = Editar  Atração = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    do {
-        printf("###              Informe o Id da atração (4 dígitos): ");
-        scanf("%s", id);
-        limpa_buffer();
-    } while (!val_id(id, tam));
-    if (*id == 1000) {
-        print_dados_atraction();
-    }
-    else {
-        printf("###                                                                         ###\n");
-        printf("###              Id da atração não encontrado!                              ###\n");
-        printf("###                                                                         ###\n");
-        printf("###############################################################################\n");
-        printf("\n");
-        printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-        scanf("%c", &go);
-    }
+    atraction_id_check();
 }
 
 void del_atraction(void)
 {
-    char *id;
-    id = (char*) malloc(10*sizeof(char));
-    int tam = 4;
-    char go;
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -193,23 +148,7 @@ void del_atraction(void)
     printf("###              = = = = = = =  Excluir Atração  = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    do {
-        printf("###              Informe o Id da atração (4 dígitos): ");
-        scanf("%s", id);
-        limpa_buffer();
-    } while (!val_id(id, tam));
-    if (*id == 1000) {
-        print_dados_atraction();
-    }
-    else {
-        printf("###                                                                         ###\n");
-        printf("###              Id da atração não encontrado!                              ###\n");
-        printf("###                                                                         ###\n");
-        printf("###############################################################################\n");
-        printf("\n");
-        printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-        scanf("%c", &go);
-    }
+    atraction_id_check();
 }
 
 void atraction_val(char *nome, char *cache, char *email, char *num)
@@ -234,6 +173,31 @@ void atraction_val(char *nome, char *cache, char *email, char *num)
         scanf("%s", num);
         limpa_buffer();
     } while (!validarFone(num));
+}
+
+void atraction_id_check(void)
+{
+    char *id;
+    id = (char*) malloc(5*sizeof(char));
+    int tam = 4;
+    char go;
+    do {
+        printf("###              Informe o Id da atração (4 dígitos): ");
+        scanf("%s", id);
+        limpa_buffer();
+    } while (!val_id(id, tam));
+    if (strcmp(id, "1000") == 0) {
+        print_dados_atraction();
+    }
+    else {
+        printf("###                                                                         ###\n");
+        printf("###              Id da atração não encontrado!                              ###\n");
+        printf("###                                                                         ###\n");
+        printf("###############################################################################\n");
+        printf("\n");
+        printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
+        scanf("%c", &go);
+    }
 }
 
 void print_dados_atraction(void)

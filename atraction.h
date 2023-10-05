@@ -6,4 +6,5 @@ void read_atraction(void);
 void upd_atraction(void);
 void del_atraction(void);
 void atraction_val(char *nome, char *cache, char *email, char *num);
+void atraction_id_check(void);
 void print_dados_atraction(void);

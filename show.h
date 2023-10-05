@@ -6,4 +6,5 @@ void read_show(void);
 void upd_show(void);
 void del_show(void);
 void show_val(char *atraction, char *data, char *hour, char *quant, char *valor, char *id);
+void show_id_check(void);
 void print_dados_show(void);

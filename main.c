@@ -70,9 +70,7 @@ char main_menu(void)
         main_menu_screen();
         scanf("%s", resp);
         limpa_buffer();
-        printf("Teste 1: %d\t Teste 2: %d\n", !ehDigitoMax(resp[0], '7'), !conta_entrada1(resp));
-        getchar();
-    } while (!ehDigitoMax(resp[0], '7')  || !conta_entrada1(resp));
+    } while (!ehDigitoMax(resp[0], '7')  || !val_entrada(resp));
     return resp[0];
 }
 
@@ -217,4 +215,4 @@ void end(void)
     printf("                         ##########################\n");
 }
 
-/////////////// conta_entrada, read_atraction, ehdinheiro, val_hour
+/////////////// read_atraction, ehdinheiro, val_hour

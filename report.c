@@ -34,13 +34,13 @@ void modulo_report(void)
 
 char report_menu(void)
 {
-    char resp;
+    char resp[256];
     do {
         report_menu_screen();
-        scanf("%c", &resp);
+        scanf("%s", resp);
         limpa_buffer();
-    } while (!ehDigitoMax(resp, '4'));
-    return resp;
+    } while (!ehDigitoMax(resp[0], '4') || !val_entrada(resp));
+    return resp[0];
 }
 
 void report_menu_screen(void)

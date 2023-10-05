@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
+#include <string.h>
 #include "show.h"
 #include "util.h"
 
@@ -34,13 +35,13 @@ void modulo_show(void)
 
 char show_menu(void)
 {
-    char resp;
+    char resp[256];
     do {
         show_menu_screen();
-        scanf("%c", &resp);
+        scanf("%s", resp);
         limpa_buffer();
-    } while (!ehDigitoMax(resp, '4'));
-    return resp;
+    } while (!ehDigitoMax(resp[0], '4') || !val_entrada(resp));
+    return resp[0];
 }
 
 void show_menu_screen(void)
@@ -73,10 +74,10 @@ void cred_show(void)
     char *atraction, *data, *hour, *quant, *valor, *id;
     atraction = (char*) malloc(50*sizeof(char));
     data = (char*) malloc(8*sizeof(char));
-    hour = (char*) malloc(4*sizeof(char));
+    hour = (char*) malloc(5*sizeof(char));
     quant = (char*) malloc(10*sizeof(char));
-    valor = (char*) malloc(16*sizeof(char));
-    id = (char*) malloc(4*sizeof(char));
+    valor = (char*) malloc(8*sizeof(char));
+    id = (char*) malloc(5*sizeof(char));
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -100,10 +101,6 @@ void cred_show(void)
 
 void read_show(void)
 {
-    char *id;
-    id = (char*) malloc(4*sizeof(char));
-    int tam = 4;
-    char go;
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -117,31 +114,11 @@ void read_show(void)
     printf("###              = = = = = = = = Pesquisar  Show = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    do {
-        printf("###              Informe o Id do show (4 dígitos): ");
-        scanf("%s", id);
-        limpa_buffer();
-    } while (!val_id(id, tam));
-    if (*id == 1000) {
-        print_dados_show();
-    }
-    else {
-        printf("###                                                                         ###\n");
-        printf("###              Id do show não encontrado!                                 ###\n");
-        printf("###                                                                         ###\n");
-        printf("###############################################################################\n");
-        printf("\n");
-        printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-        scanf("%c", &go);
-    }
+    show_id_check();
 }
 
 void upd_show(void)
 {
-    char *id;
-    id = (char*) malloc(4*sizeof(char));
-    int tam = 4;
-    char go;
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -155,31 +132,11 @@ void upd_show(void)
     printf("###              = = = = = = = =  Editar Show  = = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    do {
-        printf("###              Informe o Id do show (4 dígitos): ");
-        scanf("%s", id);
-        limpa_buffer();
-    } while (!val_id(id, tam));
-    if (*id == 1000) {
-        print_dados_show();
-    }
-    else {
-        printf("###                                                                         ###\n");
-        printf("###              Id do show não encontrado!                                 ###\n");
-        printf("###                                                                         ###\n");
-        printf("###############################################################################\n");
-        printf("\n");
-        printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-        scanf("%c", &go);
-    }
+    show_id_check();
 }
 
 void del_show(void)
 {
-    char *id;
-    id = (char*) malloc(4*sizeof(char));
-    int tam = 4;
-    char go;
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -193,23 +150,7 @@ void del_show(void)
     printf("###              = = = = = = = = Excluir  Show = = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    do {
-        printf("###              Informe o Id do show (4 dígitos): ");
-        scanf("%s", id);
-        limpa_buffer();
-    } while (!val_id(id, tam));
-    if (*id == 1000) {
-        print_dados_show();
-    }
-    else {
-        printf("###                                                                         ###\n");
-        printf("###              Id do show não encontrado!                                 ###\n");
-        printf("###                                                                         ###\n");
-        printf("###############################################################################\n");
-        printf("\n");
-        printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-        scanf("%c", &go);
-    }
+    show_id_check();
 }
 
 void show_val(char *atraction, char *data, char *hour, char *quant, char *valor, char *id)
@@ -245,6 +186,31 @@ void show_val(char *atraction, char *data, char *hour, char *quant, char *valor,
         scanf("%s", id);
         limpa_buffer();
     } while (!val_id(id, tam));
+}
+
+void show_id_check(void)
+{
+    char *id;
+    id = (char*) malloc(5*sizeof(char));
+    int tam = 4;
+    char go;
+    do {
+        printf("###              Informe o Id do show (4 dígitos): ");
+        scanf("%s", id);
+        limpa_buffer();
+    } while (!val_id(id, tam));
+    if (strcmp(id, "1000") == 0) {
+        print_dados_show();
+    }
+    else {
+        printf("###                                                                         ###\n");
+        printf("###              Id do show não encontrado!                                 ###\n");
+        printf("###                                                                         ###\n");
+        printf("###############################################################################\n");
+        printf("\n");
+        printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
+        scanf("%c", &go);
+    }
 }
 
 void print_dados_show(void)
