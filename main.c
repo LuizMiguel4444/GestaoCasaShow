@@ -214,5 +214,3 @@ void end(void)
     printf("                   ######################################\n");
     printf("                         ##########################\n");
 }
-
-/////////////// read_atraction, ehdinheiro, val_hour

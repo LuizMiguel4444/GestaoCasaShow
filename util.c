@@ -6,7 +6,8 @@
 ///////////////////////////////////////////////////////////////////////////////
 /// Função que limpa o buffer do teclado
 ///
-void limpa_buffer(void) {
+void limpa_buffer(void) 
+{
     int entrada;
     do {
         entrada = fgetc(stdin);
@@ -14,27 +15,15 @@ void limpa_buffer(void) {
 } // AUTOR: GUILHERME BERNAL /// STACKOVERFLOW: https://pt.stackoverflow.com/questions/9427/limpeza-do-buffer-do-teclado-ap%C3%B3s-scanf
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Função que barra entrada dependendo do tamanho
+/// Função que retorna 1 caso a entrada tiver mais de 1 caractere
+/// e retorna 0 caso contrário
 ///
-int conta_entrada1(char *entrada)
+int val_entrada(char *entrada)
 {
-  if (strlen(entrada) > 1){
+  if (strlen(entrada) > 1) {
     return 0;
   }
   return 1;
-} // AUTOR: LUIZ MIGUEL /// GIT: https://github.com/LuizMiguel4444
-
-///////////////////////////////////////////////////////////////////////////////
-/// Função que barra entrada dependendo do tamanho
-///
-int conta_entrada2(char *entrada)
-{
-  for (int i = 0; entrada[i] != '\0'; i++) {
-    if (i != 1) {
-      return 0;
-    }
-  }
-	return 1;
 } // AUTOR: LUIZ MIGUEL /// GIT: https://github.com/LuizMiguel4444
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -195,13 +184,13 @@ int val_email(char *email )
 }  // AUTOR: LACOBUS /// STACKOVERFLOW: https://pt.stackoverflow.com/questions/310096/como-validar-um-e-mail-em-c
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Retorna 1 se string recebido corresponder a apenas digitos e um ponto 
-/// ou retorna 0 caso contrário
+/// Retorna 1 se string recebido corresponder a apenas digitos com tamanho 
+/// maior do que 1 ou retorna 0 caso contrário
 ///
 float ehdinheiro(char *c)
 {
   for (int i = 0; c[i] != '\0'; i++) {
-    if ((!ehDigito(c[i]))) { // && (c[i] != '.') && (strlen(c) > 1)
+    if (!ehDigito(c[i]) || strlen(c) < 2 || c[0] == '0') {
       return 0;
     }
   }
@@ -303,5 +292,5 @@ int val_hour(char *hour)
     //   return 0;
     // }
   }
-  return 1; ///////////////////////////////// MOSTRAR A FLAVIUS /////////////////////////////////
+  return 1;
 } // AUTOR: LUIZ MIGUEL /// GIT: https://github.com/LuizMiguel4444

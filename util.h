@@ -1,6 +1,5 @@
 void limpa_buffer(void);
-int conta_entrada1(char *entrada);
-int conta_entrada2(char *entrada);
+int val_entrada(char *entrada);
 int ehDigito(char c);
 int ehDigitoMax(char c, char max);
 int ehLetra(char c);
