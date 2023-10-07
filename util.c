@@ -128,31 +128,57 @@ int valData(char *data)
 {
   int tam, dia, mes, ano;
   tam = strlen(data);
-  if (tam != 10) {
-    return 0;
-  }
-  for (int i = 0; i < tam; i++) {
-    if (!ehDigito(data[i]) && (data[2] != '/') && (data[5] != '/')) {
+  if (tam == 10) {
+    for (int i = 0; i < tam; i++) {
+      if (!ehDigito(data[i]) || (data[2] != '/') || (data[5] != '/')) {
+        return 0;
+      }
+    }
+    dia = (data[0] - '0') * 10 + (data[1] - '0');
+    mes = (data[3] - '0') * 10 + (data[4] - '0');
+    ano = (data[6] - '0') * 1000 + (data[7] - '0') * 100 + 
+          (data[8] - '0') * 10 + (data[9] - '0');
+    if (!ehData(dia, mes, ano)) {
+      return 0;
+    }
+    int day, mon, year;
+    time_t hoje;
+    hoje = time(NULL);
+    struct tm tm = *localtime(&hoje);
+    day = tm.tm_mday;
+    mon = tm.tm_mon + 1;
+    year = tm.tm_year + 1900;
+    if ((dia > day) || (mes > mon) || (ano > year)) {
       return 0;
     }
   }
-  dia = (data[0] - '0') * 10 + (data[1] - '0');
-  mes = (data[3] - '0') * 10 + (data[4] - '0');
-  ano = (data[6] - '0') * 1000 + (data[7] - '0') * 100 + 
-        (data[8] - '0') * 10 + (data[9] - '0');
-  if (!ehData(dia, mes, ano)) {
-    return 0;
+
+  if (tam == 8) {
+    for (int i = 0; i < tam; i++) {
+      if (!ehDigito(data[i]) || (data[i] == '/')) {
+        return 0;
+      }
+    }
+    dia = (data[0] - '0') * 10 + (data[1] - '0');
+    mes = (data[2] - '0') * 10 + (data[3] - '0');
+    ano = (data[4] - '0') * 1000 + (data[5] - '0') * 100 + 
+          (data[6] - '0') * 10 + (data[7] - '0');
+    if (!ehData(dia, mes, ano)) {
+      return 0;
+    }
+    int day, mon, year;
+    time_t hoje;
+    hoje = time(NULL);
+    struct tm tm = *localtime(&hoje);
+    day = tm.tm_mday;
+    mon = tm.tm_mon + 1;
+    year = tm.tm_year + 1900;
+    if ((dia > day) || (mes > mon) || (ano > year)) {
+      return 0;
+    }
   }
 
-  int day, mon, year;
-  time_t hoje;
-  hoje = time(NULL);
-  struct tm tm = *localtime(&hoje);
-  day = tm.tm_mday;
-  mon = tm.tm_mon + 1;
-  year = tm.tm_year + 1900;
-  
-  if ((dia > day) || (mes > mon) || (ano > year)) {
+  else {
     return 0;
   }
 
