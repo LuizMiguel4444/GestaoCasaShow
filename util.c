@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "util.h"
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -68,6 +69,20 @@ int ehLetra(char c)
 } // AUTOR: FLAVIUS GORGÔNIO /// GIT: https://github.com/flaviusgorgonio
 
 ///////////////////////////////////////////////////////////////////////////////
+/// Retorna 1 se string recebido for exclusivamente alfabético ou
+/// retorna 0 caso contrário
+///
+int valNome(char *nome)
+{
+  for (int i = 0; nome[i] != '\0'; i++) {
+    if (!ehLetra(nome[i])) {
+      return 0;
+    }
+  }
+	return 1;
+}  // AUTOR: FLAVIUS GORGÔNIO /// GIT: https://github.com/flaviusgorgonio
+
+///////////////////////////////////////////////////////////////////////////////
 /// Retorna 1 se ano for bissexto (divisível por 4, não divisível por ...
 /// 100 ou divisível por 400) e retorna 0 caso contrário
 ///
@@ -106,20 +121,6 @@ int ehData(int dd, int mm, int aa)
 } // AUTOR: FLAVIUS GORGÔNIO /// GIT: https://github.com/flaviusgorgonio
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Retorna 1 se string recebido for exclusivamente alfabético ou
-/// retorna 0 caso contrário
-///
-int valNome(char *nome)
-{
-  for (int i = 0; nome[i] != '\0'; i++) {
-    if (!ehLetra(nome[i])) {
-      return 0;
-    }
-  }
-	return 1;
-}  // AUTOR: FLAVIUS GORGÔNIO /// GIT: https://github.com/flaviusgorgonio
-
-///////////////////////////////////////////////////////////////////////////////
 /// Retorna 1 se string recebido corresponder a uma data válida (apenas dígitos
 /// e no formato: ddmmaaaa) ou retorna 0 caso contrário
 ///
@@ -142,8 +143,21 @@ int valData(char *data)
   if (!ehData(dia, mes, ano)) {
     return 0;
   }
+
+  int day, mon, year;
+  time_t hoje;
+  hoje = time(NULL);
+  struct tm tm = *localtime(&hoje);
+  day = tm.tm_mday;
+  mon = tm.tm_mon + 1;
+  year = tm.tm_year + 1900;
+  
+  if ((dia > day) || (mes > mon) || (ano > year)) {
+    return 0;
+  }
+
   return 1;
-}  // MODIFICADO DE: FLAVIUS GORGÔNIO /// GIT: https://github.com/flaviusgorgonio
+}  // MODIFICADO DE: FLAVIUS GORGÔNIO E ANTONIO MANIERO /// GIT: https://github.com/flaviusgorgonio E GIT: https://github.com/maniero
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Retorna 1 se string (com tamanhos específicos) recebido corresponder  
@@ -276,21 +290,41 @@ int ehHora(char c)
 /// Retorna 1 se string recebido corresponder a uma hora válida 
 /// (hh:mm) ou retorna 0 caso contrário
 ///
-int val_hour(char *hour)
+int val_hour(char hour[])
 {
   int tam;
   tam = strlen(hour);
-  if ((tam != 5)){
+  if (tam == 5) {
+    for (int i = 0; i < tam; i++) {
+      if ((!ehHora(hour[i])) || (hour[2] != ':')) {
+        return 0;
+      }
+      if (((hour[0] > '2')) || ((hour[1] > '3')) || (hour[3] > '5')) {
+        return 0;
+      }
+      if (((hour[0] < '0')) || ((hour[1] < '0')) || (hour[3] < '0') || (hour[4] < '0')) {
+        return 0;
+      }
+    }
+  }
+
+  else if (tam == 4) {
+    for (int i = 0; i < tam; i++) {
+      if ((!ehHora(hour[i]) || (hour[i]) == ':')) {
+        return 0;
+      }
+      if (((hour[0] > '2')) || ((hour[1] > '3')) || (hour[2] > '5')) {
+        return 0;
+      }
+      if (((hour[0] < '0')) || ((hour[1] < '0')) || (hour[2] < '0') || (hour[3] < '0')) {
+        return 0;
+      }
+    }
+  }
+
+  else {
     return 0;
   }
-  for (int i = 0; i < tam; i++) {
-    if ((!ehHora(hour[i])) && (hour[2] != ':')) {
-      return 0;
-    }
-    // if (((hour[0] > 2)) || ((hour[1] > 3)) || (hour[3] > 5)) {
-    //   printf("<%d><%d><%d><%d><%d>", hour[0], hour[1], hour[2], hour[3], hour[4]); 
-    //   return 0;
-    // }
-  }
+
   return 1;
 } // AUTOR: LUIZ MIGUEL /// GIT: https://github.com/LuizMiguel4444

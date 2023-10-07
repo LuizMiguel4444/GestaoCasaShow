@@ -13,4 +13,4 @@ float ehdinheiro(char *c);
 int validarFone(char *fone);
 int validarCPF(char *cpf);
 int ehHora(char c);
-int val_hour(char *hour);
+int val_hour(char hour[]);
