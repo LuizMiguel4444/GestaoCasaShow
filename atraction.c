@@ -7,6 +7,7 @@
 
 void modulo_atraction(void)
 {
+    Atraction* fulano;
     setlocale(LC_ALL, "Portuguese_Brazil");
     int resp;
     do
@@ -15,16 +16,16 @@ void modulo_atraction(void)
         switch (resp)
         {
             case '1':
-                cred_atraction();
+                fulano = cred_atraction();
                 break;
             case '2':
-                read_atraction();
+                read_atraction(fulano);
                 break;
             case '3':
-                upd_atraction();
+                upd_atraction(fulano);
                 break;
             case '4':
-                del_atraction();
+                del_atraction(fulano);
                 break;
             case '0':
                 system("cls || clear");
@@ -68,14 +69,10 @@ void atraction_menu_screen(void)
         printf("###              Escolha a opção que deseja: ");
 }
 
-void cred_atraction(void)
+Atraction *cred_atraction(void)
 {
-    char go;
-    char *nome, *cache, *email, *num;
-    nome = (char*) malloc(50*sizeof(char));
-    cache = (char*) malloc(10*sizeof(char));
-    email = (char*) malloc(50*sizeof(char));
-    num = (char*) malloc(12*sizeof(char));
+    Atraction *atr;
+    atr = (Atraction*) malloc(sizeof(Atraction) + 1);
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -89,15 +86,16 @@ void cred_atraction(void)
     printf("###              = = = = = = =  Cadastrar Atração  = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    atraction_val(nome, cache, email, num);
+    atraction_val(atr);
     printf("###                                                                         ###\n");
     printf("###############################################################################\n");
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-    scanf("%c", &go);
+    getchar();
+    return atr;
 }
 
-void read_atraction(void)
+void read_atraction(const Atraction* atr)
 {
     system("clear || cls");
     printf("###############################################################################\n");
@@ -112,10 +110,10 @@ void read_atraction(void)
     printf("###              = = = = = = =  Pesquisar Atração  = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    atraction_id_check();
+    atraction_id_check(atr);
 }
 
-void upd_atraction(void)
+void upd_atraction(Atraction* atr)
 {
     system("clear || cls");
     printf("###############################################################################\n");
@@ -130,10 +128,10 @@ void upd_atraction(void)
     printf("###              = = = = = = = = Editar  Atração = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    atraction_id_check();
+    atraction_id_check(atr);
 }
 
-void del_atraction(void)
+void del_atraction(Atraction* atr)
 {
     system("clear || cls");
     printf("###############################################################################\n");
@@ -148,34 +146,40 @@ void del_atraction(void)
     printf("###              = = = = = = =  Excluir Atração  = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    atraction_id_check();
+    atraction_id_check(atr);
 }
 
-void atraction_val(char *nome, char *cache, char *email, char *num)
+void atraction_val(Atraction* atr)
 {
+    int tam = 4;
     do {
         printf("###              Nome da atração: ");
-        scanf("%s", nome);
+        scanf("%s", atr -> nome);
         limpa_buffer();
-    } while (!valNome(nome));
+    } while (!valNome(atr -> nome));
     do {
         printf("###              Valor do cachê: ");
-        scanf("%s", cache);
+        scanf("%s", atr -> cache);
         limpa_buffer();
-    } while (!ehdinheiro(cache));
+    } while (!ehdinheiro(atr -> cache));
     do {
         printf("###              Email de contato: ");
-        scanf("%[a-z0-9@.]", email);
+        scanf("%[a-z0-9@.]", atr -> email);
         limpa_buffer();
-    } while (!val_email(email));
+    } while (!val_email(atr -> email));
     do{
         printf("###              Número de contato (com DDD): ");
-        scanf("%s", num);
+        scanf("%s", atr -> num);
         limpa_buffer();
-    } while (!validarFone(num));
+    } while (!validarFone(atr -> num));
+    do {
+        printf("###              Id da atração (4 dígitos): ");
+        scanf("%s", atr -> id);
+        limpa_buffer();
+    } while (!val_id(atr -> id, tam));
 }
 
-void atraction_id_check(void)
+void atraction_id_check(const Atraction* atr)
 {
     char *id;
     id = (char*) malloc(5*sizeof(char));
@@ -187,7 +191,7 @@ void atraction_id_check(void)
         limpa_buffer();
     } while (!val_id(id, tam));
     if (strcmp(id, "1000") == 0) {
-        print_dados_atraction();
+        print_dados_atraction(atr);
     }
     else {
         printf("###                                                                         ###\n");
@@ -200,9 +204,8 @@ void atraction_id_check(void)
     }
 }
 
-void print_dados_atraction(void)
+void print_dados_atraction(const Atraction* atr)
 {
-    char go;
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -214,13 +217,14 @@ void print_dados_atraction(void)
     printf("###                                                                         ###\n");
     printf("###              Informações do Id digitado (Id):                           ###\n");
     printf("###                                                                         ###\n");
-    printf("###              Nome da atração: Em desenvolvimento...                     ###\n");
-    printf("###              Valor do cachê da atração: Em desenvolvimento...           ###\n");
-    printf("###              Email de contato da atração: Em desenvolvimento...         ###\n");
-    printf("###              Número de contato da atração: Em desenvolvimento...        ###\n");
+    printf("###              Nome da atração: %s\n", atr -> nome);
+    printf("###              Valor do cachê da atração: %s\n", atr -> cache);
+    printf("###              Email de contato da atração: %s\n", atr -> email);
+    printf("###              Número de contato da atração: %s\n", atr -> num);
+    printf("###              Id da atração: %s\n", atr -> id);
     printf("###                                                                         ###\n");
     printf("###############################################################################\n");
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-    scanf("%c", &go);
+    getchar();
 }

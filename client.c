@@ -7,6 +7,7 @@
 
 void modulo_client(void)
 {
+    Client* fulano;
     setlocale(LC_ALL, "Portuguese_Brazil");
     int resp;
     do
@@ -15,16 +16,16 @@ void modulo_client(void)
         switch (resp)
         {
             case '1':
-                cred_client();
+                fulano = cred_client();
                 break;
             case '2':
-                read_client();
+                read_client(fulano);
                 break;
             case '3':
-                upd_client();
+                upd_client(fulano);
                 break;
             case '4':
-                del_client();
+                del_client(fulano);
                 break;
             case '0':
                 system("cls || clear");
@@ -63,20 +64,15 @@ void client_menu_screen(void)
     printf("###              2. Pesquisar os dados de um cliente                        ###\n");
     printf("###              3. Editar o cadastro de um cliente                         ###\n");
     printf("###              4. Excluir um cliente do sistema                           ###\n");
-    printf("###              0. Voltar ao menu arincipal                                ###\n");
+    printf("###              0. Voltar ao menu principal                                ###\n");
     printf("###                                                                         ###\n");
     printf("###              Escolha a opção que deseja: ");
 }
 
-void cred_client(void)
+Client *cred_client(void)
 {
-    char go;
-    char *nome, *cpf, *email, *num, *id;
-    nome = (char*) malloc(50*sizeof(char));
-    cpf = (char*) malloc(20*sizeof(char));
-    email = (char*) malloc(50*sizeof(char));
-    num = (char*) malloc(20*sizeof(char));
-    id = (char*) malloc(5*sizeof(char));
+    Client *cli;
+    cli = (Client*) malloc(sizeof(Client) + 1);
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -90,15 +86,16 @@ void cred_client(void)
     printf("###              = = = = = = =  Cadastrar Cliente  = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    client_val(nome, cpf, email, num, id);
+    client_val(cli);
     printf("###                                                                         ###\n");
     printf("###############################################################################\n");
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-    scanf("%c", &go);
+    getchar();
+    return cli;
 }
 
-void read_client(void)
+void read_client(const Client* cli)
 {
     system("clear || cls");
     printf("###############################################################################\n");
@@ -113,10 +110,10 @@ void read_client(void)
     printf("###              = = = = = = =  Pesquisar Cliente  = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    client_id_check();
+    client_id_check(cli);
 }
 
-void upd_client(void)
+void upd_client(Client* cli)
 {
     system("clear || cls");
     printf("###############################################################################\n");
@@ -131,10 +128,10 @@ void upd_client(void)
     printf("###              = = = = = = = = Editar  Cliente = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    client_id_check();
+    client_id_check(cli);
 }
 
-void del_client(void)
+void del_client(Client* cli)
 {
     system("clear || cls");
     printf("###############################################################################\n");
@@ -149,40 +146,40 @@ void del_client(void)
     printf("###              = = = = = = =  Excluir Cliente  = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    client_id_check();
+    client_id_check(cli);
 }
 
-void client_val(char *nome, char *cpf, char *email, char *num, char *id)
+void client_val(Client* cli)
 {
     int tam = 4;
     do {
         printf("###              Nome do cliente: ");
-        scanf("%s", nome);
+        scanf("%s", cli -> nome);
         limpa_buffer();
-    } while (!valNome(nome));
+    } while (!valNome(cli  -> nome));
     do {
         printf("###              CPF do cliente (apenas números): ");
-        scanf("%[0-9-.]", cpf);
+        scanf("%[0-9-.]", cli -> cpf);
         limpa_buffer();
-    } while (!validarCPF(cpf));
+    } while (!validarCPF(cli -> cpf));
     do {
         printf("###              Email do cliente: ");
-        scanf("%[a-z0-9@.]", email);
+        scanf("%[a-z0-9@.]", cli -> email);
         limpa_buffer();
-    } while (!val_email(email));
+    } while (!val_email(cli -> email));
     do {
         printf("###              Número do cliente: ");
-        scanf("%s", num);
+        scanf("%s", cli -> num);
         limpa_buffer();
-    } while (!validarFone(num));
+    } while (!validarFone(cli -> num));
     do {
         printf("###              Id do cliente (4 dígitos): ");
-        scanf("%s", id);
+        scanf("%s", cli -> id);
         limpa_buffer();
-    } while (!val_id(id, tam));
+    } while (!val_id(cli -> id, tam));
 }
 
-void client_id_check(void)
+void client_id_check(const Client* cli)
 {
     char *id;
     id = (char*) malloc(5*sizeof(char));
@@ -194,7 +191,7 @@ void client_id_check(void)
         limpa_buffer();
     } while (!val_id(id, tam));
     if (strcmp(id, "0000") == 0) {
-        print_dados_client();
+        print_dados_client(cli);
     }
     else {
         printf("###                                                                         ###\n");
@@ -207,9 +204,8 @@ void client_id_check(void)
     }
 }
 
-void print_dados_client(void)
+void print_dados_client(const Client* cli)
 {
-    char go;
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -221,14 +217,14 @@ void print_dados_client(void)
     printf("###                                                                         ###\n");
     printf("###              Informações do Id digitado (Id):                           ###\n");
     printf("###                                                                         ###\n");
-    printf("###              Nome do cliente: Em desenvolvimento...                     ###\n");
-    printf("###              CPF do cliente: Em desenvolvimento...                      ###\n");
-    printf("###              Email do cliente: Em desenvolvimento...                    ###\n");
-    printf("###              Número do cliente: Em desenvolvimento...                   ###\n");
-    printf("###              Id do cliente: Em desenvolvimento...                       ###\n");
+    printf("###              Nome do cliente: %s\n", cli -> nome);
+    printf("###              CPF do cliente: %s\n", cli -> cpf);
+    printf("###              Email do cliente: %s\n", cli -> email);
+    printf("###              Número do cliente: %s\n", cli -> num);
+    printf("###              Id do cliente: %s\n", cli -> id);
     printf("###                                                                         ###\n");
     printf("###############################################################################\n");
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-    scanf("%c", &go);
+    getchar();
 }

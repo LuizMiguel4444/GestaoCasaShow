@@ -69,7 +69,6 @@ void report_menu_screen(void)
 
 void report_show(void)
 {
-    char go;
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -97,12 +96,11 @@ void report_show(void)
     printf("###############################################################################\n");
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-    scanf("%c", &go);
+    getchar();
 }
 
 void report_atraction(void)
 {
-    char go;
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -128,12 +126,11 @@ void report_atraction(void)
     printf("###############################################################################\n");
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-    scanf("%c", &go);
+    getchar();
 }
 
 void report_client(void)
 {
-    char go;
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -160,12 +157,11 @@ void report_client(void)
     printf("###############################################################################\n");
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-    scanf("%c", &go);
+    getchar();
 }
 
 void report_buy(void)
 {
-    char go;
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -191,5 +187,5 @@ void report_buy(void)
     printf("###############################################################################\n");
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-    scanf("%c", &go);
+    getchar();
 }

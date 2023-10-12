@@ -7,6 +7,7 @@
 
 void modulo_show(void)
 {
+    Show* fulano;
     setlocale(LC_ALL, "Portuguese_Brazil");
     int resp;
     do
@@ -15,16 +16,16 @@ void modulo_show(void)
         switch (resp)
         {
             case '1':
-                cred_show();
+                fulano = cred_show();
                 break;
             case '2':
-                read_show();
+                read_show(fulano);
                 break;
             case '3':
-                upd_show();
+                upd_show(fulano);
                 break;
             case '4':
-                del_show();
+                del_show(fulano);
                 break;
             case '0':
                 system("cls || clear");
@@ -68,16 +69,10 @@ void show_menu_screen(void)
     printf("###              Escolha a opção que deseja:");
 }
 
-void cred_show(void)
+Show *cred_show(void)
 {
-    char go;
-    char *atraction, *data, *hour, *quant, *valor, *id;
-    atraction = (char*) malloc(50*sizeof(char));
-    data = (char*) malloc(8*sizeof(char));
-    hour = (char*) malloc(5*sizeof(char));
-    quant = (char*) malloc(10*sizeof(char));
-    valor = (char*) malloc(8*sizeof(char));
-    id = (char*) malloc(5*sizeof(char));
+    Show *sh;
+    sh = (Show*) malloc(sizeof(Show) + 1);
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -91,15 +86,16 @@ void cred_show(void)
     printf("###              = = = = = = = = Cadastrar  Show = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    show_val(atraction, data, hour, quant, valor, id);
+    show_val(sh);
     printf("###                                                                         ###\n");
     printf("###############################################################################\n");
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-    scanf("%c", &go);
+    getchar();
+    return sh;
 }
 
-void read_show(void)
+void read_show(const Show* sh)
 {
     system("clear || cls");
     printf("###############################################################################\n");
@@ -114,10 +110,10 @@ void read_show(void)
     printf("###              = = = = = = = = Pesquisar  Show = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    show_id_check();
+    show_id_check(sh);
 }
 
-void upd_show(void)
+void upd_show(Show* sh)
 {
     system("clear || cls");
     printf("###############################################################################\n");
@@ -132,10 +128,10 @@ void upd_show(void)
     printf("###              = = = = = = = =  Editar Show  = = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    show_id_check();
+    show_id_check(sh);
 }
 
-void del_show(void)
+void del_show(Show* sh)
 {
     system("clear || cls");
     printf("###############################################################################\n");
@@ -150,45 +146,45 @@ void del_show(void)
     printf("###              = = = = = = = = Excluir  Show = = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    show_id_check();
+    show_id_check(sh);
 }
 
-void show_val(char *atraction, char *data, char *hour, char *quant, char *valor, char *id)
+void show_val(Show* sh)
 {
     int tam = 4;
     do {
         printf("###              Atração: ");
-        scanf("%s", atraction);
+        scanf("%s", sh -> atraction);
         limpa_buffer();
-    } while (!valNome(atraction));
+    } while (!valNome(sh -> atraction));
     do {
         printf("###              Data (dd/mm/aaaa): ");
-        scanf("%s", data);
+        scanf("%s", sh -> data);
         limpa_buffer();
-    } while (!valData(data));
+    } while (!valData(sh -> data));
     do {
         printf("###              Hora (hh:mm): ");
-        scanf("%s", hour);
+        scanf("%s", sh -> hour);
         limpa_buffer();
-    } while (!val_hour(hour));
+    } while (!val_hour(sh -> hour));
     do {
         printf("###              Quant. de ingressos (apenas numeros): ");
-        scanf("%s", quant);
+        scanf("%s", sh -> quant);
         limpa_buffer();
-    } while (!ehdinheiro(quant));
+    } while (!ehdinheiro(sh -> quant));
     do {
         printf("###              Valor do ingresso: ");
-        scanf("%s", valor);
+        scanf("%s", sh -> valor);
         limpa_buffer();
-    } while (!ehdinheiro(valor));
+    } while (!ehdinheiro(sh -> valor));
     do {
         printf("###              Id do show (4 dígitos): ");
-        scanf("%s", id);
+        scanf("%s", sh -> id);
         limpa_buffer();
-    } while (!val_id(id, tam));
+    } while (!val_id(sh -> id, tam));
 }
 
-void show_id_check(void)
+void show_id_check(const Show* sh)
 {
     char *id;
     id = (char*) malloc(5*sizeof(char));
@@ -200,7 +196,7 @@ void show_id_check(void)
         limpa_buffer();
     } while (!val_id(id, tam));
     if (strcmp(id, "1000") == 0) {
-        print_dados_show();
+        print_dados_show(sh);
     }
     else {
         printf("###                                                                         ###\n");
@@ -213,9 +209,8 @@ void show_id_check(void)
     }
 }
 
-void print_dados_show(void)
+void print_dados_show(const Show* sh)
 {
-    char go;
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -227,15 +222,15 @@ void print_dados_show(void)
     printf("###                                                                         ###\n");
     printf("###              Informações do Id digitado (Id):                           ###\n");
     printf("###                                                                         ###\n");
-    printf("###              Atração: Em desenvolvimento...                             ###\n");
-    printf("###              Data: Em desenvolvimento...                                ###\n");
-    printf("###              Hora: Em desenvolvimento...                                ###\n");
-    printf("###              Quant. de ingressos: Em desenvolvimento...                 ###\n");
-    printf("###              Valor do ingresso: Em desenvolvimento...                   ###\n");
-    printf("###              Id do show: Em desenvolvimento...                          ###\n");
+    printf("###              Atração: %s\n", sh -> atraction);
+    printf("###              Data: %s\n", sh -> data);
+    printf("###              Hora: %s\n", sh -> hour);
+    printf("###              Quant. de ingressos: %s\n", sh -> quant);
+    printf("###              Valor do ingresso: %s\n", sh -> valor);
+    printf("###              Id do show: %s\n", sh -> id);
     printf("###                                                                         ###\n");
     printf("###############################################################################\n");
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-    scanf("%c", &go);
+    getchar();
 }

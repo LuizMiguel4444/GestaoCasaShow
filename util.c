@@ -130,6 +130,7 @@ int valData(char *data)
   tam = strlen(data);
   if (tam == 10) {
     for (int i = 0; i < tam; i++) {
+      printf("<%c>", data[i]);
       if (!ehDigito(data[i]) || (data[2] != '/') || (data[5] != '/')) {
         return 0;
       }
@@ -354,3 +355,23 @@ int val_hour(char hour[])
 
   return 1;
 } // AUTOR: LUIZ MIGUEL /// GIT: https://github.com/LuizMiguel4444
+
+///////////////////////////////////////////////////////////////////////////////
+/// Faz a função do input da linguagem python 
+///
+// static char* input(void) {
+//   char linha[256];
+//   scanf(" %255[^\n]", linha);
+//   return duplica(linha);
+// } // AUTOR: FLAVIUS GORGÔNIO /// GIT: https://github.com/flaviusgorgonio
+
+// ///////////////////////////////////////////////////////////////////////////////
+// /// Auxilía na função que simula o input da linguagem python 
+// ///
+// char* duplica(char* s) {
+//   int n;
+//   n = strlen(s) + 1;
+//   char* d = (char*) malloc(n * sizeof(char));
+//   strcpy(d, s);
+//   return d;
+// } // AUTOR: FLAVIUS GORGÔNIO /// GIT: https://github.com/flaviusgorgonio

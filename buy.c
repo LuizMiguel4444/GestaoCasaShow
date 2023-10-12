@@ -7,6 +7,7 @@
 
 void modulo_buy(void)
 {
+    Buy* fulano;
     setlocale(LC_ALL, "Portuguese_Brazil");
     int resp;
     do
@@ -15,13 +16,13 @@ void modulo_buy(void)
         switch (resp)
         {
             case '1':
-                cred_buy();
+                fulano = cred_buy();
                 break;
             case '2':
-                read_buy();
+                read_buy(fulano);
                 break;
             case '3':
-                upd_buy();
+                upd_buy(fulano);
                 break;
             case '0':
                 system("cls || clear");
@@ -64,14 +65,10 @@ void buy_menu_screen(void)
         printf("###              Escolha a opção que deseja: ");
 }
 
-void cred_buy(void)
+Buy *cred_buy(void)
 {
-    char go;
-    char *id_show, *id_cli, *quant, *valor;
-    id_show = (char*) malloc(5*sizeof(char));
-    id_cli = (char*) malloc(5*sizeof(char));
-    quant = (char*) malloc(5*sizeof(char));
-    valor = (char*) malloc(8*sizeof(char));
+    Buy *b;
+    b = (Buy*) malloc(sizeof(Buy) + 1);
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -85,20 +82,21 @@ void cred_buy(void)
     printf("###              = = = = = = = = Cadastrar Venda = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    buy_val(id_show, id_cli, quant, valor);
+    buy_val(b);
     printf("###                                                                         ###\n");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
-    printf("###              Quant. de ingressos vendidos: x + %s\n", quant);
-    printf("###              Quant. de ingressos que restam: x - %s\n", quant);
+    printf("###              Quant. de ingressos vendidos: x + %s\n", b -> quant);
+    printf("###              Quant. de ingressos que restam: x - %s\n", b -> quant);
     printf("###                                                                         ###\n");
     printf("###############################################################################\n");
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-    scanf("%c", &go);
+    getchar();
+    return b;
 }
 
-void read_buy(void)
+void read_buy(const Buy* b)
 {
     system("clear || cls");
     printf("###############################################################################\n");
@@ -113,10 +111,10 @@ void read_buy(void)
     printf("###              = = = = = = = = Pesquisar Venda = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    buy_id_check();
+    buy_id_check(b);
 }
 
-void upd_buy(void)
+void upd_buy(Buy* b)
 {
     system("clear || cls");
     printf("###############################################################################\n");
@@ -131,35 +129,35 @@ void upd_buy(void)
     printf("###              = = = = = = = =  Editar  Venda  = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    buy_id_check();
+    buy_id_check(b);
 }
 
-void buy_val(char *id_show, char *id_cli, char *quant, char *valor)
+void buy_val(Buy* b)
 {
     int tam = 4;
     do {
         printf("###              Id do show (4 dígitos): ");
-        scanf("%s", id_show);
+        scanf("%s", b -> id_show);
         limpa_buffer();
-    } while (!val_id(id_show, tam));
+    } while (!val_id(b -> id_show, tam));
     do {
         printf("###              Id do cliente (4 dígitos): ");
-        scanf("%s", id_cli);
+        scanf("%s", b -> id_cli);
         limpa_buffer();
-    } while (!val_id(id_cli, tam));
+    } while (!val_id(b -> id_cli, tam));
     do {
         printf("###              Quant. de ingressos: ");
-        scanf("%s", quant);
+        scanf("%s", b -> quant);
         limpa_buffer();
-    } while (!ehdinheiro(quant));
+    } while (!ehdinheiro(b -> quant));
     do {
         printf("###              Valor final: ");
-        scanf("%s", valor);
+        scanf("%s", b -> valor);
         limpa_buffer();
-    } while (!ehdinheiro(valor));
+    } while (!ehdinheiro(b -> valor));
 }
 
-void buy_id_check(void)
+void buy_id_check(const Buy* b)
 {
     char *id;
     id = (char*) malloc(5*sizeof(char));
@@ -171,7 +169,7 @@ void buy_id_check(void)
         limpa_buffer();
     } while (!val_id(id, tam));
     if (strcmp(id, "1000") == 0) {
-        print_dados_buy();
+        print_dados_buy(b);
     }
     else {
         printf("###                                                                         ###\n");
@@ -184,9 +182,8 @@ void buy_id_check(void)
     }
 }
 
-void print_dados_buy(void)
+void print_dados_buy(const Buy* b)
 {
-    char go;
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -198,13 +195,13 @@ void print_dados_buy(void)
     printf("###                                                                         ###\n");
     printf("###              Informações do Id digitado (Id):                           ###\n");
     printf("###                                                                         ###\n");
-    printf("###              Id do show: Em desenvolvimento...                          ###\n");
-    printf("###              Id do cliente: Em desenvolvimento...                       ###\n");
-    printf("###              Quant. de ingressos: Em desenvolvimento...                 ###\n");
-    printf("###              Valor final: Em desenvolvimento...                         ###\n");
+    printf("###              Id do show: %s\n", b -> id_show);
+    printf("###              Id do cliente: %s\n", b -> id_cli);
+    printf("###              Quant. de ingressos: %s\n", b -> quant);
+    printf("###              Valor final: %s\n", b -> valor);
     printf("###                                                                         ###\n");
     printf("###############################################################################\n");
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-    scanf("%c", &go);
+    getchar();
 }

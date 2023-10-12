@@ -14,3 +14,5 @@ int validarFone(char *fone);
 int validarCPF(char *cpf);
 int ehHora(char c);
 int val_hour(char hour[]);
+// static char* input(void);
+// char* duplica(char* s);
