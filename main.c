@@ -97,7 +97,6 @@ void main_menu_screen(void)
 
 void about(void)
 {
-    char go;
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -114,12 +113,11 @@ void about(void)
     printf("###############################################################################\n");
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao Menu Principal... <<<");
-    scanf("%c", &go);
+    getchar();
 }
 
 void dev(void)
 {
-    char go;
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -138,12 +136,11 @@ void dev(void)
     printf("###############################################################################\n");
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao Menu Principal... <<<");
-    scanf("%c", &go);
+    getchar();
 }
 
 void welcome(void)
 {
-    char go;
     system("clear || cls");
     printf("########                                                               ######\n");
     printf("#########                                                             #######\n");
@@ -181,7 +178,7 @@ void welcome(void)
     printf("\n");
     printf("\n");
     printf("\t\t>>> Tecle ENTER para ir ao Menu Principal... <<<");
-    scanf("%c", &go);
+    getchar();
 }
 
 void end(void)
@@ -214,5 +211,3 @@ void end(void)
     printf("                   ######################################\n");
     printf("                         ##########################\n");
 }
-
-// corrigir val_data

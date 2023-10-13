@@ -189,7 +189,6 @@ void show_id_check(const Show* sh)
     char *id;
     id = (char*) malloc(5*sizeof(char));
     int tam = 4;
-    char go;
     do {
         printf("###              Informe o Id do show (4 dígitos): ");
         scanf("%s", id);
@@ -205,7 +204,7 @@ void show_id_check(const Show* sh)
         printf("###############################################################################\n");
         printf("\n");
         printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-        scanf("%c", &go);
+        getchar();
     }
 }
 
