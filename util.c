@@ -130,8 +130,12 @@ int valData(char *data)
   tam = strlen(data);
   if (tam == 10) {
     for (int i = 0; i < tam; i++) {
-      printf("<%c>", data[i]);
-      if (!ehDigito(data[i]) || (data[2] != '/') || (data[5] != '/')) {
+      if (!ehHora(data[i]) || (data[2] != '/') || (data[5] != '/')) {
+        return 0;
+      } 
+      else if ((data[0] == '/') || (data[1] == '/') || (data[3] == '/') ||
+              (data[4] == '/') || (data[6] == '/') || (data[7] == '/') ||
+              (data[8] == '/') || (data[9] == '/')) {
         return 0;
       }
     }
@@ -149,12 +153,18 @@ int valData(char *data)
     day = tm.tm_mday;
     mon = tm.tm_mon + 1;
     year = tm.tm_year + 1900;
-    if ((dia > day) || (mes > mon) || (ano > year)) {
+    if (ano > year) {
+      return 0;
+    }
+    else if ((mes > mon) && (ano == year)) {
+      return 0;
+    }
+    else if ((dia > day) && (mes >= mon) && (ano == year)) {
       return 0;
     }
   }
 
-  if (tam == 8) {
+  else if (tam == 8) {
     for (int i = 0; i < tam; i++) {
       if (!ehDigito(data[i]) || (data[i] == '/')) {
         return 0;
@@ -174,7 +184,13 @@ int valData(char *data)
     day = tm.tm_mday;
     mon = tm.tm_mon + 1;
     year = tm.tm_year + 1900;
-    if ((dia > day) || (mes > mon) || (ano > year)) {
+    if (ano > year) {
+      return 0;
+    }
+    else if ((mes > mon) && (ano == year)) {
+      return 0;
+    }
+    else if ((dia > day) && (mes >= mon) && (ano == year)) {
       return 0;
     }
   }
@@ -306,7 +322,7 @@ int validarCPF(char *cpf)
 ///
 int ehHora(char c)
 {
-  if ((c >= '0' && c <= '9') || (c == ':')) {
+  if ((c >= '0' && c <= '9') || (c == ':') || (c == '/')) {
     return 1;
   } else {
     return 0;
@@ -359,19 +375,19 @@ int val_hour(char hour[])
 ///////////////////////////////////////////////////////////////////////////////
 /// Faz a função do input da linguagem python 
 ///
-// static char* input(void) {
-//   char linha[256];
-//   scanf(" %255[^\n]", linha);
-//   return duplica(linha);
-// } // AUTOR: FLAVIUS GORGÔNIO /// GIT: https://github.com/flaviusgorgonio
+char* input(void) {
+  char linha[256];
+  scanf(" %255[^\n]", linha);
+  return duplica(linha);
+} // AUTOR: FLAVIUS GORGÔNIO /// GIT: https://github.com/flaviusgorgonio
 
 // ///////////////////////////////////////////////////////////////////////////////
 // /// Auxilía na função que simula o input da linguagem python 
 // ///
-// char* duplica(char* s) {
-//   int n;
-//   n = strlen(s) + 1;
-//   char* d = (char*) malloc(n * sizeof(char));
-//   strcpy(d, s);
-//   return d;
-// } // AUTOR: FLAVIUS GORGÔNIO /// GIT: https://github.com/flaviusgorgonio
+char* duplica(char* s) {
+  int n;
+  n = strlen(s) + 1;
+  char* d = (char*) malloc(n * sizeof(char));
+  strcpy(d, s);
+  return d;
+} // AUTOR: FLAVIUS GORGÔNIO /// GIT: https://github.com/flaviusgorgonio
