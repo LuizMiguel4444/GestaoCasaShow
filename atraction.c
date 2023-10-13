@@ -184,7 +184,6 @@ void atraction_id_check(const Atraction* atr)
     char *id;
     id = (char*) malloc(5*sizeof(char));
     int tam = 4;
-    char go;
     do {
         printf("###              Informe o Id da atração (4 dígitos): ");
         scanf("%s", id);
@@ -200,7 +199,7 @@ void atraction_id_check(const Atraction* atr)
         printf("###############################################################################\n");
         printf("\n");
         printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-        scanf("%c", &go);
+        getchar();
     }
 }
 

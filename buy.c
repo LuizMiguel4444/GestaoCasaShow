@@ -162,7 +162,6 @@ void buy_id_check(const Buy* b)
     char *id;
     id = (char*) malloc(5*sizeof(char));
     int tam = 4;
-    char go;
     do {
         printf("###              Informe o Id da venda (4 dígitos): ");
         scanf("%s", id);
@@ -178,7 +177,7 @@ void buy_id_check(const Buy* b)
         printf("###############################################################################\n");
         printf("\n");
         printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-        scanf("%c", &go);
+        getchar();
     }
 }
 
