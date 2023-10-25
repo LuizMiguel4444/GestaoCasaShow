@@ -154,7 +154,8 @@ void client_val(Client* cli)
     int tam = 4;
     do {
         printf("###              Nome do cliente: ");
-        scanf("%s", cli -> nome);
+        scanf(" %50[^\n]", cli -> nome);
+        printf("nome lido:|%s|", cli -> nome);
         limpa_buffer();
     } while (!valNome(cli  -> nome));
     do {
