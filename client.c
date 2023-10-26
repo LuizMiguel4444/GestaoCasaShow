@@ -155,7 +155,6 @@ void client_val(Client* cli)
     do {
         printf("###              Nome do cliente: ");
         scanf(" %50[^\n]", cli -> nome);
-        printf("nome lido:|%s|", cli -> nome);
         limpa_buffer();
     } while (!valNome(cli  -> nome));
     do {

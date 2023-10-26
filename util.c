@@ -63,25 +63,27 @@ int ehLetra(char c)
     return 1;
   } else if (c >= 'a' && c <= 'z') {
     return 1;
-  } else if (c == ' ') {
-    return 1;
   } else {
     return 0;
   }
 } // AUTOR: FLAVIUS GORGÔNIO /// GIT: https://github.com/flaviusgorgonio
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Retorna 1 se o caractere recebido for um espaço 
-/// ou retorna 0 caso contrário
+/// Retorna 1 se o caractere recebido for uma alfabético ou um espaço
+/// (letra entre 'A' e 'Z' ou 'a' e 'z') ou retorna 0 caso contrário
 ///
-int ehEspaco(char c)
+int ehLetraeEspaco(char c)
 {
-  if (c == ' ') {
+  if (c >= 'A' && c <= 'Z') {
+    return 1;
+  } else if (c >= 'a' && c <= 'z') {
+    return 1;
+  } else if (c == ' ') {
     return 1;
   } else {
     return 0;
   }
-}
+} // AUTOR: LUIZ MIGUEL /// GIT: https://github.com/LuizMiguel4444
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Retorna 1 se string recebido for exclusivamente alfabético ou
@@ -90,7 +92,10 @@ int ehEspaco(char c)
 int valNome(char *nome)
 {
   for (int i = 0; nome[i] != '\0'; i++) {
-    if (!ehLetra(nome[i]) || ehEspaco(nome)) {
+    if (strlen(nome) < 3) {
+      return 0;
+    }
+    if (!ehLetraeEspaco(nome[i])) {
       return 0;
     }
   }
