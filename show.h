@@ -7,6 +7,7 @@ char hour[6];
 char quant[8];
 char valor[10];
 char id[5];
+char status;
 };
 
 void modulo_show(void);

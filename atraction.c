@@ -177,6 +177,7 @@ void atraction_val(Atraction* atr)
         scanf("%s", atr -> id);
         limpa_buffer();
     } while (!val_id(atr -> id, tam));
+    atr -> status = 'c';
 }
 
 void atraction_id_check(const Atraction* atr)

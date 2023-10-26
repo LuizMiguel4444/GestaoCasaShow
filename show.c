@@ -182,6 +182,7 @@ void show_val(Show* sh)
         scanf("%s", sh -> id);
         limpa_buffer();
     } while (!val_id(sh -> id, tam));
+    sh -> status = 'c';
 }
 
 void show_id_check(const Show* sh)

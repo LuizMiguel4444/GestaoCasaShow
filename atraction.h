@@ -6,6 +6,7 @@ char cache[16];
 char email[56];
 char num[12];
 char id[5];
+char status;
 };
 
 void modulo_atraction(void);

@@ -177,6 +177,7 @@ void client_val(Client* cli)
         scanf("%s", cli -> id);
         limpa_buffer();
     } while (!val_id(cli -> id, tam));
+    cli -> status = 'c';
 }
 
 void client_id_check(const Client* cli)

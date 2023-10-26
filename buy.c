@@ -155,6 +155,7 @@ void buy_val(Buy* b)
         scanf("%s", b -> valor);
         limpa_buffer();
     } while (!ehdinheiro(b -> valor));
+    b -> status = 'f';
 }
 
 void buy_id_check(const Buy* b)

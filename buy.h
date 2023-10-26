@@ -5,6 +5,7 @@ char id_show[5];
 char id_cli[5];
 char quant[8];
 char valor[10];
+char status;
 };
 
 void modulo_buy(void);
