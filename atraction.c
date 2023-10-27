@@ -3,6 +3,7 @@
 #include <locale.h>
 #include <string.h>
 #include "atraction.h"
+#include "inputs.h"
 #include "util.h"
 
 void modulo_atraction(void)
@@ -152,16 +153,8 @@ void del_atraction(Atraction* atr)
 void atraction_val(Atraction* atr)
 {
     int tam = 4;
-    do {
-        printf("###              Nome da atração: ");
-        scanf("%s", atr -> nome);
-        limpa_buffer();
-    } while (!valNome(atr -> nome));
-    do {
-        printf("###              Valor do cachê: ");
-        scanf("%s", atr -> cache);
-        limpa_buffer();
-    } while (!ehdinheiro(atr -> cache));
+    get_nome(atr -> nome, "o nome");
+    get_cache(atr -> cache, "o cache");
     do {
         printf("###              Email de contato: ");
         scanf("%[a-z0-9@.]", atr -> email);
