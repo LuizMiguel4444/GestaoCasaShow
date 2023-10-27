@@ -21,3 +21,27 @@ void get_cache(char* cache, char* modulo) {
   } while (!ehdinheiro(cache));
 }
 
+void get_email(char* email, char* modulo) {
+  do {
+    printf("###              Email d%s: ", modulo);
+    scanf("%[a-z0-9@.]", email);
+    limpa_buffer();
+  } while (!val_email(email));
+}
+
+void get_num(char* num, char* modulo) {
+  do{
+    printf("###              Número d%s: ", modulo);
+    scanf("%s", num);
+    limpa_buffer();
+  } while (!validarFone(num));
+}
+
+void get_id(char* id, char* modulo) {
+  int tam = 4;
+  do {
+    printf("###              Id d%s: ", modulo);
+    scanf("%s", id);
+    limpa_buffer();
+  } while (!val_id(id, tam));
+}

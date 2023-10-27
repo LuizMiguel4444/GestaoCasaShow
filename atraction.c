@@ -87,7 +87,7 @@ Atraction *cred_atraction(void)
     printf("###              = = = = = = =  Cadastrar Atração  = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    atraction_val(atr);
+    atraction_inputs(atr);
     printf("###                                                                         ###\n");
     printf("###############################################################################\n");
     printf("\n");
@@ -96,7 +96,7 @@ Atraction *cred_atraction(void)
     return atr;
 }
 
-void read_atraction(const Atraction* atr)
+void read_atraction(Atraction* atr)
 {
     system("clear || cls");
     printf("###############################################################################\n");
@@ -150,40 +150,22 @@ void del_atraction(Atraction* atr)
     atraction_id_check(atr);
 }
 
-void atraction_val(Atraction* atr)
+void atraction_inputs(Atraction* atr)
 {
-    int tam = 4;
-    get_nome(atr -> nome, "o nome");
-    get_cache(atr -> cache, "o cache");
-    do {
-        printf("###              Email de contato: ");
-        scanf("%[a-z0-9@.]", atr -> email);
-        limpa_buffer();
-    } while (!val_email(atr -> email));
-    do{
-        printf("###              Número de contato (com DDD): ");
-        scanf("%s", atr -> num);
-        limpa_buffer();
-    } while (!validarFone(atr -> num));
-    do {
-        printf("###              Id da atração (4 dígitos): ");
-        scanf("%s", atr -> id);
-        limpa_buffer();
-    } while (!val_id(atr -> id, tam));
+    get_nome(atr -> nome, "a atração");
+    get_cache(atr -> cache, "a atração");
+    get_email(atr -> email, "e contato");
+    get_num(atr -> num, "e contato (com DDD)");
+    get_id(atr -> id, "a atração (4 dígitos)");
     atr -> status = 'c';
 }
 
-void atraction_id_check(const Atraction* atr)
+void atraction_id_check(Atraction* atr)
 {
-    char *id;
-    id = (char*) malloc(5*sizeof(char));
-    int tam = 4;
-    do {
-        printf("###              Informe o Id da atração (4 dígitos): ");
-        scanf("%s", id);
-        limpa_buffer();
-    } while (!val_id(id, tam));
-    if (strcmp(id, "1000") == 0) {
+    /*char *id;
+    id = (char*) malloc(5*sizeof(char));*/
+    get_id(atr -> id, "a atração (4 dígitos)");
+    if (strcmp(atr -> id, "1000") == 0) {
         print_dados_atraction(atr);
     }
     else {
