@@ -51,7 +51,7 @@ void get_quant(char* quant, char* modulo) {
     printf("###              Quant. de %s: ", modulo);
     scanf("%s", quant);
     limpa_buffer();
-  } while (!ehdinheiro(quant));
+  } while (!check_quant(quant));
 }
 
 void get_valor(char* valor, char* modulo) {

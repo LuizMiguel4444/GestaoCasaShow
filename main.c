@@ -211,7 +211,3 @@ void end(void)
     printf("                   ######################################\n");
     printf("                         ##########################\n");
 }
-
-
-// colocar : nas horas e / nas datas
-// artigos

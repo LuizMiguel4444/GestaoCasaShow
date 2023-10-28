@@ -153,7 +153,7 @@ void del_atraction(Atraction* atr)
 void atraction_inputs(Atraction* atr)
 {
     get_nome(atr -> nome, "a atração");
-    get_cache(atr -> cache, "a atração");
+    get_cache(atr -> cache, "a atração (com casa decimal)");
     get_email(atr -> email, "e contato");
     get_num(atr -> num, "e contato (com DDD)");
     get_id(atr -> id, "a atração (4 dígitos)");

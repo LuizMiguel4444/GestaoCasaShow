@@ -156,7 +156,7 @@ void show_inputs(Show* sh)
     get_data(sh -> data);
     get_hour(sh -> hour);
     get_quant(sh -> quant, "ingressos");
-    get_valor(sh -> valor, "do ingresso");
+    get_valor(sh -> valor, "do ingresso (com casa decimal)");
     get_id(sh -> id, "o show (4 dígitos)");
     sh -> status = 'c';
 }

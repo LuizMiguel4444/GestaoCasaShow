@@ -141,84 +141,79 @@ int ehData(int dd, int mm, int aa)
 } // AUTOR: FLAVIUS GORGÔNIO /// GIT: https://github.com/flaviusgorgonio
 
 ///////////////////////////////////////////////////////////////////////////////
+/// Retorna 1 se string recebido corresponder a uma data válida 
+/// (contagem de dia, mês, ano) ou retorna 0 caso contrário
+///
+int val_data_aux(char data[])
+{
+  int dia, mes, ano;
+  for (int i = 0; i < strlen(data); i++) {
+    if ((data[0] == '/') || (data[1] == '/') || (data[3] == '/') ||
+        (data[4] == '/') || (data[6] == '/') || (data[7] == '/') ||
+        (data[8] == '/') || (data[9] == '/')) {
+      return 0;
+    }
+  }
+  dia = (data[0] - '0') * 10 + (data[1] - '0');
+  mes = (data[3] - '0') * 10 + (data[4] - '0');
+  ano = (data[6] - '0') * 1000 + (data[7] - '0') * 100 + 
+        (data[8] - '0') * 10 + (data[9] - '0');
+  if (!ehData(dia, mes, ano)) {
+    return 0;
+  }
+  int day, mon, year;
+  time_t hoje;
+  hoje = time(NULL);
+  struct tm tm = *localtime(&hoje);
+  day = tm.tm_mday;
+  mon = tm.tm_mon + 1;
+  year = tm.tm_year + 1900;
+  if (ano > year) {
+    return 0;
+  }
+  else if ((mes > mon) && (ano == year)) {
+    return 0;
+  }
+  else if ((dia > day) && (mes >= mon) && (ano == year)) {
+    return 0;
+  }
+  return 1;  
+} // MODIFICADO DE: FLAVIUS GORGÔNIO E ANTONIO MANIERO /// GIT: https://github.com/flaviusgorgonio E GIT: https://github.com/maniero
+
+///////////////////////////////////////////////////////////////////////////////
 /// Retorna 1 se string recebido corresponder a uma data válida (apenas dígitos
 /// e no formato: ddmmaaaa) ou retorna 0 caso contrário
 ///
 int valData(char *data)
 {
-  int tam, dia, mes, ano;
-  tam = strlen(data);
-  if (tam == 10) {
-    for (int i = 0; i < tam; i++) {
+  if (strlen(data) == 10) {
+    for (int i = 0; i < strlen(data); i++) {
       if (!ehHora(data[i]) || (data[2] != '/') || (data[5] != '/')) {
         return 0;
       } 
-      else if ((data[0] == '/') || (data[1] == '/') || (data[3] == '/') ||
-              (data[4] == '/') || (data[6] == '/') || (data[7] == '/') ||
-              (data[8] == '/') || (data[9] == '/')) {
-        return 0;
-      }
     }
-    dia = (data[0] - '0') * 10 + (data[1] - '0');
-    mes = (data[3] - '0') * 10 + (data[4] - '0');
-    ano = (data[6] - '0') * 1000 + (data[7] - '0') * 100 + 
-          (data[8] - '0') * 10 + (data[9] - '0');
-    if (!ehData(dia, mes, ano)) {
-      return 0;
-    }
-    int day, mon, year;
-    time_t hoje;
-    hoje = time(NULL);
-    struct tm tm = *localtime(&hoje);
-    day = tm.tm_mday;
-    mon = tm.tm_mon + 1;
-    year = tm.tm_year + 1900;
-    if (ano > year) {
-      return 0;
-    }
-    else if ((mes > mon) && (ano == year)) {
-      return 0;
-    }
-    else if ((dia > day) && (mes >= mon) && (ano == year)) {
-      return 0;
-    }
+    val_data_aux(data);
   }
-
-  else if (tam == 8) {
-    for (int i = 0; i < tam; i++) {
+  else if (strlen(data) == 8) {
+    for (int i = 0; i < strlen(data); i++) {
       if (!ehDigito(data[i]) || (data[i] == '/')) {
         return 0;
       }
     }
-    dia = (data[0] - '0') * 10 + (data[1] - '0');
-    mes = (data[2] - '0') * 10 + (data[3] - '0');
-    ano = (data[4] - '0') * 1000 + (data[5] - '0') * 100 + 
-          (data[6] - '0') * 10 + (data[7] - '0');
-    if (!ehData(dia, mes, ano)) {
-      return 0;
-    }
-    int day, mon, year;
-    time_t hoje;
-    hoje = time(NULL);
-    struct tm tm = *localtime(&hoje);
-    day = tm.tm_mday;
-    mon = tm.tm_mon + 1;
-    year = tm.tm_year + 1900;
-    if (ano > year) {
-      return 0;
-    }
-    else if ((mes > mon) && (ano == year)) {
-      return 0;
-    }
-    else if ((dia > day) && (mes >= mon) && (ano == year)) {
-      return 0;
-    }
+    data[8] = data[7];
+    data[9] = data[8];
+    data[8] = data[6];
+    data[7] = data[5];
+    data[6] = data[4];
+    data[4] = data[3];
+    data[3] = data[2];
+    data[2] = '/';
+    data[5] = '/';
+    val_data_aux(data);
   }
-
-  else {
+  else if (strlen(data) != 8 && strlen(data) != 10) {
     return 0;
   }
-
   return 1;
 }  // MODIFICADO DE: FLAVIUS GORGÔNIO E ANTONIO MANIERO /// GIT: https://github.com/flaviusgorgonio E GIT: https://github.com/maniero
 
@@ -261,17 +256,47 @@ int val_email(char *email )
 }  // AUTOR: LACOBUS /// STACKOVERFLOW: https://pt.stackoverflow.com/questions/310096/como-validar-um-e-mail-em-c
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Retorna 1 se string recebido corresponder a apenas digitos com tamanho 
-/// maior do que 1 ou retorna 0 caso contrário
+/// Retorna 1 se o caractere recebido for um dígito monetário
+/// (entre 0 e 9 ou um '.') ou retorna 0 caso contrário
+///
+int ehDigitoDinheiro(char c)
+{
+  if ((c >= '0' && c <= '9') || (c == '.')) {
+    return 1;
+  } else {
+    return 0;
+  }
+} // AUTOR: LUIZ MIGUEL /// GIT: https://github.com/LuizMiguel4444
+
+///////////////////////////////////////////////////////////////////////////////
+/// Retorna 1 se string recebido corresponder a apenas digitos
+/// monetários e '.' ou retorna 0 caso contrário
 ///
 float ehdinheiro(char *c)
 {
+  int ponto = strlen(c) - 3;
+  for (int i = 0; c[i] != '\0'; i++) {
+    if (!ehDigitoDinheiro(c[i]) || strlen(c) < 5 || c[0] == '0') {
+      return 0;
+    }
+    else if (c[ponto] != '.') {
+      return 0;
+    }
+  }
+	return 1;
+} // AUTOR: LUIZ MIGUEL /// GIT: https://github.com/LuizMiguel4444
+
+///////////////////////////////////////////////////////////////////////////////
+/// Retorna 1 se string recebido corresponder a apenas digitos com tamanho 
+/// maior do que '1' e valor diferente de '0' ou retorna 0 caso contrário
+///
+int check_quant(char *c) {
   for (int i = 0; c[i] != '\0'; i++) {
     if (!ehDigito(c[i]) || strlen(c) < 2 || c[0] == '0') {
       return 0;
     }
   }
-	return 1;
+  return 1;  
 } // AUTOR: LUIZ MIGUEL /// GIT: https://github.com/LuizMiguel4444
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -351,50 +376,51 @@ int ehHora(char c)
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Retorna 1 se string recebido corresponder a uma hora válida 
+/// (a[1] < 2, a[2] < 4 ...) ou retorna 0 caso contrário
+///
+int val_hour_aux(char hour[]) {
+  for (int i = 0; i < strlen(hour); i++) {
+    if (((hour[0] > '2')) || (hour[3] > '5')) {
+      return 0;
+    }
+    if (((hour[0] < '0')) || ((hour[1] < '0')) || (hour[3] < '0') || (hour[4] < '0')) {
+      return 0;
+    }
+    if (((hour[0] == '2')) && ((hour[1] > '3'))) {
+      return 0;
+    }
+  }
+  return 1;  
+} // AUTOR: LUIZ MIGUEL /// GIT: https://github.com/LuizMiguel4444
+
+///////////////////////////////////////////////////////////////////////////////
+/// Retorna 1 se string recebido corresponder a uma hora válida 
 /// (hh:mm) ou retorna 0 caso contrário
 ///
 int val_hour(char hour[])
 {
-  int tam;
-  tam = strlen(hour);
-  if (tam == 5) {
-    for (int i = 0; i < tam; i++) {
-      if ((!ehHora(hour[i])) || (hour[2] != ':')) {
-        return 0;
-      }
-      if (((hour[0] > '2')) || (hour[3] > '5')) {
-        return 0;
-      }
-      if (((hour[0] < '0')) || ((hour[1] < '0')) || (hour[3] < '0') || (hour[4] < '0')) {
-        return 0;
-      }
-      if (((hour[0] == '2')) && ((hour[1] > '3'))) {
+  if (strlen(hour) == 5) {
+    for (int i = 0; i < strlen(hour); i++) {
+      if ((!ehHora(hour[i])) || (hour[0] == ':') || (hour[1] == ':') || (hour[3] == ':') || (hour[4] == ':')) {
         return 0;
       }
     }
+    val_hour_aux(hour);
   }
 
-  else if (tam == 4) {
-    for (int i = 0; i < tam; i++) {
+  else if (strlen(hour) == 4) {
+    for (int i = 0; i < strlen(hour); i++) {
       if ((!ehHora(hour[i]) || (hour[i]) == ':')) {
-        return 0;
-      }
-      if (((hour[0] > '2')) || (hour[2] > '5')) {
-        return 0;
-      }
-      if (((hour[0] < '0')) || ((hour[1] < '0')) || (hour[2] < '0') || (hour[3] < '0')) {
-        return 0;
-      }
-      if (((hour[0] == '2')) && ((hour[1] > '3'))) {
-        return 0;
+          return 0;
       }
     }
-    // hour[4] = hour[3];
-    // hour[3] = hour[2];
-    // hour[2] = ':';
+    hour[4] = hour[3];
+    hour[3] = hour[2];
+    hour[2] = ':';
+    val_hour_aux(hour);
   }
 
-  else if (tam != 4 && tam != 5) {
+  else if (strlen(hour) != 4 && strlen(hour) != 5) {
     return 0;
   }
 
