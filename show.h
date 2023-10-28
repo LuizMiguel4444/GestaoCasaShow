@@ -20,3 +20,6 @@ void del_show(Show*);
 void show_inputs(Show*);
 void show_id_check(Show*);
 void print_dados_show(Show*);
+
+void gravar_show(Show*);
+void error_screen_file_show(void);

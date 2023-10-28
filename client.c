@@ -18,6 +18,7 @@ void modulo_client(void)
         {
             case '1':
                 fulano = cred_client();
+                gravar_client(fulano);
                 break;
             case '2':
                 read_client(fulano);
@@ -204,4 +205,31 @@ void print_dados_client(Client* cli)
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
     getchar();
+}
+
+void gravar_client(Client* cli) 
+{
+	FILE* fp_cli;
+	fp_cli = fopen("clients.dat", "ab");
+	if (fp_cli == NULL) {
+		error_screen_file_cli();
+	}
+	fwrite(cli, sizeof(Client), 1, fp_cli);
+	fclose(fp_cli);
+    free(cli);
+}
+
+void error_screen_file_cli(void) 
+{
+	system("cls || clear");
+    printf("#############################################################################\n");
+	printf("###                                                                       ###\n");
+	printf("###           = = = = = = = = = = = = = = = = = = = = = = = =             ###\n");
+	printf("###           = = = = = = = Ops!  Ocorreu um erro = = = = = =             ###\n");
+	printf("###           = = =  Não foi possível acessar o arquivo = = =             ###\n");
+	printf("###           = = =  com informações sobre os clientes  = = =             ###\n");
+	printf("###                                                                       ###\n");
+    printf("#############################################################################\n");
+	printf("\t\t>>> Tecle ENTER para continuar! <<<");
+	getchar();
 }

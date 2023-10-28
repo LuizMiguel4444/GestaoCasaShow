@@ -19,3 +19,6 @@ void del_client(Client*);
 void client_inputs(Client*);
 void client_id_check(Client*);
 void print_dados_client(Client*);
+
+void gravar_client(Client*);
+void error_screen_file_cli(void);

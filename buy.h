@@ -18,3 +18,6 @@ void upd_buy(Buy*);
 void buy_inputs(Buy*);
 void buy_id_check(Buy*);
 void print_dados_buy(Buy*);
+
+void gravar_buy(Buy*);
+void error_screen_file_buy(void);

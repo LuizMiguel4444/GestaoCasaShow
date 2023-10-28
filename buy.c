@@ -18,6 +18,7 @@ void modulo_buy(void)
         {
             case '1':
                 fulano = cred_buy();
+                gravar_buy(fulano);
                 break;
             case '2':
                 read_buy(fulano);
@@ -46,24 +47,24 @@ char buy_menu(void)
 void buy_menu_screen(void)
 {
     system("clear || cls");
-        printf("###############################################################################\n");
-        printf("###                                                                         ###\n");
-        printf("###            ===================================================          ###\n");
-        printf("###            =============   Gestão Casa Shows   ===============          ###\n");
-        printf("###            ===================================================          ###\n");
-        printf("###                                                                         ###\n");
-        printf("###############################################################################\n");
-        printf("###                                                                         ###\n");
-        printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-        printf("###              = = = = = = = = = Menu Vendas = = = = = = = = =            ###\n");
-        printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-        printf("###                                                                         ###\n");
-        printf("###              1. Cadastrar uma nova venda                                ###\n");
-        printf("###              2. Pesquisar os dados de uma venda                         ###\n");
-        printf("###              3. Editar o cadastro de uma venda                          ###\n");
-        printf("###              0. Voltar ao Menu Principal                                ###\n");
-        printf("###                                                                         ###\n");
-        printf("###              Escolha a opção que deseja: ");
+    printf("###############################################################################\n");
+    printf("###                                                                         ###\n");
+    printf("###            ===================================================          ###\n");
+    printf("###            =============   Gestão Casa Shows   ===============          ###\n");
+    printf("###            ===================================================          ###\n");
+    printf("###                                                                         ###\n");
+    printf("###############################################################################\n");
+    printf("###                                                                         ###\n");
+    printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
+    printf("###              = = = = = = = = = Menu Vendas = = = = = = = = =            ###\n");
+    printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
+    printf("###                                                                         ###\n");
+    printf("###              1. Cadastrar uma nova venda                                ###\n");
+    printf("###              2. Pesquisar os dados de uma venda                         ###\n");
+    printf("###              3. Editar o cadastro de uma venda                          ###\n");
+    printf("###              0. Voltar ao Menu Principal                                ###\n");
+    printf("###                                                                         ###\n");
+    printf("###              Escolha a opção que deseja: ");
 }
 
 Buy *cred_buy(void)
@@ -187,4 +188,31 @@ void print_dados_buy(Buy* b)
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
     getchar();
+}
+
+void gravar_buy(Buy* b) 
+{
+	FILE* fp_b;
+	fp_b = fopen("buys.dat", "ab");
+	if (fp_b == NULL) {
+		error_screen_file_buy();
+	}
+	fwrite(b, sizeof(Buy), 1, fp_b);
+	fclose(fp_b);
+    free(b);
+}
+
+void error_screen_file_buy(void) 
+{
+	system("cls || clear");
+    printf("#############################################################################\n");
+	printf("###                                                                       ###\n");
+	printf("###           = = = = = = = = = = = = = = = = = = = = = = = =             ###\n");
+	printf("###           = = = = = = = Ops!  Ocorreu um erro = = = = = =             ###\n");
+	printf("###           = = =  Não foi possível acessar o arquivo = = =             ###\n");
+	printf("###           = = = = com informações sobre as vendas = = = =             ###\n");
+	printf("###                                                                       ###\n");
+    printf("#############################################################################\n");
+	printf("\t\t>>> Tecle ENTER para continuar! <<<");
+	getchar();
 }

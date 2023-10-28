@@ -18,6 +18,7 @@ void modulo_show(void)
         {
             case '1':
                 fulano = cred_show();
+                gravar_show(fulano);
                 break;
             case '2':
                 read_show(fulano);
@@ -206,4 +207,31 @@ void print_dados_show(Show* sh)
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
     getchar();
+}
+
+void gravar_show(Show* sh) 
+{
+	FILE* fp_sh;
+	fp_sh = fopen("shows.dat", "ab");
+	if (fp_sh == NULL) {
+		error_screen_file_show();
+	}
+	fwrite(sh, sizeof(Show), 1, fp_sh);
+	fclose(fp_sh);
+    free(sh);
+}
+
+void error_screen_file_show(void) 
+{
+	system("cls || clear");
+    printf("#############################################################################\n");
+	printf("###                                                                       ###\n");
+	printf("###           = = = = = = = = = = = = = = = = = = = = = = = =             ###\n");
+	printf("###           = = = = = = = Ops!  Ocorreu um erro = = = = = =             ###\n");
+	printf("###           = = =  Não foi possível acessar o arquivo = = =             ###\n");
+	printf("###           = = = = com informações  sobre os shows = = = =             ###\n");
+	printf("###                                                                       ###\n");
+    printf("#############################################################################\n");
+	printf("\t\t>>> Tecle ENTER para continuar! <<<");
+	getchar();
 }

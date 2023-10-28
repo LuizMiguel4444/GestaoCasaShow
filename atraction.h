@@ -20,5 +20,5 @@ void atraction_inputs(Atraction*);
 void atraction_id_check(Atraction*);
 void print_dados_atraction(Atraction*);
 
-void gravar_atr(Atraction* atr);
+void gravar_atr(Atraction*);
 void error_screen_file_atr(void);
