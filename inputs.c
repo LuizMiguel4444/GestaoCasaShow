@@ -5,7 +5,8 @@
 #include "inputs.h"
 #include "util.h"
 
-void get_nome(char* nome, char* modulo) {
+void get_nome(char* nome, char* modulo)
+{
   do {
     printf("###              Nome d%s: ", modulo);
     scanf(" %50[^\n]", nome);
@@ -13,15 +14,17 @@ void get_nome(char* nome, char* modulo) {
   } while (!valNome(nome));
 }
 
-void get_cache(char* cache, char* modulo) {
+void get_cache(char* cache, char* modulo)
+{
   do {
-    printf("###              Valor d%s: ", modulo);
+    printf("###              Cachê d%s: ", modulo);
     scanf("%s", cache);
     limpa_buffer();
   } while (!ehdinheiro(cache));
 }
 
-void get_email(char* email, char* modulo) {
+void get_email(char* email, char* modulo)
+{
   do {
     printf("###              Email d%s: ", modulo);
     scanf("%[a-z0-9@.]", email);
@@ -29,7 +32,8 @@ void get_email(char* email, char* modulo) {
   } while (!val_email(email));
 }
 
-void get_num(char* num, char* modulo) {
+void get_num(char* num, char* modulo)
+{
   do{
     printf("###              Número d%s: ", modulo);
     scanf("%s", num);
@@ -37,7 +41,8 @@ void get_num(char* num, char* modulo) {
   } while (!validarFone(num));
 }
 
-void get_id(char* id, char* modulo) {
+void get_id(char* id, char* modulo)
+{
   int tam = 4;
   do {
     printf("###              Id d%s: ", modulo);
@@ -46,7 +51,8 @@ void get_id(char* id, char* modulo) {
   } while (!val_id(id, tam));
 }
 
-void get_quant(char* quant, char* modulo) {
+void get_quant(char* quant, char* modulo)
+{
   do {
     printf("###              Quant. de %s: ", modulo);
     scanf("%s", quant);
@@ -54,7 +60,8 @@ void get_quant(char* quant, char* modulo) {
   } while (!check_quant(quant));
 }
 
-void get_valor(char* valor, char* modulo) {
+void get_valor(char* valor, char* modulo)
+{
   do {
     printf("###              Valor %s: ", modulo);
     scanf("%s", valor);
@@ -62,7 +69,8 @@ void get_valor(char* valor, char* modulo) {
   } while (!ehdinheiro(valor));
 }
 
-void get_cpf(char* cpf) {
+void get_cpf(char* cpf)
+{
   do {
     printf("###              CPF do cliente (apenas números): ");
     scanf("%[0-9-.]", cpf);
@@ -70,7 +78,8 @@ void get_cpf(char* cpf) {
   } while (!validarCPF(cpf));
 }
 
-void get_data(char* data) {
+void get_data(char* data)
+{
   do {
     printf("###              Data (dd/mm/aaaa): ");
     scanf("%s", data);
@@ -78,7 +87,8 @@ void get_data(char* data) {
   } while (!valData(data));
 }
 
-void get_hour(char* hour) {
+void get_hour(char* hour)
+{
   do {
     printf("###              Hora (hh:mm): ");
     scanf("%s", hour);
