@@ -162,8 +162,13 @@ void client_inputs(Client* cli)
 
 void client_id_check(Client* cli)
 {
-    get_id(cli -> id, "o cliente (4 dígitos)");
-    if (strcmp(cli -> id, "0000") == 0) {
+    char *id_check;
+    do {
+        printf("###              Informe o Id do cliente (4 dígitos): ");
+        id_check = input();
+        limpa_buffer();
+    } while (!val_id(id_check, 4));
+    if (strcmp(id_check ,cli -> id) == 0) {
         print_dados_client(cli);
     }
     else {
@@ -188,13 +193,12 @@ void print_dados_client(Client* cli)
     printf("###                                                                         ###\n");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
-    printf("###              Informações do Id digitado (Id):                           ###\n");
+    printf("###              Informações do Id digitado (%s):                         ###\n", cli -> id);
     printf("###                                                                         ###\n");
     printf("###              Nome do cliente: %s\n", cli -> nome);
     printf("###              CPF do cliente: %s\n", cli -> cpf);
     printf("###              Email do cliente: %s\n", cli -> email);
     printf("###              Número do cliente: %s\n", cli -> num);
-    printf("###              Id do cliente: %s\n", cli -> id);
     printf("###                                                                         ###\n");
     printf("###############################################################################\n");
     printf("\n");

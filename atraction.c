@@ -162,8 +162,13 @@ void atraction_inputs(Atraction* atr)
 
 void atraction_id_check(Atraction* atr)
 {
-    get_id(atr -> id, "a atração (4 dígitos)");
-    if (strcmp(atr -> id, "1000") == 0) {
+    char *id_check;
+    do {
+        printf("###              Informe o Id da atração (4 dígitos): ");
+        id_check = input();
+        limpa_buffer();
+    } while (!val_id(id_check, 4));
+    if (strcmp(id_check ,atr -> id) == 0) {
         print_dados_atraction(atr);
     }
     else {
@@ -188,13 +193,12 @@ void print_dados_atraction(Atraction* atr)
     printf("###                                                                         ###\n");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
-    printf("###              Informações do Id digitado (Id):                           ###\n");
+    printf("###              Informações do Id digitado (%s):                         ###\n", atr -> id);
     printf("###                                                                         ###\n");
     printf("###              Nome da atração: %s\n", atr -> nome);
     printf("###              Valor do cachê da atração: %s\n", atr -> cache);
     printf("###              Email de contato da atração: %s\n", atr -> email);
     printf("###              Número de contato da atração: %s\n", atr -> num);
-    printf("###              Id da atração: %s\n", atr -> id);
     printf("###                                                                         ###\n");
     printf("###############################################################################\n");
     printf("\n");

@@ -145,8 +145,13 @@ void buy_inputs(Buy* b)
 
 void buy_id_check(Buy* b)
 {
-    get_id(b -> id_ven, "a venda (4 dígitos)");
-    if (strcmp(b -> id_ven, "1000") == 0) {
+    char *id_check;
+    do {
+        printf("###              Informe o Id da venda (4 dígitos): ");
+        id_check = input();
+        limpa_buffer();
+    } while (!val_id(id_check, 4));
+    if (strcmp(id_check ,b -> id_ven) == 0) {
         print_dados_buy(b);
     }
     else {
@@ -171,13 +176,12 @@ void print_dados_buy(Buy* b)
     printf("###                                                                         ###\n");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
-    printf("###              Informações do Id digitado (Id):                           ###\n");
+    printf("###              Informações do Id digitado (%s):                         ###\n", b -> id_ven);
     printf("###                                                                         ###\n");
     printf("###              Id do show: %s\n", b -> id_show);
     printf("###              Id do cliente: %s\n", b -> id_cli);
     printf("###              Quant. de ingressos: %s\n", b -> quant);
     printf("###              Valor final: %s\n", b -> valor);
-    printf("###              Id da venda: %s\n", b -> id_ven);
     printf("###                                                                         ###\n");
     printf("###############################################################################\n");
     printf("\n");

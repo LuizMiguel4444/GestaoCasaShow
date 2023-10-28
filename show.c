@@ -163,8 +163,13 @@ void show_inputs(Show* sh)
 
 void show_id_check(Show* sh)
 {
-    get_id(sh -> id, "o show (4 dígitos)");
-    if (strcmp(sh -> id, "1000") == 0) {
+    char *id_check;
+    do {
+        printf("###              Informe o Id do show (4 dígitos): ");
+        id_check = input();
+        limpa_buffer();
+    } while (!val_id(id_check, 4));
+    if (strcmp(id_check, sh -> id) == 0) {
         print_dados_show(sh);
     }
     else {
@@ -189,14 +194,13 @@ void print_dados_show(Show* sh)
     printf("###                                                                         ###\n");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
-    printf("###              Informações do Id digitado (Id):                           ###\n");
+    printf("###              Informações do Id digitado (%s):                         ###\n", sh -> id);
     printf("###                                                                         ###\n");
     printf("###              Atração: %s\n", sh -> atraction);
     printf("###              Data: %s\n", sh -> data);
     printf("###              Hora: %s\n", sh -> hour);
     printf("###              Quant. de ingressos: %s\n", sh -> quant);
     printf("###              Valor do ingresso: %s\n", sh -> valor);
-    printf("###              Id do show: %s\n", sh -> id);
     printf("###                                                                         ###\n");
     printf("###############################################################################\n");
     printf("\n");

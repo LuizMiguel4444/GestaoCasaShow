@@ -85,4 +85,3 @@ void get_hour(char* hour) {
     limpa_buffer();
   } while (!val_hour(hour));
 }
-
