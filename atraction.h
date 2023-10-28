@@ -18,4 +18,4 @@ void upd_atraction(Atraction*);
 void del_atraction(Atraction*);
 void atraction_inputs(Atraction*);
 void atraction_id_check(Atraction*);
-void print_dados_atraction(const Atraction*);
+void print_dados_atraction(Atraction*);

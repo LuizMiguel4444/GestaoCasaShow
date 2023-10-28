@@ -183,6 +183,7 @@ void report_buy(void)
     printf("###              Id do cliente relacionado à venda: ****                    ###\n");
     printf("###              Quantidade de ingressos da venda: **                       ###\n");
     printf("###              Valor final da venda: ***.**                               ###\n");
+    printf("###              Id da venda: ****                                          ###\n");
     printf("###                                                                         ###\n");
     printf("###############################################################################\n");
     printf("\n");

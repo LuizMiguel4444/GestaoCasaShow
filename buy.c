@@ -3,6 +3,7 @@
 #include <locale.h>
 #include <string.h>
 #include "buy.h"
+#include "inputs.h"
 #include "util.h"
 
 void modulo_buy(void)
@@ -82,7 +83,7 @@ Buy *cred_buy(void)
     printf("###              = = = = = = = = Cadastrar Venda = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    buy_val(b);
+    buy_inputs(b);
     printf("###                                                                         ###\n");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -96,7 +97,7 @@ Buy *cred_buy(void)
     return b;
 }
 
-void read_buy(const Buy* b)
+void read_buy(Buy* b)
 {
     system("clear || cls");
     printf("###############################################################################\n");
@@ -132,43 +133,20 @@ void upd_buy(Buy* b)
     buy_id_check(b);
 }
 
-void buy_val(Buy* b)
+void buy_inputs(Buy* b)
 {
-    int tam = 4;
-    do {
-        printf("###              Id do show (4 dígitos): ");
-        scanf("%s", b -> id_show);
-        limpa_buffer();
-    } while (!val_id(b -> id_show, tam));
-    do {
-        printf("###              Id do cliente (4 dígitos): ");
-        scanf("%s", b -> id_cli);
-        limpa_buffer();
-    } while (!val_id(b -> id_cli, tam));
-    do {
-        printf("###              Quant. de ingressos: ");
-        scanf("%s", b -> quant);
-        limpa_buffer();
-    } while (!ehdinheiro(b -> quant));
-    do {
-        printf("###              Valor final: ");
-        scanf("%s", b -> valor);
-        limpa_buffer();
-    } while (!ehdinheiro(b -> valor));
+    get_id(b -> id_show, "o show (4 dígitos)");
+    get_id(b -> id_cli, "o cliente (4 dígitos)");
+    get_quant(b -> quant, "ingressos");
+    get_valor(b -> valor, "final");
+    get_id(b -> id_ven, "a venda (4 dígitos)");
     b -> status = 'f';
 }
 
-void buy_id_check(const Buy* b)
+void buy_id_check(Buy* b)
 {
-    char *id;
-    id = (char*) malloc(5*sizeof(char));
-    int tam = 4;
-    do {
-        printf("###              Informe o Id da venda (4 dígitos): ");
-        scanf("%s", id);
-        limpa_buffer();
-    } while (!val_id(id, tam));
-    if (strcmp(id, "1000") == 0) {
+    get_id(b -> id_ven, "a venda (4 dígitos)");
+    if (strcmp(b -> id_ven, "1000") == 0) {
         print_dados_buy(b);
     }
     else {
@@ -182,7 +160,7 @@ void buy_id_check(const Buy* b)
     }
 }
 
-void print_dados_buy(const Buy* b)
+void print_dados_buy(Buy* b)
 {
     system("clear || cls");
     printf("###############################################################################\n");
@@ -199,6 +177,7 @@ void print_dados_buy(const Buy* b)
     printf("###              Id do cliente: %s\n", b -> id_cli);
     printf("###              Quant. de ingressos: %s\n", b -> quant);
     printf("###              Valor final: %s\n", b -> valor);
+    printf("###              Id da venda: %s\n", b -> id_ven);
     printf("###                                                                         ###\n");
     printf("###############################################################################\n");
     printf("\n");

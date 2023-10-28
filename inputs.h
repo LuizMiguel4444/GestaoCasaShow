@@ -3,3 +3,8 @@ void get_cache(char* cache, char* modulo);
 void get_email(char* email, char* modulo);
 void get_num(char* num, char* modulo);
 void get_id(char* id, char* modulo);
+void get_quant(char* quant, char* modulo);
+void get_valor(char* valor, char* modulo);
+void get_cpf(char* cpf);
+void get_data(char* data);
+void get_hour(char* hour);

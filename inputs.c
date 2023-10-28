@@ -45,3 +45,44 @@ void get_id(char* id, char* modulo) {
     limpa_buffer();
   } while (!val_id(id, tam));
 }
+
+void get_quant(char* quant, char* modulo) {
+  do {
+    printf("###              Quant. de %s: ", modulo);
+    scanf("%s", quant);
+    limpa_buffer();
+  } while (!ehdinheiro(quant));
+}
+
+void get_valor(char* valor, char* modulo) {
+  do {
+    printf("###              Valor %s: ", modulo);
+    scanf("%s", valor);
+    limpa_buffer();
+  } while (!ehdinheiro(valor));
+}
+
+void get_cpf(char* cpf) {
+  do {
+    printf("###              CPF do cliente (apenas números): ");
+    scanf("%[0-9-.]", cpf);
+    limpa_buffer();
+  } while (!validarCPF(cpf));
+}
+
+void get_data(char* data) {
+  do {
+    printf("###              Data (dd/mm/aaaa): ");
+    scanf("%s", data);
+    limpa_buffer();
+  } while (!valData(data));
+}
+
+void get_hour(char* hour) {
+  do {
+    printf("###              Hora (hh:mm): ");
+    scanf("%s", hour);
+    limpa_buffer();
+  } while (!val_hour(hour));
+}
+

@@ -3,6 +3,7 @@
 #include <locale.h>
 #include <string.h>
 #include "client.h"
+#include "inputs.h"
 #include "util.h"
 
 void modulo_client(void)
@@ -86,7 +87,7 @@ Client *cred_client(void)
     printf("###              = = = = = = =  Cadastrar Cliente  = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    client_val(cli);
+    client_inputs(cli);
     printf("###                                                                         ###\n");
     printf("###############################################################################\n");
     printf("\n");
@@ -95,7 +96,7 @@ Client *cred_client(void)
     return cli;
 }
 
-void read_client(const Client* cli)
+void read_client(Client* cli)
 {
     system("clear || cls");
     printf("###############################################################################\n");
@@ -149,48 +150,20 @@ void del_client(Client* cli)
     client_id_check(cli);
 }
 
-void client_val(Client* cli)
+void client_inputs(Client* cli)
 {
-    int tam = 4;
-    do {
-        printf("###              Nome do cliente: ");
-        scanf(" %50[^\n]", cli -> nome);
-        limpa_buffer();
-    } while (!valNome(cli  -> nome));
-    do {
-        printf("###              CPF do cliente (apenas números): ");
-        scanf("%[0-9-.]", cli -> cpf);
-        limpa_buffer();
-    } while (!validarCPF(cli -> cpf));
-    do {
-        printf("###              Email do cliente: ");
-        scanf("%[a-z0-9@.]", cli -> email);
-        limpa_buffer();
-    } while (!val_email(cli -> email));
-    do {
-        printf("###              Número do cliente: ");
-        scanf("%s", cli -> num);
-        limpa_buffer();
-    } while (!validarFone(cli -> num));
-    do {
-        printf("###              Id do cliente (4 dígitos): ");
-        scanf("%s", cli -> id);
-        limpa_buffer();
-    } while (!val_id(cli -> id, tam));
+    get_nome(cli -> nome, "o cliente");
+    get_cpf(cli -> cpf);
+    get_email(cli -> email, "o cliente");
+    get_num(cli -> num, "o cliente");
+    get_id(cli -> id, "o cliente (4 dígitos)");
     cli -> status = 'c';
 }
 
-void client_id_check(const Client* cli)
+void client_id_check(Client* cli)
 {
-    char *id;
-    id = (char*) malloc(5*sizeof(char));
-    int tam = 4;
-    do {
-        printf("###              Informe o Id do cliente: ");
-        scanf("%s", id);
-        limpa_buffer();
-    } while (!val_id(id, tam));
-    if (strcmp(id, "0000") == 0) {
+    get_id(cli -> id, "o cliente (4 dígitos)");
+    if (strcmp(cli -> id, "0000") == 0) {
         print_dados_client(cli);
     }
     else {
@@ -204,7 +177,7 @@ void client_id_check(const Client* cli)
     }
 }
 
-void print_dados_client(const Client* cli)
+void print_dados_client(Client* cli)
 {
     system("clear || cls");
     printf("###############################################################################\n");

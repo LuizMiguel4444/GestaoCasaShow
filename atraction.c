@@ -162,8 +162,6 @@ void atraction_inputs(Atraction* atr)
 
 void atraction_id_check(Atraction* atr)
 {
-    /*char *id;
-    id = (char*) malloc(5*sizeof(char));*/
     get_id(atr -> id, "a atração (4 dígitos)");
     if (strcmp(atr -> id, "1000") == 0) {
         print_dados_atraction(atr);
@@ -179,7 +177,7 @@ void atraction_id_check(Atraction* atr)
     }
 }
 
-void print_dados_atraction(const Atraction* atr)
+void print_dados_atraction(Atraction* atr)
 {
     system("clear || cls");
     printf("###############################################################################\n");

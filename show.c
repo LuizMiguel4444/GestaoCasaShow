@@ -3,6 +3,7 @@
 #include <locale.h>
 #include <string.h>
 #include "show.h"
+#include "inputs.h"
 #include "util.h"
 
 void modulo_show(void)
@@ -66,7 +67,7 @@ void show_menu_screen(void)
     printf("###              4. Excluir um show do sistema                              ###\n");
     printf("###              0. Voltar ao Menu Principal                                ###\n");
     printf("###                                                                         ###\n");
-    printf("###              Escolha a opção que deseja:");
+    printf("###              Escolha a opção que deseja: ");
 }
 
 Show *cred_show(void)
@@ -86,7 +87,7 @@ Show *cred_show(void)
     printf("###              = = = = = = = = Cadastrar  Show = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    show_val(sh);
+    show_inputs(sh);
     printf("###                                                                         ###\n");
     printf("###############################################################################\n");
     printf("\n");
@@ -95,7 +96,7 @@ Show *cred_show(void)
     return sh;
 }
 
-void read_show(const Show* sh)
+void read_show(Show* sh)
 {
     system("clear || cls");
     printf("###############################################################################\n");
@@ -149,53 +150,21 @@ void del_show(Show* sh)
     show_id_check(sh);
 }
 
-void show_val(Show* sh)
+void show_inputs(Show* sh)
 {
-    int tam = 4;
-    do {
-        printf("###              Atração: ");
-        scanf("%s", sh -> atraction);
-        limpa_buffer();
-    } while (!valNome(sh -> atraction));
-    do {
-        printf("###              Data (dd/mm/aaaa): ");
-        scanf("%s", sh -> data);
-        limpa_buffer();
-    } while (!valData(sh -> data));
-    do {
-        printf("###              Hora (hh:mm): ");
-        scanf("%s", sh -> hour);
-        limpa_buffer();
-    } while (!val_hour(sh -> hour));
-    do {
-        printf("###              Quant. de ingressos (apenas numeros): ");
-        scanf("%s", sh -> quant);
-        limpa_buffer();
-    } while (!ehdinheiro(sh -> quant));
-    do {
-        printf("###              Valor do ingresso: ");
-        scanf("%s", sh -> valor);
-        limpa_buffer();
-    } while (!ehdinheiro(sh -> valor));
-    do {
-        printf("###              Id do show (4 dígitos): ");
-        scanf("%s", sh -> id);
-        limpa_buffer();
-    } while (!val_id(sh -> id, tam));
+    get_nome(sh -> atraction, "a atração");
+    get_data(sh -> data);
+    get_hour(sh -> hour);
+    get_quant(sh -> quant, "ingressos");
+    get_valor(sh -> valor, "do ingresso");
+    get_id(sh -> id, "o show (4 dígitos)");
     sh -> status = 'c';
 }
 
-void show_id_check(const Show* sh)
+void show_id_check(Show* sh)
 {
-    char *id;
-    id = (char*) malloc(5*sizeof(char));
-    int tam = 4;
-    do {
-        printf("###              Informe o Id do show (4 dígitos): ");
-        scanf("%s", id);
-        limpa_buffer();
-    } while (!val_id(id, tam));
-    if (strcmp(id, "1000") == 0) {
+    get_id(sh -> id, "o show (4 dígitos)");
+    if (strcmp(sh -> id, "1000") == 0) {
         print_dados_show(sh);
     }
     else {
@@ -209,7 +178,7 @@ void show_id_check(const Show* sh)
     }
 }
 
-void print_dados_show(const Show* sh)
+void print_dados_show(Show* sh)
 {
     system("clear || cls");
     printf("###############################################################################\n");
