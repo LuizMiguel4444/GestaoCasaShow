@@ -362,10 +362,13 @@ int val_hour(char hour[])
       if ((!ehHora(hour[i])) || (hour[2] != ':')) {
         return 0;
       }
-      if (((hour[0] > '2')) || ((hour[1] > '3')) || (hour[3] > '5')) {
+      if (((hour[0] > '2')) || (hour[3] > '5')) {
         return 0;
       }
       if (((hour[0] < '0')) || ((hour[1] < '0')) || (hour[3] < '0') || (hour[4] < '0')) {
+        return 0;
+      }
+      if (((hour[0] == '2')) && ((hour[1] > '3'))) {
         return 0;
       }
     }
@@ -376,16 +379,22 @@ int val_hour(char hour[])
       if ((!ehHora(hour[i]) || (hour[i]) == ':')) {
         return 0;
       }
-      if (((hour[0] > '2')) || ((hour[1] > '3')) || (hour[2] > '5')) {
+      if (((hour[0] > '2')) || (hour[2] > '5')) {
         return 0;
       }
       if (((hour[0] < '0')) || ((hour[1] < '0')) || (hour[2] < '0') || (hour[3] < '0')) {
         return 0;
       }
+      if (((hour[0] == '2')) && ((hour[1] > '3'))) {
+        return 0;
+      }
     }
+    // hour[4] = hour[3];
+    // hour[3] = hour[2];
+    // hour[2] = ':';
   }
 
-  else {
+  else if (tam != 4 && tam != 5) {
     return 0;
   }
 
