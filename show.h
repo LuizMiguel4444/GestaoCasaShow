@@ -14,12 +14,13 @@ void modulo_show(void);
 char show_menu(void);
 void show_menu_screen(void);
 Show *cred_show(void);
-void read_show(Show*);
+char *screen_read_show(void);
 void upd_show(Show*);
 void del_show(Show*);
 void show_inputs(Show*);
-void show_id_check(Show*);
+Show *procura_show(char*);
 void print_dados_show(Show*);
 
 void gravar_show(Show*);
 void error_screen_file_show(void);
+void pesquisa_show(void);

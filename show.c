@@ -21,7 +21,7 @@ void modulo_show(void)
                 gravar_show(fulano);
                 break;
             case '2':
-                read_show(fulano);
+                pesquisa_show();
                 break;
             case '3':
                 upd_show(fulano);
@@ -97,8 +97,10 @@ Show *cred_show(void)
     return sh;
 }
 
-void read_show(Show* sh)
+char *screen_read_show(void)
 {
+    char *id;
+    id = (char *)malloc(5 * sizeof(char));
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -109,10 +111,16 @@ void read_show(Show* sh)
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-    printf("###              = = = = = = = = Pesquisar  Show = = = = = = = =            ###\n");
+    printf("###              = = = = = = =  Pesquisar Atração  = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    show_id_check(sh);
+    do {
+        printf("###              Informe o Id do show (4 dígitos): ");
+        scanf("%s", id);
+        limpa_buffer();
+    } while (!val_id(id, 4));
+    printf("###                                                                         ###\n");
+    return id;
 }
 
 void upd_show(Show* sh)
@@ -130,7 +138,7 @@ void upd_show(Show* sh)
     printf("###              = = = = = = = =  Editar Show  = = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    show_id_check(sh);
+    // show_id_check(sh);
 }
 
 void del_show(Show* sh)
@@ -148,7 +156,7 @@ void del_show(Show* sh)
     printf("###              = = = = = = = = Excluir  Show = = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    show_id_check(sh);
+    // show_id_check(sh);
 }
 
 void show_inputs(Show* sh)
@@ -156,54 +164,59 @@ void show_inputs(Show* sh)
     get_nome(sh -> atraction, "a atração");
     get_data(sh -> data);
     get_hour(sh -> hour);
-    get_quant(sh -> quant, "ingressos");
+    get_quant_cad(sh -> quant, "ingressos");
     get_valor(sh -> valor, "do ingresso (com casa decimal)");
     get_id(sh -> id, "o show (4 dígitos)");
     sh -> status = 'c';
 }
 
-void show_id_check(Show* sh)
+Show *procura_show(char *id)
 {
-    char *id_check;
-    do {
-        printf("###              Informe o Id do show (4 dígitos): ");
-        id_check = input();
-        limpa_buffer();
-    } while (!val_id(id_check, 4));
-    if (strcmp(id_check, sh -> id) == 0) {
-        print_dados_show(sh);
+    FILE *fp;
+    Show *sh;
+
+    sh = (Show *)malloc(sizeof(Show));
+    fp = fopen("shows.dat", "rb");
+    if (fp == NULL)
+    {
+        error_screen_file_show();
     }
-    else {
-        printf("###                                                                         ###\n");
-        printf("###              Id do show não encontrado!                                 ###\n");
-        printf("###                                                                         ###\n");
-        printf("###############################################################################\n");
-        printf("\n");
-        printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-        getchar();
+    while (fread(sh, sizeof(Show), 1, fp))
+    {
+        if ((strcmp(sh->id, id) == 0) && (sh->status == 'c'))
+        {
+            fclose(fp);
+            return sh;
+        }
     }
+    fclose(fp);
+    return NULL;
 }
 
 void print_dados_show(Show* sh)
 {
-    system("clear || cls");
-    printf("###############################################################################\n");
-    printf("###                                                                         ###\n");
-    printf("###            ===================================================          ###\n");
-    printf("###            =============   Gestão Casa Shows   ===============          ###\n");
-    printf("###            ===================================================          ###\n");
-    printf("###                                                                         ###\n");
-    printf("###############################################################################\n");
-    printf("###                                                                         ###\n");
-    printf("###              Informações do Id digitado (%s):                         ###\n", sh -> id);
-    printf("###                                                                         ###\n");
-    printf("###              Atração: %s\n", sh -> atraction);
-    printf("###              Data: %s\n", sh -> data);
-    printf("###              Hora: %s\n", sh -> hour);
-    printf("###              Quant. de ingressos: %s\n", sh -> quant);
-    printf("###              Valor do ingresso: %s\n", sh -> valor);
-    printf("###                                                                         ###\n");
-    printf("###############################################################################\n");
+    if (sh == NULL) {
+        screen_null_id_error("do show");
+    } else {
+        system("clear || cls");
+        printf("###############################################################################\n");
+        printf("###                                                                         ###\n");
+        printf("###            ===================================================          ###\n");
+        printf("###            =============   Gestão Casa Shows   ===============          ###\n");
+        printf("###            ===================================================          ###\n");
+        printf("###                                                                         ###\n");
+        printf("###############################################################################\n");
+        printf("###                                                                         ###\n");
+        printf("###              Informações do Id digitado (%s):                         ###\n", sh -> id);
+        printf("###                                                                         ###\n");
+        printf("###              Atração: %s\n", sh -> atraction);
+        printf("###              Data: %s\n", sh -> data);
+        printf("###              Hora: %s\n", sh -> hour);
+        printf("###              Quant. de ingressos: %s\n", sh -> quant);
+        printf("###              Valor do ingresso: %s\n", sh -> valor);
+        printf("###                                                                         ###\n");
+        printf("###############################################################################\n");
+    }
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
     getchar();
@@ -234,4 +247,16 @@ void error_screen_file_show(void)
     printf("#############################################################################\n");
 	printf("\t\t>>> Tecle ENTER para continuar! <<<");
 	getchar();
+}
+
+void pesquisa_show(void)
+{
+    Show *sh;
+    char *id;
+
+    id = screen_read_show();
+    sh = procura_show(id);
+    print_dados_show(sh);
+    free(sh);
+    free(id);
 }

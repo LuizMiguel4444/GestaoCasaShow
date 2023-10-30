@@ -50,13 +50,22 @@ void get_id(char* id, char* modulo)
   } while (!val_id(id, 4));
 }
 
-void get_quant(char* quant, char* modulo)
+void get_quant_cad(char* quant, char* modulo)
 {
   do {
     printf("###              Quant. de %s: ", modulo);
     scanf("%s", quant);
     limpa_buffer();
-  } while (!check_quant(quant));
+  } while (!check_quant_cad(quant));
+}
+
+void get_quant_venda(char* quant, char* modulo)
+{
+  do {
+    printf("###              Quant. de %s: ", modulo);
+    scanf("%s", quant);
+    limpa_buffer();
+  } while (!check_quant_venda(quant));
 }
 
 void get_valor(char* valor, char* modulo)

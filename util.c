@@ -307,9 +307,22 @@ float ehdinheiro(char *c)
 /// Retorna 1 se string recebido corresponder a apenas digitos com tamanho 
 /// maior do que '1' e valor diferente de '0' ou retorna 0 caso contrário
 ///
-int check_quant(char *c) {
+int check_quant_cad(char *c) {
   for (int i = 0; c[i] != '\0'; i++) {
     if (!ehDigito(c[i]) || strlen(c) < 2 || c[0] == '0') {
+      return 0;
+    }
+  }
+  return 1;  
+} // AUTOR: LUIZ MIGUEL /// GIT: https://github.com/LuizMiguel4444
+
+///////////////////////////////////////////////////////////////////////////////
+/// Retorna 1 se string recebido corresponder a apenas digitos com 
+/// valor diferente de '0' ou retorna 0 caso contrário
+///
+int check_quant_venda(char *c) {
+  for (int i = 0; c[i] != '\0'; i++) {
+    if (!ehDigito(c[i]) || strlen(c) < 1 || c[0] == '0') {
       return 0;
     }
   }

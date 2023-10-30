@@ -13,12 +13,13 @@ void modulo_client(void);
 char client_menu(void);
 void client_menu_screen(void);
 Client *cred_client(void);
-void read_client(Client*);
+char *screen_read_client(void);
 void upd_client(Client*);
 void del_client(Client*);
 void client_inputs(Client*);
-void client_id_check(Client*);
+Client *procura_client(char*);
 void print_dados_client(Client*);
 
 void gravar_client(Client*);
 void error_screen_file_cli(void);
+void pesquisa_cli(void);

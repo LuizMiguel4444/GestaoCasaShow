@@ -146,7 +146,7 @@ void buy_inputs(Buy* b)
 {
     get_id(b -> id_show, "o show (4 dígitos)");
     get_id(b -> id_cli, "o cliente (4 dígitos)");
-    get_quant(b -> quant, "ingressos");
+    get_quant_venda(b -> quant, "ingressos");
     get_valor(b -> valor, "final (com casa decimal)");
     get_id(b -> id_ven, "a venda (4 dígitos)");
     b -> status = 'f';
