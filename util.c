@@ -144,7 +144,7 @@ int ehData(int dd, int mm, int aa)
 /// Retorna 1 se string recebido corresponder a uma data válida 
 /// (contagem de dia, mês, ano) ou retorna 0 caso contrário
 ///
-int val_data_aux(char data[])
+int data_validacao(char data[])
 {
   int dia, mes, ano;
   for (int i = 0; i < strlen(data); i++) {
@@ -181,18 +181,39 @@ int val_data_aux(char data[])
 } // MODIFICADO DE: FLAVIUS GORGÔNIO E ANTONIO MANIERO /// GIT: https://github.com/flaviusgorgonio E GIT: https://github.com/maniero
 
 ///////////////////////////////////////////////////////////////////////////////
+/// Recebe uma data sem barras (ddmmaaaa) e retorna essa data
+/// com barras (dd/mm/aaaa)
+///
+char* corrige_data(char *data)
+{
+  data[8] = data[7];
+  data[9] = data[8];
+  data[8] = data[6];
+  data[7] = data[5];
+  data[6] = data[4];
+  data[4] = data[3];
+  data[3] = data[2];
+  data[2] = '/';
+  data[5] = '/';
+  data[10] = '\0';
+  return data;
+} // AUTOR: LUIZ MIGUEL /// GIT: https://github.com/LuizMiguel4444
+
+///////////////////////////////////////////////////////////////////////////////
 /// Retorna 1 se string recebido corresponder a uma data válida (apenas dígitos
 /// e no formato: ddmmaaaa) ou retorna 0 caso contrário
 ///
 int valData(char *data)
 {
+  int check;
+  char* new_data;
   if (strlen(data) == 10) {
     for (int i = 0; i < strlen(data); i++) {
       if (!ehHora(data[i]) || (data[2] != '/') || (data[5] != '/')) {
         return 0;
       } 
     }
-    val_data_aux(data);
+    check = data_validacao(data);
   }
   else if (strlen(data) == 8) {
     for (int i = 0; i < strlen(data); i++) {
@@ -200,21 +221,17 @@ int valData(char *data)
         return 0;
       }
     }
-    data[8] = data[7];
-    data[9] = data[8];
-    data[8] = data[6];
-    data[7] = data[5];
-    data[6] = data[4];
-    data[4] = data[3];
-    data[3] = data[2];
-    data[2] = '/';
-    data[5] = '/';
-    val_data_aux(data);
+    new_data = corrige_data(data);
+    check = data_validacao(new_data);
   }
   else if (strlen(data) != 8 && strlen(data) != 10) {
     return 0;
   }
-  return 1;
+  if (check != 1) {
+    return 0;
+  } else {
+    return 1;
+  }
 }  // MODIFICADO DE: FLAVIUS GORGÔNIO E ANTONIO MANIERO /// GIT: https://github.com/flaviusgorgonio E GIT: https://github.com/maniero
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -378,7 +395,7 @@ int ehHora(char c)
 /// Retorna 1 se string recebido corresponder a uma hora válida 
 /// (a[1] < 2, a[2] < 4 ...) ou retorna 0 caso contrário
 ///
-int val_hour_aux(char hour[]) {
+int hour_validacao(char hour[]) {
   for (int i = 0; i < strlen(hour); i++) {
     if (((hour[0] > '2')) || (hour[3] > '5')) {
       return 0;
@@ -394,37 +411,51 @@ int val_hour_aux(char hour[]) {
 } // AUTOR: LUIZ MIGUEL /// GIT: https://github.com/LuizMiguel4444
 
 ///////////////////////////////////////////////////////////////////////////////
+/// Recebe uma hora sem dois pontos (hhmm) e retorna essa hora
+/// com dois pontos (hh:mm)
+///
+char* corrige_hour(char hour[])
+{
+  hour[4] = hour[3];
+  hour[3] = hour[2];
+  hour[2] = ':';
+  hour[5] = '\0';
+  return hour;
+}
+
+///////////////////////////////////////////////////////////////////////////////
 /// Retorna 1 se string recebido corresponder a uma hora válida 
 /// (hh:mm) ou retorna 0 caso contrário
 ///
 int val_hour(char hour[])
 {
+  int check;
+  char* new_hour;
   if (strlen(hour) == 5) {
     for (int i = 0; i < strlen(hour); i++) {
       if ((!ehHora(hour[i])) || (hour[0] == ':') || (hour[1] == ':') || (hour[3] == ':') || (hour[4] == ':')) {
         return 0;
       }
     }
-    val_hour_aux(hour);
+    check = hour_validacao(hour);
   }
-
   else if (strlen(hour) == 4) {
     for (int i = 0; i < strlen(hour); i++) {
       if ((!ehHora(hour[i]) || (hour[i]) == ':')) {
           return 0;
       }
     }
-    hour[4] = hour[3];
-    hour[3] = hour[2];
-    hour[2] = ':';
-    val_hour_aux(hour);
+    new_hour = corrige_hour(hour);
+    check = hour_validacao(new_hour);
   }
-
   else if (strlen(hour) != 4 && strlen(hour) != 5) {
     return 0;
   }
-
-  return 1;
+  if (check != 1) {
+    return 0;
+  } else {
+    return 1;
+  }
 } // AUTOR: LUIZ MIGUEL /// GIT: https://github.com/LuizMiguel4444
 
 ///////////////////////////////////////////////////////////////////////////////
