@@ -3,7 +3,7 @@
 #include <locale.h>
 #include <string.h>
 #include "client.h"
-#include "inputs.h"
+#include "aux.h"
 #include "util.h"
 
 void modulo_client(void)

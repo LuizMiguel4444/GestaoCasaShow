@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include "inputs.h"
+#include "aux.h"
 #include "util.h"
 
 void get_nome(char* nome, char* modulo)
@@ -43,12 +43,11 @@ void get_num(char* num, char* modulo)
 
 void get_id(char* id, char* modulo)
 {
-  int tam = 4;
   do {
     printf("###              Id d%s: ", modulo);
     scanf("%s", id);
     limpa_buffer();
-  } while (!val_id(id, tam));
+  } while (!val_id(id, 4));
 }
 
 void get_quant(char* quant, char* modulo)
@@ -94,4 +93,15 @@ void get_hour(char* hour)
     scanf("%s", hour);
     limpa_buffer();
   } while (!val_hour(hour));
+}
+
+void screen_null_id_error(char* modulo)
+{
+  printf("###############################################################################\n");
+  printf("###                                                                         ###\n");
+  printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
+  printf("###                       Id %s não encontrado\n", modulo);
+  printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
+  printf("###                                                                         ###\n");
+  printf("###############################################################################\n");
 }

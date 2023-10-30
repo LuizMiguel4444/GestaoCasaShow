@@ -3,7 +3,7 @@
 #include <locale.h>
 #include <string.h>
 #include "atraction.h"
-#include "inputs.h"
+#include "aux.h"
 #include "util.h"
 
 void modulo_atraction(void)
@@ -21,7 +21,7 @@ void modulo_atraction(void)
             gravar_atr(fulano);
             break;
         case '2':
-            read_atraction(fulano);
+            pesquisa_atr();
             break;
         case '3':
             upd_atraction(fulano);
@@ -98,8 +98,10 @@ Atraction *cred_atraction(void)
     return atr;
 }
 
-void read_atraction(Atraction *atr)
+char *screen_read_atraction(void)
 {
+    char *id;
+    id = (char *)malloc(5 * sizeof(char));
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -113,7 +115,13 @@ void read_atraction(Atraction *atr)
     printf("###              = = = = = = =  Pesquisar Atração  = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    atraction_id_check(atr);
+    do {
+        printf("###              Informe o Id da atração (4 dígitos): ");
+        scanf("%s", id);
+        limpa_buffer();
+    } while (!val_id(id, 4));
+    printf("###                                                                         ###\n");
+    return id;
 }
 
 void upd_atraction(Atraction *atr)
@@ -131,7 +139,7 @@ void upd_atraction(Atraction *atr)
     printf("###              = = = = = = = = Editar  Atração = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    atraction_id_check(atr);
+    // atraction_id_check(atr);
 }
 
 void del_atraction(Atraction *atr)
@@ -149,7 +157,7 @@ void del_atraction(Atraction *atr)
     printf("###              = = = = = = =  Excluir Atração  = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    atraction_id_check(atr);
+    // atraction_id_check(atr);
 }
 
 void atraction_inputs(Atraction *atr)
@@ -162,75 +170,96 @@ void atraction_inputs(Atraction *atr)
     atr->status = 'c';
 }
 
-void atraction_id_check(Atraction *atr)
+Atraction *procura_atraction(char *id)
 {
-    char *id_check;
-    do {
-        printf("###              Informe o Id da atração (4 dígitos): ");
-        id_check = input();
-        limpa_buffer();
-    } while (!val_id(id_check, 4));
-    if (strcmp(id_check, atr -> id) == 0) {
-        print_dados_atraction(atr);
+    FILE *fp;
+    Atraction *atr;
+
+    atr = (Atraction *)malloc(sizeof(Atraction));
+    fp = fopen("atractions.dat", "rb");
+    if (fp == NULL)
+    {
+        error_screen_file_atr();
     }
-    else {
-        printf("###                                                                         ###\n");
-        printf("###              Id da atração não encontrado!                              ###\n");
-        printf("###                                                                         ###\n");
-        printf("###############################################################################\n");
-        printf("\n");
-        printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-        getchar();
+    while (fread(atr, sizeof(Atraction), 1, fp))
+    {
+        if ((strcmp(atr->id, id) == 0) && (atr->status == 'c'))
+        {
+            fclose(fp);
+            return atr;
+        }
     }
+    fclose(fp);
+    return NULL;
 }
 
 void print_dados_atraction(Atraction *atr)
 {
-    system("clear || cls");
-    printf("###############################################################################\n");
-    printf("###                                                                         ###\n");
-    printf("###            ===================================================          ###\n");
-    printf("###            =============   Gestão Casa Shows   ===============          ###\n");
-    printf("###            ===================================================          ###\n");
-    printf("###                                                                         ###\n");
-    printf("###############################################################################\n");
-    printf("###                                                                         ###\n");
-    printf("###              Informações do Id digitado (%s):                         ###\n", atr->id);
-    printf("###                                                                         ###\n");
-    printf("###              Nome da atração: %s\n", atr->nome);
-    printf("###              Valor do cachê da atração: %s\n", atr->cache);
-    printf("###              Email de contato da atração: %s\n", atr->email);
-    printf("###              Número de contato da atração: %s\n", atr->num);
-    printf("###                                                                         ###\n");
-    printf("###############################################################################\n");
+    if (atr == NULL)
+    {
+        screen_null_id_error("da atração");
+    }
+    else
+    {
+        system("clear || cls");
+        printf("###############################################################################\n");
+        printf("###                                                                         ###\n");
+        printf("###            ===================================================          ###\n");
+        printf("###            =============   Gestão Casa Shows   ===============          ###\n");
+        printf("###            ===================================================          ###\n");
+        printf("###                                                                         ###\n");
+        printf("###############################################################################\n");
+        printf("###                                                                         ###\n");
+        printf("###              Informações do Id digitado (%s):                         ###\n", atr->id);
+        printf("###                                                                         ###\n");
+        printf("###              Nome da atração: %s\n", atr->nome);
+        printf("###              Valor do cachê da atração: %s\n", atr->cache);
+        printf("###              Email de contato da atração: %s\n", atr->email);
+        printf("###              Número de contato da atração: %s\n", atr->num);
+        printf("###                                                                         ###\n");
+        printf("###############################################################################\n");
+    }
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
     getchar();
 }
 
-void gravar_atr(Atraction* atr) 
+void gravar_atr(Atraction *atr)
 {
-	FILE* fp_atr;
-	fp_atr = fopen("atractions.dat", "ab");
-	if (fp_atr == NULL) {
-		error_screen_file_atr();
-	}
-	fwrite(atr, sizeof(Atraction), 1, fp_atr);
-	fclose(fp_atr);
+    FILE *fp_atr;
+    fp_atr = fopen("atractions.dat", "ab");
+    if (fp_atr == NULL)
+    {
+        error_screen_file_atr();
+    }
+    fwrite(atr, sizeof(Atraction), 1, fp_atr);
+    fclose(fp_atr);
     free(atr);
 }
 
-void error_screen_file_atr(void) 
+void error_screen_file_atr(void)
 {
-	system("cls || clear");
+    system("cls || clear");
     printf("#############################################################################\n");
-	printf("###                                                                       ###\n");
-	printf("###           = = = = = = = = = = = = = = = = = = = = = = = =             ###\n");
-	printf("###           = = = = = = = Ops!  Ocorreu um erro = = = = = =             ###\n");
-	printf("###           = = =  Não foi possível acessar o arquivo = = =             ###\n");
-	printf("###           = = =  com informações sobre as atrações  = = =             ###\n");
-	printf("###                                                                       ###\n");
+    printf("###                                                                       ###\n");
+    printf("###           = = = = = = = = = = = = = = = = = = = = = = = =             ###\n");
+    printf("###           = = = = = = = Ops!  Ocorreu um erro = = = = = =             ###\n");
+    printf("###           = = =  Não foi possível acessar o arquivo = = =             ###\n");
+    printf("###           = = =  com informações sobre as atrações  = = =             ###\n");
+    printf("###                                                                       ###\n");
     printf("#############################################################################\n");
-	printf("\t\t>>> Tecle ENTER para continuar! <<<");
-	getchar();
+    printf("\t\t>>> Tecle ENTER para continuar! <<<");
+    getchar();
+}
+
+void pesquisa_atr(void)
+{
+    Atraction *atr;
+    char *id;
+
+    id = screen_read_atraction();
+    atr = procura_atraction(id);
+    print_dados_atraction(atr);
+    free(atr);
+    free(id);
 }

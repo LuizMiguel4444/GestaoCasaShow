@@ -3,7 +3,7 @@
 #include <locale.h>
 #include <string.h>
 #include "show.h"
-#include "inputs.h"
+#include "aux.h"
 #include "util.h"
 
 void modulo_show(void)

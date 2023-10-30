@@ -211,5 +211,3 @@ void end(void)
     printf("                   ######################################\n");
     printf("                         ##########################\n");
 }
-
-// mostrar a flavius - data e hora bug quando quer
