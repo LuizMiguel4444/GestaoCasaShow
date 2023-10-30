@@ -13,11 +13,12 @@ void modulo_buy(void);
 char buy_menu(void);
 void buy_menu_screen(void);
 Buy *cred_buy(void);
-void read_buy(Buy*);
+char *screen_read_buy(void);
 void upd_buy(Buy*);
 void buy_inputs(Buy*);
-void buy_id_check(Buy*);
+Buy *procura_buy(char*);
 void print_dados_buy(Buy*);
 
 void gravar_buy(Buy*);
 void error_screen_file_buy(void);
+void pesquisa_buy(void);
