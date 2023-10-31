@@ -497,8 +497,6 @@ char *leLinha(char *linha, int tamanhoMaximo) {
         if (quebraLinha != NULL) {
             *quebraLinha = '\0';
         }
-    } else {
-        printf("Fudeu");
     }
   return linha;
-}
+} // AUTOR: LUIZ MIGUEL COM AJUDA DO CHAT-GPT /// GIT: https://github.com/LuizMiguel4444
