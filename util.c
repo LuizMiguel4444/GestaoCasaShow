@@ -490,3 +490,15 @@ char* duplica(char* s) {
   strcpy(d, s);
   return d;
 } // AUTOR: FLAVIUS GORGÔNIO /// GIT: https://github.com/flaviusgorgonio
+
+char *leLinha(char *linha, int tamanhoMaximo) {
+    if (fgets(linha, tamanhoMaximo, stdin) != NULL) {
+        char *quebraLinha = strchr(linha, '\n');
+        if (quebraLinha != NULL) {
+            *quebraLinha = '\0';
+        }
+    } else {
+        printf("Fudeu");
+    }
+  return linha;
+}

@@ -27,7 +27,7 @@ void modulo_show(void)
                 upd_show(fulano);
                 break;
             case '4':
-                del_show(fulano);
+                excluir_show();
                 break;
             case '0':
                 system("cls || clear");
@@ -141,8 +141,10 @@ void upd_show(Show* sh)
     // show_id_check(sh);
 }
 
-void del_show(Show* sh)
+char *del_show(void)
 {
+    char *id;
+    id = (char *)malloc(5 * sizeof(char));
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -156,7 +158,14 @@ void del_show(Show* sh)
     printf("###              = = = = = = = = Excluir  Show = = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    // show_id_check(sh);
+    do
+    {
+        printf("###              Informe o Id do show (4 dígitos): ");
+        scanf("%s", id);
+        limpa_buffer();
+    } while (!val_id(id, 4));
+    printf("###                                                                         ###\n");
+    return id;
 }
 
 void show_inputs(Show* sh)
@@ -259,4 +268,67 @@ void pesquisa_show(void)
     print_dados_show(sh);
     free(sh);
     free(id);
+}
+
+void remove_show(Show *sh)
+{
+    int achou = 0;
+    FILE *fp;
+    Show *shArq;
+    shArq = (Show *)malloc(sizeof(Show));
+    fp = fopen("shows.dat", "r+b");
+    if (fp == NULL) {
+        error_screen_file_show();
+    }
+    while (!feof(fp)) {
+        fread(shArq, sizeof(Show), 1, fp);
+        if ((strcmp(shArq->id, sh->id) == 0) && (shArq->status != 'x')) {
+            achou = 1;
+            shArq->status = 'x';
+            fseek(fp, -1 * sizeof(Show), SEEK_CUR);
+            fwrite(shArq, sizeof(Show), 1, fp);
+            screen_del_ok_show();
+        }
+    }
+    if (!achou) {
+        screen_null_id_error("do show");
+        printf("\n");
+        printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
+        getchar();
+    }
+    fclose(fp);
+    free(shArq);
+}
+
+void excluir_show(void)
+{
+    Show *sh;
+    char *id;
+
+    sh = (Show *)malloc(sizeof(Show));
+    id = del_show();
+    sh = procura_show(id);
+    if (sh == NULL) {
+        screen_null_id_error("do show");
+        printf("\n");
+        printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
+        getchar();
+    } else {
+        sh->status = 'x';
+        remove_show(sh);
+        free(sh);
+    }
+    free(id);
+}
+
+void screen_del_ok_show(void)
+{
+    printf("###############################################################################\n");
+    printf("###                                                                         ###\n");
+    printf("###                       Show excluído com sucesso!!!                      ###\n");
+    printf("###                                                                         ###\n");
+    printf("###############################################################################\n");
+    printf("\n");
+    printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
+    getchar();
 }

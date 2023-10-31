@@ -24,3 +24,6 @@ char* corrige_hour(char hour[]);
 int val_hour(char hour[]);
 char* input(void);
 char* duplica(char* s);
+
+
+char *leLinha(char *linha, int tamanhoMaximo);

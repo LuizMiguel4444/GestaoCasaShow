@@ -288,7 +288,7 @@ void remove_atr(Atraction *atr)
             atrArq->status = 'x';
             fseek(fp, -1 * sizeof(Atraction), SEEK_CUR);
             fwrite(atrArq, sizeof(Atraction), 1, fp);
-            screen_del_ok();
+            screen_del_ok_atr();
         }
     }
     if (!achou) {
@@ -322,7 +322,7 @@ void excluir_atr(void)
     free(id);
 }
 
-void screen_del_ok(void)
+void screen_del_ok_atr(void)
 {
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");

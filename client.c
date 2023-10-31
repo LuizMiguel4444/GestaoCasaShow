@@ -27,7 +27,7 @@ void modulo_client(void)
                 upd_client(fulano);
                 break;
             case '4':
-                del_client(fulano);
+                excluir_cli();
                 break;
             case '0':
                 system("cls || clear");
@@ -141,8 +141,10 @@ void upd_client(Client* cli)
     // client_id_check(cli);
 }
 
-void del_client(Client* cli)
+char *del_client(void)
 {
+    char *id;
+    id = (char *)malloc(5 * sizeof(char));
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -156,7 +158,14 @@ void del_client(Client* cli)
     printf("###              = = = = = = =  Excluir Cliente  = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    // client_id_check(cli);
+    do
+    {
+        printf("###              Informe o Id do cliente (4 dígitos): ");
+        scanf("%s", id);
+        limpa_buffer();
+    } while (!val_id(id, 4));
+    printf("###                                                                         ###\n");
+    return id;
 }
 
 void client_inputs(Client* cli)
@@ -257,4 +266,67 @@ void pesquisa_cli(void)
     print_dados_client(cli);
     free(cli);
     free(id);
+}
+
+void remove_cli(Client *cli)
+{
+    int achou = 0;
+    FILE *fp;
+    Client *cliArq;
+    cliArq = (Client *)malloc(sizeof(Client));
+    fp = fopen("clients.dat", "r+b");
+    if (fp == NULL) {
+        error_screen_file_cli();
+    }
+    while (!feof(fp)) {
+        fread(cliArq, sizeof(Client), 1, fp);
+        if ((strcmp(cliArq->id, cli->id) == 0) && (cliArq->status != 'x')) {
+            achou = 1;
+            cliArq->status = 'x';
+            fseek(fp, -1 * sizeof(Client), SEEK_CUR);
+            fwrite(cliArq, sizeof(Client), 1, fp);
+            screen_del_ok_cli();
+        }
+    }
+    if (!achou) {
+        screen_null_id_error("do cliente");
+        printf("\n");
+        printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
+        getchar();
+    }
+    fclose(fp);
+    free(cliArq);
+}
+
+void excluir_cli(void)
+{
+    Client *cli;
+    char *id;
+
+    cli = (Client *)malloc(sizeof(Client));
+    id = del_client();
+    cli = procura_client(id);
+    if (cli == NULL) {
+        screen_null_id_error("do cliente");
+        printf("\n");
+        printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
+        getchar();
+    } else {
+        cli->status = 'x';
+        remove_cli(cli);
+        free(cli);
+    }
+    free(id);
+}
+
+void screen_del_ok_cli(void)
+{
+    printf("###############################################################################\n");
+    printf("###                                                                         ###\n");
+    printf("###                     Cliente excluído com sucesso!!!                     ###\n");
+    printf("###                                                                         ###\n");
+    printf("###############################################################################\n");
+    printf("\n");
+    printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
+    getchar();
 }

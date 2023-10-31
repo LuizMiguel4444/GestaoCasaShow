@@ -9,8 +9,9 @@ void get_nome(char* nome, char* modulo)
 {
   do {
     printf("###              Nome d%s: ", modulo);
-    scanf(" %50[^\n]", nome);
-    limpa_buffer();
+    nome = leLinha(nome, 56);
+    //scanf(" %50[^\n]", nome);
+    //limpa_buffer();
   } while (!valNome(nome));
 }
 

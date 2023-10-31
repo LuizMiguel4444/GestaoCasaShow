@@ -26,4 +26,4 @@ void error_screen_file_atr(void);
 void pesquisa_atr(void);
 void remove_atr(Atraction*);
 void excluir_atr(void);
-void screen_del_ok(void);
+void screen_del_ok_atr(void);
