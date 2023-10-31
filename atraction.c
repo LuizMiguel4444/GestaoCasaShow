@@ -27,7 +27,7 @@ void modulo_atraction(void)
             upd_atraction(fulano);
             break;
         case '4':
-            del_atraction(fulano);
+            excluir_atr();
             break;
         case '0':
             system("cls || clear");
@@ -98,7 +98,7 @@ Atraction *cred_atraction(void)
     return atr;
 }
 
-char *screen_read_atraction(void)
+char *screen_busc_atraction(void)
 {
     char *id;
     id = (char *)malloc(5 * sizeof(char));
@@ -115,7 +115,8 @@ char *screen_read_atraction(void)
     printf("###              = = = = = = =  Pesquisar Atração  = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    do {
+    do
+    {
         printf("###              Informe o Id da atração (4 dígitos): ");
         scanf("%s", id);
         limpa_buffer();
@@ -142,8 +143,10 @@ void upd_atraction(Atraction *atr)
     // atraction_id_check(atr);
 }
 
-void del_atraction(Atraction *atr)
+char *del_atraction(void)
 {
+    char *id;
+    id = (char *)malloc(5 * sizeof(char));
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -157,7 +160,14 @@ void del_atraction(Atraction *atr)
     printf("###              = = = = = = =  Excluir Atração  = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    // atraction_id_check(atr);
+    do
+    {
+        printf("###              Informe o Id da atração (4 dígitos): ");
+        scanf("%s", id);
+        limpa_buffer();
+    } while (!val_id(id, 4));
+    printf("###                                                                         ###\n");
+    return id;
 }
 
 void atraction_inputs(Atraction *atr)
@@ -177,14 +187,11 @@ Atraction *procura_atraction(char *id)
 
     atr = (Atraction *)malloc(sizeof(Atraction));
     fp = fopen("atractions.dat", "rb");
-    if (fp == NULL)
-    {
+    if (fp == NULL) {
         error_screen_file_atr();
     }
-    while (fread(atr, sizeof(Atraction), 1, fp))
-    {
-        if ((strcmp(atr->id, id) == 0) && (atr->status == 'c'))
-        {
+    while (fread(atr, sizeof(Atraction), 1, fp)) {
+        if ((strcmp(atr->id, id) == 0) && (atr->status == 'c')) {
             fclose(fp);
             return atr;
         }
@@ -257,9 +264,72 @@ void pesquisa_atr(void)
     Atraction *atr;
     char *id;
 
-    id = screen_read_atraction();
+    id = screen_busc_atraction();
     atr = procura_atraction(id);
     print_dados_atraction(atr);
     free(atr);
     free(id);
+}
+
+void remove_atr(Atraction *atr)
+{
+    int achou = 0;
+    FILE *fp;
+    Atraction *atrArq;
+    atrArq = (Atraction *)malloc(sizeof(Atraction));
+    fp = fopen("atractions.dat", "r+b");
+    if (fp == NULL) {
+        error_screen_file_atr();
+    }
+    while (!feof(fp)) {
+        fread(atrArq, sizeof(Atraction), 1, fp);
+        if ((strcmp(atrArq->id, atr->id) == 0) && (atrArq->status != 'x')) {
+            achou = 1;
+            atrArq->status = 'x';
+            fseek(fp, -1 * sizeof(Atraction), SEEK_CUR);
+            fwrite(atrArq, sizeof(Atraction), 1, fp);
+            screen_del_ok();
+        }
+    }
+    if (!achou) {
+        screen_null_id_error("da atração");
+        printf("\n");
+        printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
+        getchar();
+    }
+    fclose(fp);
+    free(atrArq);
+}
+
+void excluir_atr(void)
+{
+    Atraction *atr;
+    char *id;
+
+    atr = (Atraction *)malloc(sizeof(Atraction));
+    id = del_atraction();
+    atr = procura_atraction(id);
+    if (atr == NULL) {
+        screen_null_id_error("da atração");
+        printf("\n");
+        printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
+        getchar();
+    } else {
+        atr->status = 'x';
+        remove_atr(atr);
+        free(atr);
+    }
+    free(id);
+}
+
+void screen_del_ok(void)
+{
+    printf("###############################################################################\n");
+    printf("###                                                                         ###\n");
+    printf("###                     Atração excluída com sucesso!!!                     ###\n");
+    printf("###                                                                         ###\n");
+    printf("###############################################################################\n");
+    printf("\n");
+    printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
+    getchar();
 }
