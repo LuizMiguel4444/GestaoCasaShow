@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include <time.h>
 #include "util.h"
 
@@ -14,6 +15,15 @@ void limpa_buffer(void)
         entrada = fgetc(stdin);
     } while (entrada != EOF && entrada != '\n');
 } // AUTOR: GUILHERME BERNAL /// STACKOVERFLOW: https://pt.stackoverflow.com/questions/9427/limpeza-do-buffer-do-teclado-ap%C3%B3s-scanf
+
+///////////////////////////////////////////////////////////////////////////////
+/// Função que limpa a linha de cima
+///
+void limpa_linha(void)
+{
+  printf("\033[1A");
+  printf("\033[K");
+} // AUTOR: LUIZ MIGUEL COM AJUDA DO CHAT-GPT /// GIT: https://github.com/LuizMiguel4444
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Função que retorna 1 caso a entrada tiver mais de 1 caractere
@@ -446,7 +456,7 @@ int val_hour(char hour[])
   char* new_hour;
   if (strlen(hour) == 5) {
     for (int i = 0; i < strlen(hour); i++) {
-      if ((!ehHora(hour[i])) || (hour[0] == ':') || (hour[1] == ':') || (hour[3] == ':') || (hour[4] == ':')) {
+      if ((!ehHora(hour[i])) || (hour[2] != ':') || (hour[0] == ':') || (hour[1] == ':') || (hour[3] == ':') || (hour[4] == ':')) {
         return 0;
       }
     }
@@ -472,18 +482,20 @@ int val_hour(char hour[])
 } // AUTOR: LUIZ MIGUEL /// GIT: https://github.com/LuizMiguel4444
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Faz a função do input da linguagem python 
+/// Função que simula o input da linguagem python
 ///
-char* input(void) {
+char* input(void)
+{
   char linha[256];
   scanf(" %255[^\n]", linha);
   return duplica(linha);
 } // AUTOR: FLAVIUS GORGÔNIO /// GIT: https://github.com/flaviusgorgonio
 
-// ///////////////////////////////////////////////////////////////////////////////
-// /// Auxilía na função que simula o input da linguagem python 
-// ///
-char* duplica(char* s) {
+/////////////////////////////////////////////////////////////////////////////////
+///// Auxilía na função que simula o input da linguagem python 
+/////
+char* duplica(char* s)
+{
   int n;
   n = strlen(s) + 1;
   char* d = (char*) malloc(n * sizeof(char));
@@ -491,7 +503,11 @@ char* duplica(char* s) {
   return d;
 } // AUTOR: FLAVIUS GORGÔNIO /// GIT: https://github.com/flaviusgorgonio
 
-char *leLinha(char *linha, int tamanhoMaximo) {
+///////////////////////////////////////////////////////////////////////////////
+/// Função que simula o input da linguagem python
+///
+char *leLinha(char *linha, int tamanhoMaximo)
+{
     if (fgets(linha, tamanhoMaximo, stdin) != NULL) {
         char *quebraLinha = strchr(linha, '\n');
         if (quebraLinha != NULL) {

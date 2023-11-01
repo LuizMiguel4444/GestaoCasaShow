@@ -8,7 +8,7 @@
 
 void modulo_show(void)
 {
-    Show* fulano;
+    Show* show;
     setlocale(LC_ALL, "Portuguese_Brazil");
     int resp;
     do
@@ -17,14 +17,14 @@ void modulo_show(void)
         switch (resp)
         {
             case '1':
-                fulano = cred_show();
-                gravar_show(fulano);
+                show = cred_show();
+                gravar_show(show);
                 break;
             case '2':
                 pesquisa_show();
                 break;
             case '3':
-                upd_show(fulano);
+                upd_show(show);
                 break;
             case '4':
                 excluir_show();

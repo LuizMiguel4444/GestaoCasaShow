@@ -8,7 +8,7 @@
 
 void modulo_client(void)
 {
-    Client* fulano;
+    Client* cliente;
     setlocale(LC_ALL, "Portuguese_Brazil");
     int resp;
     do
@@ -17,14 +17,14 @@ void modulo_client(void)
         switch (resp)
         {
             case '1':
-                fulano = cred_client();
-                gravar_client(fulano);
+                cliente = cred_client();
+                gravar_client(cliente);
                 break;
             case '2':
                 pesquisa_cli();
                 break;
             case '3':
-                upd_client(fulano);
+                upd_client(cliente);
                 break;
             case '4':
                 excluir_cli();

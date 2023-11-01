@@ -8,7 +8,7 @@
 
 void modulo_atraction(void)
 {
-    Atraction *fulano;
+    Atraction *atracao;
     setlocale(LC_ALL, "Portuguese_Brazil");
     int resp;
     do
@@ -17,14 +17,14 @@ void modulo_atraction(void)
         switch (resp)
         {
         case '1':
-            fulano = cred_atraction();
-            gravar_atr(fulano);
+            atracao = cred_atraction();
+            gravar_atr(atracao);
             break;
         case '2':
             pesquisa_atr();
             break;
         case '3':
-            upd_atraction(fulano);
+            upd_atraction(atracao);
             break;
         case '4':
             excluir_atr();

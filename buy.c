@@ -8,7 +8,7 @@
 
 void modulo_buy(void)
 {
-    Buy* fulano;
+    Buy* venda;
     setlocale(LC_ALL, "Portuguese_Brazil");
     int resp;
     do
@@ -17,14 +17,14 @@ void modulo_buy(void)
         switch (resp)
         {
             case '1':
-                fulano = cred_buy();
-                gravar_buy(fulano);
+                venda = cred_buy();
+                gravar_buy(venda);
                 break;
             case '2':
                 pesquisa_buy();
                 break;
             case '3':
-                upd_buy(fulano);
+                upd_buy(venda);
                 break;
             case '0':
                 system("cls || clear");
