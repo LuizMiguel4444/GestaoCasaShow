@@ -14,3 +14,4 @@ all:
 
 clean:
 	rm *.o
+	rm GestaoCasaShow
