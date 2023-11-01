@@ -2,29 +2,32 @@
 #include <stdlib.h>
 #include <locale.h>
 #include <string.h>
-#include "buy.h"
-#include "aux.h"
-#include "util.h"
+#include "show.h"
+#include "../aux/aux.h"
+#include "../util/util.h"
 
-void modulo_buy(void)
+void modulo_show(void)
 {
-    Buy* venda;
+    Show* show;
     setlocale(LC_ALL, "Portuguese_Brazil");
     int resp;
     do
     {
-        resp = buy_menu();
+        resp = show_menu();
         switch (resp)
         {
             case '1':
-                venda = cred_buy();
-                gravar_buy(venda);
+                show = cred_show();
+                gravar_show(show);
                 break;
             case '2':
-                pesquisa_buy();
+                pesquisa_show();
                 break;
             case '3':
-                upd_buy(venda);
+                upd_show(show);
+                break;
+            case '4':
+                excluir_show();
                 break;
             case '0':
                 system("cls || clear");
@@ -33,18 +36,18 @@ void modulo_buy(void)
     } while (resp != '0');
 }
 
-char buy_menu(void)
+char show_menu(void)
 {
     char resp[256];
     do {
-        buy_menu_screen();
+        show_menu_screen();
         scanf("%s", resp);
         limpa_buffer();
-    } while (!ehDigitoMax(resp[0], '3') || !val_entrada(resp));
+    } while (!ehDigitoMax(resp[0], '4') || !val_entrada(resp));
     return resp[0];
 }
 
-void buy_menu_screen(void)
+void show_menu_screen(void)
 {
     system("clear || cls");
     printf("###############################################################################\n");
@@ -56,21 +59,22 @@ void buy_menu_screen(void)
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-    printf("###              = = = = = = = = = Menu Vendas = = = = = = = = =            ###\n");
+    printf("###              = = = = = = = = = Menu  Shows = = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    printf("###              1. Cadastrar uma nova venda                                ###\n");
-    printf("###              2. Pesquisar os dados de uma venda                         ###\n");
-    printf("###              3. Editar o cadastro de uma venda                          ###\n");
+    printf("###              1. Cadastrar um novo show                                  ###\n");
+    printf("###              2. Pesquisar os dados de um show                           ###\n");
+    printf("###              3. Editar o cadastro de um show                            ###\n");
+    printf("###              4. Excluir um show do sistema                              ###\n");
     printf("###              0. Voltar ao Menu Principal                                ###\n");
     printf("###                                                                         ###\n");
     printf("###              Escolha a opção que deseja: ");
 }
 
-Buy *cred_buy(void)
+Show *cred_show(void)
 {
-    Buy *b;
-    b = (Buy*) malloc(sizeof(Buy) + 1);
+    Show *sh;
+    sh = (Show*) malloc(sizeof(Show) + 1);
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -81,24 +85,19 @@ Buy *cred_buy(void)
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-    printf("###              = = = = = = = = Cadastrar Venda = = = = = = = =            ###\n");
+    printf("###              = = = = = = = = Cadastrar  Show = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    buy_inputs(b);
-    printf("###                                                                         ###\n");
-    printf("###############################################################################\n");
-    printf("###                                                                         ###\n");
-    printf("###              Quant. de ingressos vendidos: x + %s\n", b -> quant);
-    printf("###              Quant. de ingressos que restam: x - %s\n", b -> quant);
+    show_inputs(sh);
     printf("###                                                                         ###\n");
     printf("###############################################################################\n");
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
     getchar();
-    return b;
+    return sh;
 }
 
-char *screen_read_buy(void)
+char *screen_read_show(void)
 {
     char *id;
     id = (char *)malloc(5 * sizeof(char));
@@ -112,11 +111,11 @@ char *screen_read_buy(void)
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-    printf("###              = = = = = = = = Pesquisar Venda = = = = = = = =            ###\n");
+    printf("###              = = = = = = =  Pesquisar Atração  = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
     do {
-        printf("###              Informe o Id da venda (4 dígitos): ");
+        printf("###              Informe o Id do show (4 dígitos): ");
         scanf("%s", id);
         limpa_buffer();
     } while (!val_id(id, 4));
@@ -124,7 +123,7 @@ char *screen_read_buy(void)
     return id;
 }
 
-void upd_buy(Buy* b)
+void upd_show(Show* sh)
 {
     system("clear || cls");
     printf("###############################################################################\n");
@@ -136,51 +135,78 @@ void upd_buy(Buy* b)
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-    printf("###              = = = = = = = =  Editar  Venda  = = = = = = = =            ###\n");
+    printf("###              = = = = = = = =  Editar Show  = = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    // buy_id_check(b);
+    // show_id_check(sh);
 }
 
-void buy_inputs(Buy* b)
+char *del_show(void)
 {
-    get_id(b -> id_show, "o show (4 dígitos)");
-    get_id(b -> id_cli, "o cliente (4 dígitos)");
-    get_quant_venda(b -> quant, "ingressos");
-    get_valor(b -> valor, "final (com casa decimal)");
-    get_id(b -> id_ven, "a venda (4 dígitos)");
-    b -> status = 'f';
+    char *id;
+    id = (char *)malloc(5 * sizeof(char));
+    system("clear || cls");
+    printf("###############################################################################\n");
+    printf("###                                                                         ###\n");
+    printf("###            ===================================================          ###\n");
+    printf("###            =============   Gestão Casa Shows   ===============          ###\n");
+    printf("###            ===================================================          ###\n");
+    printf("###                                                                         ###\n");
+    printf("###############################################################################\n");
+    printf("###                                                                         ###\n");
+    printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
+    printf("###              = = = = = = = = Excluir  Show = = = = = = = = =            ###\n");
+    printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
+    printf("###                                                                         ###\n");
+    do
+    {
+        printf("###              Informe o Id do show (4 dígitos): ");
+        scanf("%s", id);
+        limpa_buffer();
+    } while (!val_id(id, 4));
+    printf("###                                                                         ###\n");
+    return id;
 }
 
-Buy *procura_buy(char *id)
+void show_inputs(Show* sh)
+{
+    get_nome(sh -> atraction, "a atração");
+    get_data(sh -> data);
+    get_hour(sh -> hour);
+    get_quant_cad(sh -> quant, "ingressos");
+    get_valor(sh -> valor, "do ingresso (com casa decimal)");
+    get_id(sh -> id, "o show (4 dígitos)");
+    sh -> status = 'c';
+}
+
+Show *procura_show(char *id)
 {
     FILE *fp;
-    Buy *b;
+    Show *sh;
 
-    b = (Buy*)malloc(sizeof(Buy));
-    fp = fopen("buys.dat", "rb");
+    sh = (Show *)malloc(sizeof(Show));
+    fp = fopen("shows.dat", "rb");
     if (fp == NULL)
     {
-        error_screen_file_buy();
+        error_screen_file_show();
     }
-    while (fread(b, sizeof(Buy), 1, fp))
+    while (fread(sh, sizeof(Show), 1, fp))
     {
-        if ((strcmp(b->id_ven, id) == 0) && (b->status == 'f'))
+        if ((strcmp(sh->id, id) == 0) && (sh->status == 'c'))
         {
             fclose(fp);
-            return b;
+            return sh;
         }
     }
     fclose(fp);
     return NULL;
 }
 
-void print_dados_buy(Buy* b)
+void print_dados_show(Show* sh)
 {
-    if (b == NULL) {
-        screen_null_id_error("da venda");
-    }
-    else {
+    if (sh == NULL) {
+        screen_null_id_error("do show");
+    } else {
         system("clear || cls");
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
@@ -190,12 +216,13 @@ void print_dados_buy(Buy* b)
         printf("###                                                                         ###\n");
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
-        printf("###              Informações do Id digitado (%s):                         ###\n", b -> id_ven);
+        printf("###              Informações do Id digitado (%s):                         ###\n", sh -> id);
         printf("###                                                                         ###\n");
-        printf("###              Id do show: %s\n", b -> id_show);
-        printf("###              Id do cliente: %s\n", b -> id_cli);
-        printf("###              Quant. de ingressos: %s\n", b -> quant);
-        printf("###              Valor final: %s\n", b -> valor);
+        printf("###              Atração: %s\n", sh -> atraction);
+        printf("###              Data: %s\n", sh -> data);
+        printf("###              Hora: %s\n", sh -> hour);
+        printf("###              Quant. de ingressos: %s\n", sh -> quant);
+        printf("###              Valor do ingresso: %s\n", sh -> valor);
         printf("###                                                                         ###\n");
         printf("###############################################################################\n");
     }
@@ -204,19 +231,19 @@ void print_dados_buy(Buy* b)
     getchar();
 }
 
-void gravar_buy(Buy* b) 
+void gravar_show(Show* sh) 
 {
-	FILE* fp_b;
-	fp_b = fopen("buys.dat", "ab");
-	if (fp_b == NULL) {
-		error_screen_file_buy();
+	FILE* fp_sh;
+	fp_sh = fopen("shows.dat", "ab");
+	if (fp_sh == NULL) {
+		error_screen_file_show();
 	}
-	fwrite(b, sizeof(Buy), 1, fp_b);
-	fclose(fp_b);
-    free(b);
+	fwrite(sh, sizeof(Show), 1, fp_sh);
+	fclose(fp_sh);
+    free(sh);
 }
 
-void error_screen_file_buy(void) 
+void error_screen_file_show(void) 
 {
 	system("cls || clear");
     printf("#############################################################################\n");
@@ -224,21 +251,84 @@ void error_screen_file_buy(void)
 	printf("###           = = = = = = = = = = = = = = = = = = = = = = = =             ###\n");
 	printf("###           = = = = = = = Ops!  Ocorreu um erro = = = = = =             ###\n");
 	printf("###           = = =  Não foi possível acessar o arquivo = = =             ###\n");
-	printf("###           = = = = com informações sobre as vendas = = = =             ###\n");
+	printf("###           = = = = com informações  sobre os shows = = = =             ###\n");
 	printf("###                                                                       ###\n");
     printf("#############################################################################\n");
 	printf("\t\t>>> Tecle ENTER para continuar! <<<");
 	getchar();
 }
 
-void pesquisa_buy(void)
+void pesquisa_show(void)
 {
-    Buy *b;
+    Show *sh;
     char *id;
 
-    id = screen_read_buy();
-    b = procura_buy(id);
-    print_dados_buy(b);
-    free(b);
+    id = screen_read_show();
+    sh = procura_show(id);
+    print_dados_show(sh);
+    free(sh);
     free(id);
+}
+
+void remove_show(Show *sh)
+{
+    int achou = 0;
+    FILE *fp;
+    Show *shArq;
+    shArq = (Show *)malloc(sizeof(Show));
+    fp = fopen("shows.dat", "r+b");
+    if (fp == NULL) {
+        error_screen_file_show();
+    }
+    while (!feof(fp)) {
+        fread(shArq, sizeof(Show), 1, fp);
+        if ((strcmp(shArq->id, sh->id) == 0) && (shArq->status != 'x')) {
+            achou = 1;
+            shArq->status = 'x';
+            fseek(fp, -1 * sizeof(Show), SEEK_CUR);
+            fwrite(shArq, sizeof(Show), 1, fp);
+            screen_del_ok_show();
+        }
+    }
+    if (!achou) {
+        screen_null_id_error("do show");
+        printf("\n");
+        printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
+        getchar();
+    }
+    fclose(fp);
+    free(shArq);
+}
+
+void excluir_show(void)
+{
+    Show *sh;
+    char *id;
+
+    sh = (Show *)malloc(sizeof(Show));
+    id = del_show();
+    sh = procura_show(id);
+    if (sh == NULL) {
+        screen_null_id_error("do show");
+        printf("\n");
+        printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
+        getchar();
+    } else {
+        sh->status = 'x';
+        remove_show(sh);
+        free(sh);
+    }
+    free(id);
+}
+
+void screen_del_ok_show(void)
+{
+    printf("###############################################################################\n");
+    printf("###                                                                         ###\n");
+    printf("###                       Show excluído com sucesso!!!                      ###\n");
+    printf("###                                                                         ###\n");
+    printf("###############################################################################\n");
+    printf("\n");
+    printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
+    getchar();
 }

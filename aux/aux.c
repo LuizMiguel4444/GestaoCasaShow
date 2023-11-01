@@ -3,7 +3,7 @@
 #include <string.h>
 #include <time.h>
 #include "aux.h"
-#include "util.h"
+#include "../util/util.h"
 
 void get_nome(char* nome, char* modulo)
 {

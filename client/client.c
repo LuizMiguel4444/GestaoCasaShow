@@ -2,32 +2,32 @@
 #include <stdlib.h>
 #include <locale.h>
 #include <string.h>
-#include "show.h"
-#include "aux.h"
-#include "util.h"
+#include "client.h"
+#include "../aux/aux.h"
+#include "../util/util.h"
 
-void modulo_show(void)
+void modulo_client(void)
 {
-    Show* show;
+    Client* cliente;
     setlocale(LC_ALL, "Portuguese_Brazil");
     int resp;
     do
     {
-        resp = show_menu();
+        resp = client_menu();
         switch (resp)
         {
             case '1':
-                show = cred_show();
-                gravar_show(show);
+                cliente = cred_client();
+                gravar_client(cliente);
                 break;
             case '2':
-                pesquisa_show();
+                pesquisa_cli();
                 break;
             case '3':
-                upd_show(show);
+                upd_client(cliente);
                 break;
             case '4':
-                excluir_show();
+                excluir_cli();
                 break;
             case '0':
                 system("cls || clear");
@@ -36,18 +36,18 @@ void modulo_show(void)
     } while (resp != '0');
 }
 
-char show_menu(void)
+char client_menu(void)
 {
     char resp[256];
     do {
-        show_menu_screen();
+        client_menu_screen();
         scanf("%s", resp);
         limpa_buffer();
     } while (!ehDigitoMax(resp[0], '4') || !val_entrada(resp));
     return resp[0];
 }
 
-void show_menu_screen(void)
+void client_menu_screen(void)
 {
     system("clear || cls");
     printf("###############################################################################\n");
@@ -59,22 +59,22 @@ void show_menu_screen(void)
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-    printf("###              = = = = = = = = = Menu  Shows = = = = = = = = =            ###\n");
+    printf("###              = = = = = = = =  Menu Clientes  = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    printf("###              1. Cadastrar um novo show                                  ###\n");
-    printf("###              2. Pesquisar os dados de um show                           ###\n");
-    printf("###              3. Editar o cadastro de um show                            ###\n");
-    printf("###              4. Excluir um show do sistema                              ###\n");
-    printf("###              0. Voltar ao Menu Principal                                ###\n");
+    printf("###              1. Cadastrar um novo cliente                               ###\n");
+    printf("###              2. Pesquisar os dados de um cliente                        ###\n");
+    printf("###              3. Editar o cadastro de um cliente                         ###\n");
+    printf("###              4. Excluir um cliente do sistema                           ###\n");
+    printf("###              0. Voltar ao menu principal                                ###\n");
     printf("###                                                                         ###\n");
     printf("###              Escolha a opção que deseja: ");
 }
 
-Show *cred_show(void)
+Client *cred_client(void)
 {
-    Show *sh;
-    sh = (Show*) malloc(sizeof(Show) + 1);
+    Client *cli;
+    cli = (Client*) malloc(sizeof(Client) + 1);
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -85,19 +85,19 @@ Show *cred_show(void)
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-    printf("###              = = = = = = = = Cadastrar  Show = = = = = = = =            ###\n");
+    printf("###              = = = = = = =  Cadastrar Cliente  = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    show_inputs(sh);
+    client_inputs(cli);
     printf("###                                                                         ###\n");
     printf("###############################################################################\n");
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
     getchar();
-    return sh;
+    return cli;
 }
 
-char *screen_read_show(void)
+char *screen_read_client(void)
 {
     char *id;
     id = (char *)malloc(5 * sizeof(char));
@@ -111,11 +111,11 @@ char *screen_read_show(void)
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-    printf("###              = = = = = = =  Pesquisar Atração  = = = = = = =            ###\n");
+    printf("###              = = = = = = =  Pesquisar Cliente  = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
     do {
-        printf("###              Informe o Id do show (4 dígitos): ");
+        printf("###              Informe o Id do cliente (4 dígitos): ");
         scanf("%s", id);
         limpa_buffer();
     } while (!val_id(id, 4));
@@ -123,7 +123,7 @@ char *screen_read_show(void)
     return id;
 }
 
-void upd_show(Show* sh)
+void upd_client(Client* cli)
 {
     system("clear || cls");
     printf("###############################################################################\n");
@@ -135,13 +135,13 @@ void upd_show(Show* sh)
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-    printf("###              = = = = = = = =  Editar Show  = = = = = = = = =            ###\n");
+    printf("###              = = = = = = = = Editar  Cliente = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    // show_id_check(sh);
+    // client_id_check(cli);
 }
 
-char *del_show(void)
+char *del_client(void)
 {
     char *id;
     id = (char *)malloc(5 * sizeof(char));
@@ -155,12 +155,12 @@ char *del_show(void)
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-    printf("###              = = = = = = = = Excluir  Show = = = = = = = = =            ###\n");
+    printf("###              = = = = = = =  Excluir Cliente  = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
     do
     {
-        printf("###              Informe o Id do show (4 dígitos): ");
+        printf("###              Informe o Id do cliente (4 dígitos): ");
         scanf("%s", id);
         limpa_buffer();
     } while (!val_id(id, 4));
@@ -168,44 +168,43 @@ char *del_show(void)
     return id;
 }
 
-void show_inputs(Show* sh)
+void client_inputs(Client* cli)
 {
-    get_nome(sh -> atraction, "a atração");
-    get_data(sh -> data);
-    get_hour(sh -> hour);
-    get_quant_cad(sh -> quant, "ingressos");
-    get_valor(sh -> valor, "do ingresso (com casa decimal)");
-    get_id(sh -> id, "o show (4 dígitos)");
-    sh -> status = 'c';
+    get_nome(cli -> nome, "o cliente");
+    get_cpf(cli -> cpf);
+    get_email(cli -> email, "o cliente");
+    get_num(cli -> num, "o cliente");
+    get_id(cli -> id, "o cliente (4 dígitos)");
+    cli -> status = 'c';
 }
 
-Show *procura_show(char *id)
+Client *procura_client(char *id)
 {
     FILE *fp;
-    Show *sh;
+    Client *cli;
 
-    sh = (Show *)malloc(sizeof(Show));
-    fp = fopen("shows.dat", "rb");
+    cli = (Client *)malloc(sizeof(Client));
+    fp = fopen("clients.dat", "rb");
     if (fp == NULL)
     {
-        error_screen_file_show();
+        error_screen_file_cli();
     }
-    while (fread(sh, sizeof(Show), 1, fp))
+    while (fread(cli, sizeof(Client), 1, fp))
     {
-        if ((strcmp(sh->id, id) == 0) && (sh->status == 'c'))
+        if ((strcmp(cli->id, id) == 0) && (cli->status == 'c'))
         {
             fclose(fp);
-            return sh;
+            return cli;
         }
     }
     fclose(fp);
     return NULL;
 }
 
-void print_dados_show(Show* sh)
+void print_dados_client(Client* cli)
 {
-    if (sh == NULL) {
-        screen_null_id_error("do show");
+    if (cli == NULL) {
+        screen_null_id_error("do cliente");
     } else {
         system("clear || cls");
         printf("###############################################################################\n");
@@ -216,13 +215,12 @@ void print_dados_show(Show* sh)
         printf("###                                                                         ###\n");
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
-        printf("###              Informações do Id digitado (%s):                         ###\n", sh -> id);
+        printf("###              Informações do Id digitado (%s):                         ###\n", cli -> id);
         printf("###                                                                         ###\n");
-        printf("###              Atração: %s\n", sh -> atraction);
-        printf("###              Data: %s\n", sh -> data);
-        printf("###              Hora: %s\n", sh -> hour);
-        printf("###              Quant. de ingressos: %s\n", sh -> quant);
-        printf("###              Valor do ingresso: %s\n", sh -> valor);
+        printf("###              Nome do cliente: %s\n", cli -> nome);
+        printf("###              CPF do cliente: %s\n", cli -> cpf);
+        printf("###              Email do cliente: %s\n", cli -> email);
+        printf("###              Número do cliente: %s\n", cli -> num);
         printf("###                                                                         ###\n");
         printf("###############################################################################\n");
     }
@@ -231,19 +229,19 @@ void print_dados_show(Show* sh)
     getchar();
 }
 
-void gravar_show(Show* sh) 
+void gravar_client(Client* cli)
 {
-	FILE* fp_sh;
-	fp_sh = fopen("shows.dat", "ab");
-	if (fp_sh == NULL) {
-		error_screen_file_show();
+	FILE* fp_cli;
+	fp_cli = fopen("clients.dat", "ab");
+	if (fp_cli == NULL) {
+		error_screen_file_cli();
 	}
-	fwrite(sh, sizeof(Show), 1, fp_sh);
-	fclose(fp_sh);
-    free(sh);
+	fwrite(cli, sizeof(Client), 1, fp_cli);
+	fclose(fp_cli);
+    free(cli);
 }
 
-void error_screen_file_show(void) 
+void error_screen_file_cli(void)
 {
 	system("cls || clear");
     printf("#############################################################################\n");
@@ -251,81 +249,81 @@ void error_screen_file_show(void)
 	printf("###           = = = = = = = = = = = = = = = = = = = = = = = =             ###\n");
 	printf("###           = = = = = = = Ops!  Ocorreu um erro = = = = = =             ###\n");
 	printf("###           = = =  Não foi possível acessar o arquivo = = =             ###\n");
-	printf("###           = = = = com informações  sobre os shows = = = =             ###\n");
+	printf("###           = = =  com informações sobre os clientes  = = =             ###\n");
 	printf("###                                                                       ###\n");
     printf("#############################################################################\n");
 	printf("\t\t>>> Tecle ENTER para continuar! <<<");
 	getchar();
 }
 
-void pesquisa_show(void)
+void pesquisa_cli(void)
 {
-    Show *sh;
+    Client *cli;
     char *id;
 
-    id = screen_read_show();
-    sh = procura_show(id);
-    print_dados_show(sh);
-    free(sh);
+    id = screen_read_client();
+    cli = procura_client(id);
+    print_dados_client(cli);
+    free(cli);
     free(id);
 }
 
-void remove_show(Show *sh)
+void remove_cli(Client *cli)
 {
     int achou = 0;
     FILE *fp;
-    Show *shArq;
-    shArq = (Show *)malloc(sizeof(Show));
-    fp = fopen("shows.dat", "r+b");
+    Client *cliArq;
+    cliArq = (Client *)malloc(sizeof(Client));
+    fp = fopen("clients.dat", "r+b");
     if (fp == NULL) {
-        error_screen_file_show();
+        error_screen_file_cli();
     }
     while (!feof(fp)) {
-        fread(shArq, sizeof(Show), 1, fp);
-        if ((strcmp(shArq->id, sh->id) == 0) && (shArq->status != 'x')) {
+        fread(cliArq, sizeof(Client), 1, fp);
+        if ((strcmp(cliArq->id, cli->id) == 0) && (cliArq->status != 'x')) {
             achou = 1;
-            shArq->status = 'x';
-            fseek(fp, -1 * sizeof(Show), SEEK_CUR);
-            fwrite(shArq, sizeof(Show), 1, fp);
-            screen_del_ok_show();
+            cliArq->status = 'x';
+            fseek(fp, -1 * sizeof(Client), SEEK_CUR);
+            fwrite(cliArq, sizeof(Client), 1, fp);
+            screen_del_ok_cli();
         }
     }
     if (!achou) {
-        screen_null_id_error("do show");
+        screen_null_id_error("do cliente");
         printf("\n");
         printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
         getchar();
     }
     fclose(fp);
-    free(shArq);
+    free(cliArq);
 }
 
-void excluir_show(void)
+void excluir_cli(void)
 {
-    Show *sh;
+    Client *cli;
     char *id;
 
-    sh = (Show *)malloc(sizeof(Show));
-    id = del_show();
-    sh = procura_show(id);
-    if (sh == NULL) {
-        screen_null_id_error("do show");
+    cli = (Client *)malloc(sizeof(Client));
+    id = del_client();
+    cli = procura_client(id);
+    if (cli == NULL) {
+        screen_null_id_error("do cliente");
         printf("\n");
         printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
         getchar();
     } else {
-        sh->status = 'x';
-        remove_show(sh);
-        free(sh);
+        cli->status = 'x';
+        remove_cli(cli);
+        free(cli);
     }
     free(id);
 }
 
-void screen_del_ok_show(void)
+void screen_del_ok_cli(void)
 {
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
-    printf("###                       Show excluído com sucesso!!!                      ###\n");
+    printf("###                     Cliente excluído com sucesso!!!                     ###\n");
     printf("###                                                                         ###\n");
     printf("###############################################################################\n");
     printf("\n");

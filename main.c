@@ -2,12 +2,12 @@
 #include <stdlib.h>
 #include <locale.h>
 #include <string.h>
-#include "show.h"
-#include "atraction.h"
-#include "client.h"
-#include "buy.h"
-#include "report.h"
-#include "util.h"
+#include "show/show.h"
+#include "atraction/atraction.h"
+#include "client/client.h"
+#include "buy/buy.h"
+#include "report/report.h"
+#include "util/util.h"
 #ifndef cores
 #define cores
 #define ciano(texto) printf("\33[1;36m %s \33[0m", texto)

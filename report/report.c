@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <locale.h>
 #include "report.h"
-#include "util.h"
+#include "../util/util.h"
 
 void modulo_report(void)
 {

@@ -3,8 +3,8 @@
 #include <locale.h>
 #include <string.h>
 #include "atraction.h"
-#include "aux.h"
-#include "util.h"
+#include "../aux/aux.h"
+#include "../util/util.h"
 
 void modulo_atraction(void)
 {
