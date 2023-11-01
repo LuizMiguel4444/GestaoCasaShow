@@ -7,6 +7,7 @@
 #include "client/client.h"
 #include "buy/buy.h"
 #include "report/report.h"
+#include "aux/aux.h"
 #include "util/util.h"
 #ifndef cores
 #define cores
@@ -70,6 +71,10 @@ char main_menu(void)
         main_menu_screen();
         scanf("%s", resp);
         limpa_buffer();
+        if (!ehDigitoMax(resp[0], '7')  || !val_entrada(resp)) {
+            screen_error_input();
+            limpa_linha();
+        }
     } while (!ehDigitoMax(resp[0], '7')  || !val_entrada(resp));
     return resp[0];
 }
@@ -211,3 +216,5 @@ void end(void)
     printf("                   ######################################\n");
     printf("                         ##########################\n");
 }
+
+// ajeitar val_data

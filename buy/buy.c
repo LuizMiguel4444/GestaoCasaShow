@@ -40,6 +40,10 @@ char buy_menu(void)
         buy_menu_screen();
         scanf("%s", resp);
         limpa_buffer();
+        if (!ehDigitoMax(resp[0], '3')  || !val_entrada(resp)) {
+            screen_error_input();
+            limpa_linha();
+        }
     } while (!ehDigitoMax(resp[0], '3') || !val_entrada(resp));
     return resp[0];
 }
@@ -119,6 +123,10 @@ char *screen_read_buy(void)
         printf("###              Informe o Id da venda (4 dígitos): ");
         scanf("%s", id);
         limpa_buffer();
+        if (!val_id(id, 4)) {
+            screen_error_input();
+            limpa_linha(); limpa_linha(); limpa_linha();
+        }
     } while (!val_id(id, 4));
     printf("###                                                                         ###\n");
     return id;
@@ -158,7 +166,7 @@ Buy *procura_buy(char *id)
     Buy *b;
 
     b = (Buy*)malloc(sizeof(Buy));
-    fp = fopen("buys.dat", "rb");
+    fp = fopen("buy/buys.dat", "rb");
     if (fp == NULL)
     {
         error_screen_file_buy();
@@ -207,7 +215,7 @@ void print_dados_buy(Buy* b)
 void gravar_buy(Buy* b) 
 {
 	FILE* fp_b;
-	fp_b = fopen("buys.dat", "ab");
+	fp_b = fopen("buy/buys.dat", "ab");
 	if (fp_b == NULL) {
 		error_screen_file_buy();
 	}
@@ -222,12 +230,12 @@ void error_screen_file_buy(void)
     printf("#############################################################################\n");
 	printf("###                                                                       ###\n");
 	printf("###           = = = = = = = = = = = = = = = = = = = = = = = =             ###\n");
-	printf("###           = = = = = = = Ops!  Ocorreu um erro = = = = = =             ###\n");
+	printf("###           = = = = = = = Ops! Ocorreu um erro! = = = = = =             ###\n");
 	printf("###           = = =  Não foi possível acessar o arquivo = = =             ###\n");
 	printf("###           = = = = com informações sobre as vendas = = = =             ###\n");
 	printf("###                                                                       ###\n");
     printf("#############################################################################\n");
-	printf("\t\t>>> Tecle ENTER para continuar! <<<");
+	printf("\t\t    >>> Tecle ENTER para continuar! <<<");
 	getchar();
 }
 

@@ -44,6 +44,10 @@ char atraction_menu(void)
         atraction_menu_screen();
         scanf("%s", resp);
         limpa_buffer();
+        if (!ehDigitoMax(resp[0], '4')  || !val_entrada(resp)) {
+            screen_error_input();
+            limpa_linha();
+        }
     } while (!ehDigitoMax(resp[0], '4') || !val_entrada(resp));
     return resp[0];
 }
@@ -120,6 +124,10 @@ char *screen_busc_atraction(void)
         printf("###              Informe o Id da atração (4 dígitos): ");
         scanf("%s", id);
         limpa_buffer();
+        if (!val_id(id, 4)) {
+            screen_error_input();
+            limpa_linha(); limpa_linha(); limpa_linha();
+        }
     } while (!val_id(id, 4));
     printf("###                                                                         ###\n");
     return id;
@@ -165,6 +173,10 @@ char *del_atraction(void)
         printf("###              Informe o Id da atração (4 dígitos): ");
         scanf("%s", id);
         limpa_buffer();
+        if (!val_id(id, 4)) {
+            screen_error_input();
+            limpa_linha(); limpa_linha(); limpa_linha();
+        }
     } while (!val_id(id, 4));
     printf("###                                                                         ###\n");
     return id;
@@ -186,7 +198,7 @@ Atraction *procura_atraction(char *id)
     Atraction *atr;
 
     atr = (Atraction *)malloc(sizeof(Atraction));
-    fp = fopen("atractions.dat", "rb");
+    fp = fopen("atraction/atractions.dat", "rb");
     if (fp == NULL) {
         error_screen_file_atr();
     }
@@ -234,7 +246,7 @@ void print_dados_atraction(Atraction *atr)
 void gravar_atr(Atraction *atr)
 {
     FILE *fp_atr;
-    fp_atr = fopen("atractions.dat", "ab");
+    fp_atr = fopen("atraction/atractions.dat", "ab");
     if (fp_atr == NULL)
     {
         error_screen_file_atr();
@@ -250,12 +262,12 @@ void error_screen_file_atr(void)
     printf("#############################################################################\n");
     printf("###                                                                       ###\n");
     printf("###           = = = = = = = = = = = = = = = = = = = = = = = =             ###\n");
-    printf("###           = = = = = = = Ops!  Ocorreu um erro = = = = = =             ###\n");
+    printf("###           = = = = = = = Ops! Ocorreu um erro! = = = = = =             ###\n");
     printf("###           = = =  Não foi possível acessar o arquivo = = =             ###\n");
     printf("###           = = =  com informações sobre as atrações  = = =             ###\n");
     printf("###                                                                       ###\n");
     printf("#############################################################################\n");
-    printf("\t\t>>> Tecle ENTER para continuar! <<<");
+    printf("\t\t    >>> Tecle ENTER para continuar! <<<");
     getchar();
 }
 
@@ -277,7 +289,7 @@ void remove_atr(Atraction *atr)
     FILE *fp;
     Atraction *atrArq;
     atrArq = (Atraction *)malloc(sizeof(Atraction));
-    fp = fopen("atractions.dat", "r+b");
+    fp = fopen("atraction/atractions.dat", "r+b");
     if (fp == NULL) {
         error_screen_file_atr();
     }

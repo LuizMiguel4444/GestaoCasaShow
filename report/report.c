@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <locale.h>
 #include "report.h"
+#include "../aux/aux.h"
 #include "../util/util.h"
 
 void modulo_report(void)
@@ -39,6 +40,10 @@ char report_menu(void)
         report_menu_screen();
         scanf("%s", resp);
         limpa_buffer();
+        if (!ehDigitoMax(resp[0], '4')  || !val_entrada(resp)) {
+            screen_error_input();
+            limpa_linha();
+        }
     } while (!ehDigitoMax(resp[0], '4') || !val_entrada(resp));
     return resp[0];
 }

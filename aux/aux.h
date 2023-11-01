@@ -10,3 +10,4 @@ void get_cpf(char* cpf);
 void get_data(char* data);
 void get_hour(char* hour);
 void screen_null_id_error(char* modulo);
+void screen_error_input(void);

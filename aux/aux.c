@@ -12,7 +12,8 @@ void get_nome(char* nome, char* modulo)
     scanf(" %50[^\n]", nome);
     limpa_buffer();
     if (!valNome(nome)) {
-      limpa_linha();
+      screen_error_input();
+      limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while (!valNome(nome));
 }
@@ -24,7 +25,8 @@ void get_cache(char* cache, char* modulo)
     scanf("%s", cache);
     limpa_buffer();
     if (!ehdinheiro(cache)) {
-      limpa_linha();
+      screen_error_input();
+      limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while (!ehdinheiro(cache));
 }
@@ -36,7 +38,8 @@ void get_email(char* email, char* modulo)
     scanf("%[a-z0-9@.]", email);
     limpa_buffer();
     if (!val_email(email)) {
-      limpa_linha();
+      screen_error_input();
+      limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while (!val_email(email));
 }
@@ -48,7 +51,8 @@ void get_num(char* num, char* modulo)
     scanf("%s", num);
     limpa_buffer();
     if (!validarFone(num)) {
-      limpa_linha();
+      screen_error_input();
+      limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while (!validarFone(num));
 }
@@ -60,7 +64,8 @@ void get_id(char* id, char* modulo)
     scanf("%s", id);
     limpa_buffer();
     if (!val_id(id, 4)) {
-      limpa_linha();
+      screen_error_input();
+      limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while (!val_id(id, 4));
 }
@@ -72,7 +77,8 @@ void get_quant_cad(char* quant, char* modulo)
     scanf("%s", quant);
     limpa_buffer();
     if (!check_quant_cad(quant)) {
-      limpa_linha();
+      screen_error_input();
+      limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while (!check_quant_cad(quant));
 }
@@ -84,7 +90,8 @@ void get_quant_venda(char* quant, char* modulo)
     scanf("%s", quant);
     limpa_buffer();
     if (!check_quant_venda(quant)) {
-      limpa_linha();
+      screen_error_input();
+      limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while (!check_quant_venda(quant));
 }
@@ -96,7 +103,8 @@ void get_valor(char* valor, char* modulo)
     scanf("%s", valor);
     limpa_buffer();
     if (!ehdinheiro(valor)) {
-      limpa_linha();
+      screen_error_input();
+      limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while (!ehdinheiro(valor));
 }
@@ -108,7 +116,8 @@ void get_cpf(char* cpf)
     scanf("%[0-9-.]", cpf);
     limpa_buffer();
     if (!validarCPF(cpf)) {
-      limpa_linha();
+      screen_error_input();
+      limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while (!validarCPF(cpf));
 }
@@ -120,7 +129,8 @@ void get_data(char* data)
     scanf("%s", data);
     limpa_buffer();
     if (!valData(data)) {
-      limpa_linha();
+      screen_error_input();
+      limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while (!valData(data));
 }
@@ -132,7 +142,8 @@ void get_hour(char* hour)
     scanf("%s", hour);
     limpa_buffer();
     if (!val_hour(hour)) {
-      limpa_linha();
+      screen_error_input();
+      limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while (!val_hour(hour));
 }
@@ -146,4 +157,10 @@ void screen_null_id_error(char* modulo)
   printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
   printf("###                                                                         ###\n");
   printf("###############################################################################\n");
+}
+
+void screen_error_input(void)
+{
+  printf("\n\tEntrada inválida! Por favor, tecle ENTER e tente novamente...");
+  getchar();
 }

@@ -43,6 +43,10 @@ char client_menu(void)
         client_menu_screen();
         scanf("%s", resp);
         limpa_buffer();
+        if (!ehDigitoMax(resp[0], '4')  || !val_entrada(resp)) {
+            screen_error_input();
+            limpa_linha();
+        }
     } while (!ehDigitoMax(resp[0], '4') || !val_entrada(resp));
     return resp[0];
 }
@@ -118,6 +122,10 @@ char *screen_read_client(void)
         printf("###              Informe o Id do cliente (4 dígitos): ");
         scanf("%s", id);
         limpa_buffer();
+        if (!val_id(id, 4)) {
+            screen_error_input();
+            limpa_linha(); limpa_linha(); limpa_linha();
+        }
     } while (!val_id(id, 4));
     printf("###                                                                         ###\n");
     return id;
@@ -163,6 +171,10 @@ char *del_client(void)
         printf("###              Informe o Id do cliente (4 dígitos): ");
         scanf("%s", id);
         limpa_buffer();
+        if (!val_id(id, 4)) {
+            screen_error_input();
+            limpa_linha(); limpa_linha(); limpa_linha();
+        }
     } while (!val_id(id, 4));
     printf("###                                                                         ###\n");
     return id;
@@ -184,7 +196,7 @@ Client *procura_client(char *id)
     Client *cli;
 
     cli = (Client *)malloc(sizeof(Client));
-    fp = fopen("clients.dat", "rb");
+    fp = fopen("client/clients.dat", "rb");
     if (fp == NULL)
     {
         error_screen_file_cli();
@@ -232,7 +244,7 @@ void print_dados_client(Client* cli)
 void gravar_client(Client* cli)
 {
 	FILE* fp_cli;
-	fp_cli = fopen("clients.dat", "ab");
+	fp_cli = fopen("client/clients.dat", "ab");
 	if (fp_cli == NULL) {
 		error_screen_file_cli();
 	}
@@ -247,12 +259,12 @@ void error_screen_file_cli(void)
     printf("#############################################################################\n");
 	printf("###                                                                       ###\n");
 	printf("###           = = = = = = = = = = = = = = = = = = = = = = = =             ###\n");
-	printf("###           = = = = = = = Ops!  Ocorreu um erro = = = = = =             ###\n");
+	printf("###           = = = = = = = Ops! Ocorreu um erro! = = = = = =             ###\n");
 	printf("###           = = =  Não foi possível acessar o arquivo = = =             ###\n");
 	printf("###           = = =  com informações sobre os clientes  = = =             ###\n");
 	printf("###                                                                       ###\n");
     printf("#############################################################################\n");
-	printf("\t\t>>> Tecle ENTER para continuar! <<<");
+	printf("\t\t    >>> Tecle ENTER para continuar! <<<");
 	getchar();
 }
 
@@ -274,7 +286,7 @@ void remove_cli(Client *cli)
     FILE *fp;
     Client *cliArq;
     cliArq = (Client *)malloc(sizeof(Client));
-    fp = fopen("clients.dat", "r+b");
+    fp = fopen("client/clients.dat", "r+b");
     if (fp == NULL) {
         error_screen_file_cli();
     }

@@ -43,6 +43,10 @@ char show_menu(void)
         show_menu_screen();
         scanf("%s", resp);
         limpa_buffer();
+        if (!ehDigitoMax(resp[0], '4')  || !val_entrada(resp)) {
+            screen_error_input();
+            limpa_linha();
+        }
     } while (!ehDigitoMax(resp[0], '4') || !val_entrada(resp));
     return resp[0];
 }
@@ -118,6 +122,10 @@ char *screen_read_show(void)
         printf("###              Informe o Id do show (4 dígitos): ");
         scanf("%s", id);
         limpa_buffer();
+        if (!val_id(id, 4)) {
+            screen_error_input();
+            limpa_linha(); limpa_linha(); limpa_linha();
+        }
     } while (!val_id(id, 4));
     printf("###                                                                         ###\n");
     return id;
@@ -163,6 +171,10 @@ char *del_show(void)
         printf("###              Informe o Id do show (4 dígitos): ");
         scanf("%s", id);
         limpa_buffer();
+        if (!val_id(id, 4)) {
+            screen_error_input();
+            limpa_linha(); limpa_linha(); limpa_linha();
+        }
     } while (!val_id(id, 4));
     printf("###                                                                         ###\n");
     return id;
@@ -185,7 +197,7 @@ Show *procura_show(char *id)
     Show *sh;
 
     sh = (Show *)malloc(sizeof(Show));
-    fp = fopen("shows.dat", "rb");
+    fp = fopen("show/shows.dat", "rb");
     if (fp == NULL)
     {
         error_screen_file_show();
@@ -234,7 +246,7 @@ void print_dados_show(Show* sh)
 void gravar_show(Show* sh) 
 {
 	FILE* fp_sh;
-	fp_sh = fopen("shows.dat", "ab");
+	fp_sh = fopen("show/shows.dat", "ab");
 	if (fp_sh == NULL) {
 		error_screen_file_show();
 	}
@@ -249,12 +261,12 @@ void error_screen_file_show(void)
     printf("#############################################################################\n");
 	printf("###                                                                       ###\n");
 	printf("###           = = = = = = = = = = = = = = = = = = = = = = = =             ###\n");
-	printf("###           = = = = = = = Ops!  Ocorreu um erro = = = = = =             ###\n");
+	printf("###           = = = = = = = Ops! Ocorreu um erro! = = = = = =             ###\n");
 	printf("###           = = =  Não foi possível acessar o arquivo = = =             ###\n");
 	printf("###           = = = = com informações  sobre os shows = = = =             ###\n");
 	printf("###                                                                       ###\n");
     printf("#############################################################################\n");
-	printf("\t\t>>> Tecle ENTER para continuar! <<<");
+	printf("\t\t    >>> Tecle ENTER para continuar! <<<");
 	getchar();
 }
 
@@ -276,7 +288,7 @@ void remove_show(Show *sh)
     FILE *fp;
     Show *shArq;
     shArq = (Show *)malloc(sizeof(Show));
-    fp = fopen("shows.dat", "r+b");
+    fp = fopen("show/shows.dat", "r+b");
     if (fp == NULL) {
         error_screen_file_show();
     }
