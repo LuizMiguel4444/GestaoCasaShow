@@ -178,13 +178,13 @@ int data_validacao(char data[])
   day = tm.tm_mday;
   mon = tm.tm_mon + 1;
   year = tm.tm_year + 1900;
-  if (ano > year) {
+  if (ano < year) {
     return 0;
   }
-  else if ((mes > mon) && (ano == year)) {
+  else if ((mes < mon) && (ano == year)) {
     return 0;
   }
-  else if ((dia > day) && (mes >= mon) && (ano == year)) {
+  else if ((dia < day) && (mes == mon) && (ano == year)) {
     return 0;
   }
   return 1;  
