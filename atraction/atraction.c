@@ -2,11 +2,11 @@
 #include <stdlib.h>
 #include <locale.h>
 #include <string.h>
-#include "../show/show.h"
+//#include "../show/show.h"
 #include "atraction.h"
-#include "../client/client.h"
-#include "../buy/buy.h"
-#include "../report/report.h"
+//#include "../client/client.h"
+//#include "../buy/buy.h"
+//#include "../report/report.h"
 #include "../aux/aux.h"
 #include "../util/util.h"
 
@@ -150,17 +150,13 @@ char *screen_busc_atraction(void)
     printf("###              = = = = = = =  Pesquisar Atração  = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    do
-    {
+    do {
         printf("###              Informe o Id da atração (4 dígitos): ");
         scanf("%s", id);
         limpa_buffer();
-        if (!val_id(id, 4))
-        {
+        if (!val_id(id, 4)) {
             screen_error_input();
-            limpa_linha();
-            limpa_linha();
-            limpa_linha();
+            limpa_linha(); limpa_linha(); limpa_linha();
         }
     } while (!val_id(id, 4));
     printf("###                                                                         ###\n");
@@ -190,9 +186,7 @@ char *screen_upd_atraction(void)
         limpa_buffer();
         if (!val_id(id, 4)) {
             screen_error_input();
-            limpa_linha();
-            limpa_linha();
-            limpa_linha();
+            limpa_linha(); limpa_linha(); limpa_linha();
         }
     } while (!val_id(id, 4));
     printf("###                                                                         ###\n");
@@ -534,7 +528,7 @@ void qual_campo(Atraction *atr)
         getchar();
     }
 }
-    
+
 Atraction *mudar_campo(void)
 {
     Atraction *atr;

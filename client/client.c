@@ -2,11 +2,11 @@
 #include <stdlib.h>
 #include <locale.h>
 #include <string.h>
-#include "../show/show.h"
+//#include "../show/show.h"
 #include "../atraction/atraction.h"
 #include "client.h"
-#include "../buy/buy.h"
-#include "../report/report.h"
+//#include "../buy/buy.h"
+//#include "../report/report.h"
 #include "../aux/aux.h"
 #include "../util/util.h"
 
@@ -28,7 +28,7 @@ void modulo_client(void)
                 pesquisa_cli();
                 break;
             case '3':
-                upd_client(cliente);
+                update_cli();
                 break;
             case '4':
                 excluir_cli();
@@ -105,7 +105,33 @@ Client *cred_client(void)
     return cli;
 }
 
-char *screen_read_client(void)
+Client *cred_client_sem_id(void)
+{
+    Client *cli;
+    cli = (Client*) malloc(sizeof(Client) + 1);
+    system("clear || cls");
+    printf("###############################################################################\n");
+    printf("###                                                                         ###\n");
+    printf("###            ===================================================          ###\n");
+    printf("###            =============   Gestão Casa Shows   ===============          ###\n");
+    printf("###            ===================================================          ###\n");
+    printf("###                                                                         ###\n");
+    printf("###############################################################################\n");
+    printf("###                                                                         ###\n");
+    printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
+    printf("###              = = = = = = =  Cadastrar Cliente  = = = = = = =            ###\n");
+    printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
+    printf("###                                                                         ###\n");
+    client_inputs_sem_id(cli);
+    printf("###                                                                         ###\n");
+    printf("###############################################################################\n");
+    printf("\n");
+    printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
+    getchar();
+    return cli;
+}
+
+char *screen_busc_client(void)
 {
     char *id;
     id = (char *)malloc(5 * sizeof(char));
@@ -135,8 +161,10 @@ char *screen_read_client(void)
     return id;
 }
 
-void upd_client(Client* cli)
+char *screen_upd_client(void)
 {
+    char *id;
+    id = (char *)malloc(5 * sizeof(char));
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -150,7 +178,17 @@ void upd_client(Client* cli)
     printf("###              = = = = = = = = Editar  Cliente = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    // client_id_check(cli);
+    do {
+        printf("###              Informe o Id do cliente (4 dígitos): ");
+        scanf("%s", id);
+        limpa_buffer();
+        if (!val_id(id, 4)) {
+            screen_error_input();
+            limpa_linha(); limpa_linha(); limpa_linha();
+        }
+    } while (!val_id(id, 4));
+    printf("###                                                                         ###\n");
+    return id;
 }
 
 char *del_client(void)
@@ -191,6 +229,15 @@ void client_inputs(Client* cli)
     get_email(cli -> email, "o cliente");
     get_num(cli -> num, "o cliente");
     get_id(cli -> id, "o cliente (4 dígitos)");
+    cli -> status = 'c';
+}
+
+void client_inputs_sem_id(Client* cli)
+{
+    get_nome(cli -> nome, "o cliente");
+    get_cpf(cli -> cpf);
+    get_email(cli -> email, "o cliente");
+    get_num(cli -> num, "o cliente");
     cli -> status = 'c';
 }
 
@@ -245,6 +292,31 @@ void print_dados_client(Client* cli)
     getchar();
 }
 
+void print_dados_client_upd(Client* cli)
+{
+    if (cli == NULL) {
+        screen_null_id_error("do cliente");
+    } else {
+        system("clear || cls");
+        printf("###############################################################################\n");
+        printf("###                                                                         ###\n");
+        printf("###            ===================================================          ###\n");
+        printf("###            =============   Gestão Casa Shows   ===============          ###\n");
+        printf("###            ===================================================          ###\n");
+        printf("###                                                                         ###\n");
+        printf("###############################################################################\n");
+        printf("###                                                                         ###\n");
+        printf("###              Informações do Id digitado (%s):                         ###\n", cli -> id);
+        printf("###                                                                         ###\n");
+        printf("###              Nome do cliente: %s\n", cli -> nome);
+        printf("###              CPF do cliente: %s\n", cli -> cpf);
+        printf("###              Email do cliente: %s\n", cli -> email);
+        printf("###              Número do cliente: %s\n", cli -> num);
+        printf("###                                                                         ###\n");
+        printf("###############################################################################\n");
+    }
+}
+
 void gravar_client(Client* cli)
 {
 	FILE* fp_cli;
@@ -277,7 +349,7 @@ void pesquisa_cli(void)
     Client *cli;
     char *id;
 
-    id = screen_read_client();
+    id = screen_busc_client();
     cli = procura_client(id);
     print_dados_client(cli);
     free(cli);
@@ -345,4 +417,64 @@ void screen_del_ok_cli(void)
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
     getchar();
+}
+
+void update_cli(void)
+{
+    Client *cli;
+    char *id;
+    int resp;
+
+    id = screen_upd_client();
+    cli = procura_client(id);
+    if (cli == NULL) {
+        screen_null_id_error("do cliente");
+        printf("\n\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
+        getchar();
+    }
+    else {
+        print_dados_client_upd(cli);
+        resp = certeza_upd("desse cliente");
+        if (resp) {
+            cli = cred_client_sem_id();
+            strcpy(cli->id, id);
+            regravar_cli(cli);
+            free(cli);
+        } else {
+            printf("\n\t\t                        Ok!\n");
+            printf("\n\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
+            getchar();
+        }
+    }
+    free(id);
+}
+
+void regravar_cli(Client *cli)
+{
+    int achou = 0;
+    FILE *fp;
+    Client *cliLido;
+
+    cliLido = (Client *)malloc(sizeof(Client));
+    fp = fopen("client/clients.dat", "r+b");
+    if (fp == NULL) {
+        error_screen_file_cli();
+    }
+    while(!feof(fp)) {
+        fread(cliLido, sizeof(Client), 1, fp);
+        if (strcmp(cliLido->id, cli->id) == 0) {
+            achou = 1;
+            fseek(fp, -1 * sizeof(Client), SEEK_CUR);
+            fwrite(cli, sizeof(Client), 1, fp);
+            break;
+        }
+    }
+    if (!achou) {
+        screen_null_id_error("do cliente");
+        printf("\n");
+        printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
+        getchar();
+    }
+    fclose(fp);
+    free(cliLido);
 }

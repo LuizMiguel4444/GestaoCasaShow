@@ -19,7 +19,7 @@ char *screen_busc_atraction(void);
 char *screen_upd_atraction(void);
 char *del_atraction(void);
 void atraction_inputs(Atraction*);
-void atraction_inputs_sem_id(Atraction *atr);
+void atraction_inputs_sem_id(Atraction*);
 Atraction *procura_atraction(char*);
 void print_dados_atraction(Atraction*);
 void print_dados_atraction_upd(Atraction*);
@@ -32,7 +32,6 @@ void excluir_atr(void);
 void screen_del_ok_atr(void);
 void update_atr(void);
 void regravar_atr(Atraction*);
-
 
 void qual_campo(Atraction*);
 Atraction *mudar_campo(void);

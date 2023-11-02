@@ -2,11 +2,11 @@
 #include <stdlib.h>
 #include <locale.h>
 #include <string.h>
-#include "../show/show.h"
+//#include "../show/show.h"
 #include "../atraction/atraction.h"
-#include "../client/client.h"
+//#include "../client/client.h"
 #include "buy.h"
-#include "../report/report.h"
+//#include "../report/report.h"
 #include "../aux/aux.h"
 #include "../util/util.h"
 
@@ -28,7 +28,7 @@ void modulo_buy(void)
                 pesquisa_buy();
                 break;
             case '3':
-                upd_buy(venda);
+                update_buy();
                 break;
             case '0':
                 system("cls || clear");
@@ -95,9 +95,30 @@ Buy *cred_buy(void)
     buy_inputs(b);
     printf("###                                                                         ###\n");
     printf("###############################################################################\n");
+    printf("\n");
+    printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
+    getchar();
+    return b;
+}
+
+Buy *cred_buy_sem_id(void)
+{
+    Buy *b;
+    b = (Buy *)malloc(sizeof(Buy) + 1);
+    system("clear || cls");
+    printf("###############################################################################\n");
     printf("###                                                                         ###\n");
-    printf("###              Quant. de ingressos vendidos: x + %s\n", b -> quant);
-    printf("###              Quant. de ingressos que restam: x - %s\n", b -> quant);
+    printf("###            ===================================================          ###\n");
+    printf("###            =============   Gestão Casa Shows   ===============          ###\n");
+    printf("###            ===================================================          ###\n");
+    printf("###                                                                         ###\n");
+    printf("###############################################################################\n");
+    printf("###                                                                         ###\n");
+    printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
+    printf("###              = = = = = = = = Cadastrar Venda = = = = = = = =            ###\n");
+    printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
+    printf("###                                                                         ###\n");
+    buy_inputs_sem_id(b);
     printf("###                                                                         ###\n");
     printf("###############################################################################\n");
     printf("\n");
@@ -106,7 +127,7 @@ Buy *cred_buy(void)
     return b;
 }
 
-char *screen_read_buy(void)
+char *screen_busc_buy(void)
 {
     char *id;
     id = (char *)malloc(5 * sizeof(char));
@@ -136,8 +157,10 @@ char *screen_read_buy(void)
     return id;
 }
 
-void upd_buy(Buy* b)
+char *screen_upd_buy(void)
 {
+    char *id;
+    id = (char *)malloc(5 * sizeof(char));
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -151,7 +174,17 @@ void upd_buy(Buy* b)
     printf("###              = = = = = = = =  Editar  Venda  = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    // buy_id_check(b);
+    do {
+        printf("###              Informe o Id da venda (4 dígitos): ");
+        scanf("%s", id);
+        limpa_buffer();
+        if (!val_id(id, 4)) {
+            screen_error_input();
+            limpa_linha(); limpa_linha(); limpa_linha();
+        }
+    } while (!val_id(id, 4));
+    printf("###                                                                         ###\n");
+    return id;
 }
 
 void buy_inputs(Buy* b)
@@ -161,6 +194,15 @@ void buy_inputs(Buy* b)
     get_quant_venda(b -> quant, "ingressos");
     get_valor(b -> valor, "final (com casa decimal)");
     get_id(b -> id_ven, "a venda (4 dígitos)");
+    b -> status = 'f';
+}
+
+void buy_inputs_sem_id(Buy* b)
+{
+    get_id(b -> id_show, "o show (4 dígitos)");
+    get_id(b -> id_cli, "o cliente (4 dígitos)");
+    get_quant_venda(b -> quant, "ingressos");
+    get_valor(b -> valor, "final (com casa decimal)");
     b -> status = 'f';
 }
 
@@ -216,6 +258,32 @@ void print_dados_buy(Buy* b)
     getchar();
 }
 
+void print_dados_buy_upd(Buy* b)
+{
+    if (b == NULL) {
+        screen_null_id_error("da venda");
+    }
+    else {
+        system("clear || cls");
+        printf("###############################################################################\n");
+        printf("###                                                                         ###\n");
+        printf("###            ===================================================          ###\n");
+        printf("###            =============   Gestão Casa Shows   ===============          ###\n");
+        printf("###            ===================================================          ###\n");
+        printf("###                                                                         ###\n");
+        printf("###############################################################################\n");
+        printf("###                                                                         ###\n");
+        printf("###              Informações do Id digitado (%s):                         ###\n", b -> id_ven);
+        printf("###                                                                         ###\n");
+        printf("###              Id do show: %s\n", b -> id_show);
+        printf("###              Id do cliente: %s\n", b -> id_cli);
+        printf("###              Quant. de ingressos: %s\n", b -> quant);
+        printf("###              Valor final: %s\n", b -> valor);
+        printf("###                                                                         ###\n");
+        printf("###############################################################################\n");
+    }
+}
+
 void gravar_buy(Buy* b) 
 {
 	FILE* fp_b;
@@ -248,9 +316,69 @@ void pesquisa_buy(void)
     Buy *b;
     char *id;
 
-    id = screen_read_buy();
+    id = screen_busc_buy();
     b = procura_buy(id);
     print_dados_buy(b);
     free(b);
     free(id);
+}
+
+void update_buy(void)
+{
+    Buy *b;
+    char *id;
+    int resp;
+
+    id = screen_upd_buy();
+    b = procura_buy(id);
+    if (b == NULL) {
+        screen_null_id_error("da venda");
+        printf("\n\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
+        getchar();
+    }
+    else {
+        print_dados_buy_upd(b);
+        resp = certeza_upd("dessa venda");
+        if (resp) {
+            b = cred_buy_sem_id();
+            strcpy(b->id_ven, id);
+            regravar_buy(b);
+            free(b);
+        } else {
+            printf("\n\t\t                        Ok!\n");
+            printf("\n\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
+            getchar();
+        }
+    }
+    free(id);
+}
+
+void regravar_buy(Buy *b)
+{
+    int achou = 0;
+    FILE *fp;
+    Buy *buyLido;
+
+    buyLido = (Buy *)malloc(sizeof(Buy));
+    fp = fopen("buy/buys.dat", "r+b");
+    if (fp == NULL) {
+        error_screen_file_buy();
+    }
+    while(!feof(fp)) {
+        fread(buyLido, sizeof(Buy), 1, fp);
+        if (strcmp(buyLido->id_ven, b->id_ven) == 0) {
+            achou = 1;
+            fseek(fp, -1 * sizeof(Buy), SEEK_CUR);
+            fwrite(b, sizeof(Buy), 1, fp);
+            break;
+        }
+    }
+    if (!achou) {
+        screen_null_id_error("da venda");
+        printf("\n");
+        printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
+        getchar();
+    }
+    fclose(fp);
+    free(buyLido);
 }
