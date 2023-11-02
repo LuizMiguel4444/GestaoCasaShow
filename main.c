@@ -16,6 +16,7 @@
 #endif
 
 // Functions signature
+void creat_files(const char* folder, const char* name);
 char main_menu(void);
 void main_menu_screen(void);
 void about(void);
@@ -23,9 +24,32 @@ void dev(void);
 void welcome(void);
 void end(void);
 
+// File creation
+void creat_files(const char* folder, const char* name)
+{
+    FILE *fp;
+    char path[256];
+    snprintf(path, sizeof(path), "%s/%s", folder, name);
+    fp = fopen(path, "rb");
+
+    if (fp == NULL) {
+        fp = fopen(path, "wb");
+        if (fp == NULL) {
+            printf("Erro ao criar arquivos.\n");
+            printf("O programa será encerrado!");
+            exit(1);
+        }
+        fclose(fp);
+    }
+}
+
 // Main program
 int main(void)
 {
+    creat_files("atraction", "atractions.dat");
+    creat_files("buy", "buys.dat");
+    creat_files("client", "clients.dat");
+    creat_files("show", "shows.dat");
     setlocale(LC_ALL, "Portuguese_Brazil");
     welcome();
     char resp;
@@ -217,8 +241,6 @@ void end(void)
     printf("                         ##########################\n");
 }
 
-// fazer funcionar a edição por campo
-// update nos outros módulos
-// ajeitar val_data
 // criar arquivos ao iniciar
 // ver se id já existe
+// fazer funcionar a edição por campo
