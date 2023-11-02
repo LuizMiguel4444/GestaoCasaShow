@@ -14,12 +14,15 @@ void modulo_atraction(void);
 char atraction_menu(void);
 void atraction_menu_screen(void);
 Atraction *cred_atraction(void);
+Atraction *cred_atraction_sem_id(void);
 char *screen_busc_atraction(void);
-void upd_atraction(Atraction*);
+char *screen_upd_atraction(void);
 char *del_atraction(void);
 void atraction_inputs(Atraction*);
+void atraction_inputs_sem_id(Atraction *atr);
 Atraction *procura_atraction(char*);
 void print_dados_atraction(Atraction*);
+void print_dados_atraction_upd(Atraction*);
 
 void gravar_atr(Atraction*);
 void error_screen_file_atr(void);
@@ -27,3 +30,9 @@ void pesquisa_atr(void);
 void remove_atr(Atraction*);
 void excluir_atr(void);
 void screen_del_ok_atr(void);
+void update_atr(void);
+void regravar_atr(Atraction*);
+
+
+void qual_campo(Atraction*);
+Atraction *mudar_campo(void);

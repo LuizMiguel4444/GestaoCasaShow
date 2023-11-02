@@ -217,4 +217,8 @@ void end(void)
     printf("                         ##########################\n");
 }
 
+// fazer funcionar a edição por campo
+// update nos outros módulos
 // ajeitar val_data
+// criar arquivos ao iniciar
+// ver se id já existe

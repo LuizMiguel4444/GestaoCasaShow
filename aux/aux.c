@@ -18,6 +18,19 @@ void get_nome(char* nome, char* modulo)
   } while (!valNome(nome));
 }
 
+void get_nome_upd(char* nome, char* modulo)
+{
+  do {
+    printf("\n\t\t    Novo nome %s: ", modulo);
+    scanf(" %50[^\n]", nome);
+    limpa_buffer();
+    if (!valNome(nome)) {
+      screen_error_input();
+      limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
+    }
+} while (!valNome(nome));
+}
+
 void get_cache(char* cache, char* modulo)
 {
   do {
@@ -27,6 +40,19 @@ void get_cache(char* cache, char* modulo)
     if (!ehdinheiro(cache)) {
       screen_error_input();
       limpa_linha(); limpa_linha(); limpa_linha();
+    }
+  } while (!ehdinheiro(cache));
+}
+
+void get_cache_upd(char* cache, char* modulo)
+{
+  do {
+    printf("\n\t\t    Novo cachê %s (com casa decimal): ", modulo);
+    scanf("%s", cache);
+    limpa_buffer();
+    if (!ehdinheiro(cache)) {
+      screen_error_input();
+      limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while (!ehdinheiro(cache));
 }
@@ -44,6 +70,19 @@ void get_email(char* email, char* modulo)
   } while (!val_email(email));
 }
 
+void get_email_upd(char* email, char* modulo)
+{
+  do {
+    printf("\n\t\t    Novo email %s: ", modulo);
+    scanf("%[a-z0-9@.]", email);
+    limpa_buffer();
+    if (!val_email(email)) {
+      screen_error_input();
+      limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
+    }
+  } while (!val_email(email));
+}
+
 void get_num(char* num, char* modulo)
 {
   do{
@@ -53,6 +92,19 @@ void get_num(char* num, char* modulo)
     if (!validarFone(num)) {
       screen_error_input();
       limpa_linha(); limpa_linha(); limpa_linha();
+    }
+  } while (!validarFone(num));
+}
+
+void get_num_upd(char* num, char* modulo)
+{
+  do {
+    printf("\n\t\t    Novo número %s (com DDD): ", modulo);
+    scanf("%s", num);
+    limpa_buffer();
+    if (!validarFone(num)) {
+      screen_error_input();
+      limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while (!validarFone(num));
 }
@@ -163,4 +215,29 @@ void screen_error_input(void)
 {
   printf("\n\tEntrada inválida! Por favor, tecle ENTER e tente novamente...");
   getchar();
+}
+
+void screen_error_input_resp(void)
+{
+  printf("\n\t     Entrada inválida! Por favor, tecle ENTER e tente novamente...");
+  getchar();
+}
+
+char certeza_upd(char* modulo)
+{
+  char resp[256];
+  do {
+    printf("\n\t\tDeseja mesmo alterar os dados %s (s/n)? ", modulo);
+    scanf("%s", resp);
+    limpa_buffer();
+    if ((resp[0] != 's' && resp[0] != 'n') || strlen(resp) > 1) {
+        screen_error_input_resp();
+        limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
+    }
+  } while ((resp[0] != 's' && resp[0] != 'n') || strlen(resp) > 1);
+  if (resp[0] == 's') {
+    return 1;
+  } else {
+    return 0;
+  }
 }
