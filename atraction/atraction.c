@@ -2,7 +2,11 @@
 #include <stdlib.h>
 #include <locale.h>
 #include <string.h>
+#include "../show/show.h"
 #include "atraction.h"
+#include "../client/client.h"
+#include "../buy/buy.h"
+#include "../report/report.h"
 #include "../aux/aux.h"
 #include "../util/util.h"
 
@@ -447,7 +451,10 @@ void update_atr(void)
         print_dados_atraction_upd(atr);
         resp = certeza_upd("dessa atração");
         if (resp) {
-            atr = mudar_campo();
+            atr = cred_atraction_sem_id();
+            // atr = mudar_campo();
+            // print_dados_atraction_upd(atr);
+            // getchar();
             strcpy(atr->id, id);
             regravar_atr(atr);
             free(atr);
@@ -507,7 +514,7 @@ void qual_campo(Atraction *atr)
         }
     } while (!ehDigitoMax(resp[0], '3')  || !val_entrada(resp));
     if (resp[0] == '0') {
-        get_nome_upd(atr->nome, "da atração");
+        get_nome_upd(atr, "da atração");
         printf("\n\t\t    >>> Nome da atração editado com sucesso. <<<");
         getchar();
     }
@@ -527,7 +534,7 @@ void qual_campo(Atraction *atr)
         getchar();
     }
 }
-
+    
 Atraction *mudar_campo(void)
 {
     Atraction *atr;

@@ -1,5 +1,5 @@
 void get_nome(char* nome, char* modulo);
-void get_nome_upd(char* nome, char* modulo);
+void get_nome_upd(Atraction *nome, char* modulo);
 void get_cache(char* cache, char* modulo);
 void get_cache_upd(char* cache, char* modulo);
 void get_email(char* email, char* modulo);

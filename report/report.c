@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
+#include <string.h>
+#include "../show/show.h"
+#include "../atraction/atraction.h"
+#include "../client/client.h"
+#include "../buy/buy.h"
 #include "report.h"
 #include "../aux/aux.h"
 #include "../util/util.h"

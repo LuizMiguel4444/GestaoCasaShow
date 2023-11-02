@@ -2,7 +2,11 @@
 #include <stdlib.h>
 #include <locale.h>
 #include <string.h>
+#include "../show/show.h"
+#include "../atraction/atraction.h"
+#include "../client/client.h"
 #include "buy.h"
+#include "../report/report.h"
 #include "../aux/aux.h"
 #include "../util/util.h"
 

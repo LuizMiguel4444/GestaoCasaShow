@@ -1,7 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <locale.h>
 #include <string.h>
-#include <time.h>
+#include "../show/show.h"
+#include "../atraction/atraction.h"
+#include "../client/client.h"
+#include "../buy/buy.h"
+#include "../report/report.h"
 #include "aux.h"
 #include "../util/util.h"
 
@@ -18,17 +23,17 @@ void get_nome(char* nome, char* modulo)
   } while (!valNome(nome));
 }
 
-void get_nome_upd(char* nome, char* modulo)
+void get_nome_upd(Atraction *atr, char* modulo)
 {
   do {
     printf("\n\t\t    Novo nome %s: ", modulo);
-    scanf(" %50[^\n]", nome);
+    scanf(" %55[^\n]", atr->nome);
     limpa_buffer();
-    if (!valNome(nome)) {
+    if (!valNome(atr->nome)) {
       screen_error_input();
       limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
     }
-} while (!valNome(nome));
+} while (!valNome(atr->nome));
 }
 
 void get_cache(char* cache, char* modulo)
