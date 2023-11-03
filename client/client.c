@@ -228,7 +228,13 @@ void client_inputs(Client* cli)
     get_cpf(cli -> cpf);
     get_email(cli -> email, "o cliente");
     get_num(cli -> num, "o cliente");
-    get_id(cli -> id, "o cliente (4 dígitos)");
+    do {
+        get_id(cli->id, "o cliente (4 dígitos)");
+        if (!procura_id_client(cli->id)) {
+            screen_error_input_id();
+            limpa_linha(); limpa_linha(); limpa_linha();
+        }
+    } while (!procura_id_client(cli->id));
     cli -> status = 'c';
 }
 
@@ -248,20 +254,34 @@ Client *procura_client(char *id)
 
     cli = (Client *)malloc(sizeof(Client));
     fp = fopen("client/clients.dat", "rb");
-    if (fp == NULL)
-    {
+    if (fp == NULL) {
         error_screen_file_cli();
     }
-    while (fread(cli, sizeof(Client), 1, fp))
-    {
-        if ((strcmp(cli->id, id) == 0) && (cli->status == 'c'))
-        {
+    while (fread(cli, sizeof(Client), 1, fp)) {
+        if ((strcmp(cli->id, id) == 0) && (cli->status == 'c')) {
             fclose(fp);
             return cli;
         }
     }
     fclose(fp);
     return NULL;
+}
+
+int procura_id_client(char *id)
+{
+    FILE *fp;
+    Client *cli;
+
+    cli = (Client *)malloc(sizeof(Client));
+    fp = fopen("client/clients.dat", "rb");
+    while (fread(cli, sizeof(Client), 1, fp)) {
+        if ((strcmp(cli->id, id) == 0)) {
+            fclose(fp);
+            return 0;
+        }
+    }
+    fclose(fp);
+    return 1;
 }
 
 void print_dados_client(Client* cli)

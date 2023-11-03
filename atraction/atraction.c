@@ -233,7 +233,13 @@ void atraction_inputs(Atraction *atr)
     get_cache(atr->cache, "a atração (com casa decimal)");
     get_email(atr->email, "e contato");
     get_num(atr->num, "e contato (com DDD)");
-    get_id(atr->id, "a atração (4 dígitos)");
+    do {
+        get_id(atr->id, "a atração (4 dígitos)");
+        if (!procura_id_atraction(atr->id)) {
+            screen_error_input_id();
+            limpa_linha(); limpa_linha(); limpa_linha();
+        }
+    } while (!procura_id_atraction(atr->id));
     atr->status = 'c';
 }
 
@@ -257,14 +263,30 @@ Atraction *procura_atraction(char *id)
         error_screen_file_atr();
     }
     while (fread(atr, sizeof(Atraction), 1, fp)) {
-        if ((strcmp(atr->id, id) == 0) && (atr->status == 'c'))
-        {
+        if ((strcmp(atr->id, id) == 0) && (atr->status == 'c')) {
             fclose(fp);
             return atr;
         }
     }
     fclose(fp);
     return NULL;
+}
+
+int procura_id_atraction(char *id)
+{
+    FILE *fp;
+    Atraction *atr;
+
+    atr = (Atraction *)malloc(sizeof(Atraction));
+    fp = fopen("atraction/atractions.dat", "rb");
+    while (fread(atr, sizeof(Atraction), 1, fp)) {
+        if ((strcmp(atr->id, id) == 0)) {
+            fclose(fp);
+            return 0;
+        }
+    }
+    fclose(fp);
+    return 1;
 }
 
 void print_dados_atraction(Atraction *atr)
@@ -326,8 +348,7 @@ void gravar_atr(Atraction *atr)
 {
     FILE *fp_atr;
     fp_atr = fopen("atraction/atractions.dat", "ab");
-    if (fp_atr == NULL)
-    {
+    if (fp_atr == NULL) {
         error_screen_file_atr();
     }
     fwrite(atr, sizeof(Atraction), 1, fp_atr);

@@ -241,6 +241,7 @@ void end(void)
     printf("                         ##########################\n");
 }
 
-// criar arquivos ao iniciar
-// ver se id já existe
+// modulo cliente -> busca por cpf
+// acento no valNome
 // fazer funcionar a edição por campo
+// fazer funcionar os relatórios

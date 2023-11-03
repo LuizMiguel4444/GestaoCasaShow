@@ -229,7 +229,13 @@ void show_inputs(Show* sh)
     get_hour(sh -> hour);
     get_quant_cad(sh -> quant, "ingressos");
     get_valor(sh -> valor, "do ingresso (com casa decimal)");
-    get_id(sh -> id, "o show (4 dígitos)");
+    do {
+        get_id(sh->id, "o show (4 dígitos)");
+        if (!procura_id_show(sh->id)) {
+            screen_error_input_id();
+            limpa_linha(); limpa_linha(); limpa_linha();
+        }
+    } while (!procura_id_show(sh->id));
     sh -> status = 'c';
 }
 
@@ -250,20 +256,34 @@ Show *procura_show(char *id)
 
     sh = (Show *)malloc(sizeof(Show));
     fp = fopen("show/shows.dat", "rb");
-    if (fp == NULL)
-    {
+    if (fp == NULL) {
         error_screen_file_show();
     }
-    while (fread(sh, sizeof(Show), 1, fp))
-    {
-        if ((strcmp(sh->id, id) == 0) && (sh->status == 'c'))
-        {
+    while (fread(sh, sizeof(Show), 1, fp)) {
+        if ((strcmp(sh->id, id) == 0) && (sh->status == 'c')) {
             fclose(fp);
             return sh;
         }
     }
     fclose(fp);
     return NULL;
+}
+
+int procura_id_show(char *id)
+{
+    FILE *fp;
+    Show *sh;
+
+    sh = (Show *)malloc(sizeof(Show));
+    fp = fopen("show/shows.dat", "rb");
+    while (fread(sh, sizeof(Show), 1, fp)) {
+        if ((strcmp(sh->id, id) == 0)) {
+            fclose(fp);
+            return 0;
+        }
+    }
+    fclose(fp);
+    return 1;
 }
 
 void print_dados_show(Show* sh)

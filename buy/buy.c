@@ -2,11 +2,11 @@
 #include <stdlib.h>
 #include <locale.h>
 #include <string.h>
-//#include "../show/show.h"
+#include "../show/show.h"
 #include "../atraction/atraction.h"
-//#include "../client/client.h"
+#include "../client/client.h"
 #include "buy.h"
-//#include "../report/report.h"
+#include "../report/report.h"
 #include "../aux/aux.h"
 #include "../util/util.h"
 
@@ -78,7 +78,11 @@ void buy_menu_screen(void)
 Buy *cred_buy(void)
 {
     Buy *b;
+    Show *sh;
+    Client *cli;
     b = (Buy*) malloc(sizeof(Buy) + 1);
+    sh = (Show*) malloc(sizeof(Show) + 1);
+    cli = (Client*) malloc(sizeof(Client) + 1);
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -92,7 +96,7 @@ Buy *cred_buy(void)
     printf("###              = = = = = = = = Cadastrar Venda = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    buy_inputs(b);
+    buy_inputs(b, sh, cli);
     printf("###                                                                         ###\n");
     printf("###############################################################################\n");
     printf("\n");
@@ -187,20 +191,50 @@ char *screen_upd_buy(void)
     return id;
 }
 
-void buy_inputs(Buy* b)
+void buy_inputs(Buy* b, Show* sh, Client* cli)
 {
-    get_id(b -> id_show, "o show (4 dígitos)");
-    get_id(b -> id_cli, "o cliente (4 dígitos)");
+    do {
+        get_id(b->id_show, "o show (4 dígitos)");
+        if (procura_id_show(b->id_show)) {
+            screen_error_input_id_n_exist();
+            limpa_linha(); limpa_linha(); limpa_linha();
+        }
+    } while (procura_id_show(b->id_show));
+    do {
+        get_id(b->id_cli, "o cliente (4 dígitos)");
+        if (procura_id_client(b->id_cli)) {
+            screen_error_input_id_n_exist();
+            limpa_linha(); limpa_linha(); limpa_linha();
+        }
+    } while (procura_id_client(b->id_cli));
     get_quant_venda(b -> quant, "ingressos");
     get_valor(b -> valor, "final (com casa decimal)");
-    get_id(b -> id_ven, "a venda (4 dígitos)");
+    do {
+        get_id(b->id_ven, "a venda (4 dígitos)");
+        if (!procura_id_buy(b->id_ven)) {
+            screen_error_input_id();
+            limpa_linha(); limpa_linha(); limpa_linha();
+        }
+    } while (!procura_id_buy(b->id_ven));
     b -> status = 'f';
 }
 
 void buy_inputs_sem_id(Buy* b)
 {
-    get_id(b -> id_show, "o show (4 dígitos)");
-    get_id(b -> id_cli, "o cliente (4 dígitos)");
+    do {
+        get_id(b->id_show, "o show (4 dígitos)");
+        if (procura_id_show(b->id_show)) {
+            screen_error_input_id_n_exist();
+            limpa_linha(); limpa_linha(); limpa_linha();
+        }
+    } while (procura_id_show(b->id_show));
+    do {
+        get_id(b->id_cli, "o cliente (4 dígitos)");
+        if (procura_id_client(b->id_cli)) {
+            screen_error_input_id_n_exist();
+            limpa_linha(); limpa_linha(); limpa_linha();
+        }
+    } while (procura_id_client(b->id_cli));
     get_quant_venda(b -> quant, "ingressos");
     get_valor(b -> valor, "final (com casa decimal)");
     b -> status = 'f';
@@ -213,20 +247,34 @@ Buy *procura_buy(char *id)
 
     b = (Buy*)malloc(sizeof(Buy));
     fp = fopen("buy/buys.dat", "rb");
-    if (fp == NULL)
-    {
+    if (fp == NULL) {
         error_screen_file_buy();
     }
-    while (fread(b, sizeof(Buy), 1, fp))
-    {
-        if ((strcmp(b->id_ven, id) == 0) && (b->status == 'f'))
-        {
+    while (fread(b, sizeof(Buy), 1, fp)) {
+        if ((strcmp(b->id_ven, id) == 0) && (b->status == 'f')) {
             fclose(fp);
             return b;
         }
     }
     fclose(fp);
     return NULL;
+}
+
+int procura_id_buy(char *id)
+{
+    FILE *fp;
+    Buy *b;
+
+    b = (Buy*)malloc(sizeof(Buy));
+    fp = fopen("buy/buys.dat", "rb");
+    while (fread(b, sizeof(Buy), 1, fp)) {
+        if ((strcmp(b->id_ven, id) == 0)) {
+            fclose(fp);
+            return 0;
+        }
+    }
+    fclose(fp);
+    return 1;
 }
 
 void print_dados_buy(Buy* b)

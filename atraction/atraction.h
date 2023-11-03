@@ -21,6 +21,7 @@ char *del_atraction(void);
 void atraction_inputs(Atraction*);
 void atraction_inputs_sem_id(Atraction*);
 Atraction *procura_atraction(char*);
+int procura_id_atraction(char*);
 void print_dados_atraction(Atraction*);
 void print_dados_atraction_upd(Atraction*);
 

@@ -22,6 +22,7 @@ char *del_show(void);
 void show_inputs(Show*);
 void show_inputs_sem_id(Show*);
 Show *procura_show(char*);
+int procura_id_show(char*);
 void print_dados_show(Show*);
 void print_dados_show_upd(Show*);
 

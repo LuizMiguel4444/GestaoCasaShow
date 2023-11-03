@@ -21,6 +21,7 @@ char *del_client(void);
 void client_inputs(Client*);
 void client_inputs_sem_id(Client*);
 Client *procura_client(char*);
+int procura_id_client(char*);
 void print_dados_client(Client*);
 void print_dados_client_upd(Client*);
 

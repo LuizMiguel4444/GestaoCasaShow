@@ -16,4 +16,6 @@ void get_hour(char* hour);
 void screen_null_id_error(char* modulo);
 void screen_error_input(void);
 void screen_error_input_resp(void);
+void screen_error_input_id(void);
+void screen_error_input_id_n_exist(void);
 char certeza_upd(char* modulo);
