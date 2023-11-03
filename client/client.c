@@ -105,7 +105,7 @@ Client *cred_client(void)
     return cli;
 }
 
-Client *cred_client_sem_id(void)
+Client *cred_client_sem_cpf(void)
 {
     Client *cli;
     cli = (Client*) malloc(sizeof(Client) + 1);
@@ -122,7 +122,7 @@ Client *cred_client_sem_id(void)
     printf("###              = = = = = = =  Cadastrar Cliente  = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    client_inputs_sem_id(cli);
+    client_inputs_sem_cpf(cli);
     printf("###                                                                         ###\n");
     printf("###############################################################################\n");
     printf("\n");
@@ -133,8 +133,8 @@ Client *cred_client_sem_id(void)
 
 char *screen_busc_client(void)
 {
-    char *id;
-    id = (char *)malloc(5 * sizeof(char));
+    char *cpf;
+    cpf = (char *)malloc(5 * sizeof(char));
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -149,22 +149,22 @@ char *screen_busc_client(void)
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
     do {
-        printf("###              Informe o Id do cliente (4 dígitos): ");
-        scanf("%s", id);
+        printf("###              Informe o CPF do cliente: ");
+        scanf("%s", cpf);
         limpa_buffer();
-        if (!val_id(id, 4)) {
+        if (!validarCPF(cpf)) {
             screen_error_input();
             limpa_linha(); limpa_linha(); limpa_linha();
         }
-    } while (!val_id(id, 4));
+    } while (!validarCPF(cpf));
     printf("###                                                                         ###\n");
-    return id;
+    return cpf;
 }
 
 char *screen_upd_client(void)
 {
-    char *id;
-    id = (char *)malloc(5 * sizeof(char));
+    char *cpf;
+    cpf = (char *)malloc(5 * sizeof(char));
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -179,22 +179,22 @@ char *screen_upd_client(void)
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
     do {
-        printf("###              Informe o Id do cliente (4 dígitos): ");
-        scanf("%s", id);
+        printf("###              Informe o CPF do cliente: ");
+        scanf("%s", cpf);
         limpa_buffer();
-        if (!val_id(id, 4)) {
+        if (!validarCPF(cpf)) {
             screen_error_input();
             limpa_linha(); limpa_linha(); limpa_linha();
         }
-    } while (!val_id(id, 4));
+    } while (!validarCPF(cpf));
     printf("###                                                                         ###\n");
-    return id;
+    return cpf;
 }
 
 char *del_client(void)
 {
-    char *id;
-    id = (char *)malloc(5 * sizeof(char));
+    char *cpf;
+    cpf = (char *)malloc(5 * sizeof(char));
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -208,46 +208,43 @@ char *del_client(void)
     printf("###              = = = = = = =  Excluir Cliente  = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    do
-    {
-        printf("###              Informe o Id do cliente (4 dígitos): ");
-        scanf("%s", id);
+    do {
+        printf("###              Informe o CPF do cliente: ");
+        scanf("%s", cpf);
         limpa_buffer();
-        if (!val_id(id, 4)) {
+        if (!validarCPF(cpf)) {
             screen_error_input();
             limpa_linha(); limpa_linha(); limpa_linha();
         }
-    } while (!val_id(id, 4));
+    } while (!validarCPF(cpf));
     printf("###                                                                         ###\n");
-    return id;
+    return cpf;
 }
 
 void client_inputs(Client* cli)
 {
     get_nome(cli -> nome, "o cliente");
-    get_cpf(cli -> cpf);
-    get_email(cli -> email, "o cliente");
-    get_num(cli -> num, "o cliente");
     do {
-        get_id(cli->id, "o cliente (4 dígitos)");
-        if (!procura_id_client(cli->id)) {
-            screen_error_input_id();
+        get_cpf(cli->cpf);
+        if (!procura_cpf_client(cli->cpf)) {
+            screen_error_input_n_exist("CPF");
             limpa_linha(); limpa_linha(); limpa_linha();
         }
-    } while (!procura_id_client(cli->id));
-    cli -> status = 'c';
-}
-
-void client_inputs_sem_id(Client* cli)
-{
-    get_nome(cli -> nome, "o cliente");
-    get_cpf(cli -> cpf);
+    } while (!procura_cpf_client(cli->cpf));
     get_email(cli -> email, "o cliente");
     get_num(cli -> num, "o cliente");
     cli -> status = 'c';
 }
 
-Client *procura_client(char *id)
+void client_inputs_sem_cpf(Client* cli)
+{
+    get_nome(cli -> nome, "o cliente");
+    get_email(cli -> email, "o cliente");
+    get_num(cli -> num, "o cliente");
+    cli -> status = 'c';
+}
+
+Client *procura_client(char *cpf)
 {
     FILE *fp;
     Client *cli;
@@ -258,7 +255,7 @@ Client *procura_client(char *id)
         error_screen_file_cli();
     }
     while (fread(cli, sizeof(Client), 1, fp)) {
-        if ((strcmp(cli->id, id) == 0) && (cli->status == 'c')) {
+        if ((strcmp(cli->cpf, cpf) == 0) && (cli->status == 'c')) {
             fclose(fp);
             return cli;
         }
@@ -267,7 +264,7 @@ Client *procura_client(char *id)
     return NULL;
 }
 
-int procura_id_client(char *id)
+int procura_cpf_client(char *cpf)
 {
     FILE *fp;
     Client *cli;
@@ -275,7 +272,7 @@ int procura_id_client(char *id)
     cli = (Client *)malloc(sizeof(Client));
     fp = fopen("client/clients.dat", "rb");
     while (fread(cli, sizeof(Client), 1, fp)) {
-        if ((strcmp(cli->id, id) == 0)) {
+        if ((strcmp(cli->cpf, cpf) == 0)) {
             fclose(fp);
             return 0;
         }
@@ -298,7 +295,7 @@ void print_dados_client(Client* cli)
         printf("###                                                                         ###\n");
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
-        printf("###              Informações do Id digitado (%s):                         ###\n", cli -> id);
+        printf("###              Informações do CPF digitado:                               ###\n");
         printf("###                                                                         ###\n");
         printf("###              Nome do cliente: %s\n", cli -> nome);
         printf("###              CPF do cliente: %s\n", cli -> cpf);
@@ -326,7 +323,7 @@ void print_dados_client_upd(Client* cli)
         printf("###                                                                         ###\n");
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
-        printf("###              Informações do Id digitado (%s):                         ###\n", cli -> id);
+        printf("###              Informações do CPF digitado:                               ###\n");
         printf("###                                                                         ###\n");
         printf("###              Nome do cliente: %s\n", cli -> nome);
         printf("###              CPF do cliente: %s\n", cli -> cpf);
@@ -367,13 +364,13 @@ void error_screen_file_cli(void)
 void pesquisa_cli(void)
 {
     Client *cli;
-    char *id;
+    char *cpf;
 
-    id = screen_busc_client();
-    cli = procura_client(id);
+    cpf = screen_busc_client();
+    cli = procura_client(cpf);
     print_dados_client(cli);
     free(cli);
-    free(id);
+    free(cpf);
 }
 
 void remove_cli(Client *cli)
@@ -388,7 +385,7 @@ void remove_cli(Client *cli)
     }
     while (!feof(fp)) {
         fread(cliArq, sizeof(Client), 1, fp);
-        if ((strcmp(cliArq->id, cli->id) == 0) && (cliArq->status != 'x')) {
+        if ((strcmp(cliArq->cpf, cli->cpf) == 0) && (cliArq->status != 'x')) {
             achou = 1;
             cliArq->status = 'x';
             fseek(fp, -1 * sizeof(Client), SEEK_CUR);
@@ -409,13 +406,13 @@ void remove_cli(Client *cli)
 void excluir_cli(void)
 {
     Client *cli;
-    char *id;
+    char *cpf;
 
     cli = (Client *)malloc(sizeof(Client));
-    id = del_client();
-    cli = procura_client(id);
+    cpf = del_client();
+    cli = procura_client(cpf);
     if (cli == NULL) {
-        screen_null_id_error("do cliente");
+        screen_null_cpf_error();
         printf("\n");
         printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
         getchar();
@@ -424,7 +421,7 @@ void excluir_cli(void)
         remove_cli(cli);
         free(cli);
     }
-    free(id);
+    free(cpf);
 }
 
 void screen_del_ok_cli(void)
@@ -442,13 +439,13 @@ void screen_del_ok_cli(void)
 void update_cli(void)
 {
     Client *cli;
-    char *id;
+    char *cpf;
     int resp;
 
-    id = screen_upd_client();
-    cli = procura_client(id);
+    cpf = screen_upd_client();
+    cli = procura_client(cpf);
     if (cli == NULL) {
-        screen_null_id_error("do cliente");
+        screen_null_cpf_error();
         printf("\n\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
         getchar();
     }
@@ -456,8 +453,8 @@ void update_cli(void)
         print_dados_client_upd(cli);
         resp = certeza_upd("desse cliente");
         if (resp) {
-            cli = cred_client_sem_id();
-            strcpy(cli->id, id);
+            cli = cred_client_sem_cpf();
+            strcpy(cli->cpf, cpf);
             regravar_cli(cli);
             free(cli);
         } else {
@@ -466,7 +463,7 @@ void update_cli(void)
             getchar();
         }
     }
-    free(id);
+    free(cpf);
 }
 
 void regravar_cli(Client *cli)
@@ -482,7 +479,7 @@ void regravar_cli(Client *cli)
     }
     while(!feof(fp)) {
         fread(cliLido, sizeof(Client), 1, fp);
-        if (strcmp(cliLido->id, cli->id) == 0) {
+        if (strcmp(cliLido->cpf, cli->cpf) == 0) {
             achou = 1;
             fseek(fp, -1 * sizeof(Client), SEEK_CUR);
             fwrite(cli, sizeof(Client), 1, fp);
@@ -497,4 +494,15 @@ void regravar_cli(Client *cli)
     }
     fclose(fp);
     free(cliLido);
+}
+
+void screen_null_cpf_error(void)
+{
+    printf("###############################################################################\n");
+    printf("###                                                                         ###\n");
+    printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
+    printf("###                       CPF do cliente não encontrado\n");
+    printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
+    printf("###                                                                         ###\n");
+    printf("###############################################################################\n");
 }

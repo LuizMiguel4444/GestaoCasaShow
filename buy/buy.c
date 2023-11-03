@@ -196,17 +196,17 @@ void buy_inputs(Buy* b, Show* sh, Client* cli)
     do {
         get_id(b->id_show, "o show (4 dígitos)");
         if (procura_id_show(b->id_show)) {
-            screen_error_input_id_n_exist();
+            screen_error_input_n_exist("Id");
             limpa_linha(); limpa_linha(); limpa_linha();
         }
     } while (procura_id_show(b->id_show));
     do {
-        get_id(b->id_cli, "o cliente (4 dígitos)");
-        if (procura_id_client(b->id_cli)) {
-            screen_error_input_id_n_exist();
+        get_cpf(b->cpf_cli);
+        if (procura_cpf_client(b->cpf_cli)) {
+            screen_error_input_n_exist("CPF");
             limpa_linha(); limpa_linha(); limpa_linha();
         }
-    } while (procura_id_client(b->id_cli));
+    } while (procura_cpf_client(b->cpf_cli));
     get_quant_venda(b -> quant, "ingressos");
     get_valor(b -> valor, "final (com casa decimal)");
     do {
@@ -224,17 +224,17 @@ void buy_inputs_sem_id(Buy* b)
     do {
         get_id(b->id_show, "o show (4 dígitos)");
         if (procura_id_show(b->id_show)) {
-            screen_error_input_id_n_exist();
+            screen_error_input_n_exist("Id");
             limpa_linha(); limpa_linha(); limpa_linha();
         }
     } while (procura_id_show(b->id_show));
     do {
-        get_id(b->id_cli, "o cliente (4 dígitos)");
-        if (procura_id_client(b->id_cli)) {
-            screen_error_input_id_n_exist();
+        get_cpf(b->cpf_cli);
+        if (procura_cpf_client(b->cpf_cli)) {
+            screen_error_input_n_exist("CPF");
             limpa_linha(); limpa_linha(); limpa_linha();
         }
-    } while (procura_id_client(b->id_cli));
+    } while (procura_cpf_client(b->cpf_cli));
     get_quant_venda(b -> quant, "ingressos");
     get_valor(b -> valor, "final (com casa decimal)");
     b -> status = 'f';
@@ -295,7 +295,7 @@ void print_dados_buy(Buy* b)
         printf("###              Informações do Id digitado (%s):                         ###\n", b -> id_ven);
         printf("###                                                                         ###\n");
         printf("###              Id do show: %s\n", b -> id_show);
-        printf("###              Id do cliente: %s\n", b -> id_cli);
+        printf("###              CPF do cliente: %s\n", b -> cpf_cli);
         printf("###              Quant. de ingressos: %s\n", b -> quant);
         printf("###              Valor final: %s\n", b -> valor);
         printf("###                                                                         ###\n");
@@ -324,7 +324,7 @@ void print_dados_buy_upd(Buy* b)
         printf("###              Informações do Id digitado (%s):                         ###\n", b -> id_ven);
         printf("###                                                                         ###\n");
         printf("###              Id do show: %s\n", b -> id_show);
-        printf("###              Id do cliente: %s\n", b -> id_cli);
+        printf("###              CPF do cliente: %s\n", b -> cpf_cli);
         printf("###              Quant. de ingressos: %s\n", b -> quant);
         printf("###              Valor final: %s\n", b -> valor);
         printf("###                                                                         ###\n");

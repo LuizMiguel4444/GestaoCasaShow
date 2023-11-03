@@ -105,6 +105,9 @@ int valNome(char *nome)
     if (strlen(nome) < 3) {
       return 0;
     }
+    if (!isupper(nome[0])) {
+      return 0;
+    }
     if (!ehLetraeEspaco(nome[i])) {
       return 0;
     }

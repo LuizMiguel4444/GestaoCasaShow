@@ -2,7 +2,7 @@ typedef struct buy Buy;
 
 struct buy {
 char id_show[5];
-char id_cli[5];
+char cpf_cli[16];
 char quant[8];
 char valor[10];
 char id_ven[5];

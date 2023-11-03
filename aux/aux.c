@@ -13,12 +13,12 @@
 void get_nome(char* nome, char* modulo)
 {
   do {
-    printf("###              Nome d%s: ", modulo);
+    printf("###              Nome d%s (sem acentos ou ç): ", modulo);
     scanf(" %50[^\n]", nome);
     limpa_buffer();
     if (!valNome(nome)) {
-      screen_error_input();
-      limpa_linha(); limpa_linha(); limpa_linha();
+      screen_error_input_name();
+      limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while (!valNome(nome));
 }
@@ -26,7 +26,7 @@ void get_nome(char* nome, char* modulo)
 void get_nome_upd(Atraction *atr, char* modulo)
 {
   do {
-    printf("\n\t\t    Novo nome %s: ", modulo);
+    printf("\n\t\t    Novo nome %s  (sem acentos ou ç): ", modulo);
     scanf(" %55[^\n]", atr->nome);
     limpa_buffer();
     if (!valNome(atr->nome)) {
@@ -222,6 +222,13 @@ void screen_error_input(void)
   getchar();
 }
 
+void screen_error_input_name(void)
+{
+  printf("\n\tEntrada inválida! Por favor, tecle ENTER e tente novamente...");
+  printf("\n\tNomes próprios devem iniciar com letra maiúscula!");
+  getchar();
+}
+
 void screen_error_input_resp(void)
 {
   printf("\n\t     Entrada inválida! Por favor, tecle ENTER e tente novamente...");
@@ -234,11 +241,12 @@ void screen_error_input_id(void)
   getchar();
 }
 
-void screen_error_input_id_n_exist(void)
+void screen_error_input_n_exist(char* chave)
 {
-  printf("\n\tO Id digitado não foi cadastrado! Por favor, insira um Id válido existente...");
+  printf("\n\tO %s digitado não foi cadastrado! Por favor, insira um %s válido existente...", chave, chave);
   getchar();
 }
+
 char certeza_upd(char* modulo)
 {
   char resp[256];

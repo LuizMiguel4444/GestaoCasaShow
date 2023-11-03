@@ -241,7 +241,5 @@ void end(void)
     printf("                         ##########################\n");
 }
 
-// modulo cliente -> busca por cpf
-// acento no valNome
 // fazer funcionar a edição por campo
 // fazer funcionar os relatórios
