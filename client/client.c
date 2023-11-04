@@ -334,6 +334,25 @@ void print_dados_client_upd(Client* cli)
     }
 }
 
+void print_dados_client_rep(Client* cli)
+{
+    if (cli == NULL) {
+        printf("Erro na abertura do arquivo!\n");
+        printf("Não é possível continuar este programa...\n");
+        exit(1);
+    } else {
+        printf("###############################################################################\n");
+        printf("###                                                                         ###\n");
+        printf("###              Nome do cliente: %s\n", cli -> nome);
+        printf("###              CPF do cliente: %s\n", cli -> cpf);
+        printf("###              Email do cliente: %s\n", cli -> email);
+        printf("###              Número do cliente: %s\n", cli -> num);
+        printf("###              Status do cliente: %c\n", cli -> status);
+        printf("###                                                                         ###\n");
+        printf("###############################################################################\n\n");
+    }
+}
+
 void gravar_client(Client* cli)
 {
 	FILE* fp_cli;
@@ -407,6 +426,7 @@ void excluir_cli(void)
 {
     Client *cli;
     char *cpf;
+    int resp;
 
     cli = (Client *)malloc(sizeof(Client));
     cpf = del_client();
@@ -417,9 +437,18 @@ void excluir_cli(void)
         printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
         getchar();
     } else {
-        cli->status = 'x';
-        remove_cli(cli);
-        free(cli);
+        print_dados_client_upd(cli);
+        resp = certeza_del("desse cliente");
+        if (resp) {
+            printf("\n");
+            cli->status = 'x';
+            remove_cli(cli);
+            free(cli);
+        } else {
+            printf("\n\t\t                        Ok!\n");
+            printf("\n\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
+            getchar();
+        }
     }
     free(cpf);
 }

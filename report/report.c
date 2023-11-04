@@ -79,6 +79,15 @@ void report_menu_screen(void)
 
 void report_show(void)
 {
+    FILE *fp;
+    Show *sh;
+    sh = (Show*) malloc(sizeof(Show));
+    fp = fopen("show/shows.dat", "rb");
+    if (fp == NULL) {
+        printf("Erro na abertura do arquivo!\n");
+        printf("Não é possível continuar este programa...\n");
+        exit(1);
+    }
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -86,31 +95,32 @@ void report_show(void)
     printf("###            =============   Gestão Casa Shows   ===============          ###\n");
     printf("###            ===================================================          ###\n");
     printf("###                                                                         ###\n");
-    printf("###############################################################################\n");
-    printf("###                                                                         ###\n");
-    printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-    printf("###              = = = = = = = = Relatório Shows = = = = = = = =            ###\n");
-    printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-    printf("###                                                                         ###\n");
-    printf("###              Cadastro realizado em **/**/**** às **/**.                 ###\n");
-    printf("###                                                                         ###\n");
-    printf("###              Dados do show:                                             ###\n");
-    printf("###                                                                         ###\n");
-    printf("###              Atrações do show: ***** ***** ********                     ###\n");
-    printf("###              Data do show: **/**/****                                   ###\n");
-    printf("###              Hora do show: **:**                                        ###\n");
-    printf("###              Quant. de ingressos do show: ***                           ###\n");
-    printf("###              Valor do ingresso do show: ***.**                          ###\n");
-    printf("###              Id do show: ****                                           ###\n");
-    printf("###                                                                         ###\n");
-    printf("###############################################################################\n");
-    printf("\n");
+    while(fread(sh, sizeof(Show), 1, fp)) {
+        //if (sh -> status != 'x') {
+        printf("###############################################################################\n");
+        printf("###                                                                         ###\n");
+        printf("###              Cadastro realizado em **/**/**** às **/**.                 ###\n");
+        printf("###                                                                         ###\n");
+        print_dados_show_rep(sh);
+        //}
+    }
+    fclose(fp);
+    free(sh);
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
     getchar();
 }
 
 void report_atraction(void)
 {
+    FILE *fp;
+    Atraction *atr;
+    atr = (Atraction*) malloc(sizeof(Atraction));
+    fp = fopen("atraction/atractions.dat", "rb");
+    if (fp == NULL) {
+        printf("Erro na abertura do arquivo!\n");
+        printf("Não é possível continuar este programa...\n");
+        exit(1);
+    }
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -118,29 +128,32 @@ void report_atraction(void)
     printf("###            =============   Gestão Casa Shows   ===============          ###\n");
     printf("###            ===================================================          ###\n");
     printf("###                                                                         ###\n");
-    printf("###############################################################################\n");
-    printf("###                                                                         ###\n");
-    printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-    printf("###              = = = = = = = Relatório  Atrações = = = = = = =            ###\n");
-    printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-    printf("###                                                                         ###\n");
-    printf("###              Cadastro realizado em **/**/**** às **/**.                 ###\n");
-    printf("###                                                                         ###\n");
-    printf("###              Dados da atração:                                          ###\n");
-    printf("###                                                                         ###\n");
-    printf("###              Nome da atração: ***** ***** ********                      ###\n");
-    printf("###              Valor do cachê da atração: *****.**                        ###\n");
-    printf("###              Email de contato da atração: ****@*****.***                ###\n");
-    printf("###              Número de contato da atração: ***********                  ###\n");
-    printf("###                                                                         ###\n");
-    printf("###############################################################################\n");
-    printf("\n");
+    while(fread(atr, sizeof(Atraction), 1, fp)) {
+        //if (atr -> status != 'x') {
+        printf("###############################################################################\n");
+        printf("###                                                                         ###\n");
+        printf("###              Cadastro realizado em **/**/**** às **/**.                 ###\n");
+        printf("###                                                                         ###\n");
+        print_dados_atraction_rep(atr);
+        //}
+    }
+    fclose(fp);
+    free(atr);
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
     getchar();
 }
 
 void report_client(void)
 {
+    FILE *fp;
+    Client *cli;
+    cli = (Client*) malloc(sizeof(Client));
+    fp = fopen("client/clients.dat", "rb");
+    if (fp == NULL) {
+        printf("Erro na abertura do arquivo!\n");
+        printf("Não é possível continuar este programa...\n");
+        exit(1);
+    }
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -148,30 +161,32 @@ void report_client(void)
     printf("###            =============   Gestão Casa Shows   ===============          ###\n");
     printf("###            ===================================================          ###\n");
     printf("###                                                                         ###\n");
-    printf("###############################################################################\n");
-    printf("###                                                                         ###\n");
-    printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-    printf("###              = = = = = = = Relatório  Clientes = = = = = = =            ###\n");
-    printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-    printf("###                                                                         ###\n");
-    printf("###              Cadastro realizado em **/**/**** às **/**.                 ###\n");
-    printf("###                                                                         ###\n");
-    printf("###              Dados do cliente:                                          ###\n");
-    printf("###                                                                         ###\n");
-    printf("###              Nome do cliente: ***** ***** ********                      ###\n");
-    printf("###              CPF do cliente: ***********                                ###\n");
-    printf("###              Email do cliente: ****@*****.***                           ###\n");
-    printf("###              Número do cliente: ***********                             ###\n");
-    printf("###              Id do cliente: ****                                        ###\n");
-    printf("###                                                                         ###\n");
-    printf("###############################################################################\n");
-    printf("\n");
+    while(fread(cli, sizeof(Client), 1, fp)) {
+        //if (cli -> status != 'x') {
+        printf("###############################################################################\n");
+        printf("###                                                                         ###\n");
+        printf("###              Cadastro realizado em **/**/**** às **/**.                 ###\n");
+        printf("###                                                                         ###\n");
+        print_dados_client_rep(cli);
+        //}
+    }
+    fclose(fp);
+    free(cli);
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
     getchar();
 }
 
 void report_buy(void)
 {
+    FILE *fp;
+    Buy *b;
+    b = (Buy*) malloc(sizeof(Buy));
+    fp = fopen("buy/buys.dat", "rb");
+    if (fp == NULL) {
+        printf("Erro na abertura do arquivo!\n");
+        printf("Não é possível continuar este programa...\n");
+        exit(1);
+    }
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -179,24 +194,17 @@ void report_buy(void)
     printf("###            =============   Gestão Casa Shows   ===============          ###\n");
     printf("###            ===================================================          ###\n");
     printf("###                                                                         ###\n");
-    printf("###############################################################################\n");
-    printf("###                                                                         ###\n");
-    printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-    printf("###              = = = = = = =  Relatório  Vendas  = = = = = = =            ###\n");
-    printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-    printf("###                                                                         ###\n");
-    printf("###              Cadastro realizado em **/**/**** às **/**.                 ###\n");
-    printf("###                                                                         ###\n");
-    printf("###              Dados da venda:                                            ###\n");
-    printf("###                                                                         ###\n");
-    printf("###              Id do show relacionado à venda: ****                       ###\n");
-    printf("###              Id do cliente relacionado à venda: ****                    ###\n");
-    printf("###              Quantidade de ingressos da venda: **                       ###\n");
-    printf("###              Valor final da venda: ***.**                               ###\n");
-    printf("###              Id da venda: ****                                          ###\n");
-    printf("###                                                                         ###\n");
-    printf("###############################################################################\n");
-    printf("\n");
+    while(fread(b, sizeof(Buy), 1, fp)) {
+        //if (b -> status != 'x') {
+        printf("###############################################################################\n");
+        printf("###                                                                         ###\n");
+        printf("###              Cadastro realizado em **/**/**** às **/**.                 ###\n");
+        printf("###                                                                         ###\n");
+        print_dados_buy_rep(b);
+        //}
+    }
+    fclose(fp);
+    free(b);
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
     getchar();
 }

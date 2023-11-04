@@ -23,6 +23,7 @@ Client *procura_client(char*);
 int procura_cpf_client(char*);
 void print_dados_client(Client*);
 void print_dados_client_upd(Client*);
+void print_dados_client_rep(Client*);
 
 void gravar_client(Client*);
 void error_screen_file_cli(void);

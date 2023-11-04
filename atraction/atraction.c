@@ -344,6 +344,26 @@ void print_dados_atraction_upd(Atraction *atr)
     }
 }
 
+void print_dados_atraction_rep(Atraction *atr)
+{
+    if (atr == NULL) {
+        printf("Erro na abertura do arquivo!\n");
+        printf("Não é possível continuar este programa...\n");
+        exit(1);
+    } else {
+        printf("###############################################################################\n");
+        printf("###                                                                         ###\n");
+        printf("###              Nome da atração: %s\n", atr->nome);
+        printf("###              Valor do cachê da atração: %s\n", atr->cache);
+        printf("###              Email de contato da atração: %s\n", atr->email);
+        printf("###              Número de contato da atração: %s\n", atr->num);
+        printf("###              Id da atração: %s\n", atr -> id);
+        printf("###              Status da atração: %c\n", atr -> status);
+        printf("###                                                                         ###\n");
+        printf("###############################################################################\n\n");
+    }
+}
+
 void gravar_atr(Atraction *atr)
 {
     FILE *fp_atr;
@@ -417,22 +437,29 @@ void excluir_atr(void)
 {
     Atraction *atr;
     char *id;
+    int resp;
 
     atr = (Atraction *)malloc(sizeof(Atraction));
     id = del_atraction();
     atr = procura_atraction(id);
-    if (atr == NULL)
-    {
+    if (atr == NULL) {
         screen_null_id_error("da atração");
         printf("\n");
         printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
         getchar();
-    }
-    else
-    {
-        atr->status = 'x';
-        remove_atr(atr);
-        free(atr);
+    } else {
+        print_dados_atraction_upd(atr);
+        resp = certeza_del("dessa atração");
+        if (resp) {
+            printf("\n");
+            atr->status = 'x';
+            remove_atr(atr);
+            free(atr);
+        } else {
+            printf("\n\t\t                        Ok!\n");
+            printf("\n\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
+            getchar();
+        }
     }
     free(id);
 }

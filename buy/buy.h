@@ -22,6 +22,7 @@ Buy *procura_buy(char*);
 int procura_id_buy(char*);
 void print_dados_buy(Buy*);
 void print_dados_buy_upd(Buy*);
+void print_dados_buy_rep(Buy*);
 
 void gravar_buy(Buy*);
 void error_screen_file_buy(void);

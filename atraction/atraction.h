@@ -24,6 +24,7 @@ Atraction *procura_atraction(char*);
 int procura_id_atraction(char*);
 void print_dados_atraction(Atraction*);
 void print_dados_atraction_upd(Atraction*);
+void print_dados_atraction_rep(Atraction*);
 
 void gravar_atr(Atraction*);
 void error_screen_file_atr(void);

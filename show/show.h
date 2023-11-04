@@ -25,6 +25,7 @@ Show *procura_show(char*);
 int procura_id_show(char*);
 void print_dados_show(Show*);
 void print_dados_show_upd(Show*);
+void print_dados_show_rep(Show*);
 
 void gravar_show(Show*);
 void error_screen_file_show(void);

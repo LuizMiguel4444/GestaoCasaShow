@@ -20,3 +20,4 @@ void screen_error_input_resp(void);
 void screen_error_input_id(void);
 void screen_error_input_n_exist(char* chave);
 char certeza_upd(char* modulo);
+char certeza_del(char* modulo);

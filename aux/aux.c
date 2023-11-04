@@ -265,3 +265,22 @@ char certeza_upd(char* modulo)
     return 0;
   }
 }
+
+char certeza_del(char* modulo)
+{
+  char resp[256];
+  do {
+    printf("\n\t\tDeseja mesmo excluir os dados %s (s/n)? ", modulo);
+    scanf("%s", resp);
+    limpa_buffer();
+    if ((resp[0] != 's' && resp[0] != 'n') || strlen(resp) > 1) {
+        screen_error_input_resp();
+        limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
+    }
+  } while ((resp[0] != 's' && resp[0] != 'n') || strlen(resp) > 1);
+  if (resp[0] == 's') {
+    return 1;
+  } else {
+    return 0;
+  }
+}

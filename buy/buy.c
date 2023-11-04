@@ -332,6 +332,26 @@ void print_dados_buy_upd(Buy* b)
     }
 }
 
+void print_dados_buy_rep(Buy* b)
+{
+    if (b == NULL) {
+        printf("Erro na abertura do arquivo!\n");
+        printf("Não é possível continuar este programa...\n");
+        exit(1);
+    } else {
+        printf("###############################################################################\n");
+        printf("###                                                                         ###\n");
+        printf("###              Id do show: %s\n", b -> id_show);
+        printf("###              CPF do cliente: %s\n", b -> cpf_cli);
+        printf("###              Quant. de ingressos: %s\n", b -> quant);
+        printf("###              Valor final: %s\n", b -> valor);
+        printf("###              Id da venda: %s\n", b -> id_ven);
+        printf("###              Status da venda: %c\n", b -> status);
+        printf("###                                                                         ###\n");
+        printf("###############################################################################\n\n");
+    }
+}
+
 void gravar_buy(Buy* b) 
 {
 	FILE* fp_b;

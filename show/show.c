@@ -341,6 +341,27 @@ void print_dados_show_upd(Show* sh)
     }
 }
 
+void print_dados_show_rep(Show* sh)
+{
+    if (sh == NULL) {
+        printf("Erro na abertura do arquivo!\n");
+        printf("Não é possível continuar este programa...\n");
+        exit(1);
+    } else {
+        printf("###############################################################################\n");
+        printf("###                                                                         ###\n");
+        printf("###              Atração: %s\n", sh -> atraction);
+        printf("###              Data: %s\n", sh -> data);
+        printf("###              Hora: %s\n", sh -> hour);
+        printf("###              Quant. de ingressos: %s\n", sh -> quant);
+        printf("###              Valor do ingresso: %s\n", sh -> valor);
+        printf("###              Id do show: %s\n", sh -> id);
+        printf("###              Status do show: %c\n", sh -> status);
+        printf("###                                                                         ###\n");
+        printf("###############################################################################\n\n");
+    }
+}
+
 void gravar_show(Show* sh) 
 {
 	FILE* fp_sh;
@@ -414,6 +435,7 @@ void excluir_show(void)
 {
     Show *sh;
     char *id;
+    int resp; 
 
     sh = (Show *)malloc(sizeof(Show));
     id = del_show();
@@ -424,9 +446,18 @@ void excluir_show(void)
         printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
         getchar();
     } else {
-        sh->status = 'x';
-        remove_show(sh);
-        free(sh);
+        print_dados_show_upd(sh);
+        resp = certeza_del("desse show");
+        if (resp) {
+            printf("\n");
+            sh->status = 'x';
+            remove_show(sh);
+            free(sh);
+        } else {
+            printf("\n\t\t                        Ok!\n");
+            printf("\n\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
+            getchar();
+        }
     }
     free(id);
 }
