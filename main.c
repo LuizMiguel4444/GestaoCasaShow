@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <locale.h>
 #include <string.h>
+#include <unistd.h>
 #include "show/show.h"
 #include "atraction/atraction.h"
 #include "client/client.h"
@@ -9,11 +10,6 @@
 #include "report/report.h"
 #include "aux/aux.h"
 #include "util/util.h"
-#ifndef cores
-#define cores
-#define ciano(texto) printf("\33[1;36m %s \33[0m", texto)
-#define amarelo(texto) printf("\33[1;33m %s \33[0m", texto)
-#endif
 
 // Functions signature
 void creat_files(const char* folder, const char* name);
@@ -170,76 +166,70 @@ void dev(void)
 
 void welcome(void)
 {
-    system("clear || cls");
-    printf("########                                                               ######\n");
-    printf("#########                                                             #######\n");
-    printf("       ###                                                           ###\n");
-    printf("       #####                                                       #####\n");
-    printf("       #######                                                   #######\n");
-    printf("      ##########                                               ##########\n");
-    printf("     #############                                           #############\n");
-    printf("      ##############                                       ##############\n");
-    printf("        ##############                                   ##############\n");
-    printf("          ########                                           #########\n");
-    printf("            ####                                                ####\n");
-    printf("             ##                                                  ##\n");
-    ciano("                  ######                              ######\n");
-    ciano("                 ########                          ########\n");
-    ciano("                 ##########                      ##########\n");
-    ciano("                 ############                  ############\n");
-    ciano("                 ##############              ##############\n");
-    ciano("                 ################          ################\n");
-    ciano("                 ##################      ##################\n");
-    ciano("                 ####################  ####################\n");
-    ciano("                 ##########################################\n");
-    ciano("                 ##########################################\n");
-    ciano("                   ######################################\n");
-    ciano("                    ####################################\n");
-    ciano("                       ##############################\n");
+    int height = 11;
+    int width = 70;
+    char message[] = "SEJA BEM-VINDO AO GESTAO CASA SHOW!";
+    int messageLength = strlen(message);
+
+    for (int i = width / 2; i >= 0; i--) {
+        printf("\033[H\033[J"); // Limpa a tela
+
+        for (int j = 0; j < height; j++) {
+            for (int k = 0; k < width; k++) {
+                if (k <= i || k >= width - i - 1) {
+                    printf("/");
+                } else if (j == height / 2) {
+                    int messagePosition = (width - messageLength) / 2;
+                    if (k >= messagePosition && k < messagePosition + messageLength) {
+                        printf("%c", message[k - messagePosition]);
+                    } else {
+                        printf(" ");
+                    }
+                } else {
+                    printf(" ");
+                }
+            }
+            printf("\n");
+        }
+        usleep(80000); // Espera por 0.08 segundo
+    }
     printf("\n");
-    amarelo("                      SEJA BEM-VINDO AO GESTÃO CASA SHOW\n");
-    printf("\n");
-    printf("               ##################################################\n");
-    printf("                ##############################################\n");
-    printf("                    ######################################\n");
-    printf("                          ##########################\n");
-    printf("\n");
-    printf("\n");
-    printf("\n");
-    printf("\t\t>>> Tecle ENTER para ir ao Menu Principal... <<<");
+    printf("\t   >>> Tecle ENTER para ir ao Menu Principal... <<<");
     getchar();
-}
+} // AUTOR: LUIZ MIGUEL, FEITO COM AJUDA DO CHAT-GPT /// GIT: https://github.com/LuizMiguel4444
 
 void end(void)
 {
-    system("clear || cls");
-    printf("########                                                             ######\n");
-    printf("#########                                                           #######\n");
-    printf("       ###                                                         ###\n");
-    printf("       #####                                                     #####\n");
-    printf("       #######                                                 #######\n");
-    printf("      ##########                                             ##########\n");
-    printf("     #############                                         #############\n");
-    printf("      ##############                                     ##############\n");
-    printf("        ##############                                 ##############\n");
-    printf("          ########                                         #########\n");
-    printf("            ####                                              ####\n");
-    printf("             ##                                                ##\n");
-    printf("\n");
-    printf("\n");
-    printf("\n");
-    printf("\n");
-    amarelo("                             FIM DO ESPETÁCULO\n");
-    printf("\n");
-    printf("\n");
-    printf("\n");
-    printf("\n");
-    printf("\n");
-    printf("             ##################################################\n");
-    printf("               ##############################################\n");
-    printf("                   ######################################\n");
-    printf("                         ##########################\n");
-}
+    int height = 11;
+    int width = 70;
+    char message[] = "F I M    D O    E S P E T A C U L O";
+    int messageLength = strlen(message);
 
-// fazer funcionar a edição por campo
+    for (int i = 0; i <= width / 2; i++) {
+        printf("\033[H\033[J"); // Limpa a tela
+
+        for (int j = 0; j < height; j++) {
+            for (int k = 0; k < width; k++) {
+                if (k <= i || k >= width - i - 1) {
+                    printf("/");
+                } else {
+                    if (j == height / 2 && k >= (width - messageLength) / 2 && k < (width + messageLength) / 2) {
+                        printf("%c", message[k - (width - messageLength) / 2]);
+                    } else {
+                        printf(" ");
+                    }
+                }
+            }
+            printf("\n");
+        }
+        usleep(80000); // Espera por 0.08 segundo
+
+        // Limpa a linha da frase para que ela desapareça
+        for (int j = 0; j < height; j++) {
+            printf("\e[A\e[K"); // Move o cursor uma linha para cima e limpa a linha
+        }
+    }
+} // AUTOR: LUIZ MIGUEL, FEITO COM AJUDA DO CHAT-GPT /// GIT: https://github.com/LuizMiguel4444
+
 // fazer funcionar os relatórios
+// fazer funcionar a edição por campo
