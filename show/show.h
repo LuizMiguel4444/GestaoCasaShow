@@ -2,13 +2,18 @@ typedef struct show Show;
 
 struct show
 {
-char atraction[56];
-char data[12];
-char hour[6];
-char quant[8];
-char valor[10];
-char id[5];
-char status;
+    char atraction[56];
+    char data[12];
+    char hora[6];
+    char quant[8];
+    char valor[10];
+    char id[5];
+    char status;
+    int day;
+    int month;
+    int year;
+    int hour;
+    int minute;
 };
 
 void modulo_show(void);
@@ -35,3 +40,4 @@ void excluir_show(void);
 void screen_del_ok_show(void);
 void update_show(void);
 void regravar_show(Show*);
+void get_data_hour_sh(Show*);

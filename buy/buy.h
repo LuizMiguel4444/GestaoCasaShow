@@ -1,12 +1,17 @@
 typedef struct buy Buy;
 
 struct buy {
-char id_show[5];
-char cpf_cli[16];
-char quant[8];
-char valor[10];
-char id_ven[5];
-char status;
+    char id_show[5];
+    char cpf_cli[16];
+    char quant[8];
+    char valor[10];
+    char id_ven[5];
+    char status;
+    int day;
+    int month;
+    int year;
+    int hour;
+    int minute;
 };
 
 void modulo_buy(void);
@@ -29,3 +34,4 @@ void error_screen_file_buy(void);
 void pesquisa_buy(void);
 void update_buy(void);
 void regravar_buy(Buy*);
+void get_data_hour_buy(Buy*);

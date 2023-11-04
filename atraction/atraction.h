@@ -8,6 +8,11 @@ struct atraction
     char num[12];
     char id[5];
     char status;
+    int day;
+    int month;
+    int year;
+    int hour;
+    int minute;
 };
 
 void modulo_atraction(void);
@@ -34,6 +39,7 @@ void excluir_atr(void);
 void screen_del_ok_atr(void);
 void update_atr(void);
 void regravar_atr(Atraction*);
+void get_data_hour_atr(Atraction*);
 
 void qual_campo(Atraction*);
 Atraction *mudar_campo(void);

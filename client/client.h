@@ -2,11 +2,16 @@ typedef struct client Client;
 
 struct client
 {
-char nome[56];
-char cpf[16];
-char email[56];
-char num[12];
-char status;
+    char nome[56];
+    char cpf[16];
+    char email[56];
+    char num[12];
+    char status;
+    int day;
+    int month;
+    int year;
+    int hour;
+    int minute;
 };
 
 void modulo_client(void);
@@ -34,3 +39,4 @@ void screen_del_ok_cli(void);
 void update_cli(void);
 void regravar_cli(Client*);
 void screen_null_cpf_error(void);
+void get_data_hour_cli(Client*);

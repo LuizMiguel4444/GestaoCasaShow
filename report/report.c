@@ -99,7 +99,7 @@ void report_show(void)
         //if (sh -> status != 'x') {
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
-        printf("###              Cadastro realizado em **/**/**** às **/**.                 ###\n");
+        printf("###              Cadastro realizado em %02d/%02d/%d às %02d:%02d.                 ###\n", sh->day, sh->month, sh->year, sh->hour, sh->minute);
         printf("###                                                                         ###\n");
         print_dados_show_rep(sh);
         //}
@@ -132,7 +132,7 @@ void report_atraction(void)
         //if (atr -> status != 'x') {
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
-        printf("###              Cadastro realizado em **/**/**** às **/**.                 ###\n");
+        printf("###              Cadastro realizado em %02d/%02d/%d às %02d:%02d.                 ###\n", atr->day, atr->month, atr->year, atr->hour, atr->minute);
         printf("###                                                                         ###\n");
         print_dados_atraction_rep(atr);
         //}
@@ -165,7 +165,7 @@ void report_client(void)
         //if (cli -> status != 'x') {
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
-        printf("###              Cadastro realizado em **/**/**** às **/**.                 ###\n");
+        printf("###              Cadastro realizado em %02d/%02d/%d às %02d:%02d.                 ###\n", cli->day, cli->month, cli->year, cli->hour, cli->minute);
         printf("###                                                                         ###\n");
         print_dados_client_rep(cli);
         //}
@@ -198,7 +198,7 @@ void report_buy(void)
         //if (b -> status != 'x') {
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
-        printf("###              Cadastro realizado em **/**/**** às **/**.                 ###\n");
+        printf("###              Cadastro realizado em %02d/%02d/%d às %02d:%02d.                 ###\n", b->day, b->month, b->year, b->hour, b->minute);
         printf("###                                                                         ###\n");
         print_dados_buy_rep(b);
         //}

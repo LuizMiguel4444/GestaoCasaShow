@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <locale.h>
 #include <string.h>
+#include <time.h>
 #include "show.h"
 #include "../atraction/atraction.h"
 //#include "../client/client.h"
@@ -226,7 +227,7 @@ void show_inputs(Show* sh)
 {
     get_nome(sh -> atraction, "a atração");
     get_data(sh -> data);
-    get_hour(sh -> hour);
+    get_hour(sh -> hora);
     get_quant_cad(sh -> quant, "ingressos");
     get_valor(sh -> valor, "do ingresso (com casa decimal)");
     do {
@@ -237,16 +238,18 @@ void show_inputs(Show* sh)
         }
     } while (!procura_id_show(sh->id));
     sh -> status = 'c';
+    get_data_hour_sh(sh);
 }
 
 void show_inputs_sem_id(Show* sh)
 {
     get_nome(sh -> atraction, "a atração");
     get_data(sh -> data);
-    get_hour(sh -> hour);
+    get_hour(sh -> hora);
     get_quant_cad(sh -> quant, "ingressos");
     get_valor(sh -> valor, "do ingresso (com casa decimal)");
     sh -> status = 'c';
+    get_data_hour_sh(sh);
 }
 
 Show *procura_show(char *id)
@@ -304,7 +307,7 @@ void print_dados_show(Show* sh)
         printf("###                                                                         ###\n");
         printf("###              Atração: %s\n", sh -> atraction);
         printf("###              Data: %s\n", sh -> data);
-        printf("###              Hora: %s\n", sh -> hour);
+        printf("###              Hora: %s\n", sh -> hora);
         printf("###              Quant. de ingressos: %s\n", sh -> quant);
         printf("###              Valor do ingresso: %s\n", sh -> valor);
         printf("###                                                                         ###\n");
@@ -333,7 +336,7 @@ void print_dados_show_upd(Show* sh)
         printf("###                                                                         ###\n");
         printf("###              Atração: %s\n", sh -> atraction);
         printf("###              Data: %s\n", sh -> data);
-        printf("###              Hora: %s\n", sh -> hour);
+        printf("###              Hora: %s\n", sh -> hora);
         printf("###              Quant. de ingressos: %s\n", sh -> quant);
         printf("###              Valor do ingresso: %s\n", sh -> valor);
         printf("###                                                                         ###\n");
@@ -352,7 +355,7 @@ void print_dados_show_rep(Show* sh)
         printf("###                                                                         ###\n");
         printf("###              Atração: %s\n", sh -> atraction);
         printf("###              Data: %s\n", sh -> data);
-        printf("###              Hora: %s\n", sh -> hour);
+        printf("###              Hora: %s\n", sh -> hora);
         printf("###              Quant. de ingressos: %s\n", sh -> quant);
         printf("###              Valor do ingresso: %s\n", sh -> valor);
         printf("###              Id do show: %s\n", sh -> id);
@@ -532,4 +535,17 @@ void regravar_show(Show *sh)
     }
     fclose(fp);
     free(showLido);
+}
+
+void get_data_hour_sh(Show *sh)
+{
+    time_t currentTime;
+    time(&currentTime);
+    struct tm *timeInfo;
+    timeInfo = localtime(&currentTime);
+    sh->day = timeInfo->tm_mday;
+    sh->month = timeInfo->tm_mon + 1;
+    sh->year = timeInfo->tm_year + 1900;
+    sh->hour = timeInfo->tm_hour;
+    sh->minute = timeInfo->tm_min;
 }

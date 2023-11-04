@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <locale.h>
 #include <string.h>
+#include <time.h>
 //#include "../show/show.h"
 #include "atraction.h"
 //#include "../client/client.h"
@@ -241,6 +242,7 @@ void atraction_inputs(Atraction *atr)
         }
     } while (!procura_id_atraction(atr->id));
     atr->status = 'c';
+    get_data_hour_atr(atr);
 }
 
 void atraction_inputs_sem_id(Atraction *atr)
@@ -250,6 +252,7 @@ void atraction_inputs_sem_id(Atraction *atr)
     get_email(atr->email, "e contato");
     get_num(atr->num, "e contato (com DDD)");
     atr->status = 'c';
+    get_data_hour_atr(atr);
 }
 
 Atraction *procura_atraction(char *id)
@@ -537,6 +540,19 @@ void regravar_atr(Atraction *atr)
     }
     fclose(fp);
     free(atrLido);
+}
+
+void get_data_hour_atr(Atraction *atr)
+{
+    time_t currentTime;
+    time(&currentTime);
+    struct tm *timeInfo;
+    timeInfo = localtime(&currentTime);
+    atr->day = timeInfo->tm_mday;
+    atr->month = timeInfo->tm_mon + 1;
+    atr->year = timeInfo->tm_year + 1900;
+    atr->hour = timeInfo->tm_hour;
+    atr->minute = timeInfo->tm_min;
 }
 
 void qual_campo(Atraction *atr)

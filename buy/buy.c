@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <locale.h>
 #include <string.h>
+#include <time.h>
 #include "../show/show.h"
 #include "../atraction/atraction.h"
 #include "../client/client.h"
@@ -217,6 +218,7 @@ void buy_inputs(Buy* b, Show* sh, Client* cli)
         }
     } while (!procura_id_buy(b->id_ven));
     b -> status = 'f';
+    get_data_hour_buy(b);
 }
 
 void buy_inputs_sem_id(Buy* b)
@@ -238,6 +240,7 @@ void buy_inputs_sem_id(Buy* b)
     get_quant_venda(b -> quant, "ingressos");
     get_valor(b -> valor, "final (com casa decimal)");
     b -> status = 'f';
+    get_data_hour_buy(b);
 }
 
 Buy *procura_buy(char *id)
@@ -449,4 +452,17 @@ void regravar_buy(Buy *b)
     }
     fclose(fp);
     free(buyLido);
+}
+
+void get_data_hour_buy(Buy *b)
+{
+    time_t currentTime;
+    time(&currentTime);
+    struct tm *timeInfo;
+    timeInfo = localtime(&currentTime);
+    b->day = timeInfo->tm_mday;
+    b->month = timeInfo->tm_mon + 1;
+    b->year = timeInfo->tm_year + 1900;
+    b->hour = timeInfo->tm_hour;
+    b->minute = timeInfo->tm_min;
 }

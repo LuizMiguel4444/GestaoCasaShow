@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <locale.h>
 #include <string.h>
+#include <time.h>
 //#include "../show/show.h"
 #include "../atraction/atraction.h"
 #include "client.h"
@@ -234,6 +235,7 @@ void client_inputs(Client* cli)
     get_email(cli -> email, "o cliente");
     get_num(cli -> num, "o cliente");
     cli -> status = 'c';
+    get_data_hour_cli(cli);
 }
 
 void client_inputs_sem_cpf(Client* cli)
@@ -242,6 +244,7 @@ void client_inputs_sem_cpf(Client* cli)
     get_email(cli -> email, "o cliente");
     get_num(cli -> num, "o cliente");
     cli -> status = 'c';
+    get_data_hour_cli(cli);
 }
 
 Client *procura_client(char *cpf)
@@ -534,4 +537,17 @@ void screen_null_cpf_error(void)
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
     printf("###############################################################################\n");
+}
+
+void get_data_hour_cli(Client *cli)
+{
+    time_t currentTime;
+    time(&currentTime);
+    struct tm *timeInfo;
+    timeInfo = localtime(&currentTime);
+    cli->day = timeInfo->tm_mday;
+    cli->month = timeInfo->tm_mon + 1;
+    cli->year = timeInfo->tm_year + 1900;
+    cli->hour = timeInfo->tm_hour;
+    cli->minute = timeInfo->tm_min;
 }
