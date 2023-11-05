@@ -17,5 +17,4 @@ clean:
 	rm GestaoCasaShow
 	rm atraction/*.dat
 	rm buy/*.dat
-	rm client/*.dat
 	rm show/*.dat

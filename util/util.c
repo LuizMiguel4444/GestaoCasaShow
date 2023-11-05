@@ -368,7 +368,10 @@ int validarFone(char *fone)
 int validarCPF(char *cpf)
 {
     int i, j, digito1 = 0, digito2 = 0;
-    if(strlen(cpf) != 11)
+    if (strcmp(cpf, "000") == 0) {
+      return 1; /// Esse é um CPF fantasma!!!
+    }
+    else if(strlen(cpf) != 11)
         return 0;
     else if((strcmp(cpf,"00000000000") == 0) || (strcmp(cpf,"11111111111") == 0) || (strcmp(cpf,"22222222222") == 0) ||
             (strcmp(cpf,"33333333333") == 0) || (strcmp(cpf,"44444444444") == 0) || (strcmp(cpf,"55555555555") == 0) ||

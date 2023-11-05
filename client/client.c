@@ -275,7 +275,7 @@ int procura_cpf_client(char *cpf)
     cli = (Client *)malloc(sizeof(Client));
     fp = fopen("client/clients.dat", "rb");
     while (fread(cli, sizeof(Client), 1, fp)) {
-        if ((strcmp(cli->cpf, cpf) == 0)) {
+        if ((strcmp(cli->cpf, cpf) == 0) || (strcmp(cli->cpf, "000") == 0)) {
             fclose(fp);
             return 0;
         }
