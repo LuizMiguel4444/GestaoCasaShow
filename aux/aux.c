@@ -235,9 +235,9 @@ void screen_error_input_resp(void)
   getchar();
 }
 
-void screen_error_input_id(void)
+void screen_error_input_id(char* chave)
 {
-  printf("\n\tO Id digitado já foi cadastrado! Por favor, insira um Id válido...");
+  printf("\n\tO %s digitado já foi cadastrado! Por favor, insira um %s válido...", chave, chave);
   getchar();
 }
 

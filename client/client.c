@@ -228,8 +228,13 @@ void client_inputs(Client* cli)
     do {
         get_cpf(cli->cpf);
         if (!procura_cpf_client(cli->cpf)) {
-            screen_error_input_n_exist("CPF");
-            limpa_linha(); limpa_linha(); limpa_linha();
+            if (strcmp(cli->cpf, "000") == 0) {
+                screen_error_input_id("CPF");
+                limpa_linha(); limpa_linha(); limpa_linha();
+            } else {
+                screen_error_input_n_exist("CPF");
+                limpa_linha(); limpa_linha(); limpa_linha();
+            }
         }
     } while (!procura_cpf_client(cli->cpf));
     get_email(cli -> email, "o cliente");
@@ -268,6 +273,23 @@ Client *procura_client(char *cpf)
 }
 
 int procura_cpf_client(char *cpf)
+{
+    FILE *fp;
+    Client *cli;
+
+    cli = (Client *)malloc(sizeof(Client));
+    fp = fopen("client/clients.dat", "rb");
+    while (fread(cli, sizeof(Client), 1, fp)) {
+        if ((strcmp(cli->cpf, cpf) == 0)) {
+            fclose(fp);
+            return 0;
+        }
+    }
+    fclose(fp);
+    return 1;
+}
+
+int procura_cpf_client_fantasm(char *cpf)
 {
     FILE *fp;
     Client *cli;
@@ -407,7 +429,11 @@ void remove_cli(Client *cli)
     }
     while (!feof(fp)) {
         fread(cliArq, sizeof(Client), 1, fp);
-        if ((strcmp(cliArq->cpf, cli->cpf) == 0) && (cliArq->status != 'x')) {
+        if ((strcmp(cliArq->cpf, cli->cpf) == 0) && (strcmp(cliArq->cpf, "000") == 0)) {
+            achou = 1;
+            screen_del_cli_block();
+        }
+        else if ((strcmp(cliArq->cpf, cli->cpf) == 0) && (cliArq->status != 'x')) {
             achou = 1;
             cliArq->status = 'x';
             fseek(fp, -1 * sizeof(Client), SEEK_CUR);
@@ -461,6 +487,18 @@ void screen_del_ok_cli(void)
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
     printf("###                     Cliente excluído com sucesso!!!                     ###\n");
+    printf("###                                                                         ###\n");
+    printf("###############################################################################\n");
+    printf("\n");
+    printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
+    getchar();
+}
+
+void screen_del_cli_block(void)
+{
+    printf("###############################################################################\n");
+    printf("###                                                                         ###\n");
+    printf("###                 Esse cliente não pode ser excluído!!!                   ###\n");
     printf("###                                                                         ###\n");
     printf("###############################################################################\n");
     printf("\n");

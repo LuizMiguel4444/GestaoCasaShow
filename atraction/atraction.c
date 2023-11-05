@@ -237,7 +237,7 @@ void atraction_inputs(Atraction *atr)
     do {
         get_id(atr->id, "a atração (4 dígitos)");
         if (!procura_id_atraction(atr->id)) {
-            screen_error_input_id();
+            screen_error_input_id("Id");
             limpa_linha(); limpa_linha(); limpa_linha();
         }
     } while (!procura_id_atraction(atr->id));

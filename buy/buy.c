@@ -199,11 +199,11 @@ void buy_inputs(Buy* b)
     } while (procura_id_show(b->id_show));
     do {
         get_cpf(b->cpf_cli);
-        if (procura_cpf_client(b->cpf_cli)) {
+        if (procura_cpf_client_fantasm(b->cpf_cli)) {
             screen_error_input_n_exist("CPF");
             limpa_linha(); limpa_linha(); limpa_linha();
         }
-    } while (procura_cpf_client(b->cpf_cli));
+    } while (procura_cpf_client_fantasm(b->cpf_cli));
     get_quant_venda(b -> quant, "ingressos");
     int quant_ing = atoi(b -> quant); // Converte a string para int
     char* valor_string = retorna_valor_show(b->id_show);
@@ -215,7 +215,7 @@ void buy_inputs(Buy* b)
     do {
         get_id(b->id_ven, "a venda (4 dígitos)");
         if (!procura_id_buy(b->id_ven)) {
-            screen_error_input_id();
+            screen_error_input_id("Id");
             limpa_linha(); limpa_linha(); limpa_linha();
         }
     } while (!procura_id_buy(b->id_ven));
@@ -234,11 +234,11 @@ void buy_inputs_sem_id(Buy* b)
     } while (procura_id_show(b->id_show));
     do {
         get_cpf(b->cpf_cli);
-        if (procura_cpf_client(b->cpf_cli)) {
+        if (procura_cpf_client_fantasm(b->cpf_cli)) {
             screen_error_input_n_exist("CPF");
             limpa_linha(); limpa_linha(); limpa_linha();
         }
-    } while (procura_cpf_client(b->cpf_cli));
+    } while (procura_cpf_client_fantasm(b->cpf_cli));
     get_quant_venda(b -> quant, "ingressos");
     int quant_ing = atoi(b -> quant); // Converte a string para int
     char* valor_string = retorna_valor_show(b->id_show);
