@@ -289,6 +289,23 @@ int procura_id_show(char *id)
     return 1;
 }
 
+char* retorna_valor_show(char *id)
+{
+    FILE *fp;
+    Show *sh;
+
+    sh = (Show *)malloc(sizeof(Show));
+    fp = fopen("show/shows.dat", "rb");
+    while (fread(sh, sizeof(Show), 1, fp)) {
+        if ((strcmp(sh->id, id) == 0)) {
+            fclose(fp);
+            return sh->valor;
+        }
+    }
+    fclose(fp);
+    return sh->valor;
+}
+
 void print_dados_show(Show* sh)
 {
     if (sh == NULL) {

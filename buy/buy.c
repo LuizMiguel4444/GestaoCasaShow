@@ -79,11 +79,7 @@ void buy_menu_screen(void)
 Buy *cred_buy(void)
 {
     Buy *b;
-    Show *sh;
-    Client *cli;
     b = (Buy*) malloc(sizeof(Buy) + 1);
-    sh = (Show*) malloc(sizeof(Show) + 1);
-    cli = (Client*) malloc(sizeof(Client) + 1);
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -97,7 +93,7 @@ Buy *cred_buy(void)
     printf("###              = = = = = = = = Cadastrar Venda = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    buy_inputs(b, sh, cli);
+    buy_inputs(b);
     printf("###                                                                         ###\n");
     printf("###############################################################################\n");
     printf("\n");
@@ -192,7 +188,7 @@ char *screen_upd_buy(void)
     return id;
 }
 
-void buy_inputs(Buy* b, Show* sh, Client* cli)
+void buy_inputs(Buy* b)
 {
     do {
         get_id(b->id_show, "o show (4 dígitos)");
@@ -209,7 +205,13 @@ void buy_inputs(Buy* b, Show* sh, Client* cli)
         }
     } while (procura_cpf_client(b->cpf_cli));
     get_quant_venda(b -> quant, "ingressos");
-    get_valor(b -> valor, "final (com casa decimal)");
+    int quant_ing = atoi(b -> quant); // Converte a string para int
+    char* valor_string = retorna_valor_show(b->id_show);
+    float valor_ing = strtof(valor_string, NULL); // Converte a string para float
+    float valor_final = quant_ing * valor_ing;
+    char valor_final_para_string[20];
+    snprintf(valor_final_para_string, sizeof(valor_final_para_string), "%.2f", valor_final);
+    memcpy(b -> valor, valor_final_para_string, sizeof(valor_final_para_string)); // Copia dados de um array para outro array
     do {
         get_id(b->id_ven, "a venda (4 dígitos)");
         if (!procura_id_buy(b->id_ven)) {
@@ -238,7 +240,13 @@ void buy_inputs_sem_id(Buy* b)
         }
     } while (procura_cpf_client(b->cpf_cli));
     get_quant_venda(b -> quant, "ingressos");
-    get_valor(b -> valor, "final (com casa decimal)");
+    int quant_ing = atoi(b -> quant); // Converte a string para int
+    char* valor_string = retorna_valor_show(b->id_show);
+    float valor_ing = strtof(valor_string, NULL); // Converte a string para float
+    float valor_final = quant_ing * valor_ing;
+    char valor_final_para_string[20];
+    snprintf(valor_final_para_string, sizeof(valor_final_para_string), "%.2f", valor_final);
+    memcpy(b -> valor, valor_final_para_string, sizeof(valor_final_para_string)); // Copia dados de um array para outro array
     b -> status = 'f';
     get_data_hour_buy(b);
 }

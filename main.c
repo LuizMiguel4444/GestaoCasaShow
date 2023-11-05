@@ -231,5 +231,4 @@ void end(void)
     }
 } // AUTOR: LUIZ MIGUEL, FEITO COM AJUDA DO CHAT-GPT /// GIT: https://github.com/LuizMiguel4444
 
-// fazer funcionar os relatórios
 // fazer funcionar a edição por campo
