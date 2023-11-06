@@ -205,13 +205,7 @@ void buy_inputs(Buy* b)
         }
     } while (procura_cpf_client_fantasm(b->cpf_cli));
     get_quant_venda(b -> quant, "ingressos");
-    int quant_ing = atoi(b -> quant); // Converte a string para int
-    char* valor_string = retorna_valor_show(b->id_show);
-    float valor_ing = strtof(valor_string, NULL); // Converte a string para float
-    float valor_final = quant_ing * valor_ing;
-    char valor_final_para_string[20];
-    snprintf(valor_final_para_string, sizeof(valor_final_para_string), "%.2f", valor_final);
-    memcpy(b -> valor, valor_final_para_string, sizeof(valor_final_para_string)); // Copia dados de um array para outro array
+    corrige_valor_final(b->quant, b->id_show, b->valor);
     do {
         get_id(b->id_ven, "a venda (4 dígitos)");
         if (!procura_id_buy(b->id_ven)) {
@@ -240,13 +234,7 @@ void buy_inputs_sem_id(Buy* b)
         }
     } while (procura_cpf_client_fantasm(b->cpf_cli));
     get_quant_venda(b -> quant, "ingressos");
-    int quant_ing = atoi(b -> quant); // Converte a string para int
-    char* valor_string = retorna_valor_show(b->id_show);
-    float valor_ing = strtof(valor_string, NULL); // Converte a string para float
-    float valor_final = quant_ing * valor_ing;
-    char valor_final_para_string[20];
-    snprintf(valor_final_para_string, sizeof(valor_final_para_string), "%.2f", valor_final);
-    memcpy(b -> valor, valor_final_para_string, sizeof(valor_final_para_string)); // Copia dados de um array para outro array
+    corrige_valor_final(b->quant, b->id_show, b->valor);
     b -> status = 'f';
     get_data_hour_buy(b);
 }
@@ -279,7 +267,7 @@ int procura_id_buy(char *id)
     b = (Buy*)malloc(sizeof(Buy));
     fp = fopen("buy/buys.dat", "rb");
     while (fread(b, sizeof(Buy), 1, fp)) {
-        if ((strcmp(b->id_ven, id) == 0)) {
+        if ((strcmp(b->id_ven, id) == 0) && b->status == 'f') {
             fclose(fp);
             return 0;
         }
@@ -419,10 +407,7 @@ void update_buy(void)
         print_dados_buy_upd(b);
         resp = certeza_upd("dessa venda");
         if (resp) {
-            b = cred_buy_sem_id();
-            strcpy(b->id_ven, id);
             regravar_buy(b);
-            free(b);
         } else {
             printf("\n\t\t                        Ok!\n");
             printf("\n\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
@@ -430,6 +415,7 @@ void update_buy(void)
         }
     }
     free(id);
+    free(b);
 }
 
 void regravar_buy(Buy *b)
@@ -447,6 +433,7 @@ void regravar_buy(Buy *b)
         fread(buyLido, sizeof(Buy), 1, fp);
         if (strcmp(buyLido->id_ven, b->id_ven) == 0) {
             achou = 1;
+            qual_campo_buy(b);
             fseek(fp, -1 * sizeof(Buy), SEEK_CUR);
             fwrite(b, sizeof(Buy), 1, fp);
             break;
@@ -473,4 +460,50 @@ void get_data_hour_buy(Buy *b)
     b->year = timeInfo->tm_year + 1900;
     b->hour = timeInfo->tm_hour;
     b->minute = timeInfo->tm_min;
+}
+
+void qual_campo_buy(Buy *b)
+{
+    char resp[256];
+    printf("\n\t\t\t     1 - CPF do cliente\n");
+    //printf("\t\t\t     2 - Quant. de ingressos\n");
+    do {
+        printf("\n\t\t   Digite o número do campo que deseja editar: ");
+        scanf("%s", resp);
+        limpa_buffer();
+        if (!ehDigitoMax(resp[0], '1')  || !val_entrada(resp)) {
+            screen_error_input_resp();
+            limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
+        }
+    } while (!ehDigitoMax(resp[0], '1')  || !val_entrada(resp));
+    switch (resp[0]) {
+        case '1':
+            do {
+                get_cpf_upd(b->cpf_cli);
+                if (procura_cpf_client_fantasm(b->cpf_cli)) {
+                    screen_error_input_n_exist("CPF");
+                    limpa_linha(); limpa_linha(); limpa_linha();
+                }
+            } while (procura_cpf_client_fantasm(b->cpf_cli));
+            printf("\n\t\t   >>> CPF do cliente editado com sucesso. <<<");
+            getchar();
+            break;
+        case '2':
+            get_quant_venda_upd(b -> quant, "ingressos");
+            corrige_valor_final(b->quant, b->id_show, b->valor);
+            printf("\n\t\t   >>> Quant. de ingressos vendidos editada com sucesso. <<<");
+            getchar();
+            break;
+    }
+}
+
+void corrige_valor_final(char* quant, char* id_show, char* valor)
+{
+    int quant_ing = atoi(quant); // Converte a string para int.
+    char* valor_string = retorna_valor_show(id_show);
+    float valor_ing = strtof(valor_string, NULL); // Converte a string para float.
+    float valor_final = quant_ing * valor_ing;
+    char valor_final_para_string[20];
+    snprintf(valor_final_para_string, sizeof(valor_final_para_string), "%.2f", valor_final);
+    memcpy(valor, valor_final_para_string, sizeof(valor_final_para_string)); // Copia dados de um array para outro array.
 }

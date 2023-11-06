@@ -42,3 +42,4 @@ void update_cli(void);
 void regravar_cli(Client*);
 void screen_null_cpf_error(void);
 void get_data_hour_cli(Client*);
+void qual_campo_cli(Client*);

@@ -23,17 +23,17 @@ void get_nome(char* nome, char* modulo)
   } while (!valNome(nome));
 }
 
-void get_nome_upd(Atraction *atr, char* modulo)
+void get_nome_upd(char* nome, char* modulo)
 {
   do {
     printf("\n\t\t    Novo nome %s  (sem acentos ou ç): ", modulo);
-    scanf(" %55[^\n]", atr->nome);
+    scanf(" %55[^\n]", nome);
     limpa_buffer();
-    if (!valNome(atr->nome)) {
+    if (!valNome(nome)) {
       screen_error_input();
       limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
     }
-} while (!valNome(atr->nome));
+  } while (!valNome(nome));
 }
 
 void get_cache(char* cache, char* modulo)
@@ -140,10 +140,36 @@ void get_quant_cad(char* quant, char* modulo)
   } while (!check_quant_cad(quant));
 }
 
+void get_quant_cad_upd(char* quant, char* modulo)
+{
+  do {
+    printf("\n\t\t    Nova quant. de %s: ", modulo);
+    scanf("%s", quant);
+    limpa_buffer();
+    if (!check_quant_cad(quant)) {
+      screen_error_input();
+      limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
+    }
+  } while (!check_quant_cad(quant));
+}
+
 void get_quant_venda(char* quant, char* modulo)
 {
   do {
     printf("###              Quant. de %s: ", modulo);
+    scanf("%s", quant);
+    limpa_buffer();
+    if (!check_quant_venda(quant)) {
+      screen_error_input();
+      limpa_linha(); limpa_linha(); limpa_linha();
+    }
+  } while (!check_quant_venda(quant));
+}
+
+void get_quant_venda_upd(char* quant, char* modulo)
+{
+  do {
+    printf("\n\t\t   Nova quant. de %s: ", modulo);
     scanf("%s", quant);
     limpa_buffer();
     if (!check_quant_venda(quant)) {
@@ -166,6 +192,19 @@ void get_valor(char* valor, char* modulo)
   } while (!ehdinheiro(valor));
 }
 
+void get_valor_upd(char* valor, char* modulo)
+{
+  do {
+    printf("\n\t\t    Novo valor %s: ", modulo);
+    scanf("%s", valor);
+    limpa_buffer();
+    if (!ehdinheiro(valor)) {
+      screen_error_input();
+      limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
+    }
+  } while (!ehdinheiro(valor));
+}
+
 void get_cpf(char* cpf)
 {
   do {
@@ -175,6 +214,19 @@ void get_cpf(char* cpf)
     if (!validarCPF(cpf)) {
       screen_error_input();
       limpa_linha(); limpa_linha(); limpa_linha();
+    }
+  } while (!validarCPF(cpf));
+}
+
+void get_cpf_upd(char* cpf)
+{
+  do {
+    printf("\n\t\t   Novo CPF do cliente (apenas números): ");
+    scanf("%[0-9-.]", cpf);
+    limpa_buffer();
+    if (!validarCPF(cpf)) {
+      screen_error_input();
+      limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while (!validarCPF(cpf));
 }
@@ -192,15 +244,41 @@ void get_data(char* data)
   } while (!valData(data));
 }
 
+void get_data_upd(char* data)
+{
+  do {
+    printf("\n\t\t    Nova data (dd/mm/aaaa): ");
+    scanf("%s", data);
+    limpa_buffer();
+    if (!valData(data)) {
+      screen_error_input();
+      limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
+    }
+  } while (!valData(data));
+}
+
 void get_hour(char* hour)
 {
   do {
-    printf("###              Hora (hh:mm): ");
+    printf("###              Horário (hh:mm): ");
     scanf("%s", hour);
     limpa_buffer();
     if (!val_hour(hour)) {
       screen_error_input();
       limpa_linha(); limpa_linha(); limpa_linha();
+    }
+  } while (!val_hour(hour));
+}
+
+void get_hour_upd(char* hour)
+{
+  do {
+    printf("\n\t\t    Novo horário (hh:mm): ");
+    scanf("%s", hour);
+    limpa_buffer();
+    if (!val_hour(hour)) {
+      screen_error_input();
+      limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while (!val_hour(hour));
 }

@@ -42,3 +42,4 @@ void screen_del_ok_show(void);
 void update_show(void);
 void regravar_show(Show*);
 void get_data_hour_sh(Show*);
+void qual_campo_show(Show*);

@@ -232,7 +232,7 @@ void client_inputs(Client* cli)
                 screen_error_input_id("CPF");
                 limpa_linha(); limpa_linha(); limpa_linha();
             } else {
-                screen_error_input_n_exist("CPF");
+                screen_error_input_id("CPF");
                 limpa_linha(); limpa_linha(); limpa_linha();
             }
         }
@@ -280,7 +280,7 @@ int procura_cpf_client(char *cpf)
     cli = (Client *)malloc(sizeof(Client));
     fp = fopen("client/clients.dat", "rb");
     while (fread(cli, sizeof(Client), 1, fp)) {
-        if ((strcmp(cli->cpf, cpf) == 0)) {
+        if ((strcmp(cli->cpf, cpf) == 0) && cli->status == 'c') {
             fclose(fp);
             return 0;
         }
@@ -523,10 +523,7 @@ void update_cli(void)
         print_dados_client_upd(cli);
         resp = certeza_upd("desse cliente");
         if (resp) {
-            cli = cred_client_sem_cpf();
-            strcpy(cli->cpf, cpf);
             regravar_cli(cli);
-            free(cli);
         } else {
             printf("\n\t\t                        Ok!\n");
             printf("\n\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
@@ -534,6 +531,7 @@ void update_cli(void)
         }
     }
     free(cpf);
+    free(cli);
 }
 
 void regravar_cli(Client *cli)
@@ -551,6 +549,7 @@ void regravar_cli(Client *cli)
         fread(cliLido, sizeof(Client), 1, fp);
         if (strcmp(cliLido->cpf, cli->cpf) == 0) {
             achou = 1;
+            qual_campo_cli(cli);
             fseek(fp, -1 * sizeof(Client), SEEK_CUR);
             fwrite(cli, sizeof(Client), 1, fp);
             break;
@@ -588,4 +587,38 @@ void get_data_hour_cli(Client *cli)
     cli->year = timeInfo->tm_year + 1900;
     cli->hour = timeInfo->tm_hour;
     cli->minute = timeInfo->tm_min;
+}
+
+void qual_campo_cli(Client *cli)
+{
+    char resp[256];
+    printf("\n\t\t\t\t    1 - Nome\n");
+    printf("\t\t\t\t    2 - Email\n");
+    printf("\t\t\t\t    3 - Número\n");
+    do {
+        printf("\n\t\t    Digite o número do campo que deseja editar: ");
+        scanf("%s", resp);
+        limpa_buffer();
+        if (!ehDigitoMax(resp[0], '3')  || !val_entrada(resp)) {
+            screen_error_input_resp();
+            limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
+        }
+    } while (!ehDigitoMax(resp[0], '3')  || !val_entrada(resp));
+    switch (resp[0]) {
+        case '1':
+            get_nome_upd(cli->nome, "do cliente");
+            printf("\n\t\t    >>> Nome do cliente editado com sucesso. <<<");
+            getchar();
+            break;
+        case '2':
+            get_email_upd(cli->email, "de contato");
+            printf("\n\t\t    >>> Email do cliente editado com sucesso. <<<");
+            getchar();
+            break;
+        case '3':
+            get_num_upd(cli->num, "de contato");
+            printf("\n\t\t    >>> Número do cliente editado com sucesso. <<<");
+            getchar();
+            break;
+    }
 }

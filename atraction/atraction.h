@@ -40,6 +40,4 @@ void screen_del_ok_atr(void);
 void update_atr(void);
 void regravar_atr(Atraction*);
 void get_data_hour_atr(Atraction*);
-
-void qual_campo(Atraction*);
-Atraction *mudar_campo(void);
+void qual_campo_atr(Atraction*);

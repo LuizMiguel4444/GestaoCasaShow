@@ -171,27 +171,27 @@ void welcome(void)
     char message[] = "SEJA BEM-VINDO AO GESTAO CASA SHOW!";
     int messageLength = strlen(message);
 
-    for (int i = width / 2; i >= 0; i--) {
+    for (int i = width / 2; i >= 0; i--) { // Loop que controla o efeito de animação.
         printf("\033[H\033[J"); // Limpa a tela
 
-        for (int j = 0; j < height; j++) {
-            for (int k = 0; k < width; k++) {
-                if (k <= i || k >= width - i - 1) {
+        for (int j = 0; j < height; j++) { // Loop para percorrer as linhas da "janela".
+            for (int k = 0; k < width; k++) { // Loop para percorrer as colunas da "janela".
+                if (k <= i || k >= width - i - 1) { // imprime o caractere '/' para criar uma borda.
                     printf("/");
-                } else if (j == height / 2) {
-                    int messagePosition = (width - messageLength) / 2;
-                    if (k >= messagePosition && k < messagePosition + messageLength) {
-                        printf("%c", message[k - messagePosition]);
-                    } else {
+                } else if (j == height / 2) { // Se j estiver na metade da altura da "janela", então é a linha onde a mensagem deve ser exibida.
+                    int messagePosition = (width - messageLength) / 2; // Calcula a posição inicial da mensagem para centralizá-la na "janela".
+                    if (k >= messagePosition && k < messagePosition + messageLength) { // Se k estiver dentro da faixa onde a mensagem deve ser exibida:
+                        printf("%c", message[k - messagePosition]); // Imprime o caractere correspondente na mensagem.
+                    } else { // Caso contrário, imprime um espaço em branco para preencher o espaço vazio.
                         printf(" ");
                     }
-                } else {
+                } else { // Para todas as outras linhas, imprime espaços em branco para preencher a "janela".
                     printf(" ");
                 }
             }
-            printf("\n");
+            printf("\n"); // Ao final de cada linha, imprime uma quebra de linha.
         }
-        usleep(80000); // Espera por 0.08 segundo
+        usleep(80000); // Espera por 0.08 segundo antes de atualizar a próxima animação.
     }
     printf("\n");
     printf("\t   >>> Tecle ENTER para ir ao Menu Principal... <<<");
@@ -205,30 +205,29 @@ void end(void)
     char message[] = "F I M    D O    E S P E T A C U L O";
     int messageLength = strlen(message);
 
-    for (int i = 0; i <= width / 2; i++) {
+    for (int i = 0; i <= width / 2; i++) { // Loop que controla o efeito de animação.
         printf("\033[H\033[J"); // Limpa a tela
 
-        for (int j = 0; j < height; j++) {
-            for (int k = 0; k < width; k++) {
-                if (k <= i || k >= width - i - 1) {
+        for (int j = 0; j < height; j++) { // Loop para percorrer as linhas da "janela".
+            for (int k = 0; k < width; k++) { // Loop para percorrer as colunas da "janela".
+                if (k <= i || k >= width - i - 1) { // imprime o caractere '/' para criar uma borda.
                     printf("/");
                 } else {
                     if (j == height / 2 && k >= (width - messageLength) / 2 && k < (width + messageLength) / 2) {
+                        // Se j estiver na metade da altura da "janela" e k estiver na faixa onde a mensagem deve ser exibida:
+                        // Imprime o caractere correspondente na mensagem.
                         printf("%c", message[k - (width - messageLength) / 2]);
-                    } else {
+                    } else { // Caso contrário, imprime um espaço em branco para preencher o espaço vazio.
                         printf(" ");
                     }
                 }
             }
-            printf("\n");
+            printf("\n"); // Ao final de cada linha, imprime uma quebra de linha.
         }
-        usleep(80000); // Espera por 0.08 segundo
+        usleep(80000); // Espera por 0.08 segundo antes de atualizar a próxima animação.
 
-        // Limpa a linha da frase para que ela desapareça
-        for (int j = 0; j < height; j++) {
-            printf("\e[A\e[K"); // Move o cursor uma linha para cima e limpa a linha
+        for (int j = 0; j < height; j++) { // Limpa a linha da frase para que ela desapareça.
+            printf("\e[A\e[K"); // Move o cursor uma linha para cima e limpa a linha.
         }
     }
 } // AUTOR: LUIZ MIGUEL, FEITO COM AJUDA DO CHAT-GPT /// GIT: https://github.com/LuizMiguel4444
-
-// fazer funcionar a edição por campo

@@ -280,7 +280,7 @@ int procura_id_show(char *id)
     sh = (Show *)malloc(sizeof(Show));
     fp = fopen("show/shows.dat", "rb");
     while (fread(sh, sizeof(Show), 1, fp)) {
-        if ((strcmp(sh->id, id) == 0)) {
+        if ((strcmp(sh->id, id) == 0) && (sh->status == 'c')) {
             fclose(fp);
             return 0;
         }
@@ -511,10 +511,7 @@ void update_show(void)
         print_dados_show_upd(sh);
         resp = certeza_upd("desse show");
         if (resp) {
-            sh = cred_show_sem_id();
-            strcpy(sh->id, id);
             regravar_show(sh);
-            free(sh);
         } else {
             printf("\n\t\t                        Ok!\n");
             printf("\n\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
@@ -522,6 +519,7 @@ void update_show(void)
         }
     }
     free(id);
+    free(sh);
 }
 
 void regravar_show(Show *sh)
@@ -539,6 +537,7 @@ void regravar_show(Show *sh)
         fread(showLido, sizeof(Show), 1, fp);
         if (strcmp(showLido->id, sh->id) == 0) {
             achou = 1;
+            qual_campo_show(sh);
             fseek(fp, -1 * sizeof(Show), SEEK_CUR);
             fwrite(sh, sizeof(Show), 1, fp);
             break;
@@ -565,4 +564,50 @@ void get_data_hour_sh(Show *sh)
     sh->year = timeInfo->tm_year + 1900;
     sh->hour = timeInfo->tm_hour;
     sh->minute = timeInfo->tm_min;
+}
+
+void qual_campo_show(Show *sh)
+{
+    char resp[256];
+    printf("\n\t\t\t\t   1 - Nome\n");
+    printf("\t\t\t\t   2 - Data\n");
+    printf("\t\t\t\t   3 - Hora\n");
+    printf("\t\t\t\t   4 - Quant.\n");
+    printf("\t\t\t\t   5 - Valor\n");
+    do {
+        printf("\n\t\t    Digite o número do campo que deseja editar: ");
+        scanf("%s", resp);
+        limpa_buffer();
+        if (!ehDigitoMax(resp[0], '5')  || !val_entrada(resp)) {
+            screen_error_input_resp();
+            limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
+        }
+    } while (!ehDigitoMax(resp[0], '5')  || !val_entrada(resp));
+    switch (resp[0]) {
+        case '1':
+            get_nome_upd(sh->atraction, "da atração");
+            printf("\n\t\t    >>> Nome da atração editado com sucesso. <<<");
+            getchar();
+            break;
+        case '2':
+            get_data_upd(sh->data);
+            printf("\n\t\t    >>> Data editada com sucesso. <<<");
+            getchar();
+            break;
+        case '3':
+            get_hour_upd(sh->hora);
+            printf("\n\t\t    >>> Horário editado com sucesso. <<<");
+            getchar();
+            break;
+        case '4':
+            get_quant_cad_upd(sh->quant, "ingressos");
+            printf("\n\t\t    >>> Quant. de ingressos editada com sucesso. <<<");
+            getchar();
+            break;
+        case '5':
+            get_valor_upd(sh->valor, "do ingresso (com casa decimal)");
+            printf("\n\t\t    >>> Valor do ingresso editado com sucesso. <<<");
+            getchar();
+            break;
+    }
 }

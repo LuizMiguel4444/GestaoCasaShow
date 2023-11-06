@@ -35,3 +35,5 @@ void pesquisa_buy(void);
 void update_buy(void);
 void regravar_buy(Buy*);
 void get_data_hour_buy(Buy*);
+void qual_campo_buy(Buy*);
+void corrige_valor_final(char*, char*, char*);

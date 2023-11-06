@@ -283,7 +283,7 @@ int procura_id_atraction(char *id)
     atr = (Atraction *)malloc(sizeof(Atraction));
     fp = fopen("atraction/atractions.dat", "rb");
     while (fread(atr, sizeof(Atraction), 1, fp)) {
-        if ((strcmp(atr->id, id) == 0)) {
+        if ((strcmp(atr->id, id) == 0) && atr->status == 'c') {
             fclose(fp);
             return 0;
         }
@@ -496,13 +496,7 @@ void update_atr(void)
         print_dados_atraction_upd(atr);
         resp = certeza_upd("dessa atração");
         if (resp) {
-            atr = cred_atraction_sem_id();
-            // atr = mudar_campo();
-            // print_dados_atraction_upd(atr);
-            // getchar();
-            strcpy(atr->id, id);
             regravar_atr(atr);
-            free(atr);
         } else {
             printf("\n\t\t                        Ok!\n");
             printf("\n\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
@@ -510,6 +504,7 @@ void update_atr(void)
         }
     }
     free(id);
+    free(atr);
 }
 
 void regravar_atr(Atraction *atr)
@@ -527,6 +522,7 @@ void regravar_atr(Atraction *atr)
         fread(atrLido, sizeof(Atraction), 1, fp);
         if (strcmp(atrLido->id, atr->id) == 0) {
             achou = 1;
+            qual_campo_atr(atr);
             fseek(fp, -1 * sizeof(Atraction), SEEK_CUR);
             fwrite(atr, sizeof(Atraction), 1, fp);
             break;
@@ -555,48 +551,42 @@ void get_data_hour_atr(Atraction *atr)
     atr->minute = timeInfo->tm_min;
 }
 
-void qual_campo(Atraction *atr)
+void qual_campo_atr(Atraction *atr)
 {
     char resp[256];
-    printf("\n\t\t\t\t    0 - nome\n");
-    printf("\t\t\t\t    1 - cachê\n");
-    printf("\t\t\t\t    2 - email\n");
-    printf("\t\t\t\t    3 - número\n");
+    printf("\n\t\t\t\t    1 - Nome\n");
+    printf("\t\t\t\t    2 - Cachê\n");
+    printf("\t\t\t\t    3 - Email\n");
+    printf("\t\t\t\t    4 - Número\n");
     do {
         printf("\n\t\t    Digite o número do campo que deseja editar: ");
         scanf("%s", resp);
         limpa_buffer();
-        if (!ehDigitoMax(resp[0], '3')  || !val_entrada(resp)) {
+        if (!ehDigitoMax(resp[0], '4')  || !val_entrada(resp)) {
             screen_error_input_resp();
             limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
         }
-    } while (!ehDigitoMax(resp[0], '3')  || !val_entrada(resp));
-    if (resp[0] == '0') {
-        get_nome_upd(atr, "da atração");
-        printf("\n\t\t    >>> Nome da atração editado com sucesso. <<<");
-        getchar();
+    } while (!ehDigitoMax(resp[0], '4')  || !val_entrada(resp));
+    switch (resp[0]) {
+        case '1':
+            get_nome_upd(atr->nome, "da atração");
+            printf("\n\t\t    >>> Nome da atração editado com sucesso. <<<");
+            getchar();
+            break;
+        case '2':
+            get_cache_upd(atr->cache, "da atração");
+            printf("\n\t\t    >>> Cachê da atração editado com sucesso. <<<");
+            getchar();
+            break;
+        case '3':
+            get_email_upd(atr->email, "de contato");
+            printf("\n\t\t    >>> Email da atração editado com sucesso. <<<");
+            getchar();
+            break;
+        case '4':
+            get_num_upd(atr->num, "de contato");
+            printf("\n\t\t    >>> Número da atração editado com sucesso. <<<");
+            getchar();
+            break;
     }
-    else if (resp[0] == '1') {
-        get_cache_upd(atr->cache, "da atração");
-        printf("\n\t\t    >>> Cachê da atração editado com sucesso. <<<");
-        getchar();
-    }
-    else if (resp[0] == '2') {
-        get_email_upd(atr->email, "de contato");
-        printf("\n\t\t    >>> Email da atração editado com sucesso. <<<");
-        getchar();
-    }
-    else if (resp[0] == '3') {
-        get_num_upd(atr->num, "de contato");
-        printf("\n\t\t    >>> Número da atração editado com sucesso. <<<");
-        getchar();
-    }
-}
-
-Atraction *mudar_campo(void)
-{
-    Atraction *atr;
-    atr = (Atraction *)malloc(sizeof(Atraction) + 1);
-    qual_campo(atr);
-    return atr;
 }
