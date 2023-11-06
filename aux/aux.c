@@ -288,7 +288,7 @@ void screen_null_id_error(char* modulo)
   printf("###############################################################################\n");
   printf("###                                                                         ###\n");
   printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-  printf("###                       Id %s não encontrado\n", modulo);
+  printf("###                       %s não encontrado\n", modulo);
   printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
   printf("###                                                                         ###\n");
   printf("###############################################################################\n");
@@ -321,7 +321,7 @@ void screen_error_input_id(char* chave)
 
 void screen_error_input_n_exist(char* chave)
 {
-  printf("\n\tO %s digitado não foi cadastrado! Por favor, insira um %s válido existente...", chave, chave);
+  printf("\n\tO %s digitado não foi cadastrado! Por favor, insira um %s válido cadastrado...", chave, chave);
   getchar();
 }
 

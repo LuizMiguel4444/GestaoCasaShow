@@ -309,7 +309,7 @@ char* retorna_valor_show(char *id)
 void print_dados_show(Show* sh)
 {
     if (sh == NULL) {
-        screen_null_id_error("do show");
+        screen_null_id_error("Id do show");
     } else {
         system("clear || cls");
         printf("###############################################################################\n");
@@ -338,7 +338,7 @@ void print_dados_show(Show* sh)
 void print_dados_show_upd(Show* sh)
 {
     if (sh == NULL) {
-        screen_null_id_error("do show");
+        screen_null_id_error("Id do show");
     } else {
         system("clear || cls");
         printf("###############################################################################\n");
@@ -442,7 +442,7 @@ void remove_show(Show *sh)
         }
     }
     if (!achou) {
-        screen_null_id_error("do show");
+        screen_null_id_error("Id do show");
         printf("\n");
         printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
         getchar();
@@ -461,7 +461,7 @@ void excluir_show(void)
     id = del_show();
     sh = procura_show(id);
     if (sh == NULL) {
-        screen_null_id_error("do show");
+        screen_null_id_error("Id do show");
         printf("\n");
         printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
         getchar();
@@ -503,7 +503,7 @@ void update_show(void)
     id = screen_upd_show();
     sh = procura_show(id);
     if (sh == NULL) {
-        screen_null_id_error("do show");
+        screen_null_id_error("Id do show");
         printf("\n\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
         getchar();
     }
@@ -544,7 +544,7 @@ void regravar_show(Show *sh)
         }
     }
     if (!achou) {
-        screen_null_id_error("do show");
+        screen_null_id_error("Id do show");
         printf("\n");
         printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
         getchar();

@@ -295,7 +295,7 @@ int procura_id_atraction(char *id)
 void print_dados_atraction(Atraction *atr)
 {
     if (atr == NULL) {
-        screen_null_id_error("da atração");
+        screen_null_id_error("Id da atração");
     }
     else {
         system("clear || cls");
@@ -324,7 +324,7 @@ void print_dados_atraction(Atraction *atr)
 void print_dados_atraction_upd(Atraction *atr)
 {
     if (atr == NULL) {
-        screen_null_id_error("da atração");
+        screen_null_id_error("Id da atração");
     }
     else {
         system("clear || cls");
@@ -427,7 +427,7 @@ void remove_atr(Atraction *atr)
         }
     }
     if (!achou) {
-        screen_null_id_error("da atração");
+        screen_null_id_error("Id da atração");
         printf("\n");
         printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
         getchar();
@@ -446,7 +446,7 @@ void excluir_atr(void)
     id = del_atraction();
     atr = procura_atraction(id);
     if (atr == NULL) {
-        screen_null_id_error("da atração");
+        screen_null_id_error("Id da atração");
         printf("\n");
         printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
         getchar();
@@ -488,7 +488,7 @@ void update_atr(void)
     id = screen_upd_atraction();
     atr = procura_atraction(id);
     if (atr == NULL) {
-        screen_null_id_error("da atração");
+        screen_null_id_error("Id da atração");
         printf("\n\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
         getchar();
     }
@@ -529,7 +529,7 @@ void regravar_atr(Atraction *atr)
         }
     }
     if (!achou) {
-        screen_null_id_error("da atração");
+        screen_null_id_error("Id da atração");
         printf("\n");
         printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
         getchar();

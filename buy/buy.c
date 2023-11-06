@@ -279,7 +279,7 @@ int procura_id_buy(char *id)
 void print_dados_buy(Buy* b)
 {
     if (b == NULL) {
-        screen_null_id_error("da venda");
+        screen_null_id_error("Id da venda");
     }
     else {
         system("clear || cls");
@@ -308,7 +308,7 @@ void print_dados_buy(Buy* b)
 void print_dados_buy_upd(Buy* b)
 {
     if (b == NULL) {
-        screen_null_id_error("da venda");
+        screen_null_id_error("Id da venda");
     }
     else {
         system("clear || cls");
@@ -399,7 +399,7 @@ void update_buy(void)
     id = screen_upd_buy();
     b = procura_buy(id);
     if (b == NULL) {
-        screen_null_id_error("da venda");
+        screen_null_id_error("Id da venda");
         printf("\n\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
         getchar();
     }
@@ -440,7 +440,7 @@ void regravar_buy(Buy *b)
         }
     }
     if (!achou) {
-        screen_null_id_error("da venda");
+        screen_null_id_error("Id da venda");
         printf("\n");
         printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
         getchar();
@@ -466,7 +466,6 @@ void qual_campo_buy(Buy *b)
 {
     char resp[256];
     printf("\n\t\t\t     1 - CPF do cliente\n");
-    //printf("\t\t\t     2 - Quant. de ingressos\n");
     do {
         printf("\n\t\t   Digite o número do campo que deseja editar: ");
         scanf("%s", resp);
@@ -486,12 +485,6 @@ void qual_campo_buy(Buy *b)
                 }
             } while (procura_cpf_client_fantasm(b->cpf_cli));
             printf("\n\t\t   >>> CPF do cliente editado com sucesso. <<<");
-            getchar();
-            break;
-        case '2':
-            get_quant_venda_upd(b -> quant, "ingressos");
-            corrige_valor_final(b->quant, b->id_show, b->valor);
-            printf("\n\t\t   >>> Quant. de ingressos vendidos editada com sucesso. <<<");
             getchar();
             break;
     }

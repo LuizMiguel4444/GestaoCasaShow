@@ -309,7 +309,7 @@ int procura_cpf_client_fantasm(char *cpf)
 void print_dados_client(Client* cli)
 {
     if (cli == NULL) {
-        screen_null_id_error("do cliente");
+        screen_null_id_error("CPF do cliente");
     } else {
         system("clear || cls");
         printf("###############################################################################\n");
@@ -337,7 +337,7 @@ void print_dados_client(Client* cli)
 void print_dados_client_upd(Client* cli)
 {
     if (cli == NULL) {
-        screen_null_id_error("do cliente");
+        screen_null_id_error("CPF do cliente");
     } else {
         system("clear || cls");
         printf("###############################################################################\n");
@@ -442,7 +442,7 @@ void remove_cli(Client *cli)
         }
     }
     if (!achou) {
-        screen_null_id_error("do cliente");
+        screen_null_id_error("CPF do cliente");
         printf("\n");
         printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
         getchar();
@@ -556,7 +556,7 @@ void regravar_cli(Client *cli)
         }
     }
     if (!achou) {
-        screen_null_id_error("do cliente");
+        screen_null_id_error("CPF do cliente");
         printf("\n");
         printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
         getchar();
