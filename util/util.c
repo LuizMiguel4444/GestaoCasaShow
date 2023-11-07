@@ -82,13 +82,16 @@ int ehLetra(char c)
 /// Retorna 1 se o caractere recebido for uma alfabético ou um espaço
 /// (letra entre 'A' e 'Z' ou 'a' e 'z') ou retorna 0 caso contrário
 ///
-int ehLetraeEspaco(char c)
+int ehLetraeEspacoeAcento(char c)
 {
+  int a = c;
   if (c >= 'A' && c <= 'Z') {
     return 1;
   } else if (c >= 'a' && c <= 'z') {
     return 1;
   } else if (c == ' ') {
+    return 1;
+  } else if (a < 0) {
     return 1;
   } else {
     return 0;
@@ -105,10 +108,7 @@ int valNome(char *nome)
     if (strlen(nome) < 3) {
       return 0;
     }
-    if (!isupper(nome[0])) {
-      return 0;
-    }
-    if (!ehLetraeEspaco(nome[i])) {
+    if (!ehLetraeEspacoeAcento(nome[i])) {
       return 0;
     }
   }

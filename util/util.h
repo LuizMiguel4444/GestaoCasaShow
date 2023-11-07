@@ -4,7 +4,7 @@ int val_entrada(char *entrada);
 int ehDigito(char c);
 int ehDigitoMax(char c, char max);
 int ehLetra(char c);
-int ehLetraeEspaco(char c);
+int ehLetraeEspacoeAcento(char c);
 int valNome(char *nome);
 int ehBissexto(int aa);
 int ehData(int dd, int mm, int aa);

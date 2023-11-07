@@ -14,11 +14,11 @@ void get_nome(char* nome, char* modulo)
 {
   do {
     printf("###              Nome d%s (sem acentos ou ç): ", modulo);
-    scanf(" %50[^\n]", nome);
+    scanf(" %55[^\n]", nome);
     limpa_buffer();
     if (!valNome(nome)) {
-      screen_error_input_name();
-      limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
+      screen_error_input();
+      limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while (!valNome(nome));
 }
@@ -297,13 +297,6 @@ void screen_null_id_error(char* modulo)
 void screen_error_input(void)
 {
   printf("\n\tEntrada inválida! Por favor, tecle ENTER e tente novamente...");
-  getchar();
-}
-
-void screen_error_input_name(void)
-{
-  printf("\n\tEntrada inválida! Por favor, tecle ENTER e tente novamente...");
-  printf("\n\tNomes próprios devem iniciar com letra maiúscula!");
   getchar();
 }
 
