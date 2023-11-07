@@ -3,7 +3,7 @@ run: all
 
 all:
 	gcc -c -Wall atraction/atraction.c; 
-	gcc -c -Wall aux/aux.c;
+	gcc -c -Wall auxiliar/auxiliar.c;
 	gcc -c -Wall buy/buy.c;
 	gcc -c -Wall client/client.c;
 	gcc -c -Wall report/report.c;
@@ -11,9 +11,9 @@ all:
 	gcc -c -Wall util/util.c;
 	gcc -c -Wall main.c;
 	gcc -o GestaoCasaShow *.o;
+	rm *.o
 
 clean:
-	rm *.o
 	rm GestaoCasaShow
 	rm atraction/*.dat
 	rm buy/*.dat

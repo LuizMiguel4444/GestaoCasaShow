@@ -8,7 +8,7 @@
 //#include "../client/client.h"
 //#include "../buy/buy.h"
 //#include "../report/report.h"
-#include "../aux/aux.h"
+#include "../auxiliar/auxiliar.h"
 #include "../util/util.h"
 
 void modulo_atraction(void)
