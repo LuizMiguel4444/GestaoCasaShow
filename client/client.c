@@ -322,10 +322,10 @@ void print_dados_client(Client* cli)
         printf("###                                                                         ###\n");
         printf("###              Informações do CPF digitado:                               ###\n");
         printf("###                                                                         ###\n");
-        printf("###              Nome do cliente: %s\n", cli -> nome);
-        printf("###              CPF do cliente: %s\n", cli -> cpf);
-        printf("###              Email do cliente: %s\n", cli -> email);
-        printf("###              Número do cliente: %s\n", cli -> num);
+        printf("###              Nome do cliente: %s###\n", centralizar_texto(cli -> nome, 42, -1));
+        printf("###              CPF do cliente: %s###\n", centralizar_texto(cli -> cpf, 43, -1));
+        printf("###              Email do cliente: %s###\n", centralizar_texto(cli -> email, 41, -1));
+        printf("###              Número do cliente: %s###\n", centralizar_texto(cli -> num, 40, -1));
         printf("###                                                                         ###\n");
         printf("###############################################################################\n");
     }
@@ -350,10 +350,10 @@ void print_dados_client_upd(Client* cli)
         printf("###                                                                         ###\n");
         printf("###              Informações do CPF digitado:                               ###\n");
         printf("###                                                                         ###\n");
-        printf("###              Nome do cliente: %s\n", cli -> nome);
-        printf("###              CPF do cliente: %s\n", cli -> cpf);
-        printf("###              Email do cliente: %s\n", cli -> email);
-        printf("###              Número do cliente: %s\n", cli -> num);
+        printf("###              Nome do cliente: %s###\n", centralizar_texto(cli -> nome, 42, -1));
+        printf("###              CPF do cliente: %s###\n", centralizar_texto(cli -> cpf, 43, -1));
+        printf("###              Email do cliente: %s###\n", centralizar_texto(cli -> email, 41, -1));
+        printf("###              Número do cliente: %s###\n", centralizar_texto(cli -> num, 40, -1));
         printf("###                                                                         ###\n");
         printf("###############################################################################\n");
     }
@@ -368,11 +368,17 @@ void print_dados_client_rep(Client* cli)
     } else {
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
-        printf("###              Nome do cliente: %s\n", cli -> nome);
-        printf("###              CPF do cliente: %s\n", cli -> cpf);
-        printf("###              Email do cliente: %s\n", cli -> email);
-        printf("###              Número do cliente: %s\n", cli -> num);
-        printf("###              Status do cliente: %c\n", cli -> status);
+        printf("###              Nome do cliente: %s###\n", centralizar_texto(cli -> nome, 42, -1));
+        printf("###              CPF do cliente: %s###\n", centralizar_texto(cli -> cpf, 43, -1));
+        printf("###              Email do cliente: %s###\n", centralizar_texto(cli -> email, 41, -1));
+        printf("###              Número do cliente: %s###\n", centralizar_texto(cli -> num, 40, -1));
+        if (cli -> status == 'c') {
+            char status[] = "Ativo";
+            printf("###              Status do cliente: %s###\n", centralizar_texto(status, 40, -1));
+        } else {
+            char status[] = "Inativo";
+            printf("###              Status do cliente: %s###\n", centralizar_texto(status, 40, -1));
+        }
         printf("###                                                                         ###\n");
         printf("###############################################################################\n\n");
     }

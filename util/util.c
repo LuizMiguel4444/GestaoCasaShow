@@ -522,3 +522,36 @@ char *leLinha(char *linha, int tamanhoMaximo)
     }
   return linha;
 } // AUTOR: LUIZ MIGUEL COM AJUDA DO CHAT-GPT /// GIT: https://github.com/LuizMiguel4444
+
+///////////////////////////////////////////////////////////////////////////////
+/// Função centraliza o texto inserido
+///
+char* centralizar_texto(char* texto, int tam, int horizontal) {
+    int tam_texto = strlen(texto);
+
+    for(int c = 0;c < tam_texto;c++) {
+        if(texto[c] < 0) {
+            tam++;
+            c++;
+        }
+    }
+    int pos;
+    if(horizontal == 1) {
+        pos = tam - tam_texto;
+    } else if (horizontal == -1) {
+        pos = 0;
+    } else {
+        pos = tam/2 - tam_texto/2;
+    }
+
+    char *str= malloc((tam + 1)*sizeof(char));
+    for(int c = 0; c < tam; c++) {
+        if(c >= pos && c < (pos + tam_texto)) {
+            str[c] = texto[c-pos];
+        } else {
+            str[c] = ' ';
+        }
+    }
+    str[tam] = '\0';
+    return str;
+} // AUTOR: EMANUEL ALVES // GIT: https://github.com/Faltrenn

@@ -322,11 +322,11 @@ void print_dados_show(Show* sh)
         printf("###                                                                         ###\n");
         printf("###              Informações do Id digitado (%s):                         ###\n", sh -> id);
         printf("###                                                                         ###\n");
-        printf("###              Atração: %s\n", sh -> atraction);
-        printf("###              Data: %s\n", sh -> data);
-        printf("###              Hora: %s\n", sh -> hora);
-        printf("###              Quant. de ingressos: %s\n", sh -> quant);
-        printf("###              Valor do ingresso: %s\n", sh -> valor);
+        printf("###              Atração: %s###\n", centralizar_texto(sh -> atraction, 50, -1));
+        printf("###              Data: %s###\n", centralizar_texto(sh -> data, 53, -1));
+        printf("###              Hora: %s###\n", centralizar_texto(sh -> hora, 53, -1));
+        printf("###              Quant. de ingressos: %s###\n", centralizar_texto(sh -> quant, 38, -1));
+        printf("###              Valor do ingresso: R$%s###\n", centralizar_texto(sh -> valor, 38, -1));
         printf("###                                                                         ###\n");
         printf("###############################################################################\n");
     }
@@ -351,11 +351,11 @@ void print_dados_show_upd(Show* sh)
         printf("###                                                                         ###\n");
         printf("###              Informações do Id digitado (%s):                         ###\n", sh -> id);
         printf("###                                                                         ###\n");
-        printf("###              Atração: %s\n", sh -> atraction);
-        printf("###              Data: %s\n", sh -> data);
-        printf("###              Hora: %s\n", sh -> hora);
-        printf("###              Quant. de ingressos: %s\n", sh -> quant);
-        printf("###              Valor do ingresso: %s\n", sh -> valor);
+        printf("###              Atração: %s###\n", centralizar_texto(sh -> atraction, 50, -1));
+        printf("###              Data: %s###\n", centralizar_texto(sh -> data, 53, -1));
+        printf("###              Hora: %s###\n", centralizar_texto(sh -> hora, 53, -1));
+        printf("###              Quant. de ingressos: %s###\n", centralizar_texto(sh -> quant, 38, -1));
+        printf("###              Valor do ingresso: R$%s###\n", centralizar_texto(sh -> valor, 38, -1));
         printf("###                                                                         ###\n");
         printf("###############################################################################\n");
     }
@@ -370,13 +370,19 @@ void print_dados_show_rep(Show* sh)
     } else {
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
-        printf("###              Atração: %s\n", sh -> atraction);
-        printf("###              Data: %s\n", sh -> data);
-        printf("###              Hora: %s\n", sh -> hora);
-        printf("###              Quant. de ingressos: %s\n", sh -> quant);
-        printf("###              Valor do ingresso: %s\n", sh -> valor);
-        printf("###              Id do show: %s\n", sh -> id);
-        printf("###              Status do show: %c\n", sh -> status);
+        printf("###              Atração: %s###\n", centralizar_texto(sh -> atraction, 50, -1));
+        printf("###              Data: %s###\n", centralizar_texto(sh -> data, 53, -1));
+        printf("###              Hora: %s###\n", centralizar_texto(sh -> hora, 53, -1));
+        printf("###              Quant. de ingressos: %s###\n", centralizar_texto(sh -> quant, 38, -1));
+        printf("###              Valor do ingresso: R$%s###\n", centralizar_texto(sh -> valor, 38, -1));
+        printf("###              Id do show: %s###\n", centralizar_texto(sh -> id, 47, -1));
+        if (sh -> status == 'c') {
+            char status[] = "Ativo";
+            printf("###              Status do show: %s###\n", centralizar_texto(status, 43, -1));
+        } else {
+            char status[] = "Inativo";
+            printf("###              Status do show: %s###\n", centralizar_texto(status, 43, -1));
+        }
         printf("###                                                                         ###\n");
         printf("###############################################################################\n\n");
     }

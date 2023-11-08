@@ -309,10 +309,10 @@ void print_dados_atraction(Atraction *atr)
         printf("###                                                                         ###\n");
         printf("###              Informações do Id digitado (%s):                         ###\n", atr->id);
         printf("###                                                                         ###\n");
-        printf("###              Nome da atração: %s\n", atr->nome);
-        printf("###              Valor do cachê da atração: %s\n", atr->cache);
-        printf("###              Email de contato da atração: %s\n", atr->email);
-        printf("###              Número de contato da atração: %s\n", atr->num);
+        printf("###              Nome da atração: %s###\n", centralizar_texto(atr->nome, 42, -1));
+        printf("###              Valor do cachê da atração: R$%s###\n", centralizar_texto(atr->cache, 30, -1));
+        printf("###              Email de contato da atração: %s###\n", centralizar_texto(atr->email, 30, -1));
+        printf("###              Número de contato da atração: %s###\n", centralizar_texto(atr->num, 29, -1));
         printf("###                                                                         ###\n");
         printf("###############################################################################\n");
     }
@@ -338,10 +338,10 @@ void print_dados_atraction_upd(Atraction *atr)
         printf("###                                                                         ###\n");
         printf("###              Informações do Id digitado (%s):                         ###\n", atr->id);
         printf("###                                                                         ###\n");
-        printf("###              Nome da atração: %s\n", atr->nome);
-        printf("###              Valor do cachê da atração: %s\n", atr->cache);
-        printf("###              Email de contato da atração: %s\n", atr->email);
-        printf("###              Número de contato da atração: %s\n", atr->num);
+        printf("###              Nome da atração: %s###\n", centralizar_texto(atr->nome, 42, -1));
+        printf("###              Valor do cachê da atração: R$%s###\n", centralizar_texto(atr->cache, 30, -1));
+        printf("###              Email de contato da atração: %s###\n", centralizar_texto(atr->email, 30, -1));
+        printf("###              Número de contato da atração: %s###\n", centralizar_texto(atr->num, 29, -1));
         printf("###                                                                         ###\n");
         printf("###############################################################################\n");
     }
@@ -356,12 +356,18 @@ void print_dados_atraction_rep(Atraction *atr)
     } else {
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
-        printf("###              Nome da atração: %s\n", atr->nome);
-        printf("###              Valor do cachê da atração: %s\n", atr->cache);
-        printf("###              Email de contato da atração: %s\n", atr->email);
-        printf("###              Número de contato da atração: %s\n", atr->num);
-        printf("###              Id da atração: %s\n", atr -> id);
-        printf("###              Status da atração: %c\n", atr -> status);
+        printf("###              Nome da atração: %s###\n", centralizar_texto(atr->nome, 42, -1));
+        printf("###              Valor do cachê da atração: R$%s###\n", centralizar_texto(atr->cache, 30, -1));
+        printf("###              Email de contato da atração: %s###\n", centralizar_texto(atr->email, 30, -1));
+        printf("###              Número de contato da atração: %s###\n", centralizar_texto(atr->num, 29, -1));
+        printf("###              Id da atração: %s###\n", centralizar_texto(atr -> id, 44, -1));
+        if (atr -> status == 'c') {
+            char status[] = "Ativo";
+            printf("###              Status da atração: %s###\n", centralizar_texto(status, 40, -1));
+        } else {
+            char status[] = "Inativo";
+            printf("###              Status da atração: %s###\n", centralizar_texto(status, 40, -1));
+        }
         printf("###                                                                         ###\n");
         printf("###############################################################################\n\n");
     }

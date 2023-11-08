@@ -26,3 +26,4 @@ int val_hour(char hour[]);
 char* input(void);
 char* duplica(char* s);
 char *leLinha(char *linha, int tamanhoMaximo);
+char* centralizar_texto(char* texto, int tam, int horizontal);

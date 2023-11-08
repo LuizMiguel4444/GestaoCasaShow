@@ -13,7 +13,7 @@
 void get_nome(char* nome, char* modulo)
 {
   do {
-    printf("###              Nome d%s (sem acentos ou ç): ", modulo);
+    printf("###              Nome d%s : ", modulo);
     scanf(" %55[^\n]", nome);
     limpa_buffer();
     if (!valNome(nome)) {
@@ -26,7 +26,7 @@ void get_nome(char* nome, char* modulo)
 void get_nome_upd(char* nome, char* modulo)
 {
   do {
-    printf("\n\t\t    Novo nome %s  (sem acentos ou ç): ", modulo);
+    printf("\n\t\t    Novo nome %s : ", modulo);
     scanf(" %55[^\n]", nome);
     limpa_buffer();
     if (!valNome(nome)) {

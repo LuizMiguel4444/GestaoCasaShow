@@ -90,13 +90,14 @@ void report_show(void)
     }
     system("clear || cls");
     while(fread(sh, sizeof(Show), 1, fp)) {
-        //if (sh -> status != 'x') {
-        printf("###############################################################################\n");
-        printf("###                                                                         ###\n");
-        printf("###              Cadastro realizado em %02d/%02d/%d às %02d:%02d.                 ###\n", sh->day, sh->month, sh->year, sh->hour, sh->minute);
-        printf("###                                                                         ###\n");
-        print_dados_show_rep(sh);
-        //}
+        if (sh -> status != 'x') {
+            printf("###############################################################################\n");
+            printf("###                                                                         ###\n");
+            printf("###              Cadastro realizado em %02d/%02d/%d às %02d:%02d.                 ###\n", sh->day, sh->month, sh->year, sh->hour, sh->minute);
+            printf("###                                                                         ###\n");
+            print_dados_show_rep(sh);
+            printf("-------------------------------------------------------------------------------\n\n");
+        }
     }
     fclose(fp);
     free(sh);
@@ -117,13 +118,14 @@ void report_atraction(void)
     }
     system("clear || cls");
     while(fread(atr, sizeof(Atraction), 1, fp)) {
-        //if (atr -> status != 'x') {
-        printf("###############################################################################\n");
-        printf("###                                                                         ###\n");
-        printf("###              Cadastro realizado em %02d/%02d/%d às %02d:%02d.                 ###\n", atr->day, atr->month, atr->year, atr->hour, atr->minute);
-        printf("###                                                                         ###\n");
-        print_dados_atraction_rep(atr);
-        //}
+        if (atr -> status != 'x') {
+            printf("###############################################################################\n");
+            printf("###                                                                         ###\n");
+            printf("###              Cadastro realizado em %02d/%02d/%d às %02d:%02d.                 ###\n", atr->day, atr->month, atr->year, atr->hour, atr->minute);
+            printf("###                                                                         ###\n");
+            print_dados_atraction_rep(atr);
+            printf("-------------------------------------------------------------------------------\n\n");
+        }
     }
     fclose(fp);
     free(atr);
@@ -144,13 +146,14 @@ void report_client(void)
     }
     system("clear || cls");
     while(fread(cli, sizeof(Client), 1, fp)) {
-        //if (cli -> status != 'x') {
-        printf("###############################################################################\n");
-        printf("###                                                                         ###\n");
-        printf("###              Cadastro realizado em %02d/%02d/%d às %02d:%02d.                 ###\n", cli->day, cli->month, cli->year, cli->hour, cli->minute);
-        printf("###                                                                         ###\n");
-        print_dados_client_rep(cli);
-        //}
+        if (cli -> status != 'x') {
+            printf("###############################################################################\n");
+            printf("###                                                                         ###\n");
+            printf("###              Cadastro realizado em %02d/%02d/%d às %02d:%02d.                 ###\n", cli->day, cli->month, cli->year, cli->hour, cli->minute);
+            printf("###                                                                         ###\n");
+            print_dados_client_rep(cli);
+            printf("-------------------------------------------------------------------------------\n\n");
+        }
     }
     fclose(fp);
     free(cli);
@@ -171,13 +174,14 @@ void report_buy(void)
     }
     system("clear || cls");
     while(fread(b, sizeof(Buy), 1, fp)) {
-        //if (b -> status != 'x') {
-        printf("###############################################################################\n");
-        printf("###                                                                         ###\n");
-        printf("###              Cadastro realizado em %02d/%02d/%d às %02d:%02d.                 ###\n", b->day, b->month, b->year, b->hour, b->minute);
-        printf("###                                                                         ###\n");
-        print_dados_buy_rep(b);
-        //}
+        if (b -> status != 'x') {
+            printf("###############################################################################\n");
+            printf("###                                                                         ###\n");
+            printf("###              Cadastro realizado em %02d/%02d/%d às %02d:%02d.                 ###\n", b->day, b->month, b->year, b->hour, b->minute);
+            printf("###                                                                         ###\n");
+            print_dados_buy_rep(b);
+            printf("-------------------------------------------------------------------------------\n\n");
+        }
     }
     fclose(fp);
     free(b);

@@ -293,10 +293,10 @@ void print_dados_buy(Buy* b)
         printf("###                                                                         ###\n");
         printf("###              Informações do Id digitado (%s):                         ###\n", b -> id_ven);
         printf("###                                                                         ###\n");
-        printf("###              Id do show: %s\n", b -> id_show);
-        printf("###              CPF do cliente: %s\n", b -> cpf_cli);
-        printf("###              Quant. de ingressos: %s\n", b -> quant);
-        printf("###              Valor final: %s\n", b -> valor);
+        printf("###              Id do show: %s###\n", centralizar_texto(b -> id_show, 47, -1));
+        printf("###              CPF do cliente: %s###\n", centralizar_texto(b -> cpf_cli, 43, -1));
+        printf("###              Quant. de ingressos: %s###\n", centralizar_texto(b -> quant, 38, -1));
+        printf("###              Valor final: R$%s###\n", centralizar_texto(b -> valor, 44, -1));
         printf("###                                                                         ###\n");
         printf("###############################################################################\n");
     }
@@ -322,10 +322,10 @@ void print_dados_buy_upd(Buy* b)
         printf("###                                                                         ###\n");
         printf("###              Informações do Id digitado (%s):                         ###\n", b -> id_ven);
         printf("###                                                                         ###\n");
-        printf("###              Id do show: %s\n", b -> id_show);
-        printf("###              CPF do cliente: %s\n", b -> cpf_cli);
-        printf("###              Quant. de ingressos: %s\n", b -> quant);
-        printf("###              Valor final: %s\n", b -> valor);
+        printf("###              Id do show: %s###\n", centralizar_texto(b -> id_show, 47, -1));
+        printf("###              CPF do cliente: %s###\n", centralizar_texto(b -> cpf_cli, 43, -1));
+        printf("###              Quant. de ingressos: %s###\n", centralizar_texto(b -> quant, 38, -1));
+        printf("###              Valor final: R$%s###\n", centralizar_texto(b -> valor, 44, -1));
         printf("###                                                                         ###\n");
         printf("###############################################################################\n");
     }
@@ -340,12 +340,15 @@ void print_dados_buy_rep(Buy* b)
     } else {
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
-        printf("###              Id do show: %s\n", b -> id_show);
-        printf("###              CPF do cliente: %s\n", b -> cpf_cli);
-        printf("###              Quant. de ingressos: %s\n", b -> quant);
-        printf("###              Valor final: %s\n", b -> valor);
-        printf("###              Id da venda: %s\n", b -> id_ven);
-        printf("###              Status da venda: %c\n", b -> status);
+        printf("###              Id do show: %s###\n", centralizar_texto(b -> id_show, 47, -1));
+        printf("###              CPF do cliente: %s###\n", centralizar_texto(b -> cpf_cli, 43, -1));
+        printf("###              Quant. de ingressos: %s###\n", centralizar_texto(b -> quant, 38, -1));
+        printf("###              Valor final: R$%s###\n", centralizar_texto(b -> valor, 44, -1));
+        printf("###              Id da venda: %s###\n", centralizar_texto(b -> id_ven, 46, -1));
+        if (b -> status == 'f') {
+            char status[] = "Finalizada";
+            printf("###              Status da venda: %s###\n", centralizar_texto(status, 42, -1));
+        }
         printf("###                                                                         ###\n");
         printf("###############################################################################\n\n");
     }
