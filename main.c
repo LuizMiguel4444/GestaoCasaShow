@@ -210,8 +210,10 @@ void end(void)
 
         for (int j = 0; j < height; j++) { // Loop para percorrer as linhas da "janela".
             for (int k = 0; k < width; k++) { // Loop para percorrer as colunas da "janela".
-                if (k <= i || k >= width - i - 1) { // imprime o caractere '/' para criar uma borda.
-                    printf("/");
+                if (k <= i) {
+                    printf("\\"); // Imprime "\" no lado esquerdo.
+                } else if (k >= width - i - 1) {
+                    printf("/"); // Imprime "/" no lado direito.
                 } else {
                     if (j == height / 2 && k >= (width - messageLength) / 2 && k < (width + messageLength) / 2) {
                         // Se j estiver na metade da altura da "janela" e k estiver na faixa onde a mensagem deve ser exibida:
