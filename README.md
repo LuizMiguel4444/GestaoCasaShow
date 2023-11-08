@@ -15,7 +15,21 @@ Desenvolvido por: Luiz Miguel Santos Silva.
 # Informações De Uso:
 
 
-- Para compilar e rodar o programa, abra o terminal, vá até a pasta do programa e digite o seguinte comando: 'make'. Caso não funcione, cole o comando a seguir: gcc -c -Wall atraction/atraction.c; gcc -c -Wall aux/aux.c; gcc -c -Wall buy/buy.c; gcc -c -Wall client/client.c; gcc -c -Wall report/report.c; gcc -c -Wall show/show.c; gcc -c -Wall util/util.c; gcc -c -Wall main.c; gcc -o GestaoCasaShow *.o; ./GestaoCasaShow
+- Para compilar e rodar o programa, abra o terminal, vá até a pasta do programa e digite o seguinte comando: 'make'. Caso não funcione, cole o comando a seguir: 'gcc -c -Wall atraction/atraction.c; gcc -c -Wall auxiliar/auxiliar.c; gcc -c -Wall buy/buy.c; gcc -c -Wall client/client.c; gcc -c -Wall report/report.c; gcc -c -Wall show/show.c; gcc -c -Wall util/util.c; gcc -c -Wall main.c; gcc -o GestaoCasaShow *.o; ./GestaoCasaShow'. 
+
+Caso ainda não funcione, digite separadamente os seguintes comandos:
+
+gcc -c -Wall atraction/atraction.c
+gcc -c -Wall auxiliar/auxiliar.c
+gcc -c -Wall buy/buy.c
+gcc -c -Wall client/client.c
+gcc -c -Wall report/report.c
+gcc -c -Wall show/show.c
+gcc -c -Wall util/util.c
+gcc -o GestaoCasaShow *.o
+GestaoCasaShow.exe
+
+Se após isso não funcionar... Mude para Linux urgentemente.
 
 - Para cadastrar uma venda é necessário que já exista ao menos um show cadastrado no sistema.
 
