@@ -243,6 +243,8 @@ void print_dados_buy(Buy* b)
         printf("###                                                                         ###\n");
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
+        printf("###              Cadastro realizado em %02d/%02d/%d às %02d:%02d.                 ###\n", b->day, b->month, b->year, b->hour, b->minute);
+        printf("###                                                                         ###\n");
         printf("###              Informações do Id digitado (%s):                         ###\n", b -> id_ven);
         printf("###                                                                         ###\n");
         printf("###              Id do show: %s###\n", centralizar_texto(b -> id_show, 47, -1));
@@ -290,19 +292,9 @@ void print_dados_buy_rep(Buy* b)
         printf("Não é possível continuar este programa...\n");
         exit(1);
     } else {
-        printf("###############################################################################\n");
-        printf("###                                                                         ###\n");
-        printf("###              Id do show: %s###\n", centralizar_texto(b -> id_show, 47, -1));
-        printf("###              CPF do cliente: %s###\n", centralizar_texto(b -> cpf_cli, 43, -1));
-        printf("###              Quant. de ingressos: %s###\n", centralizar_texto(b -> quant, 38, -1));
-        printf("###              Valor final: R$%s###\n", centralizar_texto(b -> valor, 44, -1));
-        printf("###              Id da venda: %s###\n", centralizar_texto(b -> id_ven, 46, -1));
-        if (b -> status == 'f') {
-            char status[] = "Finalizada";
-            printf("###              Status da venda: %s###\n", centralizar_texto(status, 42, -1));
-        }
-        printf("###                                                                         ###\n");
-        printf("###############################################################################\n\n");
+        printf("### |%s", centralizar_texto(b -> cpf_cli, 29, 0));
+        printf("|%s", centralizar_texto(b -> valor, 25, 0));
+        printf("| %s| ###\n", centralizar_texto(b -> id_ven, 12, 0));
     }
 }
 

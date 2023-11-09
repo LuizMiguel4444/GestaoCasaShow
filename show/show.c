@@ -5,9 +5,6 @@
 #include <time.h>
 #include "show.h"
 #include "../atraction/atraction.h"
-//#include "../client/client.h"
-//#include "../buy/buy.h"
-//#include "../report/report.h"
 #include "../auxiliar/auxiliar.h"
 #include "../util/util.h"
 
@@ -283,6 +280,8 @@ void print_dados_show(Show* sh)
         printf("###                                                                         ###\n");
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
+        printf("###              Cadastro realizado em %02d/%02d/%d às %02d:%02d.                 ###\n", sh->day, sh->month, sh->year, sh->hour, sh->minute);
+        printf("###                                                                         ###\n");
         printf("###              Informações do Id digitado (%s):                         ###\n", sh -> id);
         printf("###                                                                         ###\n");
         printf("###              Atração: %s###\n", centralizar_texto(sh -> atraction, 50, -1));
@@ -331,23 +330,8 @@ void print_dados_show_rep(Show* sh)
         printf("Não é possível continuar este programa...\n");
         exit(1);
     } else {
-        printf("###############################################################################\n");
-        printf("###                                                                         ###\n");
-        printf("###              Atração: %s###\n", centralizar_texto(sh -> atraction, 50, -1));
-        printf("###              Data: %s###\n", centralizar_texto(sh -> data, 53, -1));
-        printf("###              Hora: %s###\n", centralizar_texto(sh -> hora, 53, -1));
-        printf("###              Quant. de ingressos: %s###\n", centralizar_texto(sh -> quant, 38, -1));
-        printf("###              Valor do ingresso: R$%s###\n", centralizar_texto(sh -> valor, 38, -1));
-        printf("###              Id do show: %s###\n", centralizar_texto(sh -> id, 47, -1));
-        if (sh -> status == 'c') {
-            char status[] = "Ativo";
-            printf("###              Status do show: %s###\n", centralizar_texto(status, 43, -1));
-        } else {
-            char status[] = "Inativo";
-            printf("###              Status do show: %s###\n", centralizar_texto(status, 43, -1));
-        }
-        printf("###                                                                         ###\n");
-        printf("###############################################################################\n\n");
+        printf("### |%s", centralizar_texto(sh -> atraction, 52, 0));
+        printf("|%s| ###\n", centralizar_texto(sh -> id, 16, 0));
     }
 }
 

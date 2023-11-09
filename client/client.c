@@ -3,11 +3,8 @@
 #include <locale.h>
 #include <string.h>
 #include <time.h>
-//#include "../show/show.h"
 #include "../atraction/atraction.h"
 #include "client.h"
-//#include "../buy/buy.h"
-//#include "../report/report.h"
 #include "../auxiliar/auxiliar.h"
 #include "../util/util.h"
 
@@ -285,6 +282,8 @@ void print_dados_client(Client* cli)
         printf("###                                                                         ###\n");
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
+        printf("###              Cadastro realizado em %02d/%02d/%d às %02d:%02d.                 ###\n", cli->day, cli->month, cli->year, cli->hour, cli->minute);
+        printf("###                                                                         ###\n");
         printf("###              Informações do CPF digitado:                               ###\n");
         printf("###                                                                         ###\n");
         printf("###              Nome do cliente: %s###\n", centralizar_texto(cli -> nome, 42, -1));
@@ -331,21 +330,8 @@ void print_dados_client_rep(Client* cli)
         printf("Não é possível continuar este programa...\n");
         exit(1);
     } else {
-        printf("###############################################################################\n");
-        printf("###                                                                         ###\n");
-        printf("###              Nome do cliente: %s###\n", centralizar_texto(cli -> nome, 42, -1));
-        printf("###              CPF do cliente: %s###\n", centralizar_texto(cli -> cpf, 43, -1));
-        printf("###              Email do cliente: %s###\n", centralizar_texto(cli -> email, 41, -1));
-        printf("###              Número do cliente: %s###\n", centralizar_texto(cli -> num, 40, -1));
-        if (cli -> status == 'c') {
-            char status[] = "Ativo";
-            printf("###              Status do cliente: %s###\n", centralizar_texto(status, 40, -1));
-        } else {
-            char status[] = "Inativo";
-            printf("###              Status do cliente: %s###\n", centralizar_texto(status, 40, -1));
-        }
-        printf("###                                                                         ###\n");
-        printf("###############################################################################\n\n");
+        printf("### |%s", centralizar_texto(cli -> nome, 47, 0));
+        printf("| %s| ###\n", centralizar_texto(cli -> cpf, 20, 0));
     }
 }
 
