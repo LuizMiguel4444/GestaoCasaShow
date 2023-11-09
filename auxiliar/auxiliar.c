@@ -13,9 +13,11 @@
 void get_nome(char* nome, char* modulo)
 {
   do {
-    printf("###              Nome d%s : ", modulo);
+    printf("###              Nome d%s: ", modulo);
     scanf(" %55[^\n]", nome);
     limpa_buffer();
+    limpa_linha();
+    printf("###              Nome d%s: %s###\n", modulo, centralizar_texto(nome, 42, -1));
     if (!valNome(nome)) {
       screen_error_input();
       limpa_linha(); limpa_linha(); limpa_linha();
@@ -26,7 +28,7 @@ void get_nome(char* nome, char* modulo)
 void get_nome_upd(char* nome, char* modulo)
 {
   do {
-    printf("\n\t\t    Novo nome %s : ", modulo);
+    printf("\n\t\t    Novo nome %s: ", modulo);
     scanf(" %55[^\n]", nome);
     limpa_buffer();
     if (!valNome(nome)) {
@@ -42,6 +44,8 @@ void get_cache(char* cache, char* modulo)
     printf("###              Cachê d%s: ", modulo);
     scanf("%s", cache);
     limpa_buffer();
+    limpa_linha();
+    printf("###              Cachê d%s: %s###\n", modulo, centralizar_texto(cache, 22, -1));
     if (!ehdinheiro(cache)) {
       screen_error_input();
       limpa_linha(); limpa_linha(); limpa_linha();
@@ -68,6 +72,8 @@ void get_email(char* email, char* modulo)
     printf("###              Email d%s: ", modulo);
     scanf("%[a-z0-9@.]", email);
     limpa_buffer();
+    limpa_linha();
+    printf("###              Email d%s: %s###\n", modulo, centralizar_texto(email, 41, -1));
     if (!val_email(email)) {
       screen_error_input();
       limpa_linha(); limpa_linha(); limpa_linha();
@@ -88,12 +94,14 @@ void get_email_upd(char* email, char* modulo)
   } while (!val_email(email));
 }
 
-void get_num(char* num, char* modulo)
+void get_num(char* num, char* modulo, int tam)
 {
   do{
     printf("###              Número d%s: ", modulo);
     scanf("%s", num);
     limpa_buffer();
+    limpa_linha();
+    printf("###              Número d%s: %s###\n", modulo, centralizar_texto(num, tam, -1));
     if (!validarFone(num)) {
       screen_error_input();
       limpa_linha(); limpa_linha(); limpa_linha();
@@ -114,12 +122,14 @@ void get_num_upd(char* num, char* modulo)
   } while (!validarFone(num));
 }
 
-void get_id(char* id, char* modulo)
+void get_id(char* id, char* modulo, int tam)
 {
   do {
     printf("###              Id d%s: ", modulo);
     scanf("%s", id);
     limpa_buffer();
+    limpa_linha();
+    printf("###              Id d%s: %s###\n", modulo, centralizar_texto(id, tam, -1));
     if (!val_id(id, 4)) {
       screen_error_input();
       limpa_linha(); limpa_linha(); limpa_linha();
@@ -133,6 +143,8 @@ void get_quant_cad(char* quant, char* modulo)
     printf("###              Quant. de %s: ", modulo);
     scanf("%s", quant);
     limpa_buffer();
+    limpa_linha();
+    printf("###              Quant. de %s: %s###\n", modulo, centralizar_texto(quant, 38, -1));
     if (!check_quant_cad(quant)) {
       screen_error_input();
       limpa_linha(); limpa_linha(); limpa_linha();
@@ -159,6 +171,8 @@ void get_quant_venda(char* quant, char* modulo)
     printf("###              Quant. de %s: ", modulo);
     scanf("%s", quant);
     limpa_buffer();
+    limpa_linha();
+    printf("###              Quant. de %s: %s###\n", modulo, centralizar_texto(quant, 38, -1));
     if (!check_quant_venda(quant)) {
       screen_error_input();
       limpa_linha(); limpa_linha(); limpa_linha();
@@ -185,6 +199,8 @@ void get_valor(char* valor, char* modulo)
     printf("###              Valor %s: ", modulo);
     scanf("%s", valor);
     limpa_buffer();
+    limpa_linha();
+    printf("###              Valor %s: %s###\n", modulo, centralizar_texto(valor, 21, -1));
     if (!ehdinheiro(valor)) {
       screen_error_input();
       limpa_linha(); limpa_linha(); limpa_linha();
@@ -211,6 +227,8 @@ void get_cpf(char* cpf)
     printf("###              CPF do cliente (apenas números): ");
     scanf("%[0-9-.]", cpf);
     limpa_buffer();
+    limpa_linha();
+    printf("###              CPF do cliente (apenas números): %s###\n", centralizar_texto(cpf, 26, -1));
     if (!validarCPF(cpf)) {
       screen_error_input();
       limpa_linha(); limpa_linha(); limpa_linha();
@@ -237,6 +255,8 @@ void get_data(char* data)
     printf("###              Data (dd/mm/aaaa): ");
     scanf("%s", data);
     limpa_buffer();
+    limpa_linha();
+    printf("###              Data (dd/mm/aaaa): %s###\n", centralizar_texto(data, 40, -1));
     if (!valData(data)) {
       screen_error_input();
       limpa_linha(); limpa_linha(); limpa_linha();
@@ -263,6 +283,8 @@ void get_hour(char* hour)
     printf("###              Horário (hh:mm): ");
     scanf("%s", hour);
     limpa_buffer();
+    limpa_linha();
+    printf("###              Horário (hh:mm): %s###\n", centralizar_texto(hour, 42, -1));
     if (!val_hour(hour)) {
       screen_error_input();
       limpa_linha(); limpa_linha(); limpa_linha();

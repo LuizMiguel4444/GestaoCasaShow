@@ -106,32 +106,6 @@ Show *cred_show(void)
     return sh;
 }
 
-Show *cred_show_sem_id(void)
-{
-    Show *sh;
-    sh = (Show*) malloc(sizeof(Show) + 1);
-    system("clear || cls");
-    printf("###############################################################################\n");
-    printf("###                                                                         ###\n");
-    printf("###            ===================================================          ###\n");
-    printf("###            =============   Gestão Casa Shows   ===============          ###\n");
-    printf("###            ===================================================          ###\n");
-    printf("###                                                                         ###\n");
-    printf("###############################################################################\n");
-    printf("###                                                                         ###\n");
-    printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-    printf("###              = = = = = = = = Cadastrar  Show = = = = = = = =            ###\n");
-    printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-    printf("###                                                                         ###\n");
-    show_inputs_sem_id(sh);
-    printf("###                                                                         ###\n");
-    printf("###############################################################################\n");
-    printf("\n");
-    printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-    getchar();
-    return sh;
-}
-
 char *screen_busc_show(void)
 {
     char *id;
@@ -231,23 +205,12 @@ void show_inputs(Show* sh)
     get_quant_cad(sh -> quant, "ingressos");
     get_valor(sh -> valor, "do ingresso (com casa decimal)");
     do {
-        get_id(sh->id, "o show (4 dígitos)");
+        get_id(sh->id, "o show (4 dígitos)", 35);
         if (!procura_id_show(sh->id)) {
             screen_error_input_id("Id");
             limpa_linha(); limpa_linha(); limpa_linha();
         }
     } while (!procura_id_show(sh->id));
-    sh -> status = 'c';
-    get_data_hour_sh(sh);
-}
-
-void show_inputs_sem_id(Show* sh)
-{
-    get_nome(sh -> atraction, "a atração");
-    get_data(sh -> data);
-    get_hour(sh -> hora);
-    get_quant_cad(sh -> quant, "ingressos");
-    get_valor(sh -> valor, "do ingresso (com casa decimal)");
     sh -> status = 'c';
     get_data_hour_sh(sh);
 }

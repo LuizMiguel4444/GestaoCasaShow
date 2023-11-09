@@ -102,32 +102,6 @@ Buy *cred_buy(void)
     return b;
 }
 
-Buy *cred_buy_sem_id(void)
-{
-    Buy *b;
-    b = (Buy *)malloc(sizeof(Buy) + 1);
-    system("clear || cls");
-    printf("###############################################################################\n");
-    printf("###                                                                         ###\n");
-    printf("###            ===================================================          ###\n");
-    printf("###            =============   Gestão Casa Shows   ===============          ###\n");
-    printf("###            ===================================================          ###\n");
-    printf("###                                                                         ###\n");
-    printf("###############################################################################\n");
-    printf("###                                                                         ###\n");
-    printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-    printf("###              = = = = = = = = Cadastrar Venda = = = = = = = =            ###\n");
-    printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-    printf("###                                                                         ###\n");
-    buy_inputs_sem_id(b);
-    printf("###                                                                         ###\n");
-    printf("###############################################################################\n");
-    printf("\n");
-    printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-    getchar();
-    return b;
-}
-
 char *screen_busc_buy(void)
 {
     char *id;
@@ -191,7 +165,7 @@ char *screen_upd_buy(void)
 void buy_inputs(Buy* b)
 {
     do {
-        get_id(b->id_show, "o show (4 dígitos)");
+        get_id(b->id_show, "o show (4 dígitos)", 35);
         if (procura_id_show(b->id_show)) {
             screen_error_input_n_exist("Id");
             limpa_linha(); limpa_linha(); limpa_linha();
@@ -207,34 +181,12 @@ void buy_inputs(Buy* b)
     get_quant_venda(b -> quant, "ingressos");
     corrige_valor_final(b->quant, b->id_show, b->valor);
     do {
-        get_id(b->id_ven, "a venda (4 dígitos)");
+        get_id(b->id_ven, "a venda (4 dígitos)", 34);
         if (!procura_id_buy(b->id_ven)) {
             screen_error_input_id("Id");
             limpa_linha(); limpa_linha(); limpa_linha();
         }
     } while (!procura_id_buy(b->id_ven));
-    b -> status = 'f';
-    get_data_hour_buy(b);
-}
-
-void buy_inputs_sem_id(Buy* b)
-{
-    do {
-        get_id(b->id_show, "o show (4 dígitos)");
-        if (procura_id_show(b->id_show)) {
-            screen_error_input_n_exist("Id");
-            limpa_linha(); limpa_linha(); limpa_linha();
-        }
-    } while (procura_id_show(b->id_show));
-    do {
-        get_cpf(b->cpf_cli);
-        if (procura_cpf_client_fantasm(b->cpf_cli)) {
-            screen_error_input_n_exist("CPF");
-            limpa_linha(); limpa_linha(); limpa_linha();
-        }
-    } while (procura_cpf_client_fantasm(b->cpf_cli));
-    get_quant_venda(b -> quant, "ingressos");
-    corrige_valor_final(b->quant, b->id_show, b->valor);
     b -> status = 'f';
     get_data_hour_buy(b);
 }

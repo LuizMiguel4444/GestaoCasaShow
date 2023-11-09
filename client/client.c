@@ -106,32 +106,6 @@ Client *cred_client(void)
     return cli;
 }
 
-Client *cred_client_sem_cpf(void)
-{
-    Client *cli;
-    cli = (Client*) malloc(sizeof(Client) + 1);
-    system("clear || cls");
-    printf("###############################################################################\n");
-    printf("###                                                                         ###\n");
-    printf("###            ===================================================          ###\n");
-    printf("###            =============   Gestão Casa Shows   ===============          ###\n");
-    printf("###            ===================================================          ###\n");
-    printf("###                                                                         ###\n");
-    printf("###############################################################################\n");
-    printf("###                                                                         ###\n");
-    printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-    printf("###              = = = = = = =  Cadastrar Cliente  = = = = = = =            ###\n");
-    printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-    printf("###                                                                         ###\n");
-    client_inputs_sem_cpf(cli);
-    printf("###                                                                         ###\n");
-    printf("###############################################################################\n");
-    printf("\n");
-    printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-    getchar();
-    return cli;
-}
-
 char *screen_busc_client(void)
 {
     char *cpf;
@@ -238,16 +212,7 @@ void client_inputs(Client* cli)
         }
     } while (!procura_cpf_client(cli->cpf));
     get_email(cli -> email, "o cliente");
-    get_num(cli -> num, "o cliente");
-    cli -> status = 'c';
-    get_data_hour_cli(cli);
-}
-
-void client_inputs_sem_cpf(Client* cli)
-{
-    get_nome(cli -> nome, "o cliente");
-    get_email(cli -> email, "o cliente");
-    get_num(cli -> num, "o cliente");
+    get_num(cli -> num, "o cliente", 40);
     cli -> status = 'c';
     get_data_hour_cli(cli);
 }

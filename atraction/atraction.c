@@ -108,32 +108,6 @@ Atraction *cred_atraction(void)
     return atr;
 }
 
-Atraction *cred_atraction_sem_id(void)
-{
-    Atraction *atr;
-    atr = (Atraction *)malloc(sizeof(Atraction) + 1);
-    system("clear || cls");
-    printf("###############################################################################\n");
-    printf("###                                                                         ###\n");
-    printf("###            ===================================================          ###\n");
-    printf("###            =============   Gestão Casa Shows   ===============          ###\n");
-    printf("###            ===================================================          ###\n");
-    printf("###                                                                         ###\n");
-    printf("###############################################################################\n");
-    printf("###                                                                         ###\n");
-    printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-    printf("###              = = = = = = =  Cadastrar Atração  = = = = = = =            ###\n");
-    printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-    printf("###                                                                         ###\n");
-    atraction_inputs_sem_id(atr);
-    printf("###                                                                         ###\n");
-    printf("###############################################################################\n");
-    printf("\n");
-    printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-    getchar();
-    return atr;
-}
-
 char *screen_busc_atraction(void)
 {
     char *id;
@@ -233,24 +207,14 @@ void atraction_inputs(Atraction *atr)
     get_nome(atr->nome, "a atração");
     get_cache(atr->cache, "a atração (com casa decimal)");
     get_email(atr->email, "e contato");
-    get_num(atr->num, "e contato (com DDD)");
+    get_num(atr->num, "e contato (com DDD)", 30);
     do {
-        get_id(atr->id, "a atração (4 dígitos)");
+        get_id(atr->id, "a atração (4 dígitos)", 32);
         if (!procura_id_atraction(atr->id)) {
             screen_error_input_id("Id");
             limpa_linha(); limpa_linha(); limpa_linha();
         }
     } while (!procura_id_atraction(atr->id));
-    atr->status = 'c';
-    get_data_hour_atr(atr);
-}
-
-void atraction_inputs_sem_id(Atraction *atr)
-{
-    get_nome(atr->nome, "a atração");
-    get_cache(atr->cache, "a atração (com casa decimal)");
-    get_email(atr->email, "e contato");
-    get_num(atr->num, "e contato (com DDD)");
     atr->status = 'c';
     get_data_hour_atr(atr);
 }
