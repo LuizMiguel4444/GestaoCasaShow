@@ -70,7 +70,7 @@ void get_email(char* email, char* modulo)
 {
   do {
     printf("###              Email d%s: ", modulo);
-    scanf("%[a-z0-9@.]", email);
+    scanf("%s", email);
     limpa_buffer();
     limpa_linha();
     printf("###              Email d%s: %s###\n", modulo, centralizar_texto(email, 41, -1));
@@ -85,7 +85,7 @@ void get_email_upd(char* email, char* modulo)
 {
   do {
     printf("\n\t\t    Novo email %s: ", modulo);
-    scanf("%[a-z0-9@.]", email);
+    scanf("%s", email);
     limpa_buffer();
     if (!val_email(email)) {
       screen_error_input();
