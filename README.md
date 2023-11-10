@@ -33,7 +33,7 @@ Desenvolvido por: Luiz Miguel Santos Silva.
 
 - Para compilar e rodar o programa, abra o terminal, vá até a pasta do programa e digite os seguintes comandos em sequência:
 
-1.  gcc -c -Wall *\\*.c
+1.  gcc -c -Wall *\\\*.c
 2.  gcc -o GestaoCasaShow *.o main.c
 3.  .\GestaoCasaShow
 
