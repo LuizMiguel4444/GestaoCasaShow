@@ -1,4 +1,6 @@
 # GestaoCasaShow
+
+
 Projeto da Disciplina de Programação - 2023.2 
 
 Universidade Federal do Rio Grande do Norte - CERES - Departamento de Computação e Tecnologia.
@@ -12,24 +14,30 @@ Linguagem utilizada no projeto: C.
 Desenvolvido por: Luiz Miguel Santos Silva.
 
 
-# Informações De Uso:
+# Informações Para Compilação:
 
 
-- Para compilar e rodar o programa, abra o terminal, vá até a pasta do programa e digite o seguinte comando: 'make'. Caso não funcione, cole o comando a seguir: 'gcc -c -Wall atraction/atraction.c; gcc -c -Wall auxiliar/auxiliar.c; gcc -c -Wall buy/buy.c; gcc -c -Wall client/client.c; gcc -c -Wall report/report.c; gcc -c -Wall show/show.c; gcc -c -Wall util/util.c; gcc -c -Wall main.c; gcc -o GestaoCasaShow *.o; ./GestaoCasaShow'. 
+## Linux:
 
-Caso ainda não funcione, digite separadamente os seguintes comandos:
+- Para compilar e rodar o programa, abra o terminal, vá até a pasta do programa e digite o seguinte comando: 'make'. Caso não esteja reconhecendo o comando 'make' use o seguinte comando no terminal: 'apt-get install make'. Depois disso, digite o comando 'make' novamente.
 
-gcc -c -Wall atraction/atraction.c
-gcc -c -Wall auxiliar/auxiliar.c
-gcc -c -Wall buy/buy.c
-gcc -c -Wall client/client.c
-gcc -c -Wall report/report.c
-gcc -c -Wall show/show.c
-gcc -c -Wall util/util.c
-gcc -o GestaoCasaShow *.o
-GestaoCasaShow.exe
+- Caso ainda não funcione, cole o comando a seguir: 'gcc -c -Wall atraction/atraction.c; gcc -c -Wall auxiliar/auxiliar.c; gcc -c -Wall buy/buy.c; gcc -c -Wall client/client.c; gcc -c -Wall report/report.c; gcc -c -Wall show/show.c; gcc -c -Wall util/util.c; gcc -c -Wall main.c; gcc -o GestaoCasaShow *.o; ./GestaoCasaShow'. 
 
-Se após isso não funcionar... Mude para Linux urgentemente.
+## Replit:
+
+- Abra o site, crie um arquivo de linguagem C, vá no Shell, clone o repositório, vá até a pasta e rode o comando 'make'. É recomendável maximizar/expandir a tela do Shell para melhor expeciência ao utilizar o programa.
+
+## Windows (Não recomendável, já que ocorrem erros de otimização e layout):
+
+- Para compilar e rodar o programa, abra o terminal, vá até a pasta do programa e digite os seguintes comandos em sequência:
+
+gcc -c -Wall *\*.c
+gcc -o GestaoCasaShow *.o main.c
+.\GestaoCasaShow
+
+Se após isso não funcionar... Mude para o Linux urgentemente.
+
+# Informações Para Uso:
 
 - Para cadastrar uma venda é necessário que já exista ao menos um show cadastrado no sistema.
 
