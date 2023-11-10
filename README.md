@@ -27,17 +27,17 @@ Desenvolvido por: Luiz Miguel Santos Silva.
 
 - Abra o site, crie um arquivo de linguagem C, vá no Shell (ao lado do console), clone o repositório (git clone https://github.com/LuizMiguel4444/GestaoCasaShow.git), vá até a pasta (cd GestaoCasaShow) e digite o comando 'make' na linha de comando do Shell. 
 
-- É recomendável maximizar/expandir a tela do Shell para melhor que haja uma melhor expeciência ao utilizar o programa.
+- É recomendável maximizar/expandir a tela do Shell para que haja uma melhor expeciência ao utilizar o programa.
 
-## Windows (não recomendável, já que ocorrem erros de otimização e layout):
+## Windows (não recomendável, pois ocorrem erros de otimização e layout):
 
 - Para compilar e rodar o programa, abra o terminal, vá até a pasta do programa e digite os seguintes comandos em sequência:
 
-1. gcc -c -Wall *\*.c
-2. gcc -o GestaoCasaShow *.o main.c
-3. .\GestaoCasaShow
+1.  gcc -c -Wall *\*.c
+2.  gcc -o GestaoCasaShow *.o main.c
+3.  .\GestaoCasaShow
 
-- Se após isso ainda não funcionar... Mude para o Linux urgentemente.
+- Se após isso ainda não funcionar... Mude para Linux URGENTEMENTE!
 
 # Informações Para Uso:
 
