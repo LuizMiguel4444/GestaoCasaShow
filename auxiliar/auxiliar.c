@@ -19,8 +19,8 @@ void get_nome(char* nome, char* modulo)
     limpa_linha();
     printf("###              Nome d%s: %s###\n", modulo, centralizar_texto(nome, 42, -1));
     if (!valNome(nome)) {
-      screen_error_input();
-      limpa_linha(); limpa_linha(); limpa_linha();
+      screen_error_input_name();
+      limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while (!valNome(nome));
 }
@@ -32,8 +32,8 @@ void get_nome_upd(char* nome, char* modulo)
     scanf(" %55[^\n]", nome);
     limpa_buffer();
     if (!valNome(nome)) {
-      screen_error_input();
-      limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
+      screen_error_input_name();
+      limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while (!valNome(nome));
 }
@@ -319,6 +319,13 @@ void screen_null_id_error(char* modulo)
 void screen_error_input(void)
 {
   printf("\n\tEntrada inválida! Por favor, tecle ENTER e tente novamente...");
+  getchar();
+}
+
+void screen_error_input_name(void)
+{
+  printf("\n\tEntrada inválida! Por favor, tecle ENTER e tente novamente...");
+  printf("\n\tSe o nome digitado for muito extenso, abrevie por favor!");
   getchar();
 }
 

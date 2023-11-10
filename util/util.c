@@ -111,6 +111,9 @@ int valNome(char *nome)
     if (!ehLetraeEspacoeAcento(nome[i])) {
       return 0;
     }
+    if (strlen(nome) > 40) {
+      return 0;
+    }
   }
 	return 1;
 }  // AUTOR: FLAVIUS GORGÔNIO /// GIT: https://github.com/flaviusgorgonio
