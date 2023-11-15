@@ -1,15 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <locale.h>
-#include <string.h>
-#include <time.h>
-#include "../show/show.h"
-#include "../atraction/atraction.h"
-#include "../client/client.h"
-#include "buy.h"
-#include "../report/report.h"
-#include "../auxiliar/auxiliar.h"
-#include "../util/util.h"
+#include "../util/all.h"
 
 void modulo_buy(void)
 {

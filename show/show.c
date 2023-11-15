@@ -1,12 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <locale.h>
-#include <string.h>
-#include <time.h>
-#include "show.h"
-#include "../atraction/atraction.h"
-#include "../auxiliar/auxiliar.h"
-#include "../util/util.h"
+#include "../util/all.h"
 
 void modulo_show(void)
 {
@@ -533,6 +525,7 @@ void qual_campo_show(Show *sh)
             limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
         }
     } while (!ehDigitoMax(resp[0], '5')  || !val_entrada(resp));
+    int old_quant = atoi(sh->quant);
     switch (resp[0]) {
         case '1':
             get_nome_upd(sh->atraction, "da atração");
@@ -550,7 +543,6 @@ void qual_campo_show(Show *sh)
             getchar();
             break;
         case '4':
-            int old_quant = atoi(sh->quant);
             get_quant_cad_upd(sh->quant, "ingressos");
             int new_quant = atoi(sh->quant);
             int restante = atoi(sh->quant_rest);

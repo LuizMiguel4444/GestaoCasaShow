@@ -1,9 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
-#include <time.h>
-#include "util.h"
+#include "../util/all.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Função que limpa o buffer do teclado

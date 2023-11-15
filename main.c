@@ -1,15 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <locale.h>
-#include <string.h>
-#include <unistd.h>
-#include "show/show.h"
-#include "atraction/atraction.h"
-#include "client/client.h"
-#include "buy/buy.h"
-#include "report/report.h"
-#include "auxiliar/auxiliar.h"
-#include "util/util.h"
+#include "util/all.h"
 
 // Functions signature
 void creat_files(const char* folder, const char* name);
