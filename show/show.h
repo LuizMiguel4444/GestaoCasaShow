@@ -6,6 +6,7 @@ struct show
     char data[12];
     char hora[6];
     char quant[8];
+    char quant_rest[8];
     char valor[10];
     char id[5];
     char status;

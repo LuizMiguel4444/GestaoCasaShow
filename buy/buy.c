@@ -79,7 +79,7 @@ void buy_menu_screen(void)
 Buy *cred_buy(void)
 {
     Buy *b;
-    b = (Buy*) malloc(sizeof(Buy) + 1);
+    b = (Buy*)malloc(sizeof(Buy) + 1);
     system("clear || cls");
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
@@ -164,13 +164,16 @@ char *screen_upd_buy(void)
 
 void buy_inputs(Buy* b)
 {
+    Show *sh;
+    sh = (Show*)malloc(sizeof(Show));
     do {
-        get_id(b->id_show, "o show", 35);
+        get_id(b->id_show, "o show", 47);
         if (procura_id_show(b->id_show)) {
             screen_error_input_n_exist("Id");
             limpa_linha(); limpa_linha(); limpa_linha();
         }
     } while (procura_id_show(b->id_show));
+    sh = procura_show(b->id_show);
     do {
         get_cpf(b->cpf_cli);
         if (procura_cpf_client_fantasm(b->cpf_cli)) {
@@ -178,12 +181,20 @@ void buy_inputs(Buy* b)
             limpa_linha(); limpa_linha(); limpa_linha();
         }
     } while (procura_cpf_client_fantasm(b->cpf_cli));
-    get_quant_venda(b -> quant, "ingressos");
+    do {
+        get_quant_venda(b->quant, "ingressos");
+        if (!verify_buy_ticket(b, sh)) {
+            printf("\n\t\tNão há essa quantidade de ingressos restantes!");
+            getchar();
+            limpa_linha(); limpa_linha(); limpa_linha();
+        }
+    } while (!verify_buy_ticket(b, sh));
     corrige_valor_final(b->quant, b->id_show, b->valor);
     char* id = gera_id_buy();
     snprintf(b->id_ven, sizeof(b->id_ven), "%s", id);
     b -> status = 'f';
     get_data_hour_buy(b);
+    regravar_restante(b, sh);
 }
 
 Buy *procura_buy(char *id)
@@ -282,15 +293,19 @@ void print_dados_buy_upd(Buy* b)
 
 void print_dados_buy_rep(Buy* b)
 {
+    Show* sh;
+    sh = procura_show(b -> id_show);
     if (b == NULL) {
         printf("Erro na abertura do arquivo!\n");
         printf("Não é possível continuar este programa...\n");
         exit(1);
     } else {
-        printf("### |%s", centralizar_texto(b -> cpf_cli, 29, 0));
-        printf("|%s", centralizar_texto(b -> valor, 25, 0));
-        printf("| %s| ###\n", centralizar_texto(b -> id_ven, 12, 0));
+        printf("### |%s", centralizar_texto(sh -> atraction, 35, 0));
+        printf("|%s", centralizar_texto(b -> cpf_cli, 17, 0));
+        printf("|%s", centralizar_texto(b -> valor, 19, 0));
+        printf("| %s| ###\n", centralizar_texto(b -> id_ven, 9, 0));
     }
+    free(sh);
 }
 
 void gravar_buy(Buy* b) 
@@ -467,5 +482,58 @@ char* gera_id_buy(void)
         char* id = id_string;
         fclose(fp);
         return id;
+    }
+}
+
+void regravar_restante(Buy* b, Show* sh)
+{
+    int achou = 0;
+    FILE *fp;
+    Show *showLido;
+
+    showLido = (Show*)malloc(sizeof(Show));
+    fp = fopen("show/shows.dat", "r+b");
+    if (fp == NULL) {
+        error_screen_file_show();
+    }
+    while(!feof(fp)) {
+        fread(showLido, sizeof(Show), 1, fp);
+        if (strcmp(showLido->id, sh->id) == 0) {
+            achou = 1;
+            update_tickets_rest(b, sh);
+            fseek(fp, -1 * sizeof(Show), SEEK_CUR);
+            fwrite(sh, sizeof(Show), 1, fp);
+            break;
+        }
+    }
+    if (!achou) {
+        screen_null_id_error("Id do show");
+        printf("\n");
+        printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
+        getchar();
+    }
+    fclose(fp);
+    free(showLido);
+}
+
+void update_tickets_rest(Buy* b, Show* sh)
+{
+    int ingressos_comprados = atoi(b->quant);
+    int ingressos_restantes = atoi(sh->quant_rest);
+    int new_quant_rest = ingressos_restantes - ingressos_comprados;
+    char new_quant_rest_str[8];
+    snprintf(new_quant_rest_str, sizeof(new_quant_rest_str), "%d", new_quant_rest);
+    snprintf(sh->quant_rest, sizeof(sh->quant_rest), "%s", new_quant_rest_str);
+}
+
+int verify_buy_ticket(Buy* b, Show* sh)
+{
+    int ingressos_rest = atoi(sh->quant_rest);
+    int ingressos_ven = atoi(b->quant);
+    int resto = ingressos_rest - ingressos_ven;
+    if (resto >= 0) {
+        return 1;
+    } else {
+        return 0;
     }
 }

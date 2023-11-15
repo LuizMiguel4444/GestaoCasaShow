@@ -200,6 +200,7 @@ void show_inputs(Show* sh)
     get_data(sh -> data);
     get_hour(sh -> hora);
     get_quant_cad(sh -> quant, "ingressos");
+    snprintf(sh -> quant_rest, sizeof(sh -> quant_rest), "%s", sh -> quant);
     get_valor(sh -> valor, "do ingresso (com casa decimal)");
     char* id = gera_id_show();
     snprintf(sh -> id, sizeof(sh -> id), "%s", id);
@@ -283,6 +284,7 @@ void print_dados_show(Show* sh)
         printf("###              Data: %s###\n", centralizar_texto(sh -> data, 53, -1));
         printf("###              Hora: %s###\n", centralizar_texto(sh -> hora, 53, -1));
         printf("###              Quant. de ingressos: %s###\n", centralizar_texto(sh -> quant, 38, -1));
+        printf("###              Quant. de ingressos restante: %s###\n", centralizar_texto(sh -> quant_rest, 29, -1));
         printf("###              Valor do ingresso: R$%s###\n", centralizar_texto(sh -> valor, 38, -1));
         printf("###                                                                         ###\n");
         printf("###############################################################################\n");
@@ -548,10 +550,24 @@ void qual_campo_show(Show *sh)
             getchar();
             break;
         case '4':
+            int old_quant = atoi(sh->quant);
             get_quant_cad_upd(sh->quant, "ingressos");
-            printf("\n\t\t    >>> Quant. de ingressos editada com sucesso. <<<");
-            getchar();
-            break;
+            int new_quant = atoi(sh->quant);
+            int restante = atoi(sh->quant_rest);
+            if (new_quant < (old_quant - restante)) {
+                snprintf(sh->quant, sizeof(sh->quant), "%d", old_quant);
+                printf("\n\t\t    Impossível diminuir para essa quantidade de ingressos!\n");
+                printf("\n\t\t    Tecle Enter para voltar ao menu anterior...");
+                getchar();
+                break;
+            } else {
+                int diferenca = new_quant - old_quant;
+                int new_rest = restante + diferenca;
+                snprintf(sh->quant_rest, sizeof(sh->quant_rest), "%d", new_rest);
+                printf("\n\t\t    >>> Quant. de ingressos editada com sucesso. <<<");
+                getchar();
+                break;
+            }
         case '5':
             get_valor_upd(sh->valor, "do ingresso (com casa decimal)");
             printf("\n\t\t    >>> Valor do ingresso editado com sucesso. <<<");
