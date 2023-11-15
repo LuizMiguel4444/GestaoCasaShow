@@ -1,5 +1,18 @@
-#include "../util/all.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+#include <string.h>
+#include "../show/show.h"
+#include "../atraction/atraction.h"
+#include "../client/client.h"
+#include "../buy/buy.h"
+#include "../report/report.h"
+#include "auxiliar.h"
+#include "../util/util.h"
 
+
+
+// Functions
 void get_nome(char* nome, char* modulo)
 {
   do {
@@ -295,6 +308,65 @@ void get_hour_upd(char* hour)
   } while (!val_hour(hour));
 }
 
+int check_quant_cad(char *c) {
+  for (int i = 0; c[i] != '\0'; i++) {
+    if (!ehDigito(c[i]) || strlen(c) < 2 || c[0] == '0') {
+      return 0;
+    }
+  }
+  return 1;  
+}
+
+int check_quant_venda(char *c) {
+  for (int i = 0; c[i] != '\0'; i++) {
+    if (!ehDigito(c[i]) || strlen(c) < 1 || c[0] == '0') {
+      return 0;
+    }
+  }
+  return 1;  
+}
+
+char certeza_upd(char* modulo)
+{
+  char resp[256];
+  do {
+    printf("\n\t\tDeseja mesmo alterar os dados %s (s/n)? ", modulo);
+    scanf("%s", resp);
+    limpa_buffer();
+    if ((resp[0] != 's' && resp[0] != 'n') || strlen(resp) > 1) {
+        screen_error_input_resp();
+        limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
+    }
+  } while ((resp[0] != 's' && resp[0] != 'n') || strlen(resp) > 1);
+  if (resp[0] == 's') {
+    return 1;
+  } else {
+    return 0;
+  }
+}
+
+char certeza_del(char* modulo)
+{
+  char resp[256];
+  do {
+    printf("\n\t\tDeseja mesmo excluir os dados %s (s/n)? ", modulo);
+    scanf("%s", resp);
+    limpa_buffer();
+    if ((resp[0] != 's' && resp[0] != 'n') || strlen(resp) > 1) {
+        screen_error_input_resp();
+        limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
+    }
+  } while ((resp[0] != 's' && resp[0] != 'n') || strlen(resp) > 1);
+  if (resp[0] == 's') {
+    return 1;
+  } else {
+    return 0;
+  }
+}
+
+
+
+// Screen Functions
 void screen_null_id_error(char* modulo)
 {
   printf("###############################################################################\n");
@@ -335,42 +407,4 @@ void screen_error_input_n_exist(char* chave)
 {
   printf("\n\tO %s digitado não foi cadastrado! Por favor, insira um %s válido cadastrado...", chave, chave);
   getchar();
-}
-
-char certeza_upd(char* modulo)
-{
-  char resp[256];
-  do {
-    printf("\n\t\tDeseja mesmo alterar os dados %s (s/n)? ", modulo);
-    scanf("%s", resp);
-    limpa_buffer();
-    if ((resp[0] != 's' && resp[0] != 'n') || strlen(resp) > 1) {
-        screen_error_input_resp();
-        limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
-    }
-  } while ((resp[0] != 's' && resp[0] != 'n') || strlen(resp) > 1);
-  if (resp[0] == 's') {
-    return 1;
-  } else {
-    return 0;
-  }
-}
-
-char certeza_del(char* modulo)
-{
-  char resp[256];
-  do {
-    printf("\n\t\tDeseja mesmo excluir os dados %s (s/n)? ", modulo);
-    scanf("%s", resp);
-    limpa_buffer();
-    if ((resp[0] != 's' && resp[0] != 'n') || strlen(resp) > 1) {
-        screen_error_input_resp();
-        limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
-    }
-  } while ((resp[0] != 's' && resp[0] != 'n') || strlen(resp) > 1);
-  if (resp[0] == 's') {
-    return 1;
-  } else {
-    return 0;
-  }
 }

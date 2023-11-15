@@ -1,13 +1,28 @@
-#include "util/all.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+#include <string.h>
+#include <unistd.h>
+#include "show/show.h"
+#include "atraction/atraction.h"
+#include "client/client.h"
+#include "buy/buy.h"
+#include "report/report.h"
+#include "auxiliar/auxiliar.h"
+#include "util/util.h"
+
+
 
 // Functions signature
 void creat_files(const char* folder, const char* name);
-char main_menu(void);
+void welcome(void);
 void main_menu_screen(void);
+char main_menu(void);
 void about(void);
 void dev(void);
-void welcome(void);
 void end(void);
+
+
 
 // File creation
 void creat_files(const char* folder, const char* name)
@@ -27,6 +42,8 @@ void creat_files(const char* folder, const char* name)
         fclose(fp);
     }
 }
+
+
 
 // Main program
 int main(void)
@@ -72,21 +89,42 @@ int main(void)
     return 0;
 }
 
+
+
 // Functions
-char main_menu(void)
+void welcome(void)
 {
-    char resp[256];
-    do {
-        main_menu_screen();
-        scanf("%s", resp);
-        limpa_buffer();
-        if (!ehDigitoMax(resp[0], '7')  || !val_entrada(resp)) {
-            screen_error_input();
-            limpa_linha();
+    int height = 11;
+    int width = 70;
+    char message[] = "SEJA BEM-VINDO AO GESTAO CASA SHOW!";
+    int messageLength = strlen(message);
+
+    for (int i = width / 2; i >= 0; i--) { // Loop que controla o efeito de animação.
+        printf("\033[H\033[J"); // Limpa a tela
+
+        for (int j = 0; j < height; j++) { // Loop para percorrer as linhas da "janela".
+            for (int k = 0; k < width; k++) { // Loop para percorrer as colunas da "janela".
+                if (k <= i || k >= width - i - 1) { // imprime o caractere '/' para criar uma borda.
+                    printf("/");
+                } else if (j == height / 2) { // Se j estiver na metade da altura da "janela", então é a linha onde a mensagem deve ser exibida.
+                    int messagePosition = (width - messageLength) / 2; // Calcula a posição inicial da mensagem para centralizá-la na "janela".
+                    if (k >= messagePosition && k < messagePosition + messageLength) { // Se k estiver dentro da faixa onde a mensagem deve ser exibida:
+                        printf("%c", message[k - messagePosition]); // Imprime o caractere correspondente na mensagem.
+                    } else { // Caso contrário, imprime um espaço em branco para preencher o espaço vazio.
+                        printf(" ");
+                    }
+                } else { // Para todas as outras linhas, imprime espaços em branco para preencher a "janela".
+                    printf(" ");
+                }
+            }
+            printf("\n"); // Ao final de cada linha, imprime uma quebra de linha.
         }
-    } while (!ehDigitoMax(resp[0], '7')  || !val_entrada(resp));
-    return resp[0];
-}
+        usleep(80000); // Espera por 0.08 segundo antes de atualizar a próxima animação.
+    }
+    printf("\n");
+    printf("\t   >>> Tecle ENTER para ir ao Menu Principal... <<<");
+    getchar();
+} // AUTOR: LUIZ MIGUEL, FEITO COM AJUDA DO CHAT-GPT /// GIT: https://github.com/LuizMiguel4444
 
 void main_menu_screen(void)
 {
@@ -107,6 +145,21 @@ void main_menu_screen(void)
     printf("###                                0. Sair                                  ###\n");
     printf("###                                                                         ###\n");
     printf("###                       Escolha a opção que deseja: ");
+}
+
+char main_menu(void)
+{
+    char resp[256];
+    do {
+        main_menu_screen();
+        scanf("%s", resp);
+        limpa_buffer();
+        if (!ehDigitoMax(resp[0], '7')  || !val_entrada(resp)) {
+            screen_error_input();
+            limpa_linha();
+        }
+    } while (!ehDigitoMax(resp[0], '7')  || !val_entrada(resp));
+    return resp[0];
 }
 
 void about(void)
@@ -152,40 +205,6 @@ void dev(void)
     printf("\t\t>>> Tecle ENTER para voltar ao Menu Principal... <<<");
     getchar();
 }
-
-void welcome(void)
-{
-    int height = 11;
-    int width = 70;
-    char message[] = "SEJA BEM-VINDO AO GESTAO CASA SHOW!";
-    int messageLength = strlen(message);
-
-    for (int i = width / 2; i >= 0; i--) { // Loop que controla o efeito de animação.
-        printf("\033[H\033[J"); // Limpa a tela
-
-        for (int j = 0; j < height; j++) { // Loop para percorrer as linhas da "janela".
-            for (int k = 0; k < width; k++) { // Loop para percorrer as colunas da "janela".
-                if (k <= i || k >= width - i - 1) { // imprime o caractere '/' para criar uma borda.
-                    printf("/");
-                } else if (j == height / 2) { // Se j estiver na metade da altura da "janela", então é a linha onde a mensagem deve ser exibida.
-                    int messagePosition = (width - messageLength) / 2; // Calcula a posição inicial da mensagem para centralizá-la na "janela".
-                    if (k >= messagePosition && k < messagePosition + messageLength) { // Se k estiver dentro da faixa onde a mensagem deve ser exibida:
-                        printf("%c", message[k - messagePosition]); // Imprime o caractere correspondente na mensagem.
-                    } else { // Caso contrário, imprime um espaço em branco para preencher o espaço vazio.
-                        printf(" ");
-                    }
-                } else { // Para todas as outras linhas, imprime espaços em branco para preencher a "janela".
-                    printf(" ");
-                }
-            }
-            printf("\n"); // Ao final de cada linha, imprime uma quebra de linha.
-        }
-        usleep(80000); // Espera por 0.08 segundo antes de atualizar a próxima animação.
-    }
-    printf("\n");
-    printf("\t   >>> Tecle ENTER para ir ao Menu Principal... <<<");
-    getchar();
-} // AUTOR: LUIZ MIGUEL, FEITO COM AJUDA DO CHAT-GPT /// GIT: https://github.com/LuizMiguel4444
 
 void end(void)
 {

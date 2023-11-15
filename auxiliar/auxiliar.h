@@ -1,3 +1,5 @@
+// Functions
+
 void get_nome(char* nome, char* modulo);
 void get_nome_upd(char *nome, char* modulo);
 void get_cache(char* cache, char* modulo);
@@ -19,11 +21,17 @@ void get_data(char* data);
 void get_data_upd(char* data);
 void get_hour(char* hour);
 void get_hour_upd(char* data);
+int check_quant_cad(char *c);
+int check_quant_venda(char *c);
+char certeza_upd(char* modulo);
+char certeza_del(char* modulo);
+
+
+
+// Screen Functions
 void screen_null_id_error(char* modulo);
 void screen_error_input(void);
 void screen_error_input_name(void);
 void screen_error_input_resp(void);
 void screen_error_input_id(char* chave);
 void screen_error_input_n_exist(char* chave);
-char certeza_upd(char* modulo);
-char certeza_del(char* modulo);

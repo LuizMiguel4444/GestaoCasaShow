@@ -1,4 +1,14 @@
-#include "../util/all.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+#include <string.h>
+#include "../show/show.h"
+#include "../atraction/atraction.h"
+#include "../client/client.h"
+#include "../buy/buy.h"
+#include "report.h"
+#include "../auxiliar/auxiliar.h"
+#include "../util/util.h"
 
 void modulo_report(void)
 {
@@ -67,39 +77,6 @@ void report_menu_screen(void)
     printf("###                       Escolha a opção que deseja: ");
 }
 
-void report_show(void)
-{
-    FILE *fp;
-    Show *sh;
-    sh = (Show*) malloc(sizeof(Show));
-    fp = fopen("show/shows.dat", "rb");
-    if (fp == NULL) {
-        printf("Erro na abertura do arquivo!\n");
-        printf("Não é possível continuar este programa...\n");
-        exit(1);
-    }
-    system("clear || cls");
-    printf("###############################################################################\n");
-    printf("###                                                                         ###\n");
-    printf("###                         ATRAÇÃO                      |       ID         ###\n");
-    printf("###                                                                         ###\n");
-    printf("###############################################################################\n");
-    printf("###                                                                         ###\n");
-    while(fread(sh, sizeof(Show), 1, fp)) {
-        if (sh -> status != 'x') {
-            printf("### ----------------------------------------------------------------------- ###\n");
-            print_dados_show_rep(sh);
-            printf("### ----------------------------------------------------------------------- ###\n");
-        }
-    }
-    printf("###                                                                         ###\n");
-    printf("###############################################################################\n\n");
-    fclose(fp);
-    free(sh);
-    printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-    getchar();
-}
-
 void report_atraction(void)
 {
     FILE *fp;
@@ -130,6 +107,39 @@ void report_atraction(void)
     fclose(fp);
     free(atr);
     printf("\t\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
+    getchar();
+}
+
+void report_buy(void)
+{
+    FILE *fp;
+    Buy *b;
+    b = (Buy*) malloc(sizeof(Buy));
+    fp = fopen("buy/buys.dat", "rb");
+    if (fp == NULL) {
+        printf("Erro na abertura do arquivo!\n");
+        printf("Não é possível continuar este programa...\n");
+        exit(1);
+    }
+    system("clear || cls");
+    printf("##############################################################################################\n");
+    printf("###                                                                                        ###\n");
+    printf("###                  SHOW               |       CPF       |       VALOR       |    ID      ###\n");
+    printf("###                                                                                        ###\n");
+    printf("##############################################################################################\n");
+    printf("###                                                                                        ###\n");
+    while(fread(b, sizeof(Buy), 1, fp)) {
+        if (b -> status != 'x') {
+            printf("### -------------------------------------------------------------------------------------- ###\n");
+            print_dados_buy_rep(b);
+            printf("### -------------------------------------------------------------------------------------- ###\n");
+        }
+    }
+    printf("###                                                                                        ###\n");
+    printf("##############################################################################################\n\n");
+    fclose(fp);
+    free(b);
+    printf("\t\t     >>> Tecle ENTER para voltar ao menu anterior... <<<");
     getchar();
 }
 
@@ -166,35 +176,35 @@ void report_client(void)
     getchar();
 }
 
-void report_buy(void)
+void report_show(void)
 {
     FILE *fp;
-    Buy *b;
-    b = (Buy*) malloc(sizeof(Buy));
-    fp = fopen("buy/buys.dat", "rb");
+    Show *sh;
+    sh = (Show*) malloc(sizeof(Show));
+    fp = fopen("show/shows.dat", "rb");
     if (fp == NULL) {
         printf("Erro na abertura do arquivo!\n");
         printf("Não é possível continuar este programa...\n");
         exit(1);
     }
     system("clear || cls");
-    printf("##############################################################################################\n");
-    printf("###                                                                                        ###\n");
-    printf("###                  SHOW               |       CPF       |       VALOR       |    ID      ###\n");
-    printf("###                                                                                        ###\n");
-    printf("##############################################################################################\n");
-    printf("###                                                                                        ###\n");
-    while(fread(b, sizeof(Buy), 1, fp)) {
-        if (b -> status != 'x') {
-            printf("### -------------------------------------------------------------------------------------- ###\n");
-            print_dados_buy_rep(b);
-            printf("### -------------------------------------------------------------------------------------- ###\n");
+    printf("###############################################################################\n");
+    printf("###                                                                         ###\n");
+    printf("###                         ATRAÇÃO                      |       ID         ###\n");
+    printf("###                                                                         ###\n");
+    printf("###############################################################################\n");
+    printf("###                                                                         ###\n");
+    while(fread(sh, sizeof(Show), 1, fp)) {
+        if (sh -> status != 'x') {
+            printf("### ----------------------------------------------------------------------- ###\n");
+            print_dados_show_rep(sh);
+            printf("### ----------------------------------------------------------------------- ###\n");
         }
     }
-    printf("###                                                                                        ###\n");
-    printf("##############################################################################################\n\n");
+    printf("###                                                                         ###\n");
+    printf("###############################################################################\n\n");
     fclose(fp);
-    free(b);
-    printf("\t\t     >>> Tecle ENTER para voltar ao menu anterior... <<<");
+    free(sh);
+    printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
     getchar();
 }

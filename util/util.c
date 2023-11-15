@@ -1,4 +1,9 @@
-#include "../util/all.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+#include <time.h>
+#include "util.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Função que limpa o buffer do teclado
@@ -56,6 +61,37 @@ int ehDigitoMax(char c, char max)
   } else {
     return 0;
   }
+} // AUTOR: LUIZ MIGUEL /// GIT: https://github.com/LuizMiguel4444
+
+///////////////////////////////////////////////////////////////////////////////
+/// Retorna 1 se o caractere recebido for um dígito monetário
+/// (entre 0 e 9 ou um '.') ou retorna 0 caso contrário
+///
+int ehDigitoDinheiro(char c)
+{
+  if ((c >= '0' && c <= '9') || (c == '.')) {
+    return 1;
+  } else {
+    return 0;
+  }
+} // AUTOR: LUIZ MIGUEL /// GIT: https://github.com/LuizMiguel4444
+
+///////////////////////////////////////////////////////////////////////////////
+/// Retorna 1 se string recebido corresponder a apenas digitos
+/// monetários e '.' ou retorna 0 caso contrário
+///
+int ehdinheiro(char *c)
+{
+  int ponto = strlen(c) - 3;
+  for (int i = 0; c[i] != '\0'; i++) {
+    if (!ehDigitoDinheiro(c[i]) || strlen(c) < 5 || c[0] == '0') {
+      return 0;
+    }
+    else if (c[ponto] != '.') {
+      return 0;
+    }
+  }
+	return 1;
 } // AUTOR: LUIZ MIGUEL /// GIT: https://github.com/LuizMiguel4444
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -286,63 +322,6 @@ int val_email(char *email )
 }  // AUTOR: LACOBUS /// STACKOVERFLOW: https://pt.stackoverflow.com/questions/310096/como-validar-um-e-mail-em-c
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Retorna 1 se o caractere recebido for um dígito monetário
-/// (entre 0 e 9 ou um '.') ou retorna 0 caso contrário
-///
-int ehDigitoDinheiro(char c)
-{
-  if ((c >= '0' && c <= '9') || (c == '.')) {
-    return 1;
-  } else {
-    return 0;
-  }
-} // AUTOR: LUIZ MIGUEL /// GIT: https://github.com/LuizMiguel4444
-
-///////////////////////////////////////////////////////////////////////////////
-/// Retorna 1 se string recebido corresponder a apenas digitos
-/// monetários e '.' ou retorna 0 caso contrário
-///
-float ehdinheiro(char *c)
-{
-  int ponto = strlen(c) - 3;
-  for (int i = 0; c[i] != '\0'; i++) {
-    if (!ehDigitoDinheiro(c[i]) || strlen(c) < 5 || c[0] == '0') {
-      return 0;
-    }
-    else if (c[ponto] != '.') {
-      return 0;
-    }
-  }
-	return 1;
-} // AUTOR: LUIZ MIGUEL /// GIT: https://github.com/LuizMiguel4444
-
-///////////////////////////////////////////////////////////////////////////////
-/// Retorna 1 se string recebido corresponder a apenas digitos com tamanho 
-/// maior do que '1' e valor diferente de '0' ou retorna 0 caso contrário
-///
-int check_quant_cad(char *c) {
-  for (int i = 0; c[i] != '\0'; i++) {
-    if (!ehDigito(c[i]) || strlen(c) < 2 || c[0] == '0') {
-      return 0;
-    }
-  }
-  return 1;  
-} // AUTOR: LUIZ MIGUEL /// GIT: https://github.com/LuizMiguel4444
-
-///////////////////////////////////////////////////////////////////////////////
-/// Retorna 1 se string recebido corresponder a apenas digitos com 
-/// valor diferente de '0' ou retorna 0 caso contrário
-///
-int check_quant_venda(char *c) {
-  for (int i = 0; c[i] != '\0'; i++) {
-    if (!ehDigito(c[i]) || strlen(c) < 1 || c[0] == '0') {
-      return 0;
-    }
-  }
-  return 1;  
-} // AUTOR: LUIZ MIGUEL /// GIT: https://github.com/LuizMiguel4444
-
-///////////////////////////////////////////////////////////////////////////////
 /// Retorna 1 se string recebido corresponder a um número de celular válido 
 /// (apenas dígitos) ou retorna 0 caso contrário
 ///
@@ -450,7 +429,7 @@ char* corrige_hour(char hour[])
   hour[2] = ':';
   hour[5] = '\0';
   return hour;
-}
+} // AUTOR: LUIZ MIGUEL /// GIT: https://github.com/LuizMiguel4444
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Retorna 1 se string recebido corresponder a uma hora válida 
@@ -526,7 +505,8 @@ char *leLinha(char *linha, int tamanhoMaximo)
 ///////////////////////////////////////////////////////////////////////////////
 /// Função centraliza o texto inserido
 ///
-char* centralizar_texto(char* texto, int tam, int horizontal) {
+char* centralizar_texto(char* texto, int tam, int horizontal)
+{
     int tam_texto = strlen(texto);
 
     for(int c = 0;c < tam_texto;c++) {
