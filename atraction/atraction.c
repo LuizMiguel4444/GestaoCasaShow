@@ -122,14 +122,14 @@ char *screen_busc_atraction(void)
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
     do {
-        printf("###              Informe o Id da atração (4 dígitos): ");
+        printf("###              Informe o Id da atração: ");
         scanf("%s", id);
         limpa_buffer();
-        if (!val_id(id, 4)) {
+        if (!val_id(id)) {
             screen_error_input();
             limpa_linha(); limpa_linha(); limpa_linha();
         }
-    } while (!val_id(id, 4));
+    } while (!val_id(id));
     printf("###                                                                         ###\n");
     return id;
 }
@@ -152,14 +152,14 @@ char *screen_upd_atraction(void)
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
     do {
-        printf("###              Informe o Id da atração (4 dígitos): ");
+        printf("###              Informe o Id da atração: ");
         scanf("%s", id);
         limpa_buffer();
-        if (!val_id(id, 4)) {
+        if (!val_id(id)) {
             screen_error_input();
             limpa_linha(); limpa_linha(); limpa_linha();
         }
-    } while (!val_id(id, 4));
+    } while (!val_id(id));
     printf("###                                                                         ###\n");
     return id;
 }
@@ -183,17 +183,17 @@ char *del_atraction(void)
     printf("###                                                                         ###\n");
     do
     {
-        printf("###              Informe o Id da atração (4 dígitos): ");
+        printf("###              Informe o Id da atração: ");
         scanf("%s", id);
         limpa_buffer();
-        if (!val_id(id, 4))
+        if (!val_id(id))
         {
             screen_error_input();
             limpa_linha();
             limpa_linha();
             limpa_linha();
         }
-    } while (!val_id(id, 4));
+    } while (!val_id(id));
     printf("###                                                                         ###\n");
     return id;
 }
@@ -204,13 +204,8 @@ void atraction_inputs(Atraction *atr)
     get_cache(atr->cache, "a atração (com casa decimal)");
     get_email(atr->email, "e contato");
     get_num(atr->num, "e contato (com DDD)", 30);
-    do {
-        get_id(atr->id, "a atração (4 dígitos)", 32);
-        if (!procura_id_atraction(atr->id)) {
-            screen_error_input_id("Id");
-            limpa_linha(); limpa_linha(); limpa_linha();
-        }
-    } while (!procura_id_atraction(atr->id));
+    char* id = gera_id_atr();
+    snprintf(atr->id, sizeof(atr->id), "%s", id);
     atr->status = 'c';
     get_data_hour_atr(atr);
 }
@@ -269,7 +264,7 @@ void print_dados_atraction(Atraction *atr)
         printf("###                                                                         ###\n");
         printf("###              Cadastro realizado em %02d/%02d/%d às %02d:%02d.                 ###\n", atr->day, atr->month, atr->year, atr->hour, atr->minute);
         printf("###                                                                         ###\n");
-        printf("###              Informações do Id digitado (%s):                         ###\n", atr->id);
+        printf("###              Informações do Id digitado: %s###\n", centralizar_texto(atr->id, 31, -1));
         printf("###                                                                         ###\n");
         printf("###              Nome da atração: %s###\n", centralizar_texto(atr->nome, 42, -1));
         printf("###              Valor do cachê da atração: R$%s###\n", centralizar_texto(atr->cache, 30, -1));
@@ -298,7 +293,7 @@ void print_dados_atraction_upd(Atraction *atr)
         printf("###                                                                         ###\n");
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
-        printf("###              Informações do Id digitado (%s):                         ###\n", atr->id);
+        printf("###              Informações do Id digitado: %s###\n", centralizar_texto(atr->id, 31, -1));
         printf("###                                                                         ###\n");
         printf("###              Nome da atração: %s###\n", centralizar_texto(atr->nome, 42, -1));
         printf("###              Valor do cachê da atração: R$%s###\n", centralizar_texto(atr->cache, 30, -1));
@@ -543,5 +538,32 @@ void qual_campo_atr(Atraction *atr)
             printf("\n\t\t    >>> Número da atração editado com sucesso. <<<");
             getchar();
             break;
+    }
+}
+
+char* gera_id_atr(void)
+{
+    FILE *fp;
+    fp = fopen("atraction/atractions.dat", "rb");
+    if (fp == NULL) {
+        return "1";
+    }
+    fseek(fp, 0, SEEK_END);
+    if ((long)ftell(fp) == 0) {
+        fclose(fp);
+        return "1";
+    }
+    else {
+        fseek(fp, -((long)sizeof(Atraction)), SEEK_END);
+        Atraction* atr;
+        atr = (Atraction*)malloc(sizeof(Atraction));
+        fread(atr, sizeof(Atraction), 1, fp);
+        int id_int = atoi(atr->id);
+        int id_soma = id_int + 1;
+        char id_string[5];
+        snprintf(id_string, sizeof(id_string), "%d", id_soma);
+        char* id = id_string;
+        fclose(fp);
+        return id;
     }
 }

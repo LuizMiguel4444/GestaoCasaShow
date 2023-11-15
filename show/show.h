@@ -41,3 +41,4 @@ void update_show(void);
 void regravar_show(Show*);
 void get_data_hour_sh(Show*);
 void qual_campo_show(Show*);
+char* gera_id_show(void);

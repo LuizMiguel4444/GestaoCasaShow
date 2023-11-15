@@ -254,9 +254,10 @@ int valData(char *data)
 /// Retorna 1 se string (com tamanhos específicos) recebido corresponder  
 /// a um id válido (apenas dígitos) ou retorna 0 caso contrário
 ///
-int val_id(char *id, int tam)
+int val_id(char *id)
 {
     int i;
+    int tam = strlen(id);
     // quantidade de digitos
     for (i = 0; i < tam; i++) {
         if (id[i] == '\0') {

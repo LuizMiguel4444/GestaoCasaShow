@@ -130,11 +130,11 @@ void get_id(char* id, char* modulo, int tam)
     limpa_buffer();
     limpa_linha();
     printf("###              Id d%s: %s###\n", modulo, centralizar_texto(id, tam, -1));
-    if (!val_id(id, 4)) {
+    if (!val_id(id)) {
       screen_error_input();
       limpa_linha(); limpa_linha(); limpa_linha();
     }
-  } while (!val_id(id, 4));
+  } while (!val_id(id));
 }
 
 void get_quant_cad(char* quant, char* modulo)

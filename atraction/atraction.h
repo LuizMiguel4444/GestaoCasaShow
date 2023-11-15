@@ -39,3 +39,4 @@ void update_atr(void);
 void regravar_atr(Atraction*);
 void get_data_hour_atr(Atraction*);
 void qual_campo_atr(Atraction*);
+char* gera_id_atr(void);

@@ -121,14 +121,14 @@ char *screen_busc_show(void)
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
     do {
-        printf("###              Informe o Id do show (4 dígitos): ");
+        printf("###              Informe o Id do show: ");
         scanf("%s", id);
         limpa_buffer();
-        if (!val_id(id, 4)) {
+        if (!val_id(id)) {
             screen_error_input();
             limpa_linha(); limpa_linha(); limpa_linha();
         }
-    } while (!val_id(id, 4));
+    } while (!val_id(id));
     printf("###                                                                         ###\n");
     return id;
 }
@@ -151,14 +151,14 @@ char *screen_upd_show(void)
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
     do {
-        printf("###              Informe o Id do show (4 dígitos): ");
+        printf("###              Informe o Id do show: ");
         scanf("%s", id);
         limpa_buffer();
-        if (!val_id(id, 4)) {
+        if (!val_id(id)) {
             screen_error_input();
             limpa_linha(); limpa_linha(); limpa_linha();
         }
-    } while (!val_id(id, 4));
+    } while (!val_id(id));
     printf("###                                                                         ###\n");
     return id;
 }
@@ -182,14 +182,14 @@ char *del_show(void)
     printf("###                                                                         ###\n");
     do
     {
-        printf("###              Informe o Id do show (4 dígitos): ");
+        printf("###              Informe o Id do show: ");
         scanf("%s", id);
         limpa_buffer();
-        if (!val_id(id, 4)) {
+        if (!val_id(id)) {
             screen_error_input();
             limpa_linha(); limpa_linha(); limpa_linha();
         }
-    } while (!val_id(id, 4));
+    } while (!val_id(id));
     printf("###                                                                         ###\n");
     return id;
 }
@@ -201,13 +201,8 @@ void show_inputs(Show* sh)
     get_hour(sh -> hora);
     get_quant_cad(sh -> quant, "ingressos");
     get_valor(sh -> valor, "do ingresso (com casa decimal)");
-    do {
-        get_id(sh->id, "o show (4 dígitos)", 35);
-        if (!procura_id_show(sh->id)) {
-            screen_error_input_id("Id");
-            limpa_linha(); limpa_linha(); limpa_linha();
-        }
-    } while (!procura_id_show(sh->id));
+    char* id = gera_id_show();
+    snprintf(sh -> id, sizeof(sh -> id), "%s", id);
     sh -> status = 'c';
     get_data_hour_sh(sh);
 }
@@ -282,7 +277,7 @@ void print_dados_show(Show* sh)
         printf("###                                                                         ###\n");
         printf("###              Cadastro realizado em %02d/%02d/%d às %02d:%02d.                 ###\n", sh->day, sh->month, sh->year, sh->hour, sh->minute);
         printf("###                                                                         ###\n");
-        printf("###              Informações do Id digitado (%s):                         ###\n", sh -> id);
+        printf("###              Informações do Id digitado: %s###\n", centralizar_texto(sh->id, 31, -1));
         printf("###                                                                         ###\n");
         printf("###              Atração: %s###\n", centralizar_texto(sh -> atraction, 50, -1));
         printf("###              Data: %s###\n", centralizar_texto(sh -> data, 53, -1));
@@ -311,7 +306,7 @@ void print_dados_show_upd(Show* sh)
         printf("###                                                                         ###\n");
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
-        printf("###              Informações do Id digitado (%s):                         ###\n", sh -> id);
+        printf("###              Informações do Id digitado: %s###\n", centralizar_texto(sh->id, 31, -1));
         printf("###                                                                         ###\n");
         printf("###              Atração: %s###\n", centralizar_texto(sh -> atraction, 50, -1));
         printf("###              Data: %s###\n", centralizar_texto(sh -> data, 53, -1));
@@ -562,5 +557,32 @@ void qual_campo_show(Show *sh)
             printf("\n\t\t    >>> Valor do ingresso editado com sucesso. <<<");
             getchar();
             break;
+    }
+}
+
+char* gera_id_show(void)
+{
+    FILE *fp;
+    fp = fopen("show/shows.dat", "rb");
+    if (fp == NULL) {
+        return "1";
+    }
+    fseek(fp, 0, SEEK_END);
+    if ((long)ftell(fp) == 0) {
+        fclose(fp);
+        return "1";
+    }
+    else {
+        fseek(fp, -((long)sizeof(Show)), SEEK_END);
+        Show* sh;
+        sh = (Show*)malloc(sizeof(Show));
+        fread(sh, sizeof(Show), 1, fp);
+        int id_int = atoi(sh->id);
+        int id_soma = id_int + 1;
+        char id_string[5];
+        snprintf(id_string, sizeof(id_string), "%d", id_soma);
+        char* id = id_string;
+        fclose(fp);
+        return id;
     }
 }

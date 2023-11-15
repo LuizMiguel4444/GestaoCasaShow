@@ -120,14 +120,14 @@ char *screen_busc_buy(void)
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
     do {
-        printf("###              Informe o Id da venda (4 dígitos): ");
+        printf("###              Informe o Id da venda: ");
         scanf("%s", id);
         limpa_buffer();
-        if (!val_id(id, 4)) {
+        if (!val_id(id)) {
             screen_error_input();
             limpa_linha(); limpa_linha(); limpa_linha();
         }
-    } while (!val_id(id, 4));
+    } while (!val_id(id));
     printf("###                                                                         ###\n");
     return id;
 }
@@ -150,14 +150,14 @@ char *screen_upd_buy(void)
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
     do {
-        printf("###              Informe o Id da venda (4 dígitos): ");
+        printf("###              Informe o Id da venda: ");
         scanf("%s", id);
         limpa_buffer();
-        if (!val_id(id, 4)) {
+        if (!val_id(id)) {
             screen_error_input();
             limpa_linha(); limpa_linha(); limpa_linha();
         }
-    } while (!val_id(id, 4));
+    } while (!val_id(id));
     printf("###                                                                         ###\n");
     return id;
 }
@@ -165,7 +165,7 @@ char *screen_upd_buy(void)
 void buy_inputs(Buy* b)
 {
     do {
-        get_id(b->id_show, "o show (4 dígitos)", 35);
+        get_id(b->id_show, "o show", 35);
         if (procura_id_show(b->id_show)) {
             screen_error_input_n_exist("Id");
             limpa_linha(); limpa_linha(); limpa_linha();
@@ -180,13 +180,8 @@ void buy_inputs(Buy* b)
     } while (procura_cpf_client_fantasm(b->cpf_cli));
     get_quant_venda(b -> quant, "ingressos");
     corrige_valor_final(b->quant, b->id_show, b->valor);
-    do {
-        get_id(b->id_ven, "a venda (4 dígitos)", 34);
-        if (!procura_id_buy(b->id_ven)) {
-            screen_error_input_id("Id");
-            limpa_linha(); limpa_linha(); limpa_linha();
-        }
-    } while (!procura_id_buy(b->id_ven));
+    char* id = gera_id_buy();
+    snprintf(b->id_ven, sizeof(b->id_ven), "%s", id);
     b -> status = 'f';
     get_data_hour_buy(b);
 }
@@ -245,7 +240,7 @@ void print_dados_buy(Buy* b)
         printf("###                                                                         ###\n");
         printf("###              Cadastro realizado em %02d/%02d/%d às %02d:%02d.                 ###\n", b->day, b->month, b->year, b->hour, b->minute);
         printf("###                                                                         ###\n");
-        printf("###              Informações do Id digitado (%s):                         ###\n", b -> id_ven);
+        printf("###              Informações do Id digitado: %s###\n", centralizar_texto(b->id_ven, 31, -1));
         printf("###                                                                         ###\n");
         printf("###              Id do show: %s###\n", centralizar_texto(b -> id_show, 47, -1));
         printf("###              CPF do cliente: %s###\n", centralizar_texto(b -> cpf_cli, 43, -1));
@@ -274,7 +269,7 @@ void print_dados_buy_upd(Buy* b)
         printf("###                                                                         ###\n");
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
-        printf("###              Informações do Id digitado (%s):                         ###\n", b -> id_ven);
+        printf("###              Informações do Id digitado: %s###\n", centralizar_texto(b->id_ven, 31, -1));
         printf("###                                                                         ###\n");
         printf("###              Id do show: %s###\n", centralizar_texto(b -> id_show, 47, -1));
         printf("###              CPF do cliente: %s###\n", centralizar_texto(b -> cpf_cli, 43, -1));
@@ -446,4 +441,31 @@ void corrige_valor_final(char* quant, char* id_show, char* valor)
     char valor_final_para_string[20];
     snprintf(valor_final_para_string, sizeof(valor_final_para_string), "%.2f", valor_final);
     memcpy(valor, valor_final_para_string, sizeof(valor_final_para_string)); // Copia dados de um array para outro array.
+}
+
+char* gera_id_buy(void)
+{
+    FILE *fp;
+    fp = fopen("buy/buys.dat", "rb");
+    if (fp == NULL) {
+        return "1";
+    }
+    fseek(fp, 0, SEEK_END);
+    if ((long)ftell(fp) == 0) {
+        fclose(fp);
+        return "1";
+    }
+    else {
+        fseek(fp, -((long)sizeof(Buy)), SEEK_END);
+        Buy* b;
+        b = (Buy*)malloc(sizeof(Buy));
+        fread(b, sizeof(Buy), 1, fp);
+        int id_int = atoi(b->id_ven);
+        int id_soma = id_int + 1;
+        char id_string[5];
+        snprintf(id_string, sizeof(id_string), "%d", id_soma);
+        char* id = id_string;
+        fclose(fp);
+        return id;
+    }
 }

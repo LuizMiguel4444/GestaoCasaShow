@@ -11,7 +11,7 @@ int ehData(int dd, int mm, int aa);
 int data_validacao(char data[]);
 char* corrige_data(char *data);
 int valData(char *data);
-int val_id(char *id, int tam);
+int val_id(char *id);
 int val_email(char *email);
 int ehDigitoDinheiro(char c);
 float ehdinheiro(char *c);
