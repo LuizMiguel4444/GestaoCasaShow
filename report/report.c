@@ -7,6 +7,7 @@
 #include "../client/client.h"
 #include "../buy/buy.h"
 #include "report.h"
+#include "report_aux.h"
 #include "../auxiliar/auxiliar.h"
 #include "../util/util.h"
 
@@ -20,16 +21,16 @@ void modulo_report(void)
         switch (resp)
         {
             case '1':
-                report_show();
+                modulo_report_show();
                 break;
             case '2':
-                report_atraction();
+                modulo_report_atr();
                 break;
             case '3':
-                report_client();
+                modulo_report_cli();
                 break;
             case '4':
-                report_buy();
+                modulo_report_buy();
                 break;
             case '0':
                 system("cls || clear");
@@ -68,16 +69,16 @@ void report_menu_screen(void)
     printf("###              = = = = = = = = Menu  Relatório = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    printf("###                         1. Ver relatório de Shows                       ###\n");
-    printf("###                        2. Ver relatório de Atrações                     ###\n");
-    printf("###                        3. Ver relatório de Clientes                     ###\n");
-    printf("###                         4. Ver relatório de Vendas                      ###\n");
-    printf("###                         0. Voltar ao menu anterior                      ###\n");
+    printf("###                          1. Relatório de Shows                          ###\n");
+    printf("###                         2. Relatório de Atrações                        ###\n");
+    printf("###                         3. Relatório de Clientes                        ###\n");
+    printf("###                          4. Relatório de Vendas                         ###\n");
+    printf("###                        0. Voltar ao menu anterior                       ###\n");
     printf("###                                                                         ###\n");
-    printf("###                       Escolha a opção que deseja: ");
+    printf("###                        Escolha a opção que deseja: ");
 }
 
-void report_atraction(void)
+void report_atraction(char escolha)
 {
     FILE *fp;
     Atraction *atr;
@@ -96,11 +97,7 @@ void report_atraction(void)
     printf("#####################################################################################################\n");
     printf("###                                                                                               ###\n");
     while(fread(atr, sizeof(Atraction), 1, fp)) {
-        if (atr -> status != 'x') {
-            printf("### --------------------------------------------------------------------------------------------- ###\n");
-            print_dados_atraction_rep(atr);
-            printf("### --------------------------------------------------------------------------------------------- ###\n");
-        }
+        print_if_in_filter_atr(atr, escolha);
     }
     printf("###                                                                                               ###\n");
     printf("#####################################################################################################\n\n");
@@ -110,7 +107,7 @@ void report_atraction(void)
     getchar();
 }
 
-void report_buy(void)
+void report_buy(char escolha)
 {
     FILE *fp;
     Buy *b;
@@ -129,11 +126,7 @@ void report_buy(void)
     printf("##############################################################################################\n");
     printf("###                                                                                        ###\n");
     while(fread(b, sizeof(Buy), 1, fp)) {
-        if (b -> status != 'x') {
-            printf("### -------------------------------------------------------------------------------------- ###\n");
-            print_dados_buy_rep(b);
-            printf("### -------------------------------------------------------------------------------------- ###\n");
-        }
+        print_if_in_filter_buy(b, escolha);
     }
     printf("###                                                                                        ###\n");
     printf("##############################################################################################\n\n");
@@ -143,7 +136,7 @@ void report_buy(void)
     getchar();
 }
 
-void report_client(void)
+void report_client(char escolha)
 {
     FILE *fp;
     Client *cli;
@@ -162,11 +155,7 @@ void report_client(void)
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
     while(fread(cli, sizeof(Client), 1, fp)) {
-        if (cli -> status != 'x') {
-            printf("### ----------------------------------------------------------------------- ###\n");
-            print_dados_client_rep(cli);
-            printf("### ----------------------------------------------------------------------- ###\n");
-        }
+        print_if_in_filter_cli(cli, escolha);
     }
     printf("###                                                                         ###\n");
     printf("###############################################################################\n\n");
@@ -176,7 +165,7 @@ void report_client(void)
     getchar();
 }
 
-void report_show(void)
+void report_show(char escolha)
 {
     FILE *fp;
     Show *sh;
@@ -195,11 +184,7 @@ void report_show(void)
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
     while(fread(sh, sizeof(Show), 1, fp)) {
-        if (sh -> status != 'x') {
-            printf("### ----------------------------------------------------------------------- ###\n");
-            print_dados_show_rep(sh);
-            printf("### ----------------------------------------------------------------------- ###\n");
-        }
+        print_if_in_filter_show(sh, escolha);
     }
     printf("###                                                                         ###\n");
     printf("###############################################################################\n\n");
@@ -207,4 +192,104 @@ void report_show(void)
     free(sh);
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
     getchar();
+}
+
+void print_if_in_filter_atr(Atraction* atr, char escolha)
+{
+    switch (escolha) {
+        case '1':
+            printf("### --------------------------------------------------------------------------------------------- ###\n");
+            print_dados_atraction_rep(atr);
+            printf("### --------------------------------------------------------------------------------------------- ###\n");
+            break;
+        case '2':
+            if (atr -> status != 'x') {
+                printf("### --------------------------------------------------------------------------------------------- ###\n");
+                print_dados_atraction_rep(atr);
+                printf("### --------------------------------------------------------------------------------------------- ###\n");
+            }
+            break;
+        case '3':
+            if (atr -> status == 'x') {
+                printf("### --------------------------------------------------------------------------------------------- ###\n");
+                print_dados_atraction_rep(atr);
+                printf("### --------------------------------------------------------------------------------------------- ###\n");
+            }
+            break;
+    }
+}
+
+void print_if_in_filter_buy(Buy* b, char escolha)
+{
+    switch (escolha) {
+        case '1':
+            printf("### -------------------------------------------------------------------------------------- ###\n");
+            print_dados_buy_rep(b);
+            printf("### -------------------------------------------------------------------------------------- ###\n");
+            break;
+        case '2':
+            if (b -> status != 'x') {
+                printf("### -------------------------------------------------------------------------------------- ###\n");
+                print_dados_buy_rep(b);
+                printf("### -------------------------------------------------------------------------------------- ###\n");
+            }
+            break;
+        case '3':
+            if (b -> status == 'x') {
+                printf("### -------------------------------------------------------------------------------------- ###\n");
+                print_dados_buy_rep(b);
+                printf("### -------------------------------------------------------------------------------------- ###\n");
+            }
+            break;
+    }
+}
+
+void print_if_in_filter_cli(Client* cli, char escolha)
+{
+    switch (escolha) {
+        case '1':
+            printf("### ----------------------------------------------------------------------- ###\n");
+            print_dados_client_rep(cli);
+            printf("### ----------------------------------------------------------------------- ###\n");
+            break;
+        case '2':
+            if (cli -> status != 'x') {
+                printf("### ----------------------------------------------------------------------- ###\n");
+                print_dados_client_rep(cli);
+                printf("### ----------------------------------------------------------------------- ###\n");
+            }
+            break;
+        case '3':
+            if (cli -> status == 'x') {
+                printf("### ----------------------------------------------------------------------- ###\n");
+                print_dados_client_rep(cli);
+                printf("### ----------------------------------------------------------------------- ###\n");
+            }
+            break;
+    }
+}
+
+void print_if_in_filter_show(Show* sh, char escolha)
+{
+    switch (escolha) {
+        case '1':
+            printf("### ----------------------------------------------------------------------- ###\n");
+            print_dados_show_rep(sh);
+            printf("### ----------------------------------------------------------------------- ###\n");
+            break;
+        case '2':
+            if (sh -> status != 'x') {
+                printf("### ----------------------------------------------------------------------- ###\n");
+                print_dados_show_rep(sh);
+                printf("### ----------------------------------------------------------------------- ###\n");
+            }
+            break;
+        case '3':
+            if (sh -> status == 'x') {
+                printf("### ----------------------------------------------------------------------- ###\n");
+                print_dados_show_rep(sh);
+                printf("### ----------------------------------------------------------------------- ###\n");
+            }
+            break;
+    }
 }

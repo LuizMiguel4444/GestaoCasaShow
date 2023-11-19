@@ -7,6 +7,7 @@
 #include "../client/client.h"
 #include "../buy/buy.h"
 #include "../report/report.h"
+#include "../report/report_aux.h"
 #include "auxiliar.h"
 #include "../util/util.h"
 
