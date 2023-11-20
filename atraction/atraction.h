@@ -36,7 +36,6 @@ char *del_atraction(void);
 void gravar_atr(Atraction*);
 void pesquisa_atr(void);
 Atraction *procura_atraction(char*);
-int procura_id_atraction(char*);
 void regravar_atr(Atraction*);
 void remove_atr(Atraction*);
 void excluir_atr(void);

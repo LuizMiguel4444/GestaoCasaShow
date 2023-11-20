@@ -325,23 +325,6 @@ Atraction *procura_atraction(char *id)
     return NULL;
 }
 
-int procura_id_atraction(char *id)
-{
-    FILE *fp;
-    Atraction *atr;
-
-    atr = (Atraction *)malloc(sizeof(Atraction));
-    fp = fopen("atraction/atractions.dat", "rb");
-    while (fread(atr, sizeof(Atraction), 1, fp)) {
-        if ((strcmp(atr->id, id) == 0) && atr->status == 'c') {
-            fclose(fp);
-            return 0;
-        }
-    }
-    fclose(fp);
-    return 1;
-}
-
 void regravar_atr(Atraction *atr)
 {
     int achou = 0;

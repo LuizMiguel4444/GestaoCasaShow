@@ -335,23 +335,6 @@ Buy *procura_buy(char *id)
     return NULL;
 }
 
-int procura_id_buy(char *id)
-{
-    FILE *fp;
-    Buy *b;
-
-    b = (Buy*)malloc(sizeof(Buy));
-    fp = fopen("buy/buys.dat", "rb");
-    while (fread(b, sizeof(Buy), 1, fp)) {
-        if ((strcmp(b->id_ven, id) == 0) && b->status == 'f') {
-            fclose(fp);
-            return 0;
-        }
-    }
-    fclose(fp);
-    return 1;
-}
-
 void regravar_buy(Buy *b)
 {
     int achou = 0;

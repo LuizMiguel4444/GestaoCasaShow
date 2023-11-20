@@ -38,7 +38,6 @@ void qual_campo_buy(Buy*);
 void gravar_buy(Buy*);
 void pesquisa_buy(void);
 Buy *procura_buy(char*);
-int procura_id_buy(char*);
 void regravar_buy(Buy*);
 void regravar_restante(Buy*, Show*);
 char* gera_id_buy(void);
