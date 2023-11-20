@@ -79,16 +79,20 @@ Atraction *cred_atraction(void)
     printf("###############################################################################\n");
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-    getchar();
+    limpa_buffer();
     return atr;
 }
 
 void atraction_inputs(Atraction *atr)
 {
-    get_nome(atr->nome, "a atração");
-    get_cache(atr->cache, "a atração (com casa decimal)");
-    get_email(atr->email, "e contato");
-    get_num(atr->num, "e contato (com DDD)", 30);
+    char* nome = get_nome("a atração");
+    strcpy(atr->nome, nome);
+    char* cache = get_cache("a atração (com casa decimal)");
+    strcpy(atr->cache, cache);
+    char* email = get_email("e contato");
+    strcpy(atr->email, email);
+    char* num = get_num("e contato (com DDD)", 30);
+    strcpy(atr->num, num);
     char* id = gera_id_atr();
     snprintf(atr->id, sizeof(atr->id), "%s", id);
     atr->status = 'c';
@@ -179,7 +183,7 @@ void update_atr(void)
     if (atr == NULL) {
         screen_null_id_error("Id da atração");
         printf("\n\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-        getchar();
+        limpa_buffer();
     }
     else {
         print_dados_atraction_upd(atr);
@@ -189,7 +193,7 @@ void update_atr(void)
         } else {
             printf("\n\t\t                        Ok!\n");
             printf("\n\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-            getchar();
+            limpa_buffer();
         }
     }
     free(id);
@@ -214,24 +218,28 @@ void qual_campo_atr(Atraction *atr)
     } while (!ehDigitoMax(resp[0], '4')  || !val_entrada(resp));
     switch (resp[0]) {
         case '1':
-            get_nome_upd(atr->nome, "da atração");
+            char* nome = get_nome_upd("da atração");
+            strcpy(atr->nome, nome);
             printf("\n\t\t    >>> Nome da atração editado com sucesso. <<<");
-            getchar();
+            limpa_buffer();
             break;
         case '2':
-            get_cache_upd(atr->cache, "da atração");
+            char* cache = get_cache_upd("da atração");
+            strcpy(atr->cache, cache);
             printf("\n\t\t    >>> Cachê da atração editado com sucesso. <<<");
-            getchar();
+            limpa_buffer();
             break;
         case '3':
-            get_email_upd(atr->email, "de contato");
+            char* email = get_email_upd("de contato");
+            strcpy(atr->email, email);
             printf("\n\t\t    >>> Email da atração editado com sucesso. <<<");
-            getchar();
+            limpa_buffer();
             break;
         case '4':
-            get_num_upd(atr->num, "de contato");
+            char* num = get_num_upd("de contato");
+            strcpy(atr->num, num);
             printf("\n\t\t    >>> Número da atração editado com sucesso. <<<");
-            getchar();
+            limpa_buffer();
             break;
     }
 }
@@ -359,7 +367,7 @@ void regravar_atr(Atraction *atr)
         screen_null_id_error("Id da atração");
         printf("\n");
         printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-        getchar();
+        limpa_buffer();
     }
     fclose(fp);
     free(atrLido);
@@ -389,7 +397,7 @@ void remove_atr(Atraction *atr)
         screen_null_id_error("Id da atração");
         printf("\n");
         printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-        getchar();
+        limpa_buffer();
     }
     fclose(fp);
     free(atrArq);
@@ -408,7 +416,7 @@ void excluir_atr(void)
         screen_null_id_error("Id da atração");
         printf("\n");
         printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-        getchar();
+        limpa_buffer();
     } else {
         print_dados_atraction_upd(atr);
         resp = certeza_del("dessa atração");
@@ -420,7 +428,7 @@ void excluir_atr(void)
         } else {
             printf("\n\t\t                        Ok!\n");
             printf("\n\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-            getchar();
+            limpa_buffer();
         }
     }
     free(id);
@@ -508,7 +516,7 @@ void print_dados_atraction(Atraction *atr)
     }
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-    getchar();
+    limpa_buffer();
 }
 
 void print_dados_atraction_upd(Atraction *atr)
@@ -559,7 +567,7 @@ void screen_del_ok_atr(void)
     printf("###############################################################################\n");
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-    getchar();
+    limpa_buffer();
 }
 
 void error_screen_file_atr(void)
@@ -574,5 +582,5 @@ void error_screen_file_atr(void)
     printf("###                                                                       ###\n");
     printf("#############################################################################\n");
     printf("\t\t    >>> Tecle ENTER para continuar! <<<");
-    getchar();
+    limpa_buffer();
 }

@@ -489,20 +489,6 @@ char* duplica(char* s)
 } // AUTOR: FLAVIUS GORGÔNIO /// GIT: https://github.com/flaviusgorgonio
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Função que simula o input da linguagem python
-///
-char *leLinha(char *linha, int tamanhoMaximo)
-{
-    if (fgets(linha, tamanhoMaximo, stdin) != NULL) {
-        char *quebraLinha = strchr(linha, '\n');
-        if (quebraLinha != NULL) {
-            *quebraLinha = '\0';
-        }
-    }
-  return linha;
-} // AUTOR: LUIZ MIGUEL COM AJUDA DO CHAT-GPT /// GIT: https://github.com/LuizMiguel4444
-
-///////////////////////////////////////////////////////////////////////////////
 /// Função centraliza o texto inserido
 ///
 char* centralizar_texto(char* texto, int tam, int horizontal)

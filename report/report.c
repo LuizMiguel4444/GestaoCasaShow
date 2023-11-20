@@ -104,7 +104,7 @@ void report_atraction(char escolha)
     fclose(fp);
     free(atr);
     printf("\t\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-    getchar();
+    limpa_buffer();
 }
 
 void report_buy(char escolha)
@@ -133,7 +133,7 @@ void report_buy(char escolha)
     fclose(fp);
     free(b);
     printf("\t\t     >>> Tecle ENTER para voltar ao menu anterior... <<<");
-    getchar();
+    limpa_buffer();
 }
 
 void report_client(char escolha)
@@ -162,7 +162,7 @@ void report_client(char escolha)
     fclose(fp);
     free(cli);
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-    getchar();
+    limpa_buffer();
 }
 
 void report_show(char escolha)
@@ -191,7 +191,7 @@ void report_show(char escolha)
     fclose(fp);
     free(sh);
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-    getchar();
+    limpa_buffer();
 }
 
 void print_if_in_filter_atr(Atraction* atr, char escolha)

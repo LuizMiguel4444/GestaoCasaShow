@@ -14,11 +14,12 @@
 
 
 // Functions
-void get_nome(char* nome, char* modulo)
+char* get_nome(char* modulo)
 {
+  char* nome;
   do {
     printf("###              Nome d%s: ", modulo);
-    scanf(" %55[^\n]", nome);
+    nome = input();
     limpa_buffer();
     limpa_linha();
     printf("###              Nome d%s: %s###\n", modulo, centralizar_texto(nome, 42, -1));
@@ -27,26 +28,30 @@ void get_nome(char* nome, char* modulo)
       limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while (!valNome(nome));
+  return nome;
 }
 
-void get_nome_upd(char* nome, char* modulo)
+char* get_nome_upd(char* modulo)
 {
+  char* nome;
   do {
     printf("\n\t\t    Novo nome %s: ", modulo);
-    scanf(" %55[^\n]", nome);
+    nome = input();
     limpa_buffer();
     if (!valNome(nome)) {
       screen_error_input_name();
       limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while (!valNome(nome));
+  return nome;
 }
 
-void get_cache(char* cache, char* modulo)
+char* get_cache(char* modulo)
 {
+  char* cache;
   do {
     printf("###              Cachê d%s: ", modulo);
-    scanf("%s", cache);
+    cache = input();
     limpa_buffer();
     limpa_linha();
     printf("###              Cachê d%s: %s###\n", modulo, centralizar_texto(cache, 22, -1));
@@ -55,26 +60,30 @@ void get_cache(char* cache, char* modulo)
       limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while (!ehdinheiro(cache));
+  return cache;
 }
 
-void get_cache_upd(char* cache, char* modulo)
+char* get_cache_upd(char* modulo)
 {
+  char* cache;
   do {
     printf("\n\t\t    Novo cachê %s (com casa decimal): ", modulo);
-    scanf("%s", cache);
+    cache = input();
     limpa_buffer();
     if (!ehdinheiro(cache)) {
       screen_error_input();
       limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while (!ehdinheiro(cache));
+  return cache;
 }
 
-void get_email(char* email, char* modulo)
+char* get_email(char* modulo)
 {
+  char* email;
   do {
     printf("###              Email d%s: ", modulo);
-    scanf("%s", email);
+    email = input();
     limpa_buffer();
     limpa_linha();
     printf("###              Email d%s: %s###\n", modulo, centralizar_texto(email, 41, -1));
@@ -83,26 +92,30 @@ void get_email(char* email, char* modulo)
       limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while (!val_email(email));
+  return email;
 }
 
-void get_email_upd(char* email, char* modulo)
+char* get_email_upd(char* modulo)
 {
+  char* email;
   do {
     printf("\n\t\t    Novo email %s: ", modulo);
-    scanf("%s", email);
+    email = input();
     limpa_buffer();
     if (!val_email(email)) {
       screen_error_input();
       limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while (!val_email(email));
+  return email;
 }
 
-void get_num(char* num, char* modulo, int tam)
+char* get_num(char* modulo, int tam)
 {
+  char* num;
   do{
     printf("###              Número d%s: ", modulo);
-    scanf("%s", num);
+    num = input();
     limpa_buffer();
     limpa_linha();
     printf("###              Número d%s: %s###\n", modulo, centralizar_texto(num, tam, -1));
@@ -111,26 +124,30 @@ void get_num(char* num, char* modulo, int tam)
       limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while (!validarFone(num));
+  return num;
 }
 
-void get_num_upd(char* num, char* modulo)
+char* get_num_upd(char* modulo)
 {
+  char* num;
   do {
     printf("\n\t\t    Novo número %s (com DDD): ", modulo);
-    scanf("%s", num);
+    num = input();
     limpa_buffer();
     if (!validarFone(num)) {
       screen_error_input();
       limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while (!validarFone(num));
+  return num;
 }
 
-void get_id(char* id, char* modulo, int tam)
+char* get_id(char* modulo, int tam)
 {
+  char* id;
   do {
     printf("###              Id d%s: ", modulo);
-    scanf("%s", id);
+    id = input();
     limpa_buffer();
     limpa_linha();
     printf("###              Id d%s: %s###\n", modulo, centralizar_texto(id, tam, -1));
@@ -139,13 +156,15 @@ void get_id(char* id, char* modulo, int tam)
       limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while (!val_id(id));
+  return id;
 }
 
-void get_quant_cad(char* quant, char* modulo)
+char* get_quant_cad(char* modulo)
 {
+  char* quant;
   do {
     printf("###              Quant. de %s: ", modulo);
-    scanf("%s", quant);
+    quant = input();
     limpa_buffer();
     limpa_linha();
     printf("###              Quant. de %s: %s###\n", modulo, centralizar_texto(quant, 38, -1));
@@ -154,26 +173,30 @@ void get_quant_cad(char* quant, char* modulo)
       limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while (!check_quant_cad(quant));
+  return quant;
 }
 
-void get_quant_cad_upd(char* quant, char* modulo)
+char* get_quant_cad_upd(char* modulo)
 {
+  char* quant;
   do {
     printf("\n\t\t    Nova quant. de %s: ", modulo);
-    scanf("%s", quant);
+    quant = input();
     limpa_buffer();
     if (!check_quant_cad(quant)) {
       screen_error_input();
       limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while (!check_quant_cad(quant));
+  return quant;
 }
 
-void get_quant_venda(char* quant, char* modulo)
+char* get_quant_venda(char* modulo)
 {
+  char* quant;
   do {
     printf("###              Quant. de %s: ", modulo);
-    scanf("%s", quant);
+    quant = input();
     limpa_buffer();
     limpa_linha();
     printf("###              Quant. de %s: %s###\n", modulo, centralizar_texto(quant, 38, -1));
@@ -182,26 +205,30 @@ void get_quant_venda(char* quant, char* modulo)
       limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while (!check_quant_venda(quant));
+  return quant;
 }
 
-void get_quant_venda_upd(char* quant, char* modulo)
+char* get_quant_venda_upd(char* modulo)
 {
+  char* quant;
   do {
     printf("\n\t\t   Nova quant. de %s: ", modulo);
-    scanf("%s", quant);
+    quant = input();
     limpa_buffer();
     if (!check_quant_venda(quant)) {
       screen_error_input();
       limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while (!check_quant_venda(quant));
+  return quant;
 }
 
-void get_valor(char* valor, char* modulo)
+char* get_valor(char* modulo)
 {
+  char* valor;
   do {
     printf("###              Valor %s: ", modulo);
-    scanf("%s", valor);
+    valor = input();
     limpa_buffer();
     limpa_linha();
     printf("###              Valor %s: %s###\n", modulo, centralizar_texto(valor, 21, -1));
@@ -210,26 +237,30 @@ void get_valor(char* valor, char* modulo)
       limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while (!ehdinheiro(valor));
+  return valor;
 }
 
-void get_valor_upd(char* valor, char* modulo)
+char* get_valor_upd(char* modulo)
 {
+  char* valor;
   do {
     printf("\n\t\t    Novo valor %s: ", modulo);
-    scanf("%s", valor);
+    valor = input();
     limpa_buffer();
     if (!ehdinheiro(valor)) {
       screen_error_input();
       limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while (!ehdinheiro(valor));
+  return valor;
 }
 
-void get_cpf(char* cpf)
+char* get_cpf(void)
 {
+  char* cpf;
   do {
     printf("###              CPF do cliente (apenas números): ");
-    scanf("%[0-9-.]", cpf);
+    cpf = input();
     limpa_buffer();
     limpa_linha();
     printf("###              CPF do cliente (apenas números): %s###\n", centralizar_texto(cpf, 26, -1));
@@ -238,26 +269,30 @@ void get_cpf(char* cpf)
       limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while (!validarCPF(cpf));
+  return cpf;
 }
 
-void get_cpf_upd(char* cpf)
+char* get_cpf_upd(void)
 {
+  char* cpf;
   do {
     printf("\n\t\t   Novo CPF do cliente (apenas números): ");
-    scanf("%[0-9-.]", cpf);
+    cpf = input();
     limpa_buffer();
     if (!validarCPF(cpf)) {
       screen_error_input();
       limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while (!validarCPF(cpf));
+  return cpf;
 }
 
-void get_data(char* data)
+char* get_data(void)
 {
+  char* data;
   do {
     printf("###              Data (dd/mm/aaaa): ");
-    scanf("%s", data);
+    data = input();
     limpa_buffer();
     limpa_linha();
     printf("###              Data (dd/mm/aaaa): %s###\n", centralizar_texto(data, 40, -1));
@@ -266,26 +301,30 @@ void get_data(char* data)
       limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while (!valData(data));
+  return data;
 }
 
-void get_data_upd(char* data)
+char* get_data_upd(void)
 {
+  char* data;
   do {
     printf("\n\t\t    Nova data (dd/mm/aaaa): ");
-    scanf("%s", data);
+    data = input();
     limpa_buffer();
     if (!valData(data)) {
       screen_error_input();
       limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while (!valData(data));
+  return data;
 }
 
-void get_hour(char* hour)
+char* get_hour(void)
 {
+  char* hour;
   do {
     printf("###              Horário (hh:mm): ");
-    scanf("%s", hour);
+    hour = input();
     limpa_buffer();
     limpa_linha();
     printf("###              Horário (hh:mm): %s###\n", centralizar_texto(hour, 42, -1));
@@ -294,19 +333,22 @@ void get_hour(char* hour)
       limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while (!val_hour(hour));
+  return hour;
 }
 
-void get_hour_upd(char* hour)
+char* get_hour_upd(void)
 {
+  char* hour;
   do {
     printf("\n\t\t    Novo horário (hh:mm): ");
-    scanf("%s", hour);
+    hour = input();
     limpa_buffer();
     if (!val_hour(hour)) {
       screen_error_input();
       limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while (!val_hour(hour));
+  return hour;
 }
 
 int check_quant_cad(char *c) {
@@ -382,30 +424,30 @@ void screen_null_id_error(char* modulo)
 void screen_error_input(void)
 {
   printf("\n\tEntrada inválida! Por favor, tecle ENTER e tente novamente...");
-  getchar();
+  limpa_buffer();
 }
 
 void screen_error_input_name(void)
 {
   printf("\n\tEntrada inválida! Por favor, tecle ENTER e tente novamente...");
   printf("\n\tSe o nome digitado for muito extenso, abrevie por favor!");
-  getchar();
+  limpa_buffer();
 }
 
 void screen_error_input_resp(void)
 {
   printf("\n\t     Entrada inválida! Por favor, tecle ENTER e tente novamente...");
-  getchar();
+  limpa_buffer();
 }
 
 void screen_error_input_id(char* chave)
 {
   printf("\n\tO %s digitado já foi cadastrado! Por favor, insira um %s válido...", chave, chave);
-  getchar();
+  limpa_buffer();
 }
 
 void screen_error_input_n_exist(char* chave)
 {
   printf("\n\tO %s digitado não foi cadastrado! Por favor, insira um %s válido cadastrado...", chave, chave);
-  getchar();
+  limpa_buffer();
 }

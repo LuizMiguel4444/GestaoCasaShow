@@ -78,15 +78,17 @@ Client *cred_client(void)
     printf("###############################################################################\n");
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-    getchar();
+    limpa_buffer();
     return cli;
 }
 
 void client_inputs(Client* cli)
 {
-    get_nome(cli -> nome, "o cliente");
+    char* nome = get_nome("o cliente");
+    strcpy(cli->nome, nome);
     do {
-        get_cpf(cli->cpf);
+        char* cpf = get_cpf();
+        strcpy(cli->cpf, cpf);
         if (!procura_cpf_client(cli->cpf)) {
             if (strcmp(cli->cpf, "000") == 0) {
                 screen_error_input_id("CPF");
@@ -97,8 +99,10 @@ void client_inputs(Client* cli)
             }
         }
     } while (!procura_cpf_client(cli->cpf));
-    get_email(cli -> email, "o cliente");
-    get_num(cli -> num, "o cliente", 40);
+    char* email = get_email("o cliente");
+    strcpy(cli->email, email);
+    char* num = get_num("o cliente", 40);
+    strcpy(cli->num, num);
     cli -> status = 'c';
     get_data_hour_cli(cli);
 }
@@ -187,7 +191,7 @@ void update_cli(void)
     if (cli == NULL) {
         screen_null_cpf_error();
         printf("\n\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-        getchar();
+        limpa_buffer();
     }
     else {
         print_dados_client_upd(cli);
@@ -197,7 +201,7 @@ void update_cli(void)
         } else {
             printf("\n\t\t                        Ok!\n");
             printf("\n\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-            getchar();
+            limpa_buffer();
         }
     }
     free(cpf);
@@ -221,19 +225,22 @@ void qual_campo_cli(Client *cli)
     } while (!ehDigitoMax(resp[0], '3')  || !val_entrada(resp));
     switch (resp[0]) {
         case '1':
-            get_nome_upd(cli->nome, "do cliente");
+            char* nome = get_nome_upd("do cliente");
+            strcpy(cli->nome, nome);
             printf("\n\t\t    >>> Nome do cliente editado com sucesso. <<<");
-            getchar();
+            limpa_buffer();
             break;
         case '2':
-            get_email_upd(cli->email, "de contato");
+            char* email = get_email_upd("de contato");
+            strcpy(cli->email, email);
             printf("\n\t\t    >>> Email do cliente editado com sucesso. <<<");
-            getchar();
+            limpa_buffer();
             break;
         case '3':
-            get_num_upd(cli->num, "de contato");
+            char* num = get_num_upd("de contato");
+            strcpy(cli->num, num);
             printf("\n\t\t    >>> Número do cliente editado com sucesso. <<<");
-            getchar();
+            limpa_buffer();
             break;
     }
 }
@@ -374,7 +381,7 @@ void regravar_cli(Client *cli)
         screen_null_id_error("CPF do cliente");
         printf("\n");
         printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-        getchar();
+        limpa_buffer();
     }
     fclose(fp);
     free(cliLido);
@@ -408,7 +415,7 @@ void remove_cli(Client *cli)
         screen_null_id_error("CPF do cliente");
         printf("\n");
         printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-        getchar();
+        limpa_buffer();
     }
     fclose(fp);
     free(cliArq);
@@ -427,7 +434,7 @@ void excluir_cli(void)
         screen_null_cpf_error();
         printf("\n");
         printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-        getchar();
+        limpa_buffer();
     } else {
         print_dados_client_upd(cli);
         resp = certeza_del("desse cliente");
@@ -439,7 +446,7 @@ void excluir_cli(void)
         } else {
             printf("\n\t\t                        Ok!\n");
             printf("\n\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-            getchar();
+            limpa_buffer();
         }
     }
     free(cpf);
@@ -499,7 +506,7 @@ void print_dados_client(Client* cli)
     }
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-    getchar();
+    limpa_buffer();
 }
 
 void print_dados_client_upd(Client* cli)
@@ -548,7 +555,7 @@ void screen_del_ok_cli(void)
     printf("###############################################################################\n");
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-    getchar();
+    limpa_buffer();
 }
 
 void screen_del_cli_block(void)
@@ -560,7 +567,7 @@ void screen_del_cli_block(void)
     printf("###############################################################################\n");
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-    getchar();
+    limpa_buffer();
 }
 
 void screen_null_cpf_error(void)
@@ -586,5 +593,5 @@ void error_screen_file_cli(void)
 	printf("###                                                                       ###\n");
     printf("#############################################################################\n");
 	printf("\t\t    >>> Tecle ENTER para continuar! <<<");
-	getchar();
+	limpa_buffer();
 }

@@ -79,7 +79,7 @@ Buy *cred_buy(void)
     printf("###############################################################################\n");
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-    getchar();
+    limpa_buffer();
     return b;
 }
 
@@ -87,26 +87,32 @@ void buy_inputs(Buy* b)
 {
     Show *sh;
     sh = (Show*)malloc(sizeof(Show));
+    char* id_show;
     do {
-        get_id(b->id_show, "o show", 47);
+        id_show = get_id("o show", 47);
+        strcpy(b->id_show, id_show);
         if (procura_id_show(b->id_show)) {
             screen_error_input_n_exist("Id");
             limpa_linha(); limpa_linha(); limpa_linha();
         }
     } while (procura_id_show(b->id_show));
     sh = procura_show(b->id_show);
+    char* cpf;
     do {
-        get_cpf(b->cpf_cli);
+        cpf = get_cpf();
+        strcpy(b->cpf_cli, cpf);
         if (procura_cpf_client_fantasm(b->cpf_cli)) {
             screen_error_input_n_exist("CPF");
             limpa_linha(); limpa_linha(); limpa_linha();
         }
     } while (procura_cpf_client_fantasm(b->cpf_cli));
+    char* quant;
     do {
-        get_quant_venda(b->quant, "ingressos");
+        quant = get_quant_venda("ingressos");
+        strcpy(b->quant, quant);
         if (!verify_buy_ticket(b, sh)) {
             printf("\n\t\tNão há essa quantidade de ingressos restantes!");
-            getchar();
+            limpa_buffer();
             limpa_linha(); limpa_linha(); limpa_linha();
         }
     } while (!verify_buy_ticket(b, sh));
@@ -225,7 +231,7 @@ void update_buy(void)
     if (b == NULL) {
         screen_null_id_error("Id da venda");
         printf("\n\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-        getchar();
+        limpa_buffer();
     }
     else {
         print_dados_buy_upd(b);
@@ -235,7 +241,7 @@ void update_buy(void)
         } else {
             printf("\n\t\t                        Ok!\n");
             printf("\n\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-            getchar();
+            limpa_buffer();
         }
     }
     free(id);
@@ -268,14 +274,16 @@ void qual_campo_buy(Buy *b)
     switch (resp[0]) {
         case '1':
             do {
-                get_cpf_upd(b->cpf_cli);
+                char* cpf;
+                cpf = get_cpf_upd();
+                strcpy(b->cpf_cli, cpf);
                 if (procura_cpf_client_fantasm(b->cpf_cli)) {
                     screen_error_input_n_exist("CPF");
                     limpa_linha(); limpa_linha(); limpa_linha();
                 }
             } while (procura_cpf_client_fantasm(b->cpf_cli));
             printf("\n\t\t   >>> CPF do cliente editado com sucesso. <<<");
-            getchar();
+            limpa_buffer();
             break;
     }
 }
@@ -369,7 +377,7 @@ void regravar_buy(Buy *b)
         screen_null_id_error("Id da venda");
         printf("\n");
         printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-        getchar();
+        limpa_buffer();
     }
     fclose(fp);
     free(buyLido);
@@ -400,7 +408,7 @@ void regravar_restante(Buy* b, Show* sh)
         screen_null_id_error("Id do show");
         printf("\n");
         printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-        getchar();
+        limpa_buffer();
     }
     fclose(fp);
     free(showLido);
@@ -487,7 +495,7 @@ void print_dados_buy(Buy* b)
     }
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-    getchar();
+    limpa_buffer();
 }
 
 void print_dados_buy_upd(Buy* b)
@@ -545,5 +553,5 @@ void error_screen_file_buy(void)
 	printf("###                                                                       ###\n");
     printf("#############################################################################\n");
 	printf("\t\t    >>> Tecle ENTER para continuar! <<<");
-	getchar();
+	limpa_buffer();
 }

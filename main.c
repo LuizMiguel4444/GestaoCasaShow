@@ -123,7 +123,7 @@ void welcome(void)
     }
     printf("\n");
     printf("\t   >>> Tecle ENTER para ir ao Menu Principal... <<<");
-    getchar();
+    limpa_buffer();
 } // AUTOR: LUIZ MIGUEL, FEITO COM AJUDA DO CHAT-GPT /// GIT: https://github.com/LuizMiguel4444
 
 void main_menu_screen(void)
@@ -180,7 +180,7 @@ void about(void)
     printf("###############################################################################\n");
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao Menu Principal... <<<");
-    getchar();
+    limpa_buffer();
 }
 
 void dev(void)
@@ -203,7 +203,7 @@ void dev(void)
     printf("###############################################################################\n");
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao Menu Principal... <<<");
-    getchar();
+    limpa_buffer();
 }
 
 void end(void)

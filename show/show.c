@@ -78,18 +78,23 @@ Show *cred_show(void)
     printf("###############################################################################\n");
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-    getchar();
+    limpa_buffer();
     return sh;
 }
 
 void show_inputs(Show* sh)
 {
-    get_nome(sh -> atraction, "a atração");
-    get_data(sh -> data);
-    get_hour(sh -> hora);
-    get_quant_cad(sh -> quant, "ingressos");
+    char* nome = get_nome("a atração");
+    strcpy(sh->atraction, nome);
+    char* data = get_data();
+    strcpy(sh->data, data);
+    char* hora = get_hour();
+    strcpy(sh->hora, hora);
+    char* quant = get_quant_cad("ingressos");
+    strcpy(sh->quant, quant);
     snprintf(sh -> quant_rest, sizeof(sh -> quant_rest), "%s", sh -> quant);
-    get_valor(sh -> valor, "do ingresso (com casa decimal)");
+    char* valor = get_valor("do ingresso (com casa decimal)");
+    strcpy(sh->valor, valor);
     char* id = gera_id_show();
     snprintf(sh -> id, sizeof(sh -> id), "%s", id);
     sh -> status = 'c';
@@ -180,7 +185,7 @@ void update_show(void)
     if (sh == NULL) {
         screen_null_id_error("Id do show");
         printf("\n\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-        getchar();
+        limpa_buffer();
     }
     else {
         print_dados_show_upd(sh);
@@ -190,7 +195,7 @@ void update_show(void)
         } else {
             printf("\n\t\t                        Ok!\n");
             printf("\n\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-            getchar();
+            limpa_buffer();
         }
     }
     free(id);
@@ -217,42 +222,47 @@ void qual_campo_show(Show *sh)
     int old_quant = atoi(sh->quant);
     switch (resp[0]) {
         case '1':
-            get_nome_upd(sh->atraction, "da atração");
+            char* nome = get_nome_upd("da atração");
+            strcpy(sh->atraction, nome);
             printf("\n\t\t    >>> Nome da atração editado com sucesso. <<<");
-            getchar();
+            limpa_buffer();
             break;
         case '2':
-            get_data_upd(sh->data);
+            char* data = get_data_upd();
+            strcpy(sh->data, data);
             printf("\n\t\t    >>> Data editada com sucesso. <<<");
-            getchar();
+            limpa_buffer();
             break;
         case '3':
-            get_hour_upd(sh->hora);
+            char* hora = get_hour_upd();
+            strcpy(sh->hora, hora);
             printf("\n\t\t    >>> Horário editado com sucesso. <<<");
-            getchar();
+            limpa_buffer();
             break;
         case '4':
-            get_quant_cad_upd(sh->quant, "ingressos");
+            char* quant = get_quant_cad_upd("ingressos");
+            strcpy(sh->quant, quant);
             int new_quant = atoi(sh->quant);
             int restante = atoi(sh->quant_rest);
             if (new_quant < (old_quant - restante)) {
                 snprintf(sh->quant, sizeof(sh->quant), "%d", old_quant);
                 printf("\n\t\t    Impossível diminuir para essa quantidade de ingressos!\n");
                 printf("\n\t\t    Tecle Enter para voltar ao menu anterior...");
-                getchar();
+                limpa_buffer();
                 break;
             } else {
                 int diferenca = new_quant - old_quant;
                 int new_rest = restante + diferenca;
                 snprintf(sh->quant_rest, sizeof(sh->quant_rest), "%d", new_rest);
                 printf("\n\t\t    >>> Quant. de ingressos editada com sucesso. <<<");
-                getchar();
+                limpa_buffer();
                 break;
             }
         case '5':
-            get_valor_upd(sh->valor, "do ingresso (com casa decimal)");
+            char* valor = get_valor_upd("do ingresso (com casa decimal)");
+            strcpy(sh->valor, valor);
             printf("\n\t\t    >>> Valor do ingresso editado com sucesso. <<<");
-            getchar();
+            limpa_buffer();
             break;
     }
 }
@@ -394,7 +404,7 @@ void regravar_show(Show *sh)
         screen_null_id_error("Id do show");
         printf("\n");
         printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-        getchar();
+        limpa_buffer();
     }
     fclose(fp);
     free(showLido);
@@ -424,7 +434,7 @@ void remove_show(Show *sh)
         screen_null_id_error("Id do show");
         printf("\n");
         printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-        getchar();
+        limpa_buffer();
     }
     fclose(fp);
     free(shArq);
@@ -443,7 +453,7 @@ void excluir_show(void)
         screen_null_id_error("Id do show");
         printf("\n");
         printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-        getchar();
+        limpa_buffer();
     } else {
         print_dados_show_upd(sh);
         resp = certeza_del("desse show");
@@ -455,7 +465,7 @@ void excluir_show(void)
         } else {
             printf("\n\t\t                        Ok!\n");
             printf("\n\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-            getchar();
+            limpa_buffer();
         }
     }
     free(id);
@@ -544,7 +554,7 @@ void print_dados_show(Show* sh)
     }
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-    getchar();
+    limpa_buffer();
 }
 
 void print_dados_show_upd(Show* sh)
@@ -594,7 +604,7 @@ void screen_del_ok_show(void)
     printf("###############################################################################\n");
     printf("\n");
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
-    getchar();
+    limpa_buffer();
 }
 
 void error_screen_file_show(void) 
@@ -609,5 +619,5 @@ void error_screen_file_show(void)
 	printf("###                                                                       ###\n");
     printf("#############################################################################\n");
 	printf("\t\t    >>> Tecle ENTER para continuar! <<<");
-	getchar();
+	limpa_buffer();
 }
