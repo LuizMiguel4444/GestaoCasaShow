@@ -19,7 +19,11 @@ Desenvolvido por: Luiz Miguel Santos Silva.
 
 ## Linux:
 
-- Para compilar e rodar o programa, abra o terminal, vá até a pasta do programa e digite o seguinte comando: 'make'. Caso não esteja reconhecendo o comando 'make' use o seguinte comando no terminal: 'apt-get install make'. Depois disso, digite o comando 'make' novamente.
+- Para compilar e rodar o programa, abra o terminal, vá até a pasta do programa e digite o seguinte comando: 'make'. Caso não esteja reconhecendo o comando 'make' use o seguinte comando no terminal: 
+```
+apt-get install make
+```
+Depois disso, digite o comando 'make' novamente.
 
 - Caso ainda não funcione, cole o comando a seguir:
 ``` 
@@ -28,7 +32,15 @@ gcc -c -Wall atraction/atraction.c; gcc -c -Wall auxiliar/auxiliar.c; gcc -c -Wa
 
 ## Replit:
 
-- Abra o site, crie um arquivo de linguagem C, vá no Shell (ao lado do console), clone o repositório (git clone https://github.com/LuizMiguel4444/GestaoCasaShow.git), vá até a pasta (cd GestaoCasaShow) e digite o comando 'make' na linha de comando do Shell. 
+- Abra o site, crie um arquivo de linguagem C, vá até o Shell (ao lado do console), no Shell, clone o repositório utilizando o seguinte comando: 
+```
+git clone https://github.com/LuizMiguel4444/GestaoCasaShow.git
+```
+Depois, vá até a pasta do programa colando o comando a seguir:
+```
+cd GestaoCasaShow
+```
+Após isso, digite o comando 'make' na linha de comando do Shell.
 
 - É recomendável maximizar/expandir a tela do Shell para que haja uma melhor expeciência ao utilizar o programa.
 
@@ -37,13 +49,13 @@ gcc -c -Wall atraction/atraction.c; gcc -c -Wall auxiliar/auxiliar.c; gcc -c -Wa
 - Para compilar e rodar o programa, abra o terminal, vá até a pasta do programa e digite os seguintes comandos em sequência:
 
 ```
-1.  gcc -c -Wall *\\\*.c main.c
+gcc -c -Wall *\*.c main.c
 ```
 ```
-2.  gcc -o GestaoCasaShow *.o
+gcc -o GestaoCasaShow *.o
 ```
 ```
-3.  .\GestaoCasaShow
+.\GestaoCasaShow
 ```
 
 - Se após isso ainda não funcionar... Mude para Linux **URGENTEMENTE!**
