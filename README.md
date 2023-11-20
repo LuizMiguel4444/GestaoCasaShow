@@ -21,7 +21,10 @@ Desenvolvido por: Luiz Miguel Santos Silva.
 
 - Para compilar e rodar o programa, abra o terminal, vá até a pasta do programa e digite o seguinte comando: 'make'. Caso não esteja reconhecendo o comando 'make' use o seguinte comando no terminal: 'apt-get install make'. Depois disso, digite o comando 'make' novamente.
 
-- Caso ainda não funcione, cole o comando a seguir: 'gcc -c -Wall atraction/atraction.c; gcc -c -Wall auxiliar/auxiliar.c; gcc -c -Wall buy/buy.c; gcc -c -Wall client/client.c; gcc -c -Wall report/report.c; gcc -c -Wall show/show.c; gcc -c -Wall util/util.c; gcc -c -Wall main.c; gcc -o GestaoCasaShow *.o; ./GestaoCasaShow'. 
+- Caso ainda não funcione, cole o comando a seguir:
+``` 
+gcc -c -Wall atraction/atraction.c; gcc -c -Wall auxiliar/auxiliar.c; gcc -c -Wall buy/buy.c; gcc -c -Wall client/client.c; gcc -c -Wall report/report.c; gcc -c -Wall show/show.c; gcc -c -Wall util/util.c; gcc -c -Wall main.c; gcc -o GestaoCasaShow *.o; ./GestaoCasaShow
+```
 
 ## Replit:
 
@@ -33,9 +36,15 @@ Desenvolvido por: Luiz Miguel Santos Silva.
 
 - Para compilar e rodar o programa, abra o terminal, vá até a pasta do programa e digite os seguintes comandos em sequência:
 
+```
 1.  gcc -c -Wall *\\\*.c main.c
+```
+```
 2.  gcc -o GestaoCasaShow *.o
+```
+```
 3.  .\GestaoCasaShow
+```
 
 - Se após isso ainda não funcionar... Mude para Linux **URGENTEMENTE!**
 
