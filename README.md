@@ -27,7 +27,7 @@ Depois disso, digite o comando 'make' novamente.
 
 - Caso ainda não funcione, cole o comando a seguir:
 ``` 
-gcc -c -Wall atraction/atraction.c; gcc -c -Wall auxiliar/auxiliar.c; gcc -c -Wall buy/buy.c; gcc -c -Wall client/client.c; gcc -c -Wall report/report.c; gcc -c -Wall show/show.c; gcc -c -Wall util/util.c; gcc -c -Wall main.c; gcc -o GestaoCasaShow *.o; ./GestaoCasaShow
+gcc -c -Wall atraction/atraction.c; gcc -c -Wall auxiliar/auxiliar.c; gcc -c -Wall buy/buy.c; gcc -c -Wall client/client.c; gcc -c -Wall report/report.c; gcc -c -Wall report/report_aux.c; gcc -c -Wall show/show.c; gcc -c -Wall util/util.c; gcc -c -Wall main.c; gcc -o GestaoCasaShow *.o; ./GestaoCasaShow
 ```
 
 ## Replit:
