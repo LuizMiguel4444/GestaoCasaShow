@@ -89,18 +89,22 @@ void report_atraction(char escolha)
         printf("Não é possível continuar este programa...\n");
         exit(1);
     }
-    system("clear || cls");
-    printf("#####################################################################################################\n");
-    printf("###                                                                                               ###\n");
-    printf("###                NOME                |                   EMAIL                   |     ID       ###\n");
-    printf("###                                                                                               ###\n");
-    printf("#####################################################################################################\n");
-    printf("###                                                                                               ###\n");
+    screen_report_atr();
+    int quant_atr_total = 0;
+    int quant_atr_at = 0;
+    int quant_atr_inat = 0;
     while(fread(atr, sizeof(Atraction), 1, fp)) {
         print_if_in_filter_atr(atr, escolha);
+        quant_atr_total += 1;
+        if (atr->status == 'c') {
+            quant_atr_at += 1;
+        }
+        else if (atr->status == 'x') {
+            quant_atr_inat += 1;
+        }
     }
-    printf("###                                                                                               ###\n");
-    printf("#####################################################################################################\n\n");
+    char* quant_str = contador_quantidade(escolha, quant_atr_total, quant_atr_at, quant_atr_inat);
+    screen_quant_total_atr(quant_str);
     fclose(fp);
     free(atr);
     printf("\t\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
@@ -118,18 +122,20 @@ void report_buy(char escolha)
         printf("Não é possível continuar este programa...\n");
         exit(1);
     }
-    system("clear || cls");
-    printf("##############################################################################################\n");
-    printf("###                                                                                        ###\n");
-    printf("###                  SHOW               |       CPF       |       VALOR       |    ID      ###\n");
-    printf("###                                                                                        ###\n");
-    printf("##############################################################################################\n");
-    printf("###                                                                                        ###\n");
+    screen_report_buy();
+    int quant_vendas = 0;
+    float valor_total = 0;
     while(fread(b, sizeof(Buy), 1, fp)) {
         print_if_in_filter_buy(b, escolha);
+        quant_vendas += 1;
+        float valor_compra = strtof(b->valor, NULL);
+        valor_total += valor_compra;
     }
-    printf("###                                                                                        ###\n");
-    printf("##############################################################################################\n\n");
+    char quant_str[8];
+    snprintf(quant_str, sizeof(quant_str), "%d", quant_vendas);
+    char valor_str[20];
+    snprintf(valor_str, sizeof(valor_str), "%.2f", valor_total);
+    screen_quant_e_valor_total_buy(quant_str, valor_str);
     fclose(fp);
     free(b);
     printf("\t\t     >>> Tecle ENTER para voltar ao menu anterior... <<<");
@@ -147,18 +153,22 @@ void report_client(char escolha)
         printf("Não é possível continuar este programa...\n");
         exit(1);
     }
-    system("clear || cls");
-    printf("###############################################################################\n");
-    printf("###                                                                         ###\n");
-    printf("###                       NOME                      |          CPF          ###\n");
-    printf("###                                                                         ###\n");
-    printf("###############################################################################\n");
-    printf("###                                                                         ###\n");
+    screen_report_cli();
+    int quant_cli_total = 0;
+    int quant_cli_at = 0;
+    int quant_cli_inat = 0;
     while(fread(cli, sizeof(Client), 1, fp)) {
         print_if_in_filter_cli(cli, escolha);
+        quant_cli_total += 1;
+        if (cli->status == 'c') {
+            quant_cli_at += 1;
+        }
+        else if (cli->status == 'x') {
+            quant_cli_inat += 1;
+        }
     }
-    printf("###                                                                         ###\n");
-    printf("###############################################################################\n\n");
+    char* quant_str = contador_quantidade(escolha, quant_cli_total, quant_cli_at, quant_cli_inat);
+    screen_quant_total_cli(quant_str);
     fclose(fp);
     free(cli);
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
@@ -176,120 +186,24 @@ void report_show(char escolha)
         printf("Não é possível continuar este programa...\n");
         exit(1);
     }
-    system("clear || cls");
-    printf("###############################################################################\n");
-    printf("###                                                                         ###\n");
-    printf("###                         ATRAÇÃO                      |       ID         ###\n");
-    printf("###                                                                         ###\n");
-    printf("###############################################################################\n");
-    printf("###                                                                         ###\n");
+    screen_report_show();
+    int quant_show_total = 0;
+    int quant_show_at = 0;
+    int quant_show_inat = 0;
     while(fread(sh, sizeof(Show), 1, fp)) {
         print_if_in_filter_show(sh, escolha);
+        quant_show_total += 1;
+        if (sh->status == 'c') {
+            quant_show_at += 1;
+        }
+        else if (sh->status == 'x') {
+            quant_show_inat += 1;
+        }
     }
-    printf("###                                                                         ###\n");
-    printf("###############################################################################\n\n");
+    char* quant_str = contador_quantidade(escolha, quant_show_total, quant_show_at, quant_show_inat);
+    screen_quant_total_show(quant_str);
     fclose(fp);
     free(sh);
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
     limpa_buffer();
-}
-
-void print_if_in_filter_atr(Atraction* atr, char escolha)
-{
-    switch (escolha) {
-        case '1':
-            printf("### --------------------------------------------------------------------------------------------- ###\n");
-            print_dados_atraction_rep(atr);
-            printf("### --------------------------------------------------------------------------------------------- ###\n");
-            break;
-        case '2':
-            if (atr -> status != 'x') {
-                printf("### --------------------------------------------------------------------------------------------- ###\n");
-                print_dados_atraction_rep(atr);
-                printf("### --------------------------------------------------------------------------------------------- ###\n");
-            }
-            break;
-        case '3':
-            if (atr -> status == 'x') {
-                printf("### --------------------------------------------------------------------------------------------- ###\n");
-                print_dados_atraction_rep(atr);
-                printf("### --------------------------------------------------------------------------------------------- ###\n");
-            }
-            break;
-    }
-}
-
-void print_if_in_filter_buy(Buy* b, char escolha)
-{
-    switch (escolha) {
-        case '1':
-            printf("### -------------------------------------------------------------------------------------- ###\n");
-            print_dados_buy_rep(b);
-            printf("### -------------------------------------------------------------------------------------- ###\n");
-            break;
-        case '2':
-            if (b -> status != 'x') {
-                printf("### -------------------------------------------------------------------------------------- ###\n");
-                print_dados_buy_rep(b);
-                printf("### -------------------------------------------------------------------------------------- ###\n");
-            }
-            break;
-        case '3':
-            if (b -> status == 'x') {
-                printf("### -------------------------------------------------------------------------------------- ###\n");
-                print_dados_buy_rep(b);
-                printf("### -------------------------------------------------------------------------------------- ###\n");
-            }
-            break;
-    }
-}
-
-void print_if_in_filter_cli(Client* cli, char escolha)
-{
-    switch (escolha) {
-        case '1':
-            printf("### ----------------------------------------------------------------------- ###\n");
-            print_dados_client_rep(cli);
-            printf("### ----------------------------------------------------------------------- ###\n");
-            break;
-        case '2':
-            if (cli -> status != 'x') {
-                printf("### ----------------------------------------------------------------------- ###\n");
-                print_dados_client_rep(cli);
-                printf("### ----------------------------------------------------------------------- ###\n");
-            }
-            break;
-        case '3':
-            if (cli -> status == 'x') {
-                printf("### ----------------------------------------------------------------------- ###\n");
-                print_dados_client_rep(cli);
-                printf("### ----------------------------------------------------------------------- ###\n");
-            }
-            break;
-    }
-}
-
-void print_if_in_filter_show(Show* sh, char escolha)
-{
-    switch (escolha) {
-        case '1':
-            printf("### ----------------------------------------------------------------------- ###\n");
-            print_dados_show_rep(sh);
-            printf("### ----------------------------------------------------------------------- ###\n");
-            break;
-        case '2':
-            if (sh -> status != 'x') {
-                printf("### ----------------------------------------------------------------------- ###\n");
-                print_dados_show_rep(sh);
-                printf("### ----------------------------------------------------------------------- ###\n");
-            }
-            break;
-        case '3':
-            if (sh -> status == 'x') {
-                printf("### ----------------------------------------------------------------------- ###\n");
-                print_dados_show_rep(sh);
-                printf("### ----------------------------------------------------------------------- ###\n");
-            }
-            break;
-    }
 }

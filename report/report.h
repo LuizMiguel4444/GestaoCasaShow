@@ -5,7 +5,3 @@ void report_atraction(char);
 void report_buy(char);
 void report_client(char);
 void report_show(char);
-void print_if_in_filter_atr(Atraction*, char);
-void print_if_in_filter_buy(Buy*, char);
-void print_if_in_filter_cli(Client*, char);
-void print_if_in_filter_show(Show*, char);
