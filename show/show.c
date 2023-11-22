@@ -220,27 +220,32 @@ void qual_campo_show(Show *sh)
         }
     } while (!ehDigitoMax(resp[0], '5')  || !val_entrada(resp));
     int old_quant = atoi(sh->quant);
+    char* nome;
+    char* data;
+    char* hora;
+    char* quant;
+    char* valor;
     switch (resp[0]) {
         case '1':
-            char* nome = get_nome_upd("da atração");
+            nome = get_nome_upd("da atração");
             strcpy(sh->atraction, nome);
             printf("\n\t\t    >>> Nome da atração editado com sucesso. <<<");
             limpa_buffer();
             break;
         case '2':
-            char* data = get_data_upd();
+            data = get_data_upd();
             strcpy(sh->data, data);
             printf("\n\t\t    >>> Data editada com sucesso. <<<");
             limpa_buffer();
             break;
         case '3':
-            char* hora = get_hour_upd();
+            hora = get_hour_upd();
             strcpy(sh->hora, hora);
             printf("\n\t\t    >>> Horário editado com sucesso. <<<");
             limpa_buffer();
             break;
         case '4':
-            char* quant = get_quant_cad_upd("ingressos");
+            quant = get_quant_cad_upd("ingressos");
             strcpy(sh->quant, quant);
             int new_quant = atoi(sh->quant);
             int restante = atoi(sh->quant_rest);
@@ -259,7 +264,7 @@ void qual_campo_show(Show *sh)
                 break;
             }
         case '5':
-            char* valor = get_valor_upd("do ingresso (com casa decimal)");
+            valor = get_valor_upd("do ingresso (com casa decimal)");
             strcpy(sh->valor, valor);
             printf("\n\t\t    >>> Valor do ingresso editado com sucesso. <<<");
             limpa_buffer();

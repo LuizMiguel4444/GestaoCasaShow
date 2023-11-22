@@ -223,21 +223,24 @@ void qual_campo_cli(Client *cli)
             limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
         }
     } while (!ehDigitoMax(resp[0], '3')  || !val_entrada(resp));
+    char* nome;
+    char* email;
+    char* num;
     switch (resp[0]) {
         case '1':
-            char* nome = get_nome_upd("do cliente");
+            nome = get_nome_upd("do cliente");
             strcpy(cli->nome, nome);
             printf("\n\t\t    >>> Nome do cliente editado com sucesso. <<<");
             limpa_buffer();
             break;
         case '2':
-            char* email = get_email_upd("de contato");
+            email = get_email_upd("de contato");
             strcpy(cli->email, email);
             printf("\n\t\t    >>> Email do cliente editado com sucesso. <<<");
             limpa_buffer();
             break;
         case '3':
-            char* num = get_num_upd("de contato");
+            num = get_num_upd("de contato");
             strcpy(cli->num, num);
             printf("\n\t\t    >>> Número do cliente editado com sucesso. <<<");
             limpa_buffer();

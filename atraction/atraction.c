@@ -216,27 +216,31 @@ void qual_campo_atr(Atraction *atr)
             limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
         }
     } while (!ehDigitoMax(resp[0], '4')  || !val_entrada(resp));
+    char* nome;
+    char* cache;
+    char* email;
+    char* num;
     switch (resp[0]) {
         case '1':
-            char* nome = get_nome_upd("da atração");
+            nome = get_nome_upd("da atração");
             strcpy(atr->nome, nome);
             printf("\n\t\t    >>> Nome da atração editado com sucesso. <<<");
             limpa_buffer();
             break;
         case '2':
-            char* cache = get_cache_upd("da atração");
+            cache = get_cache_upd("da atração");
             strcpy(atr->cache, cache);
             printf("\n\t\t    >>> Cachê da atração editado com sucesso. <<<");
             limpa_buffer();
             break;
         case '3':
-            char* email = get_email_upd("de contato");
+            email = get_email_upd("de contato");
             strcpy(atr->email, email);
             printf("\n\t\t    >>> Email da atração editado com sucesso. <<<");
             limpa_buffer();
             break;
         case '4':
-            char* num = get_num_upd("de contato");
+            num = get_num_upd("de contato");
             strcpy(atr->num, num);
             printf("\n\t\t    >>> Número da atração editado com sucesso. <<<");
             limpa_buffer();
