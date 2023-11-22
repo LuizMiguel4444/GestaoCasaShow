@@ -42,9 +42,15 @@ cd GestaoCasaShow
 ```
 Após isso, digite o comando 'make' na linha de comando do Shell.
 
+- Ignore os Warnings que surgirão, o compilador do replit é diferente, por isso eles ocorrem, mesmo assim, o programa rodará normalmente.
+
 - É recomendável maximizar/expandir a tela do Shell para que haja uma melhor expeciência ao utilizar o programa.
 
-## Windows (não recomendável, pois ocorrem erros de otimização e layout):
+## Windows (SUGIRO USAR O REPLIT):
+
+- Mas caso insista...
+
+- Ignore os Warnings que surgirão, utilizei uma função não compatível com o Windows, mesmo assim, o programa rodará, mesmo que não perfeitamente.
 
 - Para compilar e rodar o programa, abra o terminal, vá até a pasta do programa e digite os seguintes comandos em sequência:
 
