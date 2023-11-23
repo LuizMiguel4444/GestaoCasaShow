@@ -124,7 +124,6 @@ void get_data_hour_cli(Client *cli)
     snprintf(ano, sizeof(ano), "%d", year);
     strcat(dia, mes);
     strcat(dia, ano);
-    corrige_data(dia);
     strcpy(cli->date, dia);
     cli->hour = timeInfo->tm_hour;
     cli->minute = timeInfo->tm_min;
@@ -497,6 +496,8 @@ void print_dados_client(Client* cli)
     if (cli == NULL) {
         screen_null_id_error("CPF do cliente");
     } else {
+        char* new_date;
+        new_date = corrige_data(cli->date);
         system("clear || cls");
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
@@ -506,7 +507,7 @@ void print_dados_client(Client* cli)
         printf("###                                                                         ###\n");
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
-        printf("###              Cadastro realizado em %s às %02d:%02d.                 ###\n", cli->date, cli->hour, cli->minute);
+        printf("###              Cadastro realizado em %s às %02d:%02d.                 ###\n", new_date, cli->hour, cli->minute);
         printf("###                                                                         ###\n");
         printf("###              Informações do CPF digitado:                               ###\n");
         printf("###                                                                         ###\n");

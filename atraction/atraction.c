@@ -116,7 +116,6 @@ void get_data_hour_atr(Atraction *atr)
     snprintf(ano, sizeof(ano), "%d", year);
     strcat(dia, mes);
     strcat(dia, ano);
-    corrige_data(dia);
     strcpy(atr->date, dia);
     atr->hour = timeInfo->tm_hour;
     atr->minute = timeInfo->tm_min;
@@ -491,6 +490,8 @@ void print_dados_atraction(Atraction *atr)
         screen_null_id_error("Id da atração");
     }
     else {
+        char* new_date;
+        new_date = corrige_data(atr->date);
         system("clear || cls");
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
@@ -500,7 +501,7 @@ void print_dados_atraction(Atraction *atr)
         printf("###                                                                         ###\n");
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
-        printf("###              Cadastro realizado em %s às %02d:%02d.                 ###\n", atr->date, atr->hour, atr->minute);
+        printf("###              Cadastro realizado em %s às %02d:%02d.                 ###\n", new_date, atr->hour, atr->minute);
         printf("###                                                                         ###\n");
         printf("###              Informações do Id digitado: %s###\n", centralizar_texto(atr->id, 31, -1));
         printf("###                                                                         ###\n");

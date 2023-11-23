@@ -164,7 +164,6 @@ void get_data_hour_buy(Buy *b)
     snprintf(ano, sizeof(ano), "%d", year);
     strcat(dia, mes);
     strcat(dia, ano);
-    corrige_data(dia);
     strcpy(b->date, dia);
     b->hour = timeInfo->tm_hour;
     b->minute = timeInfo->tm_min;
@@ -466,6 +465,8 @@ void print_dados_buy(Buy* b)
         screen_null_id_error("Id da venda");
     }
     else {
+        char* new_date;
+        new_date = corrige_data(b->date);
         system("clear || cls");
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
@@ -475,7 +476,7 @@ void print_dados_buy(Buy* b)
         printf("###                                                                         ###\n");
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
-        printf("###              Cadastro realizado em %s às %02d:%02d.                 ###\n", b->date, b->hour, b->minute);
+        printf("###              Cadastro realizado em %s às %02d:%02d.                 ###\n", new_date, b->hour, b->minute);
         printf("###                                                                         ###\n");
         printf("###              Informações do Id digitado: %s###\n", centralizar_texto(b->id_ven, 31, -1));
         printf("###                                                                         ###\n");

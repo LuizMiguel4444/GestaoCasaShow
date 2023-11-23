@@ -118,7 +118,6 @@ void get_data_hour_sh(Show *sh)
     snprintf(ano, sizeof(ano), "%d", year);
     strcat(dia, mes);
     strcat(dia, ano);
-    corrige_data(dia);
     strcpy(sh->date, dia);
     sh->hour = timeInfo->tm_hour;
     sh->minute = timeInfo->tm_min;
@@ -545,6 +544,8 @@ void print_dados_show(Show* sh)
     if (sh == NULL) {
         screen_null_id_error("Id do show");
     } else {
+        char* new_date;
+        new_date = corrige_data(sh->date);
         system("clear || cls");
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
@@ -554,7 +555,7 @@ void print_dados_show(Show* sh)
         printf("###                                                                         ###\n");
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
-        printf("###              Cadastro realizado em %s às %02d:%02d.                 ###\n", sh->date, sh->hour, sh->minute);
+        printf("###              Cadastro realizado em %s às %02d:%02d.                 ###\n", new_date, sh->hour, sh->minute);
         printf("###                                                                         ###\n");
         printf("###              Informações do Id digitado: %s###\n", centralizar_texto(sh->id, 31, -1));
         printf("###                                                                         ###\n");
