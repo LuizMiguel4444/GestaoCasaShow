@@ -8,6 +8,8 @@ void modulo_report_buy(void);
 void modulo_report_cli(void);
 void modulo_report_show(void);
 char* contador_quantidade(char, int, int, int);
+char* get_data_in(void);
+char* get_data_fin(void);
 
 
 

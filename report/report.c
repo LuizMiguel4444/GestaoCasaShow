@@ -89,18 +89,33 @@ void report_atraction(char escolha)
         printf("Não é possível continuar este programa...\n");
         exit(1);
     }
-    screen_report_atr();
     int quant_atr_total = 0;
     int quant_atr_at = 0;
     int quant_atr_inat = 0;
-    while(fread(atr, sizeof(Atraction), 1, fp)) {
-        print_if_in_filter_atr(atr, escolha);
-        quant_atr_total += 1;
-        if (atr->status == 'c') {
-            quant_atr_at += 1;
+    if (escolha == '1' || escolha == '2' || escolha == '3') {
+        screen_report_atr();
+        while(fread(atr, sizeof(Atraction), 1, fp)) {
+            print_if_in_filter_atr(atr, escolha);
+            quant_atr_total += 1;
+            if (atr->status == 'c') {
+                quant_atr_at += 1;
+            }
+            else if (atr->status == 'x') {
+                quant_atr_inat += 1;
+            }
         }
-        else if (atr->status == 'x') {
-            quant_atr_inat += 1;
+    }
+    else if (escolha == '4') {
+        char* data_in = get_data_in();
+        char* data_fin = get_data_fin();
+        system("clear || cls");
+        screen_report_atr();
+        while(fread(atr, sizeof(Atraction), 1, fp)) {
+        int esta_dentro = compara_datas(atr->date, data_in, data_fin);
+            if (esta_dentro == 1) {
+                print_if_in_filter_atr(atr, escolha);
+                quant_atr_total += 1;
+            }
         }
     }
     char* quant_str = contador_quantidade(escolha, quant_atr_total, quant_atr_at, quant_atr_inat);
@@ -167,7 +182,8 @@ void report_client(char escolha)
             quant_cli_inat += 1;
         }
     }
-    char* quant_str = contador_quantidade(escolha, quant_cli_total, quant_cli_at, quant_cli_inat);
+    char* quant_str
+ = contador_quantidade(escolha, quant_cli_total, quant_cli_at, quant_cli_inat);
     screen_quant_total_cli(quant_str);
     fclose(fp);
     free(cli);

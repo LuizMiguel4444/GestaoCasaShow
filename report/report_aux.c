@@ -21,11 +21,11 @@ char report_menu_fil(void)
         report_menu_screen_fil();
         scanf("%s", resp);
         limpa_buffer();
-        if (!ehDigitoMax(resp[0], '3')  || !val_entrada(resp)) {
+        if (!ehDigitoMax(resp[0], '5')  || !val_entrada(resp)) {
             screen_error_input();
             limpa_linha();
         }
-    } while (!ehDigitoMax(resp[0], '3') || !val_entrada(resp));
+    } while (!ehDigitoMax(resp[0], '5') || !val_entrada(resp));
     return resp[0];
 }
 
@@ -36,11 +36,11 @@ char report_menu_fil_buy(void)
         report_menu_screen_fil_buy();
         scanf("%s", resp);
         limpa_buffer();
-        if (!ehDigitoMax(resp[0], '1')  || !val_entrada(resp)) {
+        if (!ehDigitoMax(resp[0], '3')  || !val_entrada(resp)) {
             screen_error_input();
             limpa_linha();
         }
-    } while (!ehDigitoMax(resp[0], '1') || !val_entrada(resp));
+    } while (!ehDigitoMax(resp[0], '3') || !val_entrada(resp));
     return resp[0];
 }
 
@@ -62,6 +62,8 @@ void report_menu_screen_fil(void)
     printf("###                              1. Listar Todos                            ###\n");
     printf("###                          2. Listar apenas Ativos                        ###\n");
     printf("###                         3. Listar apenas Inativos                       ###\n");
+    printf("###                           4. Buscar entre Datas                         ###\n");
+    printf("###                             5. Buscar por Nome                          ###\n");
     printf("###                         0. Voltar ao menu anterior                      ###\n");
     printf("###                                                                         ###\n");
     printf("###                        Escolha a opção que deseja: ");
@@ -82,7 +84,9 @@ void report_menu_screen_fil_buy(void)
     printf("###              = = = = = = = = =  Relatório  = = = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
-    printf("###                              1. Listar Todos                            ###\n");
+    printf("###                             1. Listar Todos                             ###\n");
+    printf("###                           2. Buscar entre Datas                         ###\n");
+    printf("###                            3. Buscar por Nome                           ###\n");
     printf("###                         0. Voltar ao menu anterior                      ###\n");
     printf("###                                                                         ###\n");
     printf("###                        Escolha a opção que deseja: ");
@@ -106,6 +110,12 @@ void modulo_report_atr(void)
             case '3':
                 report_atraction(resp);
                 break;
+            case '4':
+                report_atraction(resp);
+                break;
+            case '5':
+                report_atraction(resp);
+                break;
             case '0':
                 system("cls || clear");
                 break;
@@ -123,6 +133,12 @@ void modulo_report_buy(void)
         switch (resp)
         {
             case '1':
+                report_buy(resp);
+                break;
+            case '2':
+                report_buy(resp);
+                break;
+            case '3':
                 report_buy(resp);
                 break;
             case '0':
@@ -150,6 +166,12 @@ void modulo_report_cli(void)
             case '3':
                 report_client(resp);
                 break;
+            case '4':
+                report_client(resp);
+                break;
+            case '5':
+                report_client(resp);
+                break;
             case '0':
                 system("cls || clear");
                 break;
@@ -175,6 +197,12 @@ void modulo_report_show(void)
             case '3':
                 report_show(resp);
                 break;
+            case '4':
+                report_show(resp);
+                break;
+            case '5':
+                report_show(resp);
+                break;
             case '0':
                 system("cls || clear");
                 break;
@@ -195,7 +223,43 @@ char* contador_quantidade(char escolha, int quant_total, int quant_at, int quant
     else if (escolha == '3') {
         snprintf(quant_str, 8, "%d", quant_inat);
     }
+    else if (escolha == '4') {
+        snprintf(quant_str, 8, "%d", quant_total);
+    }
+    else if (escolha == '5') {
+        snprintf(quant_str, 8, "%d", quant_total);
+    }
     return quant_str;
+}
+
+char* get_data_in(void)
+{
+    char* data_inicial;
+    do {
+        printf("\n\t\t\tDigite a data inicial (dd/mm/aaaa): ");
+        data_inicial = input();
+        limpa_buffer();
+        if (!valDataBusc(data_inicial)) {
+            screen_error_input();
+            limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
+        }
+    } while (!valDataBusc(data_inicial));
+    return data_inicial;
+}
+
+char* get_data_fin(void)
+{
+    char* data_final;
+    do {
+        printf("\n\t\t\tDigite a data final (dd/mm/aaaa): ");
+        data_final = input();
+        limpa_buffer();
+        if (!valDataBusc(data_final)) {
+            screen_error_input();
+            limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
+        }
+    } while (!valDataBusc(data_final));
+    return data_final;
 }
 
 
@@ -308,6 +372,11 @@ void print_if_in_filter_atr(Atraction* atr, char escolha)
                 print_dados_atraction_rep(atr);
                 printf("### --------------------------------------------------------------------------------------------- ###\n");
             }
+            break;
+        case '4':
+            printf("### --------------------------------------------------------------------------------------------- ###\n");
+            print_dados_atraction_rep(atr);
+            printf("### --------------------------------------------------------------------------------------------- ###\n");
             break;
     }
 }

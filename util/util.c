@@ -228,6 +228,30 @@ int data_validacao(char data[])
 } // MODIFICADO DE: FLAVIUS GORGÔNIO E ANTONIO MANIERO /// GIT: https://github.com/flaviusgorgonio E GIT: https://github.com/maniero
 
 ///////////////////////////////////////////////////////////////////////////////
+/// Retorna 1 se string recebido corresponder a uma data válida 
+/// (contagem de dia, mês, ano) ou retorna 0 caso contrário
+///
+int data_validacao_busc(char data[])
+{
+  int dia, mes, ano;
+  for (int i = 0; i < strlen(data); i++) {
+    if ((data[0] == '/') || (data[1] == '/') || (data[3] == '/') ||
+        (data[4] == '/') || (data[6] == '/') || (data[7] == '/') ||
+        (data[8] == '/') || (data[9] == '/')) {
+      return 0;
+    }
+  }
+  dia = (data[0] - '0') * 10 + (data[1] - '0');
+  mes = (data[2] - '0') * 10 + (data[3] - '0');
+  ano = (data[4] - '0') * 1000 + (data[5] - '0') * 100 + 
+        (data[6] - '0') * 10 + (data[7] - '0');
+  if (!ehData(dia, mes, ano)) {
+    return 0;
+  }
+  return 1;  
+}
+
+///////////////////////////////////////////////////////////////////////////////
 /// Recebe uma data com barras (dd/mm/aaaa) e retorna essa data
 /// sem barras (ddmmaaaa)
 ///
@@ -267,6 +291,41 @@ int valData(char *data)
       }
     }
     check = data_validacao(data);
+  }
+  else if (strlen(data) != 8 && strlen(data) != 10) {
+    return 0;
+  }
+  if (check != 1) {
+    return 0;
+  } else {
+    return 1;
+  }
+}  // MODIFICADO DE: FLAVIUS GORGÔNIO E ANTONIO MANIERO /// GIT: https://github.com/flaviusgorgonio E GIT: https://github.com/maniero
+
+///////////////////////////////////////////////////////////////////////////////
+/// Retorna 1 se string recebido corresponder a uma data válida (apenas dígitos
+/// e no formato: ddmmaaaa) ou retorna 0 caso contrário
+///
+int valDataBusc(char *data)
+{
+  int check;
+  char* new_data;
+  if (strlen(data) == 10) {
+    for (int i = 0; i < strlen(data); i++) {
+      if (!ehHora(data[i]) || (data[2] != '/') || (data[5] != '/')) {
+        return 0;
+      } 
+    }
+    new_data = corrige_data(data);
+    check = data_validacao_busc(new_data);
+  }
+  else if (strlen(data) == 8) {
+    for (int i = 0; i < strlen(data); i++) {
+      if (!ehDigito(data[i]) || (data[i] == '/')) {
+        return 0;
+      }
+    }
+    check = data_validacao_busc(data);
   }
   else if (strlen(data) != 8 && strlen(data) != 10) {
     return 0;
