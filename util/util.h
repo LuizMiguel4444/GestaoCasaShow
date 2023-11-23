@@ -13,6 +13,7 @@ int ehData(int dd, int mm, int aa);
 int data_validacao(char data[]);
 char* corrige_data(char *data);
 int valData(char *data);
+int compara_datas(char *data, char *data_inicial, char *data_final);
 int val_id(char *id);
 int val_email(char *email);
 int validarFone(char *fone);

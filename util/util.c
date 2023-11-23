@@ -202,9 +202,9 @@ int data_validacao(char data[])
     }
   }
   dia = (data[0] - '0') * 10 + (data[1] - '0');
-  mes = (data[3] - '0') * 10 + (data[4] - '0');
-  ano = (data[6] - '0') * 1000 + (data[7] - '0') * 100 + 
-        (data[8] - '0') * 10 + (data[9] - '0');
+  mes = (data[2] - '0') * 10 + (data[3] - '0');
+  ano = (data[4] - '0') * 1000 + (data[5] - '0') * 100 + 
+        (data[6] - '0') * 10 + (data[7] - '0');
   if (!ehData(dia, mes, ano)) {
     return 0;
   }
@@ -228,21 +228,18 @@ int data_validacao(char data[])
 } // MODIFICADO DE: FLAVIUS GORGÔNIO E ANTONIO MANIERO /// GIT: https://github.com/flaviusgorgonio E GIT: https://github.com/maniero
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Recebe uma data sem barras (ddmmaaaa) e retorna essa data
-/// com barras (dd/mm/aaaa)
+/// Recebe uma data com barras (dd/mm/aaaa) e retorna essa data
+/// sem barras (ddmmaaaa)
 ///
 char* corrige_data(char *data)
 {
-  data[8] = data[7];
-  data[9] = data[8];
-  data[8] = data[6];
-  data[7] = data[5];
-  data[6] = data[4];
-  data[4] = data[3];
-  data[3] = data[2];
-  data[2] = '/';
-  data[5] = '/';
-  data[10] = '\0';
+  data[2] = data[3];
+  data[3] = data[4];
+  data[4] = data[6];
+  data[5] = data[7];
+  data[6] = data[8];
+  data[7] = data[9];
+  data[8] = '\0';
   return data;
 } // AUTOR: LUIZ MIGUEL /// GIT: https://github.com/LuizMiguel4444
 
@@ -260,7 +257,8 @@ int valData(char *data)
         return 0;
       } 
     }
-    check = data_validacao(data);
+    new_data = corrige_data(data);
+    check = data_validacao(new_data);
   }
   else if (strlen(data) == 8) {
     for (int i = 0; i < strlen(data); i++) {
@@ -268,8 +266,7 @@ int valData(char *data)
         return 0;
       }
     }
-    new_data = corrige_data(data);
-    check = data_validacao(new_data);
+    check = data_validacao(data);
   }
   else if (strlen(data) != 8 && strlen(data) != 10) {
     return 0;
@@ -280,6 +277,30 @@ int valData(char *data)
     return 1;
   }
 }  // MODIFICADO DE: FLAVIUS GORGÔNIO E ANTONIO MANIERO /// GIT: https://github.com/flaviusgorgonio E GIT: https://github.com/maniero
+
+///////////////////////////////////////////////////////////////////////////////
+/// Retorna 1 se a data recebida estiver entre o período das outras 
+/// datas passadas como parâmetro ou retorna 0 caso contrário
+///
+int compara_datas(char *data, char *data_inicial, char *data_final)
+{
+  int dia, mes, ano;
+  sscanf(data, "%2d %2d %4d", &dia, &mes, &ano);
+
+  int dia_inicial, mes_inicial, ano_inicial;
+  sscanf(data_inicial, "%2d %2d %4d", &dia_inicial, &mes_inicial, &ano_inicial);
+
+  int dia_final, mes_final, ano_final;
+  sscanf(data_final, "%2d %2d %4d", &dia_final, &mes_final, &ano_final);
+
+  if (ano < ano_inicial || (ano == ano_inicial && (mes < mes_inicial || (mes == mes_inicial && dia < dia_inicial)))) {
+    return 0;
+  } else if (ano > ano_final || (ano == ano_final && (mes > mes_final || (mes == mes_final && dia > dia_final)))) {
+    return 0;
+  } else {
+    return 1;
+  }
+} // AUTOR: LUIZ MIGUEL /// GIT: https://github.com/LuizMiguel4444
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Retorna 1 se string (com tamanhos específicos) recebido corresponder  
