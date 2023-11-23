@@ -153,9 +153,19 @@ void get_data_hour_buy(Buy *b)
     time(&currentTime);
     struct tm *timeInfo;
     timeInfo = localtime(&currentTime);
-    b->day = timeInfo->tm_mday;
-    b->month = timeInfo->tm_mon + 1;
-    b->year = timeInfo->tm_year + 1900;
+    int day = timeInfo->tm_mday;
+    int month = timeInfo->tm_mon + 1;
+    int year = timeInfo->tm_year + 1900;
+    char dia[4];
+    char mes[4];
+    char ano[6];
+    snprintf(dia, sizeof(dia), "%d", day);
+    snprintf(mes, sizeof(mes), "%d", month);
+    snprintf(ano, sizeof(ano), "%d", year);
+    strcat(dia, mes);
+    strcat(dia, ano);
+    corrige_data(dia);
+    strcpy(b->date, dia);
     b->hour = timeInfo->tm_hour;
     b->minute = timeInfo->tm_min;
 }
@@ -465,7 +475,7 @@ void print_dados_buy(Buy* b)
         printf("###                                                                         ###\n");
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
-        printf("###              Cadastro realizado em %02d/%02d/%d às %02d:%02d.                 ###\n", b->day, b->month, b->year, b->hour, b->minute);
+        printf("###              Cadastro realizado em %s às %02d:%02d.                 ###\n", b->date, b->hour, b->minute);
         printf("###                                                                         ###\n");
         printf("###              Informações do Id digitado: %s###\n", centralizar_texto(b->id_ven, 31, -1));
         printf("###                                                                         ###\n");

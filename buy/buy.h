@@ -9,9 +9,7 @@ struct buy
     char valor[10];
     char id_ven[5];
     char status;
-    int day;
-    int month;
-    int year;
+    char date[12];
     int hour;
     int minute;
 };

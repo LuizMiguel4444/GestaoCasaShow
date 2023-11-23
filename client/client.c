@@ -113,9 +113,19 @@ void get_data_hour_cli(Client *cli)
     time(&currentTime);
     struct tm *timeInfo;
     timeInfo = localtime(&currentTime);
-    cli->day = timeInfo->tm_mday;
-    cli->month = timeInfo->tm_mon + 1;
-    cli->year = timeInfo->tm_year + 1900;
+    int day = timeInfo->tm_mday;
+    int month = timeInfo->tm_mon + 1;
+    int year = timeInfo->tm_year + 1900;
+    char dia[4];
+    char mes[4];
+    char ano[6];
+    snprintf(dia, sizeof(dia), "%d", day);
+    snprintf(mes, sizeof(mes), "%d", month);
+    snprintf(ano, sizeof(ano), "%d", year);
+    strcat(dia, mes);
+    strcat(dia, ano);
+    corrige_data(dia);
+    strcpy(cli->date, dia);
     cli->hour = timeInfo->tm_hour;
     cli->minute = timeInfo->tm_min;
 }
@@ -496,7 +506,7 @@ void print_dados_client(Client* cli)
         printf("###                                                                         ###\n");
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
-        printf("###              Cadastro realizado em %02d/%02d/%d às %02d:%02d.                 ###\n", cli->day, cli->month, cli->year, cli->hour, cli->minute);
+        printf("###              Cadastro realizado em %s às %02d:%02d.                 ###\n", cli->date, cli->hour, cli->minute);
         printf("###                                                                         ###\n");
         printf("###              Informações do CPF digitado:                               ###\n");
         printf("###                                                                         ###\n");

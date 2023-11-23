@@ -9,9 +9,7 @@ struct atraction
     char num[12];
     char id[5];
     char status;
-    int day;
-    int month;
-    int year;
+    char date[12];
     int hour;
     int minute;
 };

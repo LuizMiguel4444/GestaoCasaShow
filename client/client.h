@@ -8,9 +8,7 @@ struct client
     char email[56];
     char num[12];
     char status;
-    int day;
-    int month;
-    int year;
+    char date[12];
     int hour;
     int minute;
 };

@@ -105,9 +105,19 @@ void get_data_hour_atr(Atraction *atr)
     time(&currentTime);
     struct tm *timeInfo;
     timeInfo = localtime(&currentTime);
-    atr->day = timeInfo->tm_mday;
-    atr->month = timeInfo->tm_mon + 1;
-    atr->year = timeInfo->tm_year + 1900;
+    int day = timeInfo->tm_mday;
+    int month = timeInfo->tm_mon + 1;
+    int year = timeInfo->tm_year + 1900;
+    char dia[4];
+    char mes[4];
+    char ano[6];
+    snprintf(dia, sizeof(dia), "%d", day);
+    snprintf(mes, sizeof(mes), "%d", month);
+    snprintf(ano, sizeof(ano), "%d", year);
+    strcat(dia, mes);
+    strcat(dia, ano);
+    corrige_data(dia);
+    strcpy(atr->date, dia);
     atr->hour = timeInfo->tm_hour;
     atr->minute = timeInfo->tm_min;
 }
@@ -490,7 +500,7 @@ void print_dados_atraction(Atraction *atr)
         printf("###                                                                         ###\n");
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
-        printf("###              Cadastro realizado em %02d/%02d/%d às %02d:%02d.                 ###\n", atr->day, atr->month, atr->year, atr->hour, atr->minute);
+        printf("###              Cadastro realizado em %s às %02d:%02d.                 ###\n", atr->date, atr->hour, atr->minute);
         printf("###                                                                         ###\n");
         printf("###              Informações do Id digitado: %s###\n", centralizar_texto(atr->id, 31, -1));
         printf("###                                                                         ###\n");
