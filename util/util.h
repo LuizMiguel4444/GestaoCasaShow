@@ -4,7 +4,6 @@ void converte_para_minusculo(char* str);
 int val_entrada(char *entrada);
 int ehDigito(char c);
 int ehDigitoMax(char c, char max);
-int ehDigitoDinheiro(char c);
 int ehdinheiro(char *c);
 int ehLetra(char c);
 int ehLetraeEspacoeAcento(char c);

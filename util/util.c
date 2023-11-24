@@ -74,34 +74,34 @@ int ehDigitoMax(char c, char max)
 } // AUTOR: LUIZ MIGUEL /// GIT: https://github.com/LuizMiguel4444
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Retorna 1 se o caractere recebido for um dígito monetário
-/// (entre 0 e 9 ou um '.') ou retorna 0 caso contrário
+/// Retorna 1 se string recebido corresponder a apenas digitos
+/// monetários e '.' ou retorna 0 caso contrário
 ///
-int ehDigitoDinheiro(char c)
+int ehdinheiro(char* c)
 {
-  if ((c >= '0' && c <= '9') || (c == '.')) {
+  if (strlen(c) == 0) {
+    return 0;
+  }
+
+  int pontos = 0;
+  for (int i = 0; i < strlen(c); i++) {
+    if (c[i] == '.') {
+      pontos++;
+    }
+    else if (c[0] == '0') {
+      return 0;
+    }
+    else if (!ehDigito(c[i])) {
+      return 0;
+    }
+  }
+
+  int local_ponto = strlen(c) - 3;
+  if (pontos == 1 && c[local_ponto] == '.') {
     return 1;
   } else {
     return 0;
   }
-} // AUTOR: LUIZ MIGUEL /// GIT: https://github.com/LuizMiguel4444
-
-///////////////////////////////////////////////////////////////////////////////
-/// Retorna 1 se string recebido corresponder a apenas digitos
-/// monetários e '.' ou retorna 0 caso contrário
-///
-int ehdinheiro(char *c)
-{
-  int ponto = strlen(c) - 3;
-  for (int i = 0; c[i] != '\0'; i++) {
-    if (!ehDigitoDinheiro(c[i]) || strlen(c) < 5 || c[0] == '0') {
-      return 0;
-    }
-    else if (c[ponto] != '.') {
-      return 0;
-    }
-  }
-	return 1;
 } // AUTOR: LUIZ MIGUEL /// GIT: https://github.com/LuizMiguel4444
 
 ///////////////////////////////////////////////////////////////////////////////
