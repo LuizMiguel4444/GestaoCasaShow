@@ -86,16 +86,15 @@ Buy *cred_buy(void)
 void buy_inputs(Buy* b)
 {
     Show *sh;
-    sh = (Show*)malloc(sizeof(Show));
     char* id_show;
     do {
         id_show = get_id("o show", 47);
         strcpy(b->id_show, id_show);
-        if (procura_id_show(b->id_show)) {
+        if (procura_show(b->id_show) == NULL) {
             screen_error_input_n_exist("Id");
             limpa_linha(); limpa_linha(); limpa_linha();
         }
-    } while (procura_id_show(b->id_show));
+    } while (procura_show(b->id_show) == NULL);
     sh = procura_show(b->id_show);
     char* cpf;
     do {
@@ -466,7 +465,7 @@ void print_dados_buy(Buy* b)
     }
     else {
         char* new_date;
-        new_date = corrige_data(b->date);
+        new_date = corrige_data_add_barras(b->date);
         system("clear || cls");
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
@@ -522,15 +521,17 @@ void print_dados_buy_rep(Buy* b)
 {
     Show* sh;
     sh = procura_show(b -> id_show);
+    Client* cli;
+    cli = procura_client(b -> cpf_cli);
     if (b == NULL) {
         printf("Erro na abertura do arquivo!\n");
         printf("Não é possível continuar este programa...\n");
         exit(1);
     } else {
-        printf("### |%s", centralizar_texto(sh -> atraction, 35, 0));
-        printf("|%s", centralizar_texto(b -> cpf_cli, 17, 0));
-        printf("|%s", centralizar_texto(b -> valor, 19, 0));
-        printf("| %s| ###\n", centralizar_texto(b -> id_ven, 9, 0));
+        printf("### |%s", centralizar_texto(sh -> atraction, 31, 0));
+        printf("|%s", centralizar_texto(cli -> nome, 30, 0));
+        printf("|%s", centralizar_texto(b -> valor, 13, 0));
+        printf("|%s| ###\n", centralizar_texto(b -> id_ven, 7, 0));
     }
     free(sh);
 }

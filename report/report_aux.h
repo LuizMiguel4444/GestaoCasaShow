@@ -10,6 +10,15 @@ void modulo_report_show(void);
 char* contador_quantidade(char, int, int, int);
 char* get_data_in(void);
 char* get_data_fin(void);
+char* get_nome_busc(void);
+int aux_report_4_atr(Atraction*, FILE*, char);
+int aux_report_4_buy(Buy*, FILE*, char, float*);
+int aux_report_4_cli(Client*, FILE*, char);
+int aux_report_4_show(Show*, FILE*, char);
+int aux_report_5_atr(Atraction*, FILE*, char);
+int aux_report_5_buy(Buy*, FILE*, char, float*);
+int aux_report_5_cli(Client*, FILE*, char);
+int aux_report_5_show(Show*, FILE*, char);
 
 
 

@@ -359,23 +359,6 @@ Show *procura_show(char *id)
     return NULL;
 }
 
-int procura_id_show(char *id)
-{
-    FILE *fp;
-    Show *sh;
-
-    sh = (Show *)malloc(sizeof(Show));
-    fp = fopen("show/shows.dat", "rb");
-    while (fread(sh, sizeof(Show), 1, fp)) {
-        if ((strcmp(sh->id, id) == 0) && (sh->status == 'c')) {
-            fclose(fp);
-            return 0;
-        }
-    }
-    fclose(fp);
-    return 1;
-}
-
 char* retorna_valor_show(char *id)
 {
     FILE *fp;
@@ -545,7 +528,7 @@ void print_dados_show(Show* sh)
         screen_null_id_error("Id do show");
     } else {
         char* new_date;
-        new_date = corrige_data(sh->date);
+        new_date = corrige_data_add_barras(sh->date);
         system("clear || cls");
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");

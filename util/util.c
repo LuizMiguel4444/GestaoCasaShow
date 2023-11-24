@@ -26,6 +26,16 @@ void limpa_linha(void)
 } // AUTOR: LUIZ MIGUEL COM AJUDA DO CHAT-GPT /// GIT: https://github.com/LuizMiguel4444
 
 ///////////////////////////////////////////////////////////////////////////////
+/// Função que recebe uma string e altera a caixa dela para minúscula
+///
+void converte_para_minusculo(char* str)
+{
+    for (int i = 0; str[i] != '\0'; ++i) {
+        str[i] = tolower(str[i]);
+    }
+} // AUTOR: LUIZ MIGUEL COM AJUDA DO CHAT-GPT /// GIT: https://github.com/LuizMiguel4444
+
+///////////////////////////////////////////////////////////////////////////////
 /// Função que retorna 1 caso a entrada tiver mais de 1 caractere
 /// e retorna 0 caso contrário
 ///
@@ -264,6 +274,25 @@ char* corrige_data(char *data)
   data[6] = data[8];
   data[7] = data[9];
   data[8] = '\0';
+  return data;
+} // AUTOR: LUIZ MIGUEL /// GIT: https://github.com/LuizMiguel4444
+
+///////////////////////////////////////////////////////////////////////////////
+/// Recebe uma data sem barras (ddmmaaaa) e retorna essa data
+/// com barras (dd/mm/aaaa)
+///
+char* corrige_data_add_barras(char *data)
+{
+  data[8] = data[7];
+  data[9] = data[8];
+  data[8] = data[6];
+  data[7] = data[5];
+  data[6] = data[4];
+  data[4] = data[3];
+  data[3] = data[2];
+  data[2] = '/';
+  data[5] = '/';
+  data[10] = '\0';
   return data;
 } // AUTOR: LUIZ MIGUEL /// GIT: https://github.com/LuizMiguel4444
 

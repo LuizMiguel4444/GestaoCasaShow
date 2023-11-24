@@ -89,7 +89,7 @@ void client_inputs(Client* cli)
     do {
         char* cpf = get_cpf();
         strcpy(cli->cpf, cpf);
-        if (!procura_cpf_client(cli->cpf)) {
+        if (procura_client(cli->cpf) != NULL) {
             if (strcmp(cli->cpf, "000") == 0) {
                 screen_error_input_id("CPF");
                 limpa_linha(); limpa_linha(); limpa_linha();
@@ -98,7 +98,7 @@ void client_inputs(Client* cli)
                 limpa_linha(); limpa_linha(); limpa_linha();
             }
         }
-    } while (!procura_cpf_client(cli->cpf));
+    } while (procura_client(cli->cpf) != NULL);
     char* email = get_email("o cliente");
     strcpy(cli->email, email);
     char* num = get_num("o cliente", 40);
@@ -334,23 +334,6 @@ Client *procura_client(char *cpf)
     return NULL;
 }
 
-int procura_cpf_client(char *cpf)
-{
-    FILE *fp;
-    Client *cli;
-
-    cli = (Client *)malloc(sizeof(Client));
-    fp = fopen("client/clients.dat", "rb");
-    while (fread(cli, sizeof(Client), 1, fp)) {
-        if ((strcmp(cli->cpf, cpf) == 0) && cli->status == 'c') {
-            fclose(fp);
-            return 0;
-        }
-    }
-    fclose(fp);
-    return 1;
-}
-
 int procura_cpf_client_fantasm(char *cpf)
 {
     FILE *fp;
@@ -381,7 +364,12 @@ void regravar_cli(Client *cli)
     }
     while(!feof(fp)) {
         fread(cliLido, sizeof(Client), 1, fp);
-        if (strcmp(cliLido->cpf, cli->cpf) == 0) {
+        if ((strcmp(cliLido->cpf, cli->cpf) == 0) && (strcmp(cliLido->cpf, "000") == 0)) {
+            achou = 1;
+            screen_upd_cli_block();
+            break;
+        }
+        else if (strcmp(cliLido->cpf, cli->cpf) == 0 && (cliLido->status != 'x')) {
             achou = 1;
             qual_campo_cli(cli);
             fseek(fp, -1 * sizeof(Client), SEEK_CUR);
@@ -414,6 +402,7 @@ void remove_cli(Client *cli)
         if ((strcmp(cliArq->cpf, cli->cpf) == 0) && (strcmp(cliArq->cpf, "000") == 0)) {
             achou = 1;
             screen_del_cli_block();
+            break;
         }
         else if ((strcmp(cliArq->cpf, cli->cpf) == 0) && (cliArq->status != 'x')) {
             achou = 1;
@@ -497,7 +486,7 @@ void print_dados_client(Client* cli)
         screen_null_id_error("CPF do cliente");
     } else {
         char* new_date;
-        new_date = corrige_data(cli->date);
+        new_date = corrige_data_add_barras(cli->date);
         system("clear || cls");
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
@@ -565,6 +554,19 @@ void screen_del_ok_cli(void)
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
     printf("###                     Cliente excluído com sucesso!!!                     ###\n");
+    printf("###                                                                         ###\n");
+    printf("###############################################################################\n");
+    printf("\n");
+    printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
+    limpa_buffer();
+}
+
+void screen_upd_cli_block(void)
+{
+    printf("\n");
+    printf("###############################################################################\n");
+    printf("###                                                                         ###\n");
+    printf("###                  Esse cliente não pode ser editado!!!                   ###\n");
     printf("###                                                                         ###\n");
     printf("###############################################################################\n");
     printf("\n");

@@ -262,6 +262,157 @@ char* get_data_fin(void)
     return data_final;
 }
 
+char* get_nome_busc(void)
+{
+    char *nome;
+    do
+    {
+        printf("\n\t\t\t   Digite o nome: ");
+        nome = input();
+        limpa_buffer();
+        if (!valNome(nome))
+        {
+            screen_error_input_name();
+            limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
+        }
+    } while (!valNome(nome));
+    return nome;
+}
+
+int aux_report_4_atr(Atraction* atr, FILE* fp, char escolha)
+{
+    int quant_atr_total = 0;
+    char* data_in = get_data_in();
+    char* data_fin = get_data_fin();
+    system("clear || cls");
+    screen_report_atr();
+    while(fread(atr, sizeof(Atraction), 1, fp)) {
+    int esta_dentro = compara_datas(atr->date, data_in, data_fin);
+        if (esta_dentro == 1) {
+            print_if_in_filter_atr(atr, escolha);
+            quant_atr_total += 1;
+        }
+    }
+    return quant_atr_total;
+}
+
+int aux_report_4_buy(Buy* b, FILE* fp, char escolha, float* valor_total)
+{
+    int quant_buy_total = 0;
+    char* data_in = get_data_in();
+    char* data_fin = get_data_fin();
+    system("clear || cls");
+    screen_report_buy();
+    while(fread(b, sizeof(Buy), 1, fp)) {
+    int esta_dentro = compara_datas(b->date, data_in, data_fin);
+        if (esta_dentro == 1) {
+            print_if_in_filter_buy(b, escolha);
+            quant_buy_total += 1;
+            float valor_compra = strtof(b->valor, NULL);
+            *valor_total += valor_compra;
+        }
+    }
+    return quant_buy_total;
+}
+
+int aux_report_4_cli(Client* cli, FILE* fp, char escolha)
+{
+    int quant_cli_total = 0;
+    char* data_in = get_data_in();
+    char* data_fin = get_data_fin();
+    system("clear || cls");
+    screen_report_cli();
+    while(fread(cli, sizeof(Client), 1, fp)) {
+    int esta_dentro = compara_datas(cli->date, data_in, data_fin);
+        if (esta_dentro == 1) {
+            print_if_in_filter_cli(cli, escolha);
+            quant_cli_total += 1;
+        }
+    }
+    return quant_cli_total;
+}
+
+int aux_report_4_show(Show* sh, FILE* fp, char escolha)
+{
+    int quant_show_total = 0;
+    char* data_in = get_data_in();
+    char* data_fin = get_data_fin();
+    system("clear || cls");
+    screen_report_show();
+    while(fread(sh, sizeof(Show), 1, fp)) {
+    int esta_dentro = compara_datas(sh->date, data_in, data_fin);
+        if (esta_dentro == 1) {
+            print_if_in_filter_show(sh, escolha);
+            quant_show_total += 1;
+        }
+    }
+    return quant_show_total;
+}
+
+int aux_report_5_atr(Atraction* atr, FILE* fp, char escolha)
+{
+    int quant_atr_total = 0;
+    char* nome = get_nome_busc();
+    system("clear || cls");
+    screen_report_atr();
+    while(fread(atr, sizeof(Atraction), 1, fp)) {
+        if (strstr(atr->nome, nome) != NULL) {
+            print_if_in_filter_atr(atr, escolha);
+            quant_atr_total += 1;
+        }
+    }
+    return quant_atr_total;
+}
+
+int aux_report_5_buy(Buy* b, FILE* fp, char escolha, float* valor_total)
+{
+    Client* cli;
+    int quant_buy_total = 0;
+    char* nome = get_nome_busc();
+    system("clear || cls");
+    screen_report_buy();
+    while(fread(b, sizeof(Buy), 1, fp)) {
+        cli = procura_client(b -> cpf_cli);
+        if (strstr(cli->nome, nome) != NULL) {
+            print_if_in_filter_buy(b, escolha);
+            quant_buy_total += 1;
+            float valor_compra = strtof(b->valor, NULL);
+            *valor_total += valor_compra;
+        }
+    }
+    return quant_buy_total;
+}
+
+int aux_report_5_cli(Client* cli, FILE* fp, char escolha)
+{
+    int quant_cli_total = 0;
+    char* nome = get_nome_busc();
+    system("clear || cls");
+    screen_report_cli();
+    while(fread(cli, sizeof(Client), 1, fp)) {
+        if (strstr(cli->nome, nome) != NULL) {
+            print_if_in_filter_cli(cli, escolha);
+            quant_cli_total += 1;
+        }
+    }
+    return quant_cli_total;
+}
+
+int aux_report_5_show(Show* sh, FILE* fp, char escolha)
+{
+    int quant_show_total = 0;
+    char* nome = get_nome_busc();
+    system("clear || cls");
+    screen_report_show();
+    while(fread(sh, sizeof(Show), 1, fp)) {
+        if (strstr(sh->atraction, nome) != NULL) {
+            print_if_in_filter_show(sh, escolha);
+            quant_show_total += 1;
+        }
+    }
+    return quant_show_total;
+}
+
 
 
 // Screen Functions
@@ -281,7 +432,7 @@ void screen_report_buy(void)
     system("clear || cls");
     printf("##############################################################################################\n");
     printf("###                                                                                        ###\n");
-    printf("###                  SHOW               |       CPF       |       VALOR       |    ID      ###\n");
+    printf("###                SHOW             |             NOME             |    VALOR    |   ID    ###\n");
     printf("###                                                                                        ###\n");
     printf("##############################################################################################\n");
     printf("###                                                                                        ###\n");
@@ -378,6 +529,11 @@ void print_if_in_filter_atr(Atraction* atr, char escolha)
             print_dados_atraction_rep(atr);
             printf("### --------------------------------------------------------------------------------------------- ###\n");
             break;
+        case '5':
+            printf("### --------------------------------------------------------------------------------------------- ###\n");
+            print_dados_atraction_rep(atr);
+            printf("### --------------------------------------------------------------------------------------------- ###\n");
+            break;
     }
 }
 
@@ -390,18 +546,14 @@ void print_if_in_filter_buy(Buy* b, char escolha)
             printf("### -------------------------------------------------------------------------------------- ###\n");
             break;
         case '2':
-            if (b -> status != 'x') {
-                printf("### -------------------------------------------------------------------------------------- ###\n");
-                print_dados_buy_rep(b);
-                printf("### -------------------------------------------------------------------------------------- ###\n");
-            }
+            printf("### -------------------------------------------------------------------------------------- ###\n");
+            print_dados_buy_rep(b);
+            printf("### -------------------------------------------------------------------------------------- ###\n");
             break;
         case '3':
-            if (b -> status == 'x') {
-                printf("### -------------------------------------------------------------------------------------- ###\n");
-                print_dados_buy_rep(b);
-                printf("### -------------------------------------------------------------------------------------- ###\n");
-            }
+            printf("### -------------------------------------------------------------------------------------- ###\n");
+            print_dados_buy_rep(b);
+            printf("### -------------------------------------------------------------------------------------- ###\n");
             break;
     }
 }

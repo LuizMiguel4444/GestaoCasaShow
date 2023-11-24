@@ -84,14 +84,7 @@ void report_atraction(char escolha)
     Atraction *atr;
     atr = (Atraction*) malloc(sizeof(Atraction));
     fp = fopen("atraction/atractions.dat", "rb");
-    if (fp == NULL) {
-        printf("Erro na abertura do arquivo!\n");
-        printf("Não é possível continuar este programa...\n");
-        exit(1);
-    }
-    int quant_atr_total = 0;
-    int quant_atr_at = 0;
-    int quant_atr_inat = 0;
+    int quant_atr_total = 0, quant_atr_at = 0, quant_atr_inat = 0;
     if (escolha == '1' || escolha == '2' || escolha == '3') {
         screen_report_atr();
         while(fread(atr, sizeof(Atraction), 1, fp)) {
@@ -106,17 +99,9 @@ void report_atraction(char escolha)
         }
     }
     else if (escolha == '4') {
-        char* data_in = get_data_in();
-        char* data_fin = get_data_fin();
-        system("clear || cls");
-        screen_report_atr();
-        while(fread(atr, sizeof(Atraction), 1, fp)) {
-        int esta_dentro = compara_datas(atr->date, data_in, data_fin);
-            if (esta_dentro == 1) {
-                print_if_in_filter_atr(atr, escolha);
-                quant_atr_total += 1;
-            }
-        }
+        quant_atr_total = aux_report_4_atr(atr, fp, escolha);
+    } else {
+        quant_atr_total = aux_report_5_atr(atr, fp, escolha);
     }
     char* quant_str = contador_quantidade(escolha, quant_atr_total, quant_atr_at, quant_atr_inat);
     screen_quant_total_atr(quant_str);
@@ -132,19 +117,21 @@ void report_buy(char escolha)
     Buy *b;
     b = (Buy*) malloc(sizeof(Buy));
     fp = fopen("buy/buys.dat", "rb");
-    if (fp == NULL) {
-        printf("Erro na abertura do arquivo!\n");
-        printf("Não é possível continuar este programa...\n");
-        exit(1);
-    }
-    screen_report_buy();
     int quant_vendas = 0;
     float valor_total = 0;
-    while(fread(b, sizeof(Buy), 1, fp)) {
-        print_if_in_filter_buy(b, escolha);
-        quant_vendas += 1;
-        float valor_compra = strtof(b->valor, NULL);
-        valor_total += valor_compra;
+    if (escolha == '1') {
+        screen_report_buy();
+        while(fread(b, sizeof(Buy), 1, fp)) {
+            print_if_in_filter_buy(b, escolha);
+            quant_vendas += 1;
+            float valor_compra = strtof(b->valor, NULL);
+            valor_total += valor_compra;
+        }
+    }
+    else if (escolha == '2') {
+        quant_vendas = aux_report_4_buy(b, fp, escolha, &valor_total);
+    } else {
+        quant_vendas = aux_report_5_buy(b, fp, escolha, &valor_total);
     }
     char quant_str[8];
     snprintf(quant_str, sizeof(quant_str), "%d", quant_vendas);
@@ -163,27 +150,26 @@ void report_client(char escolha)
     Client *cli;
     cli = (Client*) malloc(sizeof(Client));
     fp = fopen("client/clients.dat", "rb");
-    if (fp == NULL) {
-        printf("Erro na abertura do arquivo!\n");
-        printf("Não é possível continuar este programa...\n");
-        exit(1);
-    }
-    screen_report_cli();
-    int quant_cli_total = 0;
-    int quant_cli_at = 0;
-    int quant_cli_inat = 0;
-    while(fread(cli, sizeof(Client), 1, fp)) {
-        print_if_in_filter_cli(cli, escolha);
-        quant_cli_total += 1;
-        if (cli->status == 'c') {
-            quant_cli_at += 1;
-        }
-        else if (cli->status == 'x') {
-            quant_cli_inat += 1;
+    int quant_cli_total = 0, quant_cli_at = 0, quant_cli_inat = 0;
+    if (escolha == '1' || escolha == '2' || escolha == '3') {
+        screen_report_cli();
+        while(fread(cli, sizeof(Client), 1, fp)) {
+            print_if_in_filter_cli(cli, escolha);
+            quant_cli_total += 1;
+            if (cli->status == 'c') {
+                quant_cli_at += 1;
+            }
+            else if (cli->status == 'x') {
+                quant_cli_inat += 1;
+            }
         }
     }
-    char* quant_str
- = contador_quantidade(escolha, quant_cli_total, quant_cli_at, quant_cli_inat);
+    else if (escolha == '4') {
+        quant_cli_total = aux_report_4_cli(cli, fp, escolha);
+    } else {
+        quant_cli_total = aux_report_5_cli(cli, fp, escolha);
+    }
+    char* quant_str = contador_quantidade(escolha, quant_cli_total, quant_cli_at, quant_cli_inat);
     screen_quant_total_cli(quant_str);
     fclose(fp);
     free(cli);
@@ -197,24 +183,24 @@ void report_show(char escolha)
     Show *sh;
     sh = (Show*) malloc(sizeof(Show));
     fp = fopen("show/shows.dat", "rb");
-    if (fp == NULL) {
-        printf("Erro na abertura do arquivo!\n");
-        printf("Não é possível continuar este programa...\n");
-        exit(1);
+    int quant_show_total = 0, quant_show_at = 0, quant_show_inat = 0;
+    if (escolha == '1' || escolha == '2' || escolha == '3') {
+        screen_report_show();
+        while(fread(sh, sizeof(Show), 1, fp)) {
+            print_if_in_filter_show(sh, escolha);
+            quant_show_total += 1;
+            if (sh->status == 'c') {
+                quant_show_at += 1;
+            }
+            else if (sh->status == 'x') {
+                quant_show_inat += 1;
+            }
+        }
     }
-    screen_report_show();
-    int quant_show_total = 0;
-    int quant_show_at = 0;
-    int quant_show_inat = 0;
-    while(fread(sh, sizeof(Show), 1, fp)) {
-        print_if_in_filter_show(sh, escolha);
-        quant_show_total += 1;
-        if (sh->status == 'c') {
-            quant_show_at += 1;
-        }
-        else if (sh->status == 'x') {
-            quant_show_inat += 1;
-        }
+    else if (escolha == '4') {
+        quant_show_total = aux_report_4_show(sh, fp, escolha);
+    } else {
+        quant_show_total = aux_report_5_show(sh, fp, escolha);
     }
     char* quant_str = contador_quantidade(escolha, quant_show_total, quant_show_at, quant_show_inat);
     screen_quant_total_show(quant_str);

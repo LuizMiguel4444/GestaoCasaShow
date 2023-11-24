@@ -491,7 +491,7 @@ void print_dados_atraction(Atraction *atr)
     }
     else {
         char* new_date;
-        new_date = corrige_data(atr->date);
+        new_date = corrige_data_add_barras(atr->date);
         system("clear || cls");
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");

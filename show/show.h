@@ -36,7 +36,6 @@ char *del_show(void);
 void gravar_show(Show*);
 void pesquisa_show(void);
 Show *procura_show(char*);
-int procura_id_show(char*);
 char* retorna_valor_show(char*);
 void regravar_show(Show*);
 void remove_show(Show*);

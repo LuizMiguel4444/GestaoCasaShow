@@ -1,5 +1,6 @@
 void limpa_buffer(void);
 void limpa_linha(void);
+void converte_para_minusculo(char* str);
 int val_entrada(char *entrada);
 int ehDigito(char c);
 int ehDigitoMax(char c, char max);
@@ -13,6 +14,7 @@ int ehData(int dd, int mm, int aa);
 int data_validacao(char data[]);
 int data_validacao_busc(char data[]);
 char* corrige_data(char *data);
+char* corrige_data_add_barras(char *data);
 int valData(char *data);
 int valDataBusc(char *data);
 int compara_datas(char *data, char *data_inicial, char *data_final);
