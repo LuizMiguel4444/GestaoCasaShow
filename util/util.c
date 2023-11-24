@@ -391,31 +391,18 @@ int compara_datas(char *data, char *data_inicial, char *data_final)
 } // AUTOR: LUIZ MIGUEL /// GIT: https://github.com/LuizMiguel4444
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Retorna 1 se string (com tamanhos específicos) recebido corresponder  
-/// a um id válido (apenas dígitos) ou retorna 0 caso contrário
+/// Retorna 1 se string recebido corresponder a um id válido
+/// (apenas dígitos) ou retorna 0 caso contrário
 ///
 int val_id(char *id)
 {
-    int i;
-    int tam = strlen(id);
-    // quantidade de digitos
-    for (i = 0; i < tam; i++) {
-        if (id[i] == '\0') {
-            return 0;
-        }
+  for (int i = 0; i < strlen(id); i++) {
+    if (!ehDigito(id[i])) {
+      return 0;
     }
-    if (id[i] != '\0') {
-        return 0;
-    }
-    // apenas digitos numericos
-    for (i = 0; i < tam; i++) {
-        if (!ehDigito(id[i])) {
-            return 0;
-        }
-    }
-    // ID valido
-    return 1;
-}  // MODIFICADO DE: MATHEUS QUIRINO FERNANDES FIGUEIREDO /// GIT: https://github.com/quirinof
+  }
+  return 1;
+} // AUTOR: LUIZ MIGUEL /// GIT: https://github.com/LuizMiguel4444
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Retorna 1 se string recebido corresponder a um email válido 
