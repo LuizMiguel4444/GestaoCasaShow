@@ -28,6 +28,7 @@ char* get_nome(char* modulo)
       limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while (!valNome(nome));
+  converte_para_minusculo(nome);
   return nome;
 }
 
@@ -43,6 +44,7 @@ char* get_nome_upd(char* modulo)
       limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while (!valNome(nome));
+  converte_para_minusculo(nome);
   return nome;
 }
 
@@ -381,6 +383,7 @@ char certeza_upd(char* modulo)
         limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while ((resp[0] != 's' && resp[0] != 'n') || strlen(resp) > 1);
+  converte_para_minusculo(resp);
   if (resp[0] == 's') {
     return 1;
   } else {
@@ -400,6 +403,7 @@ char certeza_del(char* modulo)
         limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
     }
   } while ((resp[0] != 's' && resp[0] != 'n') || strlen(resp) > 1);
+  converte_para_minusculo(resp);
   if (resp[0] == 's') {
     return 1;
   } else {

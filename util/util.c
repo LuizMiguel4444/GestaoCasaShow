@@ -30,16 +30,16 @@ void limpa_linha(void)
 ///
 void converte_para_minusculo(char* str)
 {
-    for (int i = 0; str[i] != '\0'; ++i) {
-        str[i] = tolower(str[i]);
-    }
+  for (int i = 0; str[i] != '\0'; ++i) {
+    str[i] = tolower(str[i]);
+  }
 } // AUTOR: LUIZ MIGUEL COM AJUDA DO CHAT-GPT /// GIT: https://github.com/LuizMiguel4444
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Função que retorna 1 caso a entrada tiver mais de 1 caractere
 /// e retorna 0 caso contrário
 ///
-int val_entrada(char *entrada)
+int val_entrada(char* entrada)
 {
   if (strlen(entrada) > 1) {
     return 0;
@@ -143,7 +143,7 @@ int ehLetraeEspacoeAcento(char c)
 /// Retorna 1 se string recebido for exclusivamente alfabético ou
 /// retorna 0 caso contrário
 ///
-int valNome(char *nome)
+int valNome(char* nome)
 {
   for (int i = 0; nome[i] != '\0'; i++) {
     if (strlen(nome) < 3) {
@@ -265,7 +265,7 @@ int data_validacao_busc(char data[])
 /// Recebe uma data com barras (dd/mm/aaaa) e retorna essa data
 /// sem barras (ddmmaaaa)
 ///
-char* corrige_data(char *data)
+char* corrige_data(char* data)
 {
   data[2] = data[3];
   data[3] = data[4];
@@ -281,7 +281,7 @@ char* corrige_data(char *data)
 /// Recebe uma data sem barras (ddmmaaaa) e retorna essa data
 /// com barras (dd/mm/aaaa)
 ///
-char* corrige_data_add_barras(char *data)
+char* corrige_data_add_barras(char* data)
 {
   data[8] = data[7];
   data[9] = data[8];
@@ -300,7 +300,7 @@ char* corrige_data_add_barras(char *data)
 /// Retorna 1 se string recebido corresponder a uma data válida (apenas dígitos
 /// e no formato: ddmmaaaa) ou retorna 0 caso contrário
 ///
-int valData(char *data)
+int valData(char* data)
 {
   int check;
   char* new_data;
@@ -335,7 +335,7 @@ int valData(char *data)
 /// Retorna 1 se string recebido corresponder a uma data válida (apenas dígitos
 /// e no formato: ddmmaaaa) ou retorna 0 caso contrário
 ///
-int valDataBusc(char *data)
+int valDataBusc(char* data)
 {
   int check;
   char* new_data;
@@ -370,7 +370,7 @@ int valDataBusc(char *data)
 /// Retorna 1 se a data recebida estiver entre o período das outras 
 /// datas passadas como parâmetro ou retorna 0 caso contrário
 ///
-int compara_datas(char *data, char *data_inicial, char *data_final)
+int compara_datas(char* data, char* data_inicial, char* data_final)
 {
   int dia, mes, ano;
   sscanf(data, "%2d %2d %4d", &dia, &mes, &ano);
@@ -394,7 +394,7 @@ int compara_datas(char *data, char *data_inicial, char *data_final)
 /// Retorna 1 se string recebido corresponder a um id válido
 /// (apenas dígitos) ou retorna 0 caso contrário
 ///
-int val_id(char *id)
+int val_id(char* id)
 {
   for (int i = 0; i < strlen(id); i++) {
     if (!ehDigito(id[i])) {
@@ -408,7 +408,7 @@ int val_id(char *id)
 /// Retorna 1 se string recebido corresponder a um email válido 
 /// ou retorna 0 caso contrário
 ///
-int val_email(char *email )
+int val_email(char* email )
 {
     char usuario[256], site[256], dominio[256];
     if((sscanf( email, "%[^@ \t\n]@%[^. \t\n].%3[^ \t\n]", usuario, site, dominio ) != 3 ) || strlen(email) > 40) {
@@ -421,7 +421,7 @@ int val_email(char *email )
 /// Retorna 1 se string recebido corresponder a um número de celular válido 
 /// (apenas dígitos) ou retorna 0 caso contrário
 ///
-int validarFone(char *fone)
+int validarFone(char* fone)
 {
   int tam;
   tam = strlen(fone);
@@ -440,7 +440,7 @@ int validarFone(char *fone)
 /// Retorna 1 se string recebido corresponder a um cpf válido 
 /// ou retorna 0 caso contrário
 ///
-int validarCPF(char *cpf)
+int validarCPF(char* cpf)
 {
     int i, j, digito1 = 0, digito2 = 0;
     if (strcmp(cpf, "000") == 0) {
