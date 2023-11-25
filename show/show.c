@@ -528,7 +528,9 @@ void print_dados_show(Show* sh)
         screen_null_id_error("Id do show");
     } else {
         char* new_date;
-        new_date = corrige_data_add_barras(sh->date);
+        new_date = corrige_data_add_barras(sh -> date);
+        char* new_date_show;
+        new_date_show = corrige_data_add_barras(sh -> data);
         system("clear || cls");
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
@@ -538,12 +540,12 @@ void print_dados_show(Show* sh)
         printf("###                                                                         ###\n");
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
-        printf("###              Cadastro realizado em %s às %02d:%02d.                 ###\n", new_date, sh->hour, sh->minute);
+        printf("###              Cadastro realizado em %s às %02d:%02d.                 ###\n", new_date, sh -> hour, sh -> minute);
         printf("###                                                                         ###\n");
-        printf("###              Informações do Id digitado: %s###\n", centralizar_texto(sh->id, 31, -1));
+        printf("###              Informações do Id digitado: %s###\n", centralizar_texto(sh -> id, 31, -1));
         printf("###                                                                         ###\n");
         printf("###              Atração: %s###\n", centralizar_texto(sh -> atraction, 50, -1));
-        printf("###              Data: %s###\n", centralizar_texto(sh -> data, 53, -1));
+        printf("###              Data: %s###\n", centralizar_texto(new_date_show, 53, -1));
         printf("###              Hora: %s###\n", centralizar_texto(sh -> hora, 53, -1));
         printf("###              Quant. de ingressos: %s###\n", centralizar_texto(sh -> quant, 38, -1));
         printf("###              Quant. de ingressos restante: %s###\n", centralizar_texto(sh -> quant_rest, 29, -1));
@@ -561,6 +563,8 @@ void print_dados_show_upd(Show* sh)
     if (sh == NULL) {
         screen_null_id_error("Id do show");
     } else {
+        char* new_date_show;
+        new_date_show = corrige_data_add_barras(sh -> data);
         system("clear || cls");
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
@@ -570,10 +574,10 @@ void print_dados_show_upd(Show* sh)
         printf("###                                                                         ###\n");
         printf("###############################################################################\n");
         printf("###                                                                         ###\n");
-        printf("###              Informações do Id digitado: %s###\n", centralizar_texto(sh->id, 31, -1));
+        printf("###              Informações do Id digitado: %s###\n", centralizar_texto(sh -> id, 31, -1));
         printf("###                                                                         ###\n");
         printf("###              Atração: %s###\n", centralizar_texto(sh -> atraction, 50, -1));
-        printf("###              Data: %s###\n", centralizar_texto(sh -> data, 53, -1));
+        printf("###              Data: %s###\n", centralizar_texto(new_date_show, 53, -1));
         printf("###              Hora: %s###\n", centralizar_texto(sh -> hora, 53, -1));
         printf("###              Quant. de ingressos: %s###\n", centralizar_texto(sh -> quant, 38, -1));
         printf("###              Valor do ingresso: R$%s###\n", centralizar_texto(sh -> valor, 38, -1));
