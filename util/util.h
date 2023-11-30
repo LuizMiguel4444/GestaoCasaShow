@@ -28,3 +28,8 @@ int val_hour(char hour[]);
 char* input(void);
 char* duplica(char* s);
 char* centralizar_texto(char* texto, int tam, int horizontal);
+int buscaBinaria(int* v, int n, int num);
+int compara_int(const void *a, const void *b);
+int compara_str(const void *a, const void *b);
+int compara_float(const void *a, const void *b);
+int compara_char(const void *a, const void *b);

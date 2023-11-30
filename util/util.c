@@ -617,3 +617,62 @@ char* centralizar_texto(char* texto, int tam, int horizontal)
     str[tam] = '\0';
     return str;
 } // AUTOR: EMANUEL ALVES // GIT: https://github.com/Faltrenn
+
+///////////////////////////////////////////////////////////////////////////////
+/// Algoritmo para buscar binárias
+///
+int buscaBinaria(int* v, int n, int num)
+{
+  int ini = 0;
+  int fim = n - 1;
+  int cont = 0;
+  while (ini <= fim) {
+    cont++;
+    int meio = (ini + fim) / 2;
+    if (num < v[meio]) {
+      fim = meio - 1;
+    } else if (num > v[meio]) {
+      ini = meio + 1;
+    } else {
+      return meio;
+    }
+  }
+  return -1;
+} // AUTOR: FLAVIUS GORGÔNIO /// GIT: https://github.com/flaviusgorgonio
+
+///////////////////////////////////////////////////////////////////////////////
+/// Função que compara inteiros (qsort)
+///
+int compara_int(const void *a, const void *b)
+{
+  return (*(int *)a - *(int *)b);
+} // AUTOR: LUIZ MIGUEL COM AJUDA DO CHAT-GPT /// GIT: https://github.com/LuizMiguel4444
+
+///////////////////////////////////////////////////////////////////////////////
+/// Função que compara strings (qsort)
+///
+int compara_str(const void *a, const void *b)
+{
+  return strcmp(*(const char **)a, *(const char **)b);
+} // AUTOR: LUIZ MIGUEL COM AJUDA DO CHAT-GPT /// GIT: https://github.com/LuizMiguel4444
+
+///////////////////////////////////////////////////////////////////////////////
+/// Função que compara floats (qsort)
+///
+int compara_float(const void *a, const void *b)
+{
+  float floatA = *((const float*)a);
+  float floatB = *((const float*)b);
+
+  if (floatA < floatB) return -1;
+  if (floatA > floatB) return 1;
+  return 0;
+} // AUTOR: LUIZ MIGUEL COM AJUDA DO CHAT-GPT /// GIT: https://github.com/LuizMiguel4444
+
+///////////////////////////////////////////////////////////////////////////////
+/// Função que compara char (qsort)
+///
+int compara_char(const void *a, const void *b)
+{
+  return (*(const char*)a - *(const char*)b);
+} // AUTOR: LUIZ MIGUEL COM AJUDA DO CHAT-GPT /// GIT: https://github.com/LuizMiguel4444
