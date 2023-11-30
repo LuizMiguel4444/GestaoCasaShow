@@ -270,12 +270,12 @@ char* get_nome_busc(void)
         printf("\n\t\t\t   Digite o nome: ");
         nome = input();
         limpa_buffer();
-        if (!valNome(nome))
+        if (!valNome(nome, 1))
         {
             screen_error_input_name();
             limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
         }
-    } while (!valNome(nome));
+    } while (!valNome(nome, 1));
     converte_para_minusculo(nome);
     return nome;
 }
