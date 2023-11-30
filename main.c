@@ -21,6 +21,8 @@ char main_menu(void);
 void about(void);
 void dev(void);
 void end(void);
+Client *cria_cliente_fantasma(void);
+void dados_fantasma(Client* cli);
 
 
 
@@ -48,9 +50,12 @@ void creat_files(const char* folder, const char* name)
 // Main program
 int main(void)
 {
+    Client* cliente;
     creat_files("atraction", "atractions.dat");
     creat_files("buy", "buys.dat");
     creat_files("client", "clients.dat");
+    cliente = cria_cliente_fantasma();
+    gravar_client(cliente);
     creat_files("show", "shows.dat");
     setlocale(LC_ALL, "Portuguese_Brazil");
     welcome();
@@ -241,3 +246,25 @@ void end(void)
         }
     }
 } // AUTOR: LUIZ MIGUEL, FEITO COM AJUDA DO CHAT-GPT /// GIT: https://github.com/LuizMiguel4444
+
+Client *cria_cliente_fantasma(void)
+{
+    Client *cli;
+    cli = (Client*) malloc(sizeof(Client) + 1);
+    dados_fantasma(cli);
+    return cli;
+}
+
+void dados_fantasma(Client* cli)
+{
+    char* nome = "NULL";
+    strcpy(cli->nome, nome);
+    char* cpf = "000";
+    strcpy(cli->cpf, cpf);
+    char* email = "null@null.null";
+    strcpy(cli->email, email);
+    char* num = "000000000";
+    strcpy(cli->num, num);
+    cli -> status = 'c';
+    get_data_hour_cli(cli);
+}
