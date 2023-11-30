@@ -12,4 +12,5 @@ clean:
 rm:
 	rm atraction/*.dat
 	rm buy/*.dat
+	rm client/*.dat
 	rm show/*.dat
