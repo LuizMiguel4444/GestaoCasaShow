@@ -143,10 +143,10 @@ int ehLetraeEspacoeAcento(char c)
 /// Retorna 1 se string recebido for exclusivamente alfabético ou
 /// retorna 0 caso contrário
 ///
-int valNome(char* nome)
+int valNome(char* nome, int tam)
 {
   for (int i = 0; nome[i] != '\0'; i++) {
-    if (strlen(nome) < 3) {
+    if (strlen(nome) < tam) {
       return 0;
     }
     if (!ehLetraeEspacoeAcento(nome[i])) {

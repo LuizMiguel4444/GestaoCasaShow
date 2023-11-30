@@ -7,7 +7,7 @@ int ehDigitoMax(char c, char max);
 int ehdinheiro(char* c);
 int ehLetra(char c);
 int ehLetraeEspacoeAcento(char c);
-int valNome(char* nome);
+int valNome(char* nome, int tam);
 int ehBissexto(int aa);
 int ehData(int dd, int mm, int aa);
 int data_validacao(char data[]);

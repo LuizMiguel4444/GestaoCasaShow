@@ -23,11 +23,11 @@ char* get_nome(char* modulo)
     limpa_buffer();
     limpa_linha();
     printf("###              Nome d%s: %s###\n", modulo, centralizar_texto(nome, 42, -1));
-    if (!valNome(nome)) {
+    if (!valNome(nome, 2)) {
       screen_error_input_name();
       limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
     }
-  } while (!valNome(nome));
+  } while (!valNome(nome, 2));
   converte_para_minusculo(nome);
   return nome;
 }
@@ -39,11 +39,11 @@ char* get_nome_upd(char* modulo)
     printf("\n\t\t    Novo nome %s: ", modulo);
     nome = input();
     limpa_buffer();
-    if (!valNome(nome)) {
+    if (!valNome(nome, 2)) {
       screen_error_input_name();
       limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
     }
-  } while (!valNome(nome));
+  } while (!valNome(nome, 2));
   converte_para_minusculo(nome);
   return nome;
 }
