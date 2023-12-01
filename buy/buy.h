@@ -12,6 +12,7 @@ struct buy
     char date[12];
     int hour;
     int minute;
+    Buy* prox;
 };
 
 
