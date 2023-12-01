@@ -257,7 +257,7 @@ Client *cria_cliente_fantasma(void)
 
 void dados_fantasma(Client* cli)
 {
-    char* nome = "NULL";
+    char* nome = "null";
     strcpy(cli->nome, nome);
     char* cpf = "000";
     strcpy(cli->cpf, cpf);
