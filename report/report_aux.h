@@ -12,13 +12,14 @@ char* get_data_in(void);
 char* get_data_fin(void);
 char* get_nome_busc(void);
 int aux_report_4_atr(Atraction*, FILE*, char);
-int aux_report_4_buy(Buy*, FILE*, char, float*);
+int aux_report_2_buy(Buy*, FILE*, char, float*);
 int aux_report_4_cli(Client*, FILE*, char);
 int aux_report_4_show(Show*, FILE*, char);
 int aux_report_5_atr(Atraction*, FILE*, char);
-int aux_report_5_buy(Buy*, FILE*, char, float*);
+int aux_report_3_buy(Buy*, FILE*, char, float*);
 int aux_report_5_cli(Client*, FILE*, char);
 int aux_report_5_show(Show*, FILE*, char);
+int aux_report_4_buy(Buy*, FILE*, char, float*);
 
 
 
@@ -35,3 +36,9 @@ void print_if_in_filter_atr(Atraction*, char);
 void print_if_in_filter_buy(Buy*, char);
 void print_if_in_filter_cli(Client*, char);
 void print_if_in_filter_show(Show*, char);
+
+
+
+
+
+int comparar(const void *a, const void *b);

@@ -36,11 +36,11 @@ char report_menu_fil_buy(void)
         report_menu_screen_fil_buy();
         scanf("%s", resp);
         limpa_buffer();
-        if (!ehDigitoMax(resp[0], '3')  || !val_entrada(resp)) {
+        if (!ehDigitoMax(resp[0], '4')  || !val_entrada(resp)) {
             screen_error_input();
             limpa_linha();
         }
-    } while (!ehDigitoMax(resp[0], '3') || !val_entrada(resp));
+    } while (!ehDigitoMax(resp[0], '4') || !val_entrada(resp));
     return resp[0];
 }
 
@@ -87,6 +87,7 @@ void report_menu_screen_fil_buy(void)
     printf("###                             1. Listar Todos                             ###\n");
     printf("###                           2. Buscar entre Datas                         ###\n");
     printf("###                            3. Buscar por Nome                           ###\n");
+    printf("###                           4. Em ordem de valor                          ###\n");
     printf("###                         0. Voltar ao menu anterior                      ###\n");
     printf("###                                                                         ###\n");
     printf("###                        Escolha a opção que deseja: ");
@@ -139,6 +140,9 @@ void modulo_report_buy(void)
                 report_buy(resp);
                 break;
             case '3':
+                report_buy(resp);
+                break;
+            case '4':
                 report_buy(resp);
                 break;
             case '0':
@@ -297,7 +301,7 @@ int aux_report_4_atr(Atraction* atr, FILE* fp, char escolha)
     return quant_atr_total;
 }
 
-int aux_report_4_buy(Buy* b, FILE* fp, char escolha, float* valor_total)
+int aux_report_2_buy(Buy* b, FILE* fp, char escolha, float* valor_total)
 {
     int quant_buy_total = 0;
     char* data_in = get_data_in();
@@ -365,7 +369,7 @@ int aux_report_5_atr(Atraction* atr, FILE* fp, char escolha)
     return quant_atr_total;
 }
 
-int aux_report_5_buy(Buy* b, FILE* fp, char escolha, float* valor_total)
+int aux_report_3_buy(Buy* b, FILE* fp, char escolha, float* valor_total)
 {
     Client* cli;
     int quant_buy_total = 0;
@@ -412,6 +416,46 @@ int aux_report_5_show(Show* sh, FILE* fp, char escolha)
         }
     }
     return quant_show_total;
+}
+
+int comparar(const void *a, const void *b)
+{
+    const Buy *buy_a = (const Buy *)a;
+    const Buy *buy_b = (const Buy *)b;
+    float valor_a = strtof(buy_a->valor, NULL);
+    float valor_b = strtof(buy_b->valor, NULL);
+
+    if (valor_a < valor_b) return 1;
+    if (valor_a > valor_b) return -1;
+    return 0;
+}
+
+int aux_report_4_buy(Buy* b, FILE* fp, char escolha, float* valor_total)
+{
+    system("clear || cls");
+    screen_report_buy();
+
+    Buy* array = (Buy*)malloc(100 * sizeof(Buy));
+    int quant_buy_total = 0;
+    int tam_array = 0;
+    Buy temp;
+
+    while(fread(&temp, sizeof(Buy), 1, fp) && tam_array < 100) {
+        array[tam_array] = temp;
+        tam_array++;
+        quant_buy_total += 1;
+        float valor_compra = strtof(temp.valor, NULL);
+        *valor_total += valor_compra;
+    }
+
+    qsort(array, tam_array, sizeof(Buy), comparar);
+
+    for (int i = 0; i < tam_array; i++) {
+        print_if_in_filter_buy(&array[i], escolha);
+    }
+
+    free(array);
+    return quant_buy_total;
 }
 
 
@@ -557,11 +601,6 @@ void print_if_in_filter_buy(Buy* b, char escolha)
             printf("### -------------------------------------------------------------------------------------- ###\n");
             break;
         case '4':
-            printf("### -------------------------------------------------------------------------------------- ###\n");
-            print_dados_buy_rep(b);
-            printf("### -------------------------------------------------------------------------------------- ###\n");
-            break;
-        case '5':
             printf("### -------------------------------------------------------------------------------------- ###\n");
             print_dados_buy_rep(b);
             printf("### -------------------------------------------------------------------------------------- ###\n");

@@ -129,9 +129,12 @@ void report_buy(char escolha)
         }
     }
     else if (escolha == '2') {
-        quant_vendas = aux_report_4_buy(b, fp, escolha, &valor_total);
+        quant_vendas = aux_report_2_buy(b, fp, escolha, &valor_total);
+    } 
+    else if (escolha == '3') {
+        quant_vendas = aux_report_3_buy(b, fp, escolha, &valor_total);
     } else {
-        quant_vendas = aux_report_5_buy(b, fp, escolha, &valor_total);
+        quant_vendas = aux_report_4_buy(b, fp, escolha, &valor_total);
     }
     char quant_str[8];
     snprintf(quant_str, sizeof(quant_str), "%d", quant_vendas);
