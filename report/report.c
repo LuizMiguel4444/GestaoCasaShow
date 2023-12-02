@@ -100,13 +100,15 @@ void report_atraction(char escolha)
     }
     else if (escolha == '4') {
         quant_atr_total = aux_report_4_atr(atr, fp, escolha);
-    } else {
+    }
+    else if (escolha == '5') {
         quant_atr_total = aux_report_5_atr(atr, fp, escolha);
+    } else {
+        quant_atr_total = aux_report_6_atr(atr, fp, escolha);
     }
     char* quant_str = contador_quantidade(escolha, quant_atr_total, quant_atr_at, quant_atr_inat);
     screen_quant_total_atr(quant_str);
     fclose(fp);
-    free(atr);
     printf("\t\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
     limpa_buffer();
 }
@@ -133,8 +135,11 @@ void report_buy(char escolha)
     } 
     else if (escolha == '3') {
         quant_vendas = aux_report_3_buy(b, fp, escolha, &valor_total);
-    } else {
+    }
+    else if (escolha == '4') {
         quant_vendas = aux_report_4_buy(b, fp, escolha, &valor_total);
+    } else {
+        quant_vendas = aux_report_5_buy(b, fp, escolha, &valor_total);
     }
     char quant_str[8];
     snprintf(quant_str, sizeof(quant_str), "%d", quant_vendas);
@@ -142,7 +147,6 @@ void report_buy(char escolha)
     snprintf(valor_str, sizeof(valor_str), "%.2f", valor_total);
     screen_quant_e_valor_total_buy(quant_str, valor_str);
     fclose(fp);
-    free(b);
     printf("\t\t     >>> Tecle ENTER para voltar ao menu anterior... <<<");
     limpa_buffer();
 }
@@ -169,13 +173,15 @@ void report_client(char escolha)
     }
     else if (escolha == '4') {
         quant_cli_total = aux_report_4_cli(cli, fp, escolha);
-    } else {
+    }
+    else if (escolha == '5') {
         quant_cli_total = aux_report_5_cli(cli, fp, escolha);
+    } else {
+        quant_cli_total = aux_report_6_cli(cli, fp, escolha);
     }
     char* quant_str = contador_quantidade(escolha, quant_cli_total, quant_cli_at, quant_cli_inat);
     screen_quant_total_cli(quant_str);
     fclose(fp);
-    free(cli);
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
     limpa_buffer();
 }
@@ -202,13 +208,15 @@ void report_show(char escolha)
     }
     else if (escolha == '4') {
         quant_show_total = aux_report_4_show(sh, fp, escolha);
-    } else {
+    }
+    else if (escolha == '5') {
         quant_show_total = aux_report_5_show(sh, fp, escolha);
+    } else {
+        quant_show_total = aux_report_6_show(sh, fp, escolha);
     }
     char* quant_str = contador_quantidade(escolha, quant_show_total, quant_show_at, quant_show_inat);
     screen_quant_total_show(quant_str);
     fclose(fp);
-    free(sh);
     printf("\t\t>>> Tecle ENTER para voltar ao menu anterior... <<<");
     limpa_buffer();
 }
