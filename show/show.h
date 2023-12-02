@@ -14,6 +14,7 @@ struct show
     char date[12];
     int hour;
     int minute;
+    Show *prox;
 };
 
 

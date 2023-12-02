@@ -11,6 +11,7 @@ struct client
     char date[12];
     int hour;
     int minute;
+    Client *prox;
 };
 
 

@@ -12,6 +12,7 @@ struct atraction
     char date[12];
     int hour;
     int minute;
+    Atraction *prox;
 };
 
 
