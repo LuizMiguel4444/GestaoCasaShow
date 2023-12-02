@@ -54,8 +54,14 @@ int main(void)
     creat_files("atraction", "atractions.dat");
     creat_files("buy", "buys.dat");
     creat_files("client", "clients.dat");
-    cliente = cria_cliente_fantasma();
-    gravar_client(cliente);
+    FILE *fp;
+    fp = fopen("client/clients.dat", "rb");
+    fseek(fp, 0, SEEK_END);
+    if ((long)ftell(fp) == 0) {
+        cliente = cria_cliente_fantasma();
+        gravar_client(cliente);
+    }
+    fclose(fp);
     creat_files("show", "shows.dat");
     setlocale(LC_ALL, "Portuguese_Brazil");
     welcome();
