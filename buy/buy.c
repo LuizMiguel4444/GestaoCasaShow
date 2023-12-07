@@ -153,12 +153,23 @@ void get_data_hour_buy(Buy *b)
     struct tm *timeInfo;
     timeInfo = localtime(&currentTime);
     int day = timeInfo->tm_mday;
-    int month = timeInfo->tm_mon + 1;
-    int year = timeInfo->tm_year + 1900;
     char dia[4];
-    char mes[4];
-    char ano[6];
     snprintf(dia, sizeof(dia), "%d", day);
+    if (strlen(dia) < 2) {
+        dia[1] = dia[0];
+        dia[0] = '0';
+        dia[2] = '\0';
+    }
+    int month = timeInfo->tm_mon + 1;
+    char mes[4];
+    snprintf(mes, sizeof(mes), "%d", month);
+    if (strlen(mes) < 2) {
+        mes[1] = mes[0];
+        mes[0] = '0';
+        mes[2] = '\0';
+    }
+    int year = timeInfo->tm_year + 1900;
+    char ano[6];
     snprintf(mes, sizeof(mes), "%d", month);
     snprintf(ano, sizeof(ano), "%d", year);
     strcat(dia, mes);
