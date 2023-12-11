@@ -381,6 +381,10 @@ int compara_datas(char* data, char* data_inicial, char* data_final)
   int dia_final, mes_final, ano_final;
   sscanf(data_final, "%2d %2d %4d", &dia_final, &mes_final, &ano_final);
 
+  if (ano_final < ano_inicial || (ano_final == ano_inicial && (mes_final < mes_inicial || (mes_final == mes_inicial && dia_final < dia_inicial)))) {
+    return 0;
+  }
+
   if (ano < ano_inicial || (ano == ano_inicial && (mes < mes_inicial || (mes == mes_inicial && dia < dia_inicial)))) {
     return 0;
   } else if (ano > ano_final || (ano == ano_final && (mes > mes_final || (mes == mes_final && dia > dia_final)))) {
