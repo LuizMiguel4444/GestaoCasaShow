@@ -1,8 +1,12 @@
 // Functions
-char report_menu_fil(void);
+char report_menu_fil_atr(void);
 char report_menu_fil_buy(void);
-void report_menu_screen_fil(void);
+char report_menu_fil_cli(void);
+char report_menu_fil_show(void);
+void report_menu_screen_fil_atr(void);
 void report_menu_screen_fil_buy(void);
+void report_menu_screen_fil_cli(void);
+void report_menu_screen_fil_show(void);
 void modulo_report_atr(void);
 void modulo_report_buy(void);
 void modulo_report_cli(void);
@@ -11,7 +15,7 @@ void modulo_report_show(void);
 char* contador_quantidade(char, int, int, int);
 int comparar(const void *, const void *);
 char* get_data_in(void);
-char* get_data_fin(void);
+char* get_data_fin(char*);
 char* get_nome_busc(void);
 
 int aux_report_4_atr(Atraction*, FILE*, char);
@@ -36,6 +40,7 @@ void free_func_in_malloc_cli(Client*, Client*);
 int aux_report_4_show(Show*, FILE*, char);
 int aux_report_5_show(Show*, FILE*, char);
 int aux_report_6_show(Show*, FILE*, char);
+int aux_report_7_show(Show*, FILE*, char);
 void print_func_in_malloc_show(Show*, Show*, char);
 void free_func_in_malloc_show(Show*, Show*);
 

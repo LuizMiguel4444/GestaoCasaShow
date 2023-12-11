@@ -211,8 +211,11 @@ void report_show(char escolha)
     }
     else if (escolha == '5') {
         quant_show_total = aux_report_5_show(sh, fp, escolha);
-    } else {
+    }
+    else if (escolha == '6') {
         quant_show_total = aux_report_6_show(sh, fp, escolha);
+    } else {
+        quant_show_total = aux_report_7_show(sh, fp, escolha);
     }
     char* quant_str = contador_quantidade(escolha, quant_show_total, quant_show_at, quant_show_inat);
     screen_quant_total_show(quant_str);

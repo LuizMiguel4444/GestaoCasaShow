@@ -14,11 +14,11 @@
 
 
 // Functions
-char report_menu_fil(void)
+char report_menu_fil_atr(void)
 {
     char resp[256];
     do {
-        report_menu_screen_fil();
+        report_menu_screen_fil_atr();
         scanf("%s", resp);
         limpa_buffer();
         if (!ehDigitoMax(resp[0], '6')  || !val_entrada(resp)) {
@@ -44,7 +44,37 @@ char report_menu_fil_buy(void)
     return resp[0];
 }
 
-void report_menu_screen_fil(void)
+char report_menu_fil_cli(void)
+{
+    char resp[256];
+    do {
+        report_menu_screen_fil_cli();
+        scanf("%s", resp);
+        limpa_buffer();
+        if (!ehDigitoMax(resp[0], '6')  || !val_entrada(resp)) {
+            screen_error_input();
+            limpa_linha();
+        }
+    } while (!ehDigitoMax(resp[0], '6') || !val_entrada(resp));
+    return resp[0];
+}
+
+char report_menu_fil_show(void)
+{
+    char resp[256];
+    do {
+        report_menu_screen_fil_show();
+        scanf("%s", resp);
+        limpa_buffer();
+        if (!ehDigitoMax(resp[0], '7')  || !val_entrada(resp)) {
+            screen_error_input();
+            limpa_linha();
+        }
+    } while (!ehDigitoMax(resp[0], '7') || !val_entrada(resp));
+    return resp[0];
+}
+
+void report_menu_screen_fil_atr(void)
 {
     system("clear || cls");
     printf("###############################################################################\n");
@@ -56,7 +86,7 @@ void report_menu_screen_fil(void)
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-    printf("###              = = = = = = = = =  Relatório  = = = = = = = = =            ###\n");
+    printf("###              = = = = = = = Relatório de Atrações = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
     printf("###                              1. Listar Todos                            ###\n");
@@ -82,7 +112,7 @@ void report_menu_screen_fil_buy(void)
     printf("###############################################################################\n");
     printf("###                                                                         ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
-    printf("###              = = = = = = = = =  Relatório  = = = = = = = = =            ###\n");
+    printf("###              = = = = = = = Relatório de Vendas = = = = = = =            ###\n");
     printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
     printf("###                                                                         ###\n");
     printf("###                             1. Listar Todos                             ###\n");
@@ -95,13 +125,66 @@ void report_menu_screen_fil_buy(void)
     printf("###                        Escolha a opção que deseja: ");
 }
 
+void report_menu_screen_fil_cli(void)
+{
+    system("clear || cls");
+    printf("###############################################################################\n");
+    printf("###                                                                         ###\n");
+    printf("###            ===================================================          ###\n");
+    printf("###            ==============   Gestão Casa Shows   ==============          ###\n");
+    printf("###            ===================================================          ###\n");
+    printf("###                                                                         ###\n");
+    printf("###############################################################################\n");
+    printf("###                                                                         ###\n");
+    printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
+    printf("###              = = = = = = = Relatório de Clientes = = = = = =            ###\n");
+    printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
+    printf("###                                                                         ###\n");
+    printf("###                              1. Listar Todos                            ###\n");
+    printf("###                          2. Listar apenas Ativos                        ###\n");
+    printf("###                         3. Listar apenas Inativos                       ###\n");
+    printf("###                           4. Buscar entre Datas                         ###\n");
+    printf("###                             5. Buscar por Nome                          ###\n");
+    printf("###                           6. Em ordem alfabética                        ###\n");
+    printf("###                         0. Voltar ao menu anterior                      ###\n");
+    printf("###                                                                         ###\n");
+    printf("###                        Escolha a opção que deseja: ");
+}
+
+void report_menu_screen_fil_show(void)
+{
+    system("clear || cls");
+    printf("###############################################################################\n");
+    printf("###                                                                         ###\n");
+    printf("###            ===================================================          ###\n");
+    printf("###            ==============   Gestão Casa Shows   ==============          ###\n");
+    printf("###            ===================================================          ###\n");
+    printf("###                                                                         ###\n");
+    printf("###############################################################################\n");
+    printf("###                                                                         ###\n");
+    printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
+    printf("###              = = = = = = = = Relatório de Show = = = = = = =            ###\n");
+    printf("###              = = = = = = = = = = = = = = = = = = = = = = = =            ###\n");
+    printf("###                                                                         ###\n");
+    printf("###                              1. Listar Todos                            ###\n");
+    printf("###                          2. Listar apenas Ativos                        ###\n");
+    printf("###                         3. Listar apenas Inativos                       ###\n");
+    printf("###                     4. Buscar entre Datas de Cadastro                   ###\n");
+    printf("###                             5. Buscar por Nome                          ###\n");
+    printf("###                           6. Em ordem alfabética                        ###\n");
+    printf("###                      7. Buscar entre Datas do Evento                    ###\n");
+    printf("###                         0. Voltar ao menu anterior                      ###\n");
+    printf("###                                                                         ###\n");
+    printf("###                        Escolha a opção que deseja: ");
+}
+
 void modulo_report_atr(void)
 {
     setlocale(LC_ALL, "Portuguese_Brazil");
     char resp;
     do
     {
-        resp = report_menu_fil();
+        resp = report_menu_fil_atr();
         switch (resp)
         {
             case '1':
@@ -166,7 +249,7 @@ void modulo_report_cli(void)
     char resp;
     do
     {
-        resp = report_menu_fil();
+        resp = report_menu_fil_cli();
         switch (resp)
         {
             case '1':
@@ -200,7 +283,7 @@ void modulo_report_show(void)
     char resp;
     do
     {
-        resp = report_menu_fil();
+        resp = report_menu_fil_show();
         switch (resp)
         {
             case '1':
@@ -219,6 +302,9 @@ void modulo_report_show(void)
                 report_show(resp);
                 break;
             case '6':
+                report_show(resp);
+                break;
+            case '7':
                 report_show(resp);
                 break;
             case '0':
@@ -248,6 +334,9 @@ char* contador_quantidade(char escolha, int quant_total, int quant_at, int quant
         snprintf(quant_str, 8, "%d", quant_total);
     }
     else if (escolha == '6') {
+        snprintf(quant_str, 8, "%d", quant_total);
+    }
+    else if (escolha == '7') {
         snprintf(quant_str, 8, "%d", quant_total);
     }
     return quant_str;
@@ -280,18 +369,22 @@ char* get_data_in(void)
     return data_inicial;
 }
 
-char* get_data_fin(void)
+char* get_data_fin(char* data)
 {
-    char* data_final;
+    char* data_inicial = data;
+    char* data_final = 0;
+    int esta_ok;
+
     do {
         printf("\n\t\t\tDigite a data final (dd/mm/aaaa): ");
         data_final = input();
         limpa_buffer();
-        if (!valDataBusc(data_final)) {
+        esta_ok = compara_datas(data, data_inicial, data_final);
+        if (!valDataBusc(data_final) || (esta_ok == 0)) {
             screen_error_input();
             limpa_linha(); limpa_linha(); limpa_linha(); limpa_linha();
         }
-    } while (!valDataBusc(data_final));
+    } while (!valDataBusc(data_final) || (esta_ok == 0));
     return data_final;
 }
 
@@ -317,7 +410,7 @@ int aux_report_4_atr(Atraction* atr, FILE* fp, char escolha)
 {
     int quant_atr_total = 0;
     char* data_in = get_data_in();
-    char* data_fin = get_data_fin();
+    char* data_fin = get_data_fin(data_in);
     system("clear || cls");
     screen_report_atr();
     while(fread(atr, sizeof(Atraction), 1, fp)) {
@@ -398,7 +491,7 @@ int aux_report_2_buy(Buy* b, FILE* fp, char escolha, float* valor_total)
 {
     int quant_buy_total = 0;
     char* data_in = get_data_in();
-    char* data_fin = get_data_fin();
+    char* data_fin = get_data_fin(data_in);
     system("clear || cls");
     screen_report_buy();
     while(fread(b, sizeof(Buy), 1, fp)) {
@@ -527,7 +620,7 @@ int aux_report_4_cli(Client* cli, FILE* fp, char escolha)
 {
     int quant_cli_total = 0;
     char* data_in = get_data_in();
-    char* data_fin = get_data_fin();
+    char* data_fin = get_data_fin(data_in);
     system("clear || cls");
     screen_report_cli();
     while(fread(cli, sizeof(Client), 1, fp)) {
@@ -608,7 +701,7 @@ int aux_report_4_show(Show* sh, FILE* fp, char escolha)
 {
     int quant_show_total = 0;
     char* data_in = get_data_in();
-    char* data_fin = get_data_fin();
+    char* data_fin = get_data_fin(data_in);
     system("clear || cls");
     screen_report_show();
     while(fread(sh, sizeof(Show), 1, fp)) {
@@ -663,6 +756,23 @@ int aux_report_6_show(Show* sh, FILE* fp, char escolha)
     }
     print_func_in_malloc_show(sh, lista, escolha);
     free_func_in_malloc_show(sh, lista);
+    return quant_show_total;
+}
+
+int aux_report_7_show(Show* sh, FILE* fp, char escolha)
+{
+    int quant_show_total = 0;
+    char* data_in = get_data_in();
+    char* data_fin = get_data_fin(data_in);
+    system("clear || cls");
+    screen_report_show();
+    while(fread(sh, sizeof(Show), 1, fp)) {
+    int esta_dentro = compara_datas(sh->data, data_in, data_fin);
+        if (esta_dentro == 1) {
+            print_if_in_filter_show(sh, escolha);
+            quant_show_total += 1;
+        }
+    }
     return quant_show_total;
 }
 
@@ -918,6 +1028,11 @@ void print_if_in_filter_show(Show* sh, char escolha)
             printf("### ----------------------------------------------------------------------- ###\n");
             break;
         case '6':
+            printf("### ----------------------------------------------------------------------- ###\n");
+            print_dados_show_rep(sh);
+            printf("### ----------------------------------------------------------------------- ###\n");
+            break;
+        case '7':
             printf("### ----------------------------------------------------------------------- ###\n");
             print_dados_show_rep(sh);
             printf("### ----------------------------------------------------------------------- ###\n");
